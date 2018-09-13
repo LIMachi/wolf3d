@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:48:51 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:48:53 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft.h"
 
-int main(int ac, const char **av)
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
-	if (ac == 2)
-	{
-		ft_putendl(av[1]);
-	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	del((*alst)->content, (*alst)->content_size);
+	free(*alst);
+	*alst = NULL;
 }

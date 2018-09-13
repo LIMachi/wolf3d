@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:49:43 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:49:44 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft.h"
 
-int main(int ac, const char **av)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	if (ac == 2)
-	{
-		ft_putendl(av[1]);
-	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	char		*s1;
+	const char	*s2;
+
+	s1 = dest;
+	s2 = src;
+	while (n--)
+		*s1++ = *s2++;
+	return (dest);
 }

@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:48:15 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:48:16 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft.h"
 
-int main(int ac, const char **av)
+char	*ft_itoa(int n)
 {
-	if (ac == 2)
+	char	*str;
+	int		i;
+	int		o;
+
+	i = (n < 0 ? 1 : 0);
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	o = (n < 0 ? -n : n);
+	while ((o = o / 10) > 0)
+		++i;
+	o = (n < 0 ? -n : n);
+	str = ft_strnew(i + 1);
+	if (!str)
+		return (NULL);
+	while (i-- >= 0)
 	{
-		ft_putendl(av[1]);
+		str[i + 1] = (o % 10) + '0';
+		o = o / 10;
 	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	if (n < 0)
+		*str = '-';
+	return (str);
 }

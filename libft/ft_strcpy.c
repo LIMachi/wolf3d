@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:50:50 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:50:54 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-
-int main(int ac, const char **av)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	if (ac == 2)
-	{
-		ft_putendl(av[1]);
-	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	char	*s1;
+
+	s1 = dest;
+	while (*src)
+		*s1++ = *src++;
+	*s1 = '\0';
+	return (dest);
 }

@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstaddback.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:48:42 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:48:43 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft.h"
 
-int main(int ac, const char **av)
+void	ft_lstaddback(t_list **begin_list, t_list *new_elem)
 {
-	if (ac == 2)
+	if (*begin_list == NULL)
 	{
-		ft_putendl(av[1]);
+		(*begin_list) = new_elem;
+		return ;
 	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	while ((*begin_list)->next)
+		*begin_list = (*begin_list)->next;
+	(*begin_list)->next = new_elem;
 }

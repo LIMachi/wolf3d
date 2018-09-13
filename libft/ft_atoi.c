@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:47:49 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:47:50 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft.h"
 
-int main(int ac, const char **av)
+int		ft_atoi(const char *str)
 {
-	if (ac == 2)
-	{
-		ft_putendl(av[1]);
-	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	int i;
+	int sign;
+
+	sign = 1;
+	i = 0;
+	while (*str == ' ' || ((*str >= '\t') && (*str <= '\r')))
+		str++;
+	if ((*str == '-') || (*str == '+'))
+		sign = (*str++ == '-') ? -1 : 1;
+	if (!ft_isdigit(*str))
+		return (0);
+	while (ft_isdigit(*str))
+		i = (i * 10) + (*str++) - '0';
+	return (sign * i);
 }

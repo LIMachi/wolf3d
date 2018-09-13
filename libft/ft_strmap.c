@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:52:19 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:52:21 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft.h"
 
-int main(int ac, const char **av)
+char	*ft_strmap(char const *str, char (*f)(char))
 {
-	if (ac == 2)
+	char	*cpy;
+	int		pos;
+
+	if (!str || !f)
+		return (NULL);
+	cpy = ft_strnew(ft_strlen(str));
+	if (!cpy)
+		return (NULL);
+	pos = -1;
+	while (str[++pos])
 	{
-		ft_putendl(av[1]);
+		cpy[pos] = f(str[pos]);
 	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	cpy[pos] = '\0';
+	return (cpy);
 }

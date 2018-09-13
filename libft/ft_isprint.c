@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:48:12 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:48:13 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-
-int main(int ac, const char **av)
+int		ft_isprint(int c)
 {
-	if (ac == 2)
-	{
-		ft_putendl(av[1]);
-	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	return ((c >= 32) && (c <= 126));
 }

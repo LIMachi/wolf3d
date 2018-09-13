@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:50:46 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:50:48 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-
-int main(int ac, const char **av)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	if (ac == 2)
+	while ((*s1) && (*s1 == *s2))
 	{
-		ft_putendl(av[1]);
+		s1++;
+		s2++;
 	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	return (*(const unsigned char*)s1 - *(const unsigned char *)s2);
 }

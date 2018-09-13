@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcspn.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:50:58 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:50:59 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft.h"
 
-int main(int ac, const char **av)
+size_t		ft_strcspn(const char *s1, const char *reject)
 {
-	if (ac == 2)
+	size_t value;
+
+	value = 0;
+	while (*s1)
 	{
-		ft_putendl(av[1]);
+		if (ft_strchr(reject, *s1))
+			return (value);
+		else
+		{
+			s1++;
+			value++;
+		}
 	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	return (value);
 }

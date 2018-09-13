@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 18:37:06 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2017/11/26 18:53:10 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2017/11/26 18:53:13 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft.h"
 
-int main(int ac, const char **av)
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	if (ac == 2)
+	if ((*s1 == *s2) && (*s1 == '\0'))
+		return ((char *)s1);
+	while (*s1)
 	{
-		ft_putendl(av[1]);
+		if (ft_strncmp(s1, s2, ft_strlen(s2)) == 0)
+			return ((char *)s1);
+		s1++;
 	}
-	else
-		ft_putendl("Invalid Arguments");
-	return 0;
+	return (NULL);
 }
