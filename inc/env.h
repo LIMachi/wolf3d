@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 18:37:25 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 22:47:29 by hmartzol         ###   ########.fr       */
+/*   Updated: 2018/09/13 23:06:36 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
+	void			*img;
+	int				*timg;
+	int				bbp;
+	int				endn;
+	int				size;
 	int				x;
 	int				y;
 	float			look;
