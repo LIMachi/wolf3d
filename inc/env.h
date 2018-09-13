@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 18:37:25 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 20:45:38 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/09/13 22:47:29 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,10 @@
 
 # include <stdint.h>
 
-typedef struct		s_env
-{
-	void			*mlx;
-	void			*win;
-	int				sx;
-	int				sy;
-	int				*map;
-	int				x;
-	int				y;
-}					t_env;
+/*
+** <stdint.h>
+** typedef ... uint32_t
+*/
 
 typedef struct		s_header
 {
@@ -37,12 +31,20 @@ typedef struct		s_header
 	uint32_t		map[0];
 }					t_header;
 
-t_header	*head;
-head = (t_header*)(
-read(fd, &head.magic, sizeof(head.magic));
-read(fd, &head.height, sizeof(head.height));
-read(fd, &head.width, sizeof(head.width));
+typedef struct		s_env
+{
+	void			*mlx;
+	void			*win;
+	int				x;
+	int				y;
+	float			look;
+	t_header		*file;
+}					t_env;
 
+/*
+** # define W3D_MAGIC *(uint32_t*)"w3d\n"
+*/
 
+# define W3D_MAGIC	0x7733640A
 
 # endif
