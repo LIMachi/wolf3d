@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 18:37:25 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 23:06:36 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/09/14 15:54:24 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ typedef struct		s_env
 ** # define W3D_MAGIC *(uint32_t*)"w3d\n"
 */
 
-# define W3D_MAGIC	0x7733640A
+t_header			*default_map(void);
+t_header			*load_map(const char *path);
+int					save_map(const char *path, t_header *header);
 
-# endif
+# define W3D_MAGIC	0x7733640A
+#endif

@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/13 23:08:05 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/09/14 15:53:21 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #define SX 1200
 #define SY 600
 
-int main(int ac, const char **av)
+int	main(int ac, const char **av)
 {
 	t_env	env;
 
@@ -25,12 +25,15 @@ int main(int ac, const char **av)
 	{
 		if ((env.mlx = mlx_init()) == NULL)
 			return (0);
+		load_map(av[1]);
 		env.win = mlx_new_window(env.mlx, SX, SY, "coucou");
 		env.img = mlx_new_image(env.mlx, SX, SY);
 		env.timg = (int *)mlx_get_data_addr(env.img, &(env.bbp),
 			&(env.size), &(env.endn));
+		mlx_string_put(env.mlx, env.win, 50, 50, 0xffffff, "coucou");
+		mlx_loop(env.mlx);
 	}
 	else
 		ft_putendl("Invalid Arguments");
-	return 0;
+	return (0);
 }

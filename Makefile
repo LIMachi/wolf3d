@@ -6,7 +6,7 @@
 #    By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/05 23:27:31 by lmunoz-q          #+#    #+#              #
-#    Updated: 2018/09/13 18:33:25 by lmunoz-q         ###   ########.fr        #
+#    Updated: 2018/09/14 15:48:45 by lmunoz-q         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,13 @@ CFLAGS = -Ofast -Wall -Wextra -Werror
 CLIB = -L libft -lft -L minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
 SRCFILES = main.c \
+		   default_map.c \
+		   load_map.c \
+		   save_map.c \
 
 INC = inc \
 
-DIRS =
+DIRS = parsing
 
 INCDIRS = $(addprefix -I,$(INC))
 
