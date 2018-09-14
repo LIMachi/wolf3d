@@ -6,11 +6,11 @@
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 13:05:35 by hmartzol          #+#    #+#             */
-/*   Updated: 2018/09/14 13:18:06 by hmartzol         ###   ########.fr       */
+/*   Updated: 2018/09/14 15:35:42 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <env.h>
+#include "../../inc/env.h"
 
 /*
 ** <env.h>
@@ -38,7 +38,7 @@ int	save_map(const char *path, t_header *header)
 	ssize_t	size;
 
 	if (path == NULL || header == NULL
-			|| (fd = open(path, O_CREAT | O_TRUNC, 0644)) = -1)
+			|| (fd = open(path, O_CREAT | O_TRUNC, 0644)) == -1)
 		return (-1);
 	size = sizeof(t_header) + header->width * header->height * sizeof(uint32_t);
 	if (write(fd, header, size) != size)

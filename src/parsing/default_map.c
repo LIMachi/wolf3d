@@ -6,11 +6,12 @@
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 13:18:52 by hmartzol          #+#    #+#             */
-/*   Updated: 2018/09/14 13:29:41 by hmartzol         ###   ########.fr       */
+/*   Updated: 2018/09/14 15:34:46 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <env.h>
+#include "../../inc/env.h"
+#include <stdlib.h>
 
 /*
 ** <env.h>
