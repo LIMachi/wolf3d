@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/14 15:53:21 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:48:02 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int ac, const char **av)
 	{
 		if ((env.mlx = mlx_init()) == NULL)
 			return (0);
-		load_map(av[1]);
 		env.win = mlx_new_window(env.mlx, SX, SY, "coucou");
 		env.img = mlx_new_image(env.mlx, SX, SY);
 		env.timg = (int *)mlx_get_data_addr(env.img, &(env.bbp),
