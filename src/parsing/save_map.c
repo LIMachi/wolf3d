@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_map.c                                         :+:      :+:    :+:   */
+/*   save_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/13 22:13:30 by hmartzol          #+#    #+#             */
-/*   Updated: 2018/09/14 13:16:59 by hmartzol         ###   ########.fr       */
+/*   Created: 2018/09/14 13:05:35 by hmartzol          #+#    #+#             */
+/*   Updated: 2018/09/14 13:18:06 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,40 +28,24 @@
 
 /*
 ** <unistd.h>
-** ssize_t read(int fildes, void *buf, size_t nbyte);
+** ssize_t write(int fildes, void *buf, size_t nbyte);
 ** int close(int fildes);
 */
 
-#include <stdlib.h>
-
-/*
-**  void *malloc(size_t size);
-*/
-
-t_header	*load_map(const char *path)
+int	save_map(const char *path, t_header *header)
 {
-	int			fd;
-	t_header	*file;
-	t_header	tmp;
-	ssize_t		size;
+	int		fd;
+	ssize_t	size;
 
-	if (path == NULL || (fd = open(path, O_RDONLY)) == -1)
-		return (NULL);
-	if (read(fd, &tmp, sizeof(tmp)) != sizeof(tmp) || tmp.magic != W3D_MAGIC)
-		return (NULL);
-	size = tmp.height * tmp.width * sizeof(uint32_t);
-	if ((file = malloc(sizeof(tmp) + size)) == NULL)
+	if (path == NULL || header == NULL
+			|| (fd = open(path, O_CREAT | O_TRUNC, 0644)) = -1)
+		return (-1);
+	size = sizeof(t_header) + header->width * header->height * sizeof(uint32_t);
+	if (write(fd, header, size) != size)
 	{
 		close(fd);
-		return (NULL);
-	}
-	*file = tmp;
-	if (read(fd, file->map, size) != size)
-	{
-		free(file);
-		close(fd);
-		return (NULL);
+		return (-1);
 	}
 	close(fd);
-	return (file);
+	return (0);
 }
