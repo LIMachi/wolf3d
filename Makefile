@@ -6,7 +6,7 @@
 #    By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/05 23:27:31 by lmunoz-q          #+#    #+#              #
-#    Updated: 2018/09/14 15:48:45 by lmunoz-q         ###   ########.fr        #
+#    Updated: 2018/09/15 20:49:24 by lmunoz-q         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 CFLAGS = -Ofast -Wall -Wextra -Werror
 
-CLIB = -L libft -lft -L minilibx_macos -lmlx -framework OpenGL -framework AppKit
+CLIB = -L libft -lft -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
 SRCFILES = main.c \
 		   default_map.c \
@@ -24,6 +24,8 @@ SRCFILES = main.c \
 		   save_map.c \
 
 INC = inc \
+	  glfw-3.2.1/include \
+	  glfw-3.2.1/glad/include
 
 DIRS = parsing
 
@@ -35,11 +37,15 @@ OBJECTS = $(SRCFILES:%.c=$(OBJDIR)/%.o)
 
 SRCDIRS := $(addprefix src/,$(DIRS))
 
+GLFWLIB := glfw-3.2.1/src/libglfw3.a
+
+GLADLIB := glfw-3.2.1/glad/glad.a
+
 vpath %.c src $(SRCDIRS)
 
 all: $(NAME)
 
-$(NAME): libft/libft.a minilibx_macos/libmlx.a $(OBJECTS)
+$(NAME): libft/libft.a $(GLFWLIB) $(GLADLIB) $(OBJECTS)
 	$(CC) $(INCDIRS) $(CLIB) -o $@ $(OBJECTS)
 
 $(OBJDIR)/%.o : %.c | $(OBJDIR)
@@ -48,12 +54,19 @@ $(OBJDIR)/%.o : %.c | $(OBJDIR)
 $(OBJDIR):
 	mkdir -p $@
 
-libft/libft.a: force
+libft/libft.a:
 	$(MAKE) -w -C libft/
-	$(MAKE) -w -C minilibx_macos/
 
-minilibx_macos/libmlx.a: force
-	$(MAKE) -w -C minilibx_macos/
+$(GLFWLIB):
+	cd glfw-3.2.1; \
+	cmake CMakeLists.txt; \
+	make; \
+	cd ..
+
+$(GLADLIB):
+	cd glfw-3.2.1/glad/; \
+	make; \
+	cd ../..
 
 clean:
 	rm -rf $(OBJDIR)
@@ -64,8 +77,5 @@ fclean: clean
 	$(MAKE) -w -C libft/ fclean
 
 re: fclean all
-
-force:
-	true
 
 .PHONY: all clean fclean re
