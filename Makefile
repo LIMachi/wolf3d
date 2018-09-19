@@ -6,7 +6,7 @@
 #    By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/05 23:27:31 by lmunoz-q          #+#    #+#              #
-#    Updated: 2018/09/15 20:49:24 by lmunoz-q         ###   ########.fr        #
+#    Updated: 2018/09/19 19:53:22 by lmunoz-q         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCFILES = main.c \
 
 INC = inc \
 	  glfw-3.2.1/include \
-	  glfw-3.2.1/glad/include
+	  glfw-3.2.1/glad/include \
+	  libft
 
 DIRS = parsing
 
