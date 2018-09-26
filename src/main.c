@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/26 23:37:05 by hmartzol         ###   ########.fr       */
+/*   Updated: 2018/09/26 23:58:17 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <time.h>
 #include "../inc/env.h"
 #include "../libft/libft.h"
 
-#define SX 250
-#define SY 250
+#define SX 1920
+#define SY 1080
 
 void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 {
@@ -56,7 +57,8 @@ int	main(int ac, const char **av)
 	"	texture_coordinates = vec2(_position.x / 2.0 + 0.5, _position.y / 2.0 + 0.5);"
 	"}\n\0";
 
-	unsigned char	test[SX * SY * 3];
+	// unsigned char	test[SX * SY * 3];
+	unsigned char	*test = malloc(SX * SY * 3);
 	unsigned int	texture;
 	unsigned int	vbo;
 	unsigned int	vao;
@@ -117,9 +119,9 @@ int	main(int ac, const char **av)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SX, SY, 0, GL_RGB, GL_UNSIGNED_BYTE, test);
 
 		int tick = 0;
+		int second = (int)time(NULL);
 		while (!glfwWindowShouldClose(window))
 		{
 			for (int i = 0; i < SX * SY * 3; ++i)
@@ -132,6 +134,13 @@ int	main(int ac, const char **av)
 			glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 			glfwSwapBuffers(window);
 			glfwPollEvents();
+			if (second != (int)time(NULL))
+			{
+				second = (int)time(NULL);
+				printf("fps: %d\n", tick);
+				tick = 0;
+			}
+			++tick;
 		}
 
 		glDeleteShader(vs);
