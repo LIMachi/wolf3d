@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/05 23:27:31 by lmunoz-q          #+#    #+#              #
-#    Updated: 2018/09/15 20:49:24 by lmunoz-q         ###   ########.fr        #
+#    Updated: 2018/09/19 19:25:53 by hmartzol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = wolf3d
 
 CC = gcc
 
-CFLAGS = -Ofast -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 CLIB = -L libft -lft -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
