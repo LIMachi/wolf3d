@@ -6,7 +6,7 @@
 #    By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/05 23:27:31 by lmunoz-q          #+#    #+#              #
-#    Updated: 2018/09/26 23:38:27 by hmartzol         ###   ########.fr        #
+#    Updated: 2018/11/17 18:59:11 by lmunoz-q         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,16 @@ SRCFILES = main.c \
 		   default_map.c \
 		   load_map.c \
 		   save_map.c \
+		   init.c \
+		   gltex.c \
 
 INC = inc \
 	  glfw-3.2.1/include \
 	  glfw-3.2.1/glad/include \
 	  libft
 
-DIRS = parsing
+DIRS = parsing \
+	   glad
 
 INCDIRS = $(addprefix -I,$(INC))
 

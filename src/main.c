@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/11/17 18:20:05 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/11/17 19:44:31 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 
 int	main(int ac, const char **av)
 {
+	t_gl	gl;
 	static const char	*fragment =
 		"#version 400 core\n"
 		"in vec2 texture_coordinates;\n"
@@ -61,11 +62,7 @@ int	main(int ac, const char **av)
 	(void)av;
 	if (ac == 2)
 	{
-		glfwInit();
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+		init();                   //code de init
 		GLFWwindow* window = glfwCreateWindow(SX, SY, "Hello World\n", NULL, NULL);
 		glfwMakeContextCurrent(window);
 		gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -103,10 +100,7 @@ int	main(int ac, const char **av)
 
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		gltex(); // code de gltext
 
 		int tick = 0;
 		int second = (int)time(NULL);
