@@ -6,26 +6,14 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/26 23:58:17 by hmartzol         ###   ########.fr       */
+/*   Updated: 2018/11/17 18:20:05 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <OpenGL/opengl.h>
 
 // #include "glfw-3.2.1/glad/include/glad/glad.h"
 // #include "glfw-3.2.1/include/GLFW/glfw3.h"
 
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <time.h>
 #include "../inc/env.h"
-#include "../libft/libft.h"
-
-#define SX 1920
-#define SY 1080
 
 void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 {

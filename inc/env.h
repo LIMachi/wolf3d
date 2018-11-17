@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 18:37:25 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/09/15 21:57:17 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/11/17 18:20:08 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 # define ENV_H
 
 # include <stdint.h>
+# include <glad/glad.h>
+# include <GLFW/glfw3.h>
+# include <OpenGL/opengl.h>
+# include <stdio.h>
+# include <stdint.h>
+# include <stdlib.h>
+# include <time.h>
+# include "../libft/libft.h"
+
+# define SX 1920
+# define SY 1080
 
 /*
 ** <stdint.h>
