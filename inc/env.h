@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 18:37:25 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/11/17 19:43:43 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/11/17 20:06:41 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ typedef struct		s_header
 	uint32_t		map[0];
 }					t_header;
 
-typedef struct		s_gl
-{
-	static const char	*fragment;
-	static const char	*vertex;
-	unsigned char		*test;
-	unsigned int		texture;
-	unsigned int		vbo;
-	unsigned int		vao;
-	unsigned int		vs;
-	unsigned int		fs;
-	unsigned int		program;
-}					t_gl;
+// typedef struct		s_gl
+// {
+// 	// static const char	*fragment;
+// 	// static const char	*vertex;
+// 	unsigned char		*test;
+// 	unsigned int		texture;
+// 	unsigned int		vbo;
+// 	unsigned int		vao;
+// 	unsigned int		vs;
+// 	unsigned int		fs;
+// 	unsigned int		program;
+// }					t_gl;
 
 
 

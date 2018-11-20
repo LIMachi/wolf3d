@@ -6,7 +6,7 @@
 #    By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/05 23:27:31 by lmunoz-q          #+#    #+#              #
-#    Updated: 2018/11/17 18:59:11 by lmunoz-q         ###   ########.fr        #
+#    Updated: 2018/11/20 20:22:23 by hmartzol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,9 @@ CFLAGS = -Wall -Wextra -Werror -g
 CLIB = -L libft -lft -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
 SRCFILES = main.c \
-		   default_map.c \
-		   load_map.c \
-		   save_map.c \
 		   init.c \
-		   gltex.c \
+		   new_window.c \
+		   refresh_window.c
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -31,7 +29,7 @@ INC = inc \
 	  libft
 
 DIRS = parsing \
-	   glad
+		glfw_wrapper
 
 INCDIRS = $(addprefix -I,$(INC))
 

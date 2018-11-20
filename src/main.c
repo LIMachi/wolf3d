@@ -6,14 +6,11 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/11/17 19:44:31 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/11/20 20:32:42 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "glfw-3.2.1/glad/include/glad/glad.h"
-// #include "glfw-3.2.1/include/GLFW/glfw3.h"
-
-#include "../inc/env.h"
+#include "../inc/glfw_wrapper.h"
 
 void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 {
@@ -25,96 +22,29 @@ void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 
 int	main(int ac, const char **av)
 {
-	t_gl	gl;
-	static const char	*fragment =
-		"#version 400 core\n"
-		"in vec2 texture_coordinates;\n"
-		"out vec4 FragColor;\n"
-		"uniform sampler2D _texture;\n"
-		"void main()\n"
-		"{\n"
-		"	FragColor = texture(_texture, texture_coordinates);\n"
-		"}\n\0";
-
-	static const char	*vertex =
-	"#version 400 core\n"
-	"layout (location = 0) in vec3 _position;\n"
-	"out vec2 texture_coordinates;\n"
-	"void main()\n"
-	"{\n"
-	"	gl_Position = vec4(_position, 1.0);\n"
-	"	texture_coordinates = vec2(_position.x / 2.0 + 0.5, _position.y / 2.0 + 0.5);"
-	"}\n\0";
-
-	// unsigned char	test[SX * SY * 3];
-	unsigned char	*test = malloc(SX * SY * 3);
-	unsigned int	texture;
-	unsigned int	vbo;
-	unsigned int	vao;
-	unsigned int	vs;
-	unsigned int	fs;
-	unsigned int	program;
-	float			triangles[] = {-1.0, -1.0, 0.0,
-								1.0, -1.0, 0.0,
-								-1.0, 1.0, 0.0,
-								1.0, 1.0, 0.0}; //GL_TRIANGLE_STRIP
-
+	t_glfw_env		env;
+	t_glfw_window	*win;
+	int tick = 0;
+	int second = (int)time(NULL);
 	(void)av;
 	if (ac == 2)
 	{
-		init();                   //code de init
-		GLFWwindow* window = glfwCreateWindow(SX, SY, "Hello World\n", NULL, NULL);
-		glfwMakeContextCurrent(window);
-		gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		glfwSetKeyCallback(window, (GLFWkeyfun)&print_key);
+		glfw_init();
+		if ((win = glfw_new_window(&env, SX, SY, "Wolf3d")) == NULL)
+			return (-42);
+		glfwSetKeyCallback(win->w, (GLFWkeyfun)&print_key);
 		for (int x = 0; x < SX; ++x)
 			for (int y = 0; y < SY; ++y)
 			{
-				test[(y * SX + x) * 3] = rand() % 256;
-				test[(y * SX + x) * 3 + 1] = rand() % 256;
-				test[(y * SX + x) * 3 + 2] = rand() % 256;
+				win->vb[(y * SX + x) * 3] = rand() % 256;
+				win->vb[(y * SX + x) * 3 + 1] = rand() % 256;
+				win->vb[(y * SX + x) * 3 + 2] = rand() % 256;
 			}
-
-		glGenVertexArrays(1, &vao);
-		glGenBuffers(1, &vbo);
-		glBindVertexArray(vao);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(triangles), triangles, GL_STATIC_DRAW);
-
-		vs = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vs, 1, &vertex, NULL);
-
-		fs = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fs, 1, &fragment, NULL);
-
-		glCompileShader(vs);
-		glCompileShader(fs);
-
-		program = glCreateProgram();
-		glAttachShader(program, vs);
-		glAttachShader(program, fs);
-		glLinkProgram(program);
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-
-		glGenTextures(1, &texture);
-		glBindTexture(GL_TEXTURE_2D, texture);
-		gltex(); // code de gltext
-
-		int tick = 0;
-		int second = (int)time(NULL);
-		while (!glfwWindowShouldClose(window))
+		while (!glfwWindowShouldClose(win->w))
 		{
 			for (int i = 0; i < SX * SY * 3; ++i)
-				++test[i];
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SX, SY, 0, GL_RGB, GL_UNSIGNED_BYTE, test);
-			glClear(GL_COLOR_BUFFER_BIT);
-			glBindTexture(GL_TEXTURE_2D, texture);
-			glUseProgram(program);
-			glBindVertexArray(vao);
-			glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-			glfwSwapBuffers(window);
+				++win->vb[i];
+			glfw_refresh_window(win);
 			glfwPollEvents();
 			if (second != (int)time(NULL))
 			{
@@ -124,10 +54,6 @@ int	main(int ac, const char **av)
 			}
 			++tick;
 		}
-
-		glDeleteShader(vs);
-		glDeleteShader(fs);
-
 		glfwTerminate();
 	}
 	else

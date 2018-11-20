@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   refresh_window.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/17 20:11:12 by hmartzol          #+#    #+#             */
-/*   Updated: 2018/11/20 19:19:33 by hmartzol         ###   ########.fr       */
+/*   Created: 2018/11/20 20:10:15 by hmartzol          #+#    #+#             */
+/*   Updated: 2018/11/20 20:20:16 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <render.h>
+#include "../inc/glfw_wrapper.h"
 
-void	mglfw_init(void)
+void	glfw_refresh_window(t_glfw_window *win)
 {
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, win->vb_width, win->vb_length, 0,
+		GL_RGB, GL_UNSIGNED_BYTE, win->vb);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glBindTexture(GL_TEXTURE_2D, win->texture);
+	glUseProgram(win->program);
+	glBindVertexArray(win->vao);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glfwSwapBuffers(win->w);
 }

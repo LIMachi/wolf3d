@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 18:21:13 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/11/17 18:57:55 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/11/20 20:17:01 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/env.h"
 
-void	init(void)
+void	glfw_init(void)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
