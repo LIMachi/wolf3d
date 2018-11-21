@@ -6,7 +6,7 @@
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 19:13:02 by hmartzol          #+#    #+#             */
-/*   Updated: 2018/11/20 20:25:53 by hmartzol         ###   ########.fr       */
+/*   Updated: 2018/11/21 18:20:53 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 
 # define SX 1920
 # define SY 1080
+
+# define mSX 5
+# define mSY 5
 
 typedef struct				s_glfw_window
 {
@@ -47,11 +50,14 @@ typedef struct				s_glfw_env
 	t_glfw_window			*window;
 }							t_glfw_env;
 
+t_glfw_env					*set_env(t_glfw_env *set);
+t_glfw_env					*env(void);
+
 void						glfw_init(void);
-t_glfw_window				*glfw_new_window(t_glfw_env *env,
-											size_t width,
+t_glfw_window				*glfw_new_window(size_t width,
 											size_t length,
-											char *name);
+											char *name,
+											void *user_ptr);
 void						glfw_refresh_window(t_glfw_window *win);
 
 #endif

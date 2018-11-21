@@ -6,7 +6,7 @@
 #    By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/05 23:27:31 by lmunoz-q          #+#    #+#              #
-#    Updated: 2018/11/20 20:22:23 by hmartzol         ###   ########.fr        #
+#    Updated: 2018/11/21 18:22:54 by lmunoz-q         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,21 +21,27 @@ CLIB = -L libft -lft -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framew
 SRCFILES = main.c \
 		   init.c \
 		   new_window.c \
-		   refresh_window.c
+		   refresh_window.c \
+		   env.c \
+		   map_editor.c \
+		   default_map.c \
 
 INC = inc \
 	  glfw-3.2.1/include \
 	  glfw-3.2.1/glad/include \
 	  libft
 
-DIRS = parsing \
-		glfw_wrapper
+DIRS =	parsing \
+		glfw_wrapper \
+		minimap \
 
 INCDIRS = $(addprefix -I,$(INC))
 
 OBJDIR = obj
 
 OBJECTS = $(SRCFILES:%.c=$(OBJDIR)/%.o)
+
+INCLUDES := inc/glfw_wrapper.h
 
 SRCDIRS := $(addprefix src/,$(DIRS))
 
@@ -50,7 +56,7 @@ all: $(NAME)
 $(NAME): libft/libft.a $(GLFWLIB) $(GLADLIB) $(OBJECTS)
 	$(CC) $(INCDIRS) $(CLIB) -o $@ $(OBJECTS)
 
-$(OBJDIR)/%.o : %.c | $(OBJDIR)
+$(OBJDIR)/%.o : %.c $(INCLUDES) | $(OBJDIR)
 	$(CC) $(INCDIRS) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR):

@@ -6,31 +6,35 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/11/21 17:04:01 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/11/21 18:24:23 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/glfw_wrapper.h"
+#include "../inc/env.h"
 
 void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 {
 	(void)win;
 	(void)mod;
+	if (!strcmp(glfwGetKeyName(key, scan), "m") && act == GLFW_PRESS)
+		map_editor();
 	printf("%s: %s\n", glfwGetKeyName(key, scan), act == GLFW_PRESS ? "PRESS" : (act == GLFW_RELEASE ? "RELEASE" : "REPEAT"));
 	return (NULL);
 }
 
 int	main(int ac, const char **av)
 {
-	t_glfw_env		env;
+	t_glfw_env		e;
 	t_glfw_window	*win;
 	int tick = 0;
 	int second = (int)time(NULL);
+	(void)set_env(&e);
 	(void)av;
 	if (ac == 2)
 	{
 		glfw_init();
-		if ((win = glfw_new_window(&env, SX, SY, "Wolf3d")) == NULL)
+		if ((win = glfw_new_window(SX, SY, "Wolf3d", NULL)) == NULL)
 			return (-42);
 		glfwSetKeyCallback(win->w, (GLFWkeyfun)&print_key);
 		for (int x = 0; x < SX; ++x)

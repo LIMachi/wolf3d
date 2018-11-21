@@ -6,7 +6,7 @@
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 19:22:53 by hmartzol          #+#    #+#             */
-/*   Updated: 2018/11/20 20:26:46 by hmartzol         ###   ########.fr       */
+/*   Updated: 2018/11/21 18:22:08 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static inline int			i_program(const char *fragment, const char *vertex)
 	return (program);
 }
 
-static inline t_glfw_window	*i_new_window(t_glfw_env *env, t_glfw_window *out)
+static inline t_glfw_window	*i_new_window(t_glfw_window *out, void *user_ptr)
 {
 	GLuint					vbo;
 	static const GLfloat	triangles[12] = {-1.0, -1.0, 0.0, 1.0, -1.0, 0.0,
@@ -53,23 +53,25 @@ static inline t_glfw_window	*i_new_window(t_glfw_env *env, t_glfw_window *out)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	if (env->window != NULL)
-		env->window->prev = out;
-	return (env->window = out);
+	if (env()->window != NULL)
+		env()->window->prev = out;
+	glfwSetWindowUserPointer(out->w, user_ptr);
+	return (env()->window = out);
 }
 
-t_glfw_window				*glfw_new_window(t_glfw_env *env,
-											size_t width,
+t_glfw_window				*glfw_new_window(size_t width,
 											size_t length,
-											char *name)
+											char *name,
+											void *user_ptr)
 {
 	t_glfw_window	*out;
 
 	if ((out = malloc(sizeof(t_glfw_window))) == NULL)
 		return (NULL);
-	*out = (t_glfw_window){.prev = NULL, .next = env->window, .should_close = 0,
-		.w_width = width, .vb_length = length, .vb = malloc(width * length * 3),
-		.vb_width = width, .w_length = length, .w = glfwCreateWindow(
+	*out = (t_glfw_window){.prev = NULL, .next = env()->window,
+		.should_close = 0, .w_width = width, .vb_length = length,
+		.vb = malloc(width * length * 3), .vb_width = width,
+		.w_length = length, .w = glfwCreateWindow(
 			width, length, name, NULL, NULL)};
 	if (out->vb == NULL || out->w == NULL)
 	{
@@ -86,5 +88,5 @@ t_glfw_window				*glfw_new_window(t_glfw_env *env,
 	"= 0) in vec3 _position;out vec2 texture_coordinates;void main(){gl_Positio"
 	"n = vec4(_position, 1.0);texture_coordinates = vec2(_position.x / 2.0 + 0."
 	"5, _position.y / 2.0 + 0.5);}");
-	return (i_new_window(env, out));
+	return (i_new_window(out, user_ptr));
 }
