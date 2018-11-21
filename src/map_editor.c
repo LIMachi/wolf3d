@@ -46,6 +46,6 @@ t_header	*map_editor(void)
 		//
 		glfwPollEvents();
 	}
-	// glfw_remove_window(win);
+	glfw_remove_window(win);
 	return (out);
 }

@@ -14,8 +14,8 @@
 # define GLFW_WRAPPER_H
 
 # include <stdint.h>
-# include <glad/glad.h>
-# include <GLFW/glfw3.h>
+# include "../glfw-3.2.1/glad/include/glad/glad.h"
+# include "../glfw-3.2.1/include/GLFW/glfw3.h"
 # include <OpenGL/opengl.h>
 # include <stdio.h>
 # include <stdint.h>
@@ -59,5 +59,6 @@ t_glfw_window				*glfw_new_window(size_t width,
 											char *name,
 											void *user_ptr);
 void						glfw_refresh_window(t_glfw_window *win);
+void						glfw_remove_window(t_glfw_window *win);
 
 #endif

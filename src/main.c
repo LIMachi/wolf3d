@@ -15,11 +15,13 @@
 
 void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 {
+	char *s;
 	(void)win;
 	(void)mod;
-	if (!strcmp(glfwGetKeyName(key, scan), "m") && act == GLFW_PRESS)
-		map_editor();
 	printf("%s: %s\n", glfwGetKeyName(key, scan), act == GLFW_PRESS ? "PRESS" : (act == GLFW_RELEASE ? "RELEASE" : "REPEAT"));
+	s = (char*)glfwGetKeyName(key, scan);
+//	if (s != NULL && !strcmp(s, "m") && act == GLFW_PRESS)
+//		map_editor();
 	return (NULL);
 }
 
@@ -50,6 +52,8 @@ int	main(int ac, const char **av)
 				++win->vb[i];
 			glfw_refresh_window(win);
 			glfwPollEvents();
+			if (glfwGetKey(win->w, GLFW_KEY_M))
+				map_editor();
 			if (second != (int)time(NULL))
 			{
 				second = (int)time(NULL);

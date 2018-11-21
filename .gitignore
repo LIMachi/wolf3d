@@ -2,3 +2,12 @@
 *.a
 *.so
 wolf3d
+.DS_Store
+.idea/codeStyles/Project.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/wolf3d.iml
+.idea/workspace.xml
+CMakeLists.txt
+cmake-build-debug/

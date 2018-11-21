@@ -25,6 +25,7 @@ SRCFILES = main.c \
 		   env.c \
 		   map_editor.c \
 		   default_map.c \
+		   glfw_remove_window.c
 
 INC = inc \
 	  glfw-3.2.1/include \
