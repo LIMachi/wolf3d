@@ -6,7 +6,7 @@
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 20:10:15 by hmartzol          #+#    #+#             */
-/*   Updated: 2018/11/20 20:20:16 by hmartzol         ###   ########.fr       */
+/*   Updated: 2018/11/22 18:29:36 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	glfw_refresh_window(t_glfw_window *win)
 {
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, win->vb_width, win->vb_length, 0,
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, win->vb_width, win->vb_height, 0,
 		GL_RGB, GL_UNSIGNED_BYTE, win->vb);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBindTexture(GL_TEXTURE_2D, win->texture);

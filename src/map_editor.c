@@ -43,7 +43,8 @@ t_header	*map_editor(void)
 	//
 	while (!glfwWindowShouldClose(win->w))
 	{
-		//
+		draw_map(win, out);
+		glfw_refresh_window(win);
 		glfwPollEvents();
 	}
 	glfw_remove_window(win);

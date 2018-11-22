@@ -6,7 +6,7 @@
 #    By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/05 23:27:31 by lmunoz-q          #+#    #+#              #
-#    Updated: 2018/11/21 22:57:20 by lmunoz-q         ###   ########.fr        #
+#    Updated: 2018/11/22 18:19:43 by lmunoz-q         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCFILES = main.c \
 		   env.c \
 		   map_editor.c \
 		   default_map.c \
-		   glfw_remove_window.c
+		   glfw_remove_window.c \
+		   draw_map.c \
 
 INC = inc \
 	  glfw-3.2.1/include \

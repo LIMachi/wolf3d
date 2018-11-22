@@ -6,7 +6,7 @@
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 19:13:02 by hmartzol          #+#    #+#             */
-/*   Updated: 2018/11/21 22:57:51 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/11/22 18:28:03 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,22 @@ typedef struct				s_glfw_window
 {
 	struct s_glfw_window	*prev;
 	struct s_glfw_window	*next;
-	int						should_close;
 	size_t					vb_width;
-	size_t					vb_length;
+	size_t					vb_height;
 	char					*vb;
 	size_t					w_width;
-	size_t					w_length;
+	size_t					w_height;
 	GLFWwindow				*w;
 	GLuint					texture;
 	GLuint					program;
 	GLuint					vao;
 }							t_glfw_window;
+
+typedef struct				s_vec
+{
+	uint32_t				x;
+	uint32_t				y;
+}							t_vec;
 
 typedef struct				s_glfw_env
 {
@@ -60,5 +65,7 @@ t_glfw_window				*glfw_new_window(size_t width,
 											void *user_ptr);
 void						glfw_refresh_window(t_glfw_window *win);
 void						glfw_remove_window(t_glfw_window *win);
+t_glfw_window				*draw_square(t_glfw_window *win, t_vec pos, t_vec size, uint32_t color);
+t_glfw_window				*draw_pixel(t_glfw_window *win, uint32_t x, uint32_t y, uint32_t color);
 
 #endif
