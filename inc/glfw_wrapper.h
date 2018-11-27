@@ -36,12 +36,13 @@ typedef struct				s_glfw_window
 	size_t					vb_width;
 	size_t					vb_height;
 	char					*vb;
-	size_t					w_width;
-	size_t					w_height;
+	int						w_width;
+	int						w_height;
 	GLFWwindow				*w;
 	GLuint					texture;
 	GLuint					program;
 	GLuint					vao;
+	void					*user_ptr;
 }							t_glfw_window;
 
 typedef struct				s_vec

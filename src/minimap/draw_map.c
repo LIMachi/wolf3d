@@ -48,7 +48,6 @@ t_glfw_window	*draw_map(t_glfw_window *win, t_header *map)
 	x = -1;
 	sx = (double)win->vb_width / (double)map->width;
 	sy = (double)win->vb_height / (double)map->height;
-	draw_square(win, (t_vec){.x = 10, .y =10}, (t_vec){.x = 10, .y = 10}, 0xFF0000);
 	while (++x < map->width)
 	{
 		y = -1;

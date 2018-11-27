@@ -62,7 +62,7 @@ typedef struct		s_header
 t_header			*default_map(void);
 t_header			*load_map(const char *path);
 int					save_map(const char *path, t_header *header);
-t_header			*map_editor(void);
+t_header			*map_editor(t_header *out);
 t_glfw_window				*draw_map(t_glfw_window *win, t_header *map);
 
 # define W3D_MAGIC	0x7733640A

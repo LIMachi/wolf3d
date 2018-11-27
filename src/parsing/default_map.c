@@ -22,17 +22,11 @@ t_header	*default_map(void)
 {
 	uint32_t				i;
 	t_header				*out;
-	static const t_header	head = {
 
-	.magic = W3D_MAGIC,
-	.height = 11,
-	.width = 11,
-	.startx = 5,
-	.starty = 5,
-	.look = 0};
 	if ((out = malloc(sizeof(t_header) + 121 * sizeof(uint32_t))) == NULL)
 		return (NULL);
-	*out = head;
+	*out = (t_header){.magic = W3D_MAGIC, .height = 11, .width = 11,
+		.startx = 5, .starty = 5, .look = 0};
 	i = -1;
 	while (++i < 121)
 		out->map[i] = i % 11 == 0 || i % 11 == 10 || i < 11 || i > 109;

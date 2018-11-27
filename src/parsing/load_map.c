@@ -50,7 +50,7 @@ t_header	*load_map(const char *path)
 		return (NULL);
 	if (read(fd, &tmp, sizeof(tmp)) != sizeof(tmp) || tmp.magic != W3D_MAGIC)
 		return (NULL);
-	size = tmp.height * tmp.width * sizeof(uint32_t);
+	size = tmp.height * tmp.width * sizeof(uint8_t);
 	if ((file = malloc(sizeof(tmp) + size)) == NULL)
 	{
 		close(fd);

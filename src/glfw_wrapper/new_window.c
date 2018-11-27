@@ -33,7 +33,7 @@ static inline int			i_program(const char *fragment, const char *vertex)
 	return (program);
 }
 
-static inline t_glfw_window	*i_new_window(t_glfw_window *out, void *user_ptr)
+static inline t_glfw_window	*i_new_window(t_glfw_window *out)
 {
 	GLuint					vbo;
 	static const GLfloat	triangles[12] = {-1.0, -1.0, 0.0, 1.0, -1.0, 0.0,
@@ -55,7 +55,7 @@ static inline t_glfw_window	*i_new_window(t_glfw_window *out, void *user_ptr)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	if (env()->window != NULL)
 		env()->window->prev = out;
-	glfwSetWindowUserPointer(out->w, user_ptr);
+	glfwSetWindowUserPointer(out->w, out);
 	return (env()->window = out);
 }
 
@@ -72,7 +72,7 @@ t_glfw_window				*glfw_new_window(size_t width,
 		.w_width = width, .vb_height = height,
 		.vb = malloc(width * height * 3), .vb_width = width,
 		.w_height = height, .w = glfwCreateWindow(
-			width, height, name, NULL, NULL)};
+			width, height, name, NULL, NULL), .user_ptr = user_ptr};
 	if (out->vb == NULL || out->w == NULL)
 	{
 		free(out->vb);
@@ -87,6 +87,6 @@ t_glfw_window				*glfw_new_window(size_t width,
 	"e(_texture, texture_coordinates);}", "#version 400 core\nlayout (location "
 	"= 0) in vec3 _position;out vec2 texture_coordinates;void main(){gl_Positio"
 	"n = vec4(_position, 1.0);texture_coordinates = vec2(_position.x / 2.0 + 0."
-	"5, _position.y / 2.0 + 0.5);}");
-	return (i_new_window(out, user_ptr));
+	"5, -_position.y / 2.0 + 0.5);}");
+	return (i_new_window(out));
 }
