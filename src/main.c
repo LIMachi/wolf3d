@@ -72,7 +72,7 @@ int	main(int ac, const char **av)
 		glfwSetMouseButtonCallback(win->w, (GLFWmousebuttonfun)&print_mouse_button);
 		glfwSetCursorPosCallback(win->w, (GLFWcursorposfun)&print_cursor_pos);
 		if ((map = load_map(av[1])) == NULL)
-//			if ((map = default_map()) == NULL)
+			if ((map = default_map()) == NULL)
 				return (-1);
 		for (int x = 0; x < SX; ++x)
 			for (int y = 0; y < SY; ++y)

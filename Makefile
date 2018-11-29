@@ -28,7 +28,8 @@ SRCFILES = main.c \
 		   glfw_remove_window.c \
 		   draw_map.c \
 		   load_map.c \
-		   save_map.c
+		   save_map.c \
+		   rotate_2d.c
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -38,6 +39,7 @@ INC = inc \
 DIRS =	parsing \
 		glfw_wrapper \
 		minimap \
+		vector
 
 INCDIRS = $(addprefix -I,$(INC))
 
@@ -51,7 +53,7 @@ SRCDIRS := $(addprefix src/,$(DIRS))
 
 GLFWLIB := glfw-3.2.1/src/libglfw3.a
 
-GLADLIB := glfw-3.2.1/glad/glad.a
+GLADLIB := glfw-3.2.1/glad/libglad.a
 
 vpath %.c src $(SRCDIRS)
 

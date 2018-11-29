@@ -21,6 +21,7 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <time.h>
+# include <math.h>
 # include "../libft/libft.h"
 #include "glfw_wrapper.h"
 
@@ -29,6 +30,11 @@
 ** typedef ... uint32_t
 */
 
+# define RAD_TO_DEG (180.0 / M_PI)
+# define DEG_TO_RAD (M_PI / 180.0)
+
+# define W3D_MAGIC	0x7733640A
+
 typedef struct		s_header
 {
 	uint32_t		magic;
@@ -36,9 +42,15 @@ typedef struct		s_header
 	uint32_t		width;
 	uint32_t		startx;
 	uint32_t		starty;
-	uint32_t		look;
+	uint32_t		look; //[0, 36000]
 	uint8_t			map[0];
 }					t_header;
+
+typedef struct	s_vector
+{
+	double		x;
+	double		y;
+}				t_vector;
 
 // typedef struct		s_gl
 // {
@@ -63,7 +75,7 @@ t_header			*default_map(void);
 t_header			*load_map(const char *path);
 int					save_map(const char *path, t_header *header);
 t_header			*map_editor(t_header *out);
-t_glfw_window				*draw_map(t_glfw_window *win, t_header *map);
+t_glfw_window		*draw_map(t_glfw_window *win, t_header *map);
+t_vector			rotate_2d(t_vector vec, double deg);
 
-# define W3D_MAGIC	0x7733640A
 #endif

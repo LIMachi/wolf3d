@@ -1,0 +1,19 @@
+un menu quand on lance le programme:
+nouveau jeu
+continuer
+editeur de map (éditer une map exitante ou crée une nouvelle map)
+options (keybind, autres)
+quiter
+
+un menu quand on fait echap en jeu:
+sauvegarder
+charger
+quitter (revient au menu pricipal)
+annuler
+
+un menu quand on fait echap dans l'editeur
+charger
+sauvegarder
+changer la taille
+quitter (revient au menu principal)
+annuler
