@@ -62,6 +62,8 @@ int	main(int ac, const char **av)
 	int tick = 0;
 	int second = (int)time(NULL);
 	(void)set_env(&e);
+	if (FT_Init_FreeType(&e.ft2_lib))
+		return (-1);
 	(void)av;
 	if (ac == 2)
 	{

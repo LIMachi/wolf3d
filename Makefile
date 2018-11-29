@@ -16,7 +16,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-CLIB = -L libft -lft -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+CLIB = -L libft -lft -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -L glfw-3.2.1/freetype-2.9.1/objs/.libs -lfreetype glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib
 
 SRCFILES = main.c \
 		   glfw_init.c \
@@ -62,7 +62,7 @@ vpath %.c src $(SRCDIRS)
 
 all: $(NAME)
 
-$(NAME): libft/libft.a $(GLFWLIB) $(GLADLIB) $(FT2LIB) $(OBJECTS)
+$(NAME): libft/libft.a $(GLFWLIB) $(GLADLIB) $(FT2LIB) $(OBJECTS) Makefile
 	$(CC) $(INCDIRS) $(CLIB) -o $@ $(OBJECTS)
 
 $(OBJDIR)/%.o : %.c $(INCLUDES) | $(OBJDIR)
@@ -89,6 +89,7 @@ $(FT2LIB):
 	cd glfw-3.2.1/freetype-2.9.1; \
 	./configure; \
 	make; \
+	install_name_tool -id "glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib" glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib; \
 	cd ..
 
 clean:

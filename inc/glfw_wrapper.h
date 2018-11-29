@@ -60,6 +60,7 @@ typedef struct				s_vec
 typedef struct				s_glfw_env
 {
 	t_glfw_window			*window;
+	FT_Library				ft2_lib;
 }							t_glfw_env;
 
 t_glfw_env					*set_env(t_glfw_env *set);
