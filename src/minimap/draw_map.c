@@ -101,6 +101,33 @@ t_glfw_window		*draw_line(t_glfw_window *win,
 	return (win);
 }
 
+uint32_t			color_blend(uint32_t c1, uint32_t c2, double f)
+{
+	int16_t	r;
+	int16_t	g;
+	int16_t	b;
+	int16_t	a;
+
+	a = (int16_t)(((double)((c1 >> 24) & 0xFF)) * f
+		+ ((double)((c2 >> 24) & 0xFF)) * (1.0 - f));
+	r = (int16_t)(((double)((c1 >> 16) & 0xFF)) * f
+		+ ((double)((c2 >> 16) & 0xFF)) * (1.0 - f));
+	g = (int16_t)(((double)((c1 >> 8) & 0xFF)) * f
+		+ ((double)((c2 >> 8) & 0xFF)) * (1.0 - f));
+	b = (int16_t)(((double)(c1 & 0xFF)) * f
+		+ ((double)(c2 & 0xFF)) * (1.0 - f));
+	a = a < 0 ? 0 : a;
+	a = a > 255 ? 255 : a;
+	r = r < 0 ? 0 : r;
+	r = r > 255 ? 255 : r;
+	g = g < 0 ? 0 : g;
+	g = g > 255 ? 255 : g;
+	b = b < 0 ? 0 : b;
+	b = b > 255 ? 255 : b;
+	return (((uint32_t)a << 24) | ((uint32_t)r << 16)
+		| ((uint32_t)g << 8) | (uint32_t)b);
+}
+
 t_glfw_window		*draw_map(t_glfw_window *win,
 							t_header *map)
 {
@@ -110,6 +137,7 @@ t_glfw_window		*draw_map(t_glfw_window *win,
 	double			sy;
 	t_vector		look;
 	FT_GlyphSlot	slot;
+	double			gray;
 
 	x = -1;
 	sx = (double)win->vb_width / (double)map->width;
@@ -130,9 +158,13 @@ t_glfw_window		*draw_map(t_glfw_window *win,
 	FT_Set_Pixel_Sizes(env()->font, 0, 128);
 	slot = env()->font->glyph;
 	FT_Load_Char(env()->font, 'a', FT_LOAD_RENDER);
+	printf("pixel mode: %d\n", slot->bitmap.pixel_mode);
 	for (x = 0; x < slot->bitmap.width; ++x)
 		for (y = 0; y < slot->bitmap.rows; ++y)
 			if (slot->bitmap.buffer[x + y * slot->bitmap.width])
-				draw_pixel(win, x, y, 0xFF);
+			{
+				gray = (double)slot->bitmap.buffer[x + y * slot->bitmap.width] / 256.0;
+				draw_pixel(win, x, y, color_blend(0xFF, 0xFFFFFF, gray));
+			}
 	return (win);
 }
