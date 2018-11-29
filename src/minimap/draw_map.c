@@ -104,11 +104,12 @@ t_glfw_window		*draw_line(t_glfw_window *win,
 t_glfw_window		*draw_map(t_glfw_window *win,
 							t_header *map)
 {
-	uint32_t	x;
-	uint32_t	y;
-	double		sx;
-	double		sy;
-	t_vector	look;
+	uint32_t		x;
+	uint32_t		y;
+	double			sx;
+	double			sy;
+	t_vector		look;
+	FT_GlyphSlot	slot;
 
 	x = -1;
 	sx = (double)win->vb_width / (double)map->width;
@@ -126,5 +127,12 @@ t_glfw_window		*draw_map(t_glfw_window *win,
 		(t_vec){.x = map->startx * sx, .y = map->starty * sy},
 		(t_vec){.x = look.x + map->startx * sx, .y = look.y + map->starty * sy},
 		0xFF0000);
+	FT_Set_Pixel_Sizes(env()->font, 0, 128);
+	slot = env()->font->glyph;
+	FT_Load_Char(env()->font, 'a', FT_LOAD_RENDER);
+	for (x = 0; x < slot->bitmap.width; ++x)
+		for (y = 0; y < slot->bitmap.rows; ++y)
+			if (slot->bitmap.buffer[x + y * slot->bitmap.width])
+				draw_pixel(win, x, y, 0xFF);
 	return (win);
 }
