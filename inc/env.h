@@ -23,7 +23,7 @@
 # include <time.h>
 # include <math.h>
 # include "../libft/libft.h"
-#include "glfw_wrapper.h"
+# include "glfw_wrapper.h"
 
 /*
 ** <stdint.h>
@@ -42,30 +42,15 @@ typedef struct		s_header
 	uint32_t		width;
 	uint32_t		startx;
 	uint32_t		starty;
-	uint32_t		look; //[0, 36000]
+	uint32_t		look;
 	uint8_t			map[0];
 }					t_header;
 
-typedef struct	s_vector
+typedef struct		s_vector
 {
-	double		x;
-	double		y;
-}				t_vector;
-
-// typedef struct		s_gl
-// {
-// 	// static const char	*fragment;
-// 	// static const char	*vertex;
-// 	unsigned char		*test;
-// 	unsigned int		texture;
-// 	unsigned int		vbo;
-// 	unsigned int		vao;
-// 	unsigned int		vs;
-// 	unsigned int		fs;
-// 	unsigned int		program;
-// }					t_gl;
-
-
+	double			x;
+	double			y;
+}					t_vector;
 
 /*
 ** # define W3D_MAGIC *(uint32_t*)"w3d\n"

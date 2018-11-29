@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_editor.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
+/*   Updated: 2018/11/22 18:19:19 by lmunoz-q         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/env.h"
 #include "../inc/glfw_wrapper.h"
 
@@ -6,7 +18,7 @@ t_header	*map_scale(t_header *map, uint32_t width, uint32_t height)
 	t_header	*out;
 	uint32_t	x;
 	uint32_t	y;
-	
+
 	if (width == map->width && height == map->height)
 		return (map);
 	if ((out = malloc(sizeof(t_header) + width * height)) == NULL)
@@ -27,7 +39,7 @@ t_header	*map_scale(t_header *map, uint32_t width, uint32_t height)
 	return (out);
 }
 
-void	click_block(t_glfw_window *win, t_header *map, double x, double y)
+void		click_block(t_glfw_window *win, t_header *map, double x, double y)
 {
 	double			sx;
 	double			sy;
@@ -39,7 +51,7 @@ void	click_block(t_glfw_window *win, t_header *map, double x, double y)
 	map->map[i] ^= 1;
 }
 
-void	*click(GLFWwindow *win, int key, int act, int mod)
+void		*click(GLFWwindow *win, int key, int act, int mod)
 {
 	double			x;
 	double			y;
@@ -51,7 +63,8 @@ void	*click(GLFWwindow *win, int key, int act, int mod)
 	{
 		glfwGetWindowSize(win, &u_win->w_width, &u_win->w_height);
 		glfwGetCursorPos(win, &x, &y);
-		if (x < 0.0 || y < 0.0 || x > (double)u_win->w_width || y > (double)u_win->w_height)
+		if (x < 0.0 || y < 0.0 || x > (double)u_win->w_width
+				|| y > (double)u_win->w_height)
 			return (NULL);
 		click_block(u_win, u_win->user_ptr, x, y);
 	}
@@ -70,7 +83,7 @@ t_header	*map_editor(t_header *out)
 		free(out);
 		return (NULL);
 	}
-	glfwSetMouseButtonCallback(win->w, (GLFWmousebuttonfun)&click);
+	glfwSetMouseButtonCallback(win->w, (GLFWmousebuttonfun) & click);
 	while (!glfwWindowShouldClose(win->w))
 	{
 		draw_map(win, out);

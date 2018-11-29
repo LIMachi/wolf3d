@@ -26,8 +26,8 @@
 # define SX 1920
 # define SY 1080
 
-# define mSX 5
-# define mSY 5
+# define MSX 5
+# define MSY 5
 
 typedef struct				s_glfw_window
 {
@@ -57,17 +57,33 @@ typedef struct				s_glfw_env
 }							t_glfw_env;
 
 t_glfw_env					*set_env(t_glfw_env *set);
+
 t_glfw_env					*env(void);
 
 void						glfw_init(void);
+
 t_glfw_window				*glfw_new_window(size_t width,
 											size_t length,
 											char *name,
 											void *user_ptr);
+
 void						glfw_refresh_window(t_glfw_window *win);
+
 void						glfw_remove_window(t_glfw_window *win);
-t_glfw_window				*draw_square(t_glfw_window *win, t_vec pos, t_vec size, uint32_t color);
-t_glfw_window				*draw_pixel(t_glfw_window *win, uint32_t x, uint32_t y, uint32_t color);
-t_glfw_window				*draw_line(t_glfw_window *win, t_vec a, t_vec b, uint32_t color);
+
+t_glfw_window				*draw_square(t_glfw_window *win,
+										t_vec pos,
+										t_vec size,
+										uint32_t color);
+
+t_glfw_window				*draw_pixel(t_glfw_window *win,
+										uint32_t x,
+										uint32_t y,
+										uint32_t color);
+
+t_glfw_window				*draw_line(t_glfw_window *win,
+										t_vec a,
+										t_vec b,
+										uint32_t color);
 
 #endif
