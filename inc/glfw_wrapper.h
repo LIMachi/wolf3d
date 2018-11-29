@@ -22,6 +22,12 @@
 # include <stdlib.h>
 # include <time.h>
 # include "../libft/libft.h"
+# include "../glfw-3.2.1/freetype-2.9.1/include/ft2build.h"
+# include FT_FREETYPE_H
+
+/*
+** https://www.freetype.org/freetype2/docs/tutorial/step1.html
+*/
 
 # define SX 1920
 # define SY 1080

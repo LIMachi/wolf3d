@@ -1,13 +1,13 @@
 # **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/09/05 23:27:31 by lmunoz-q          #+#    #+#              #
-#    Updated: 2018/11/22 18:19:43 by lmunoz-q         ###   ########.fr        #
-#                                                                              #
+#																			 #
+#														:::	  ::::::::  #
+#   Makefile										   :+:	:+:   :+: #
+#													+:+ +:+		 +:+	  #
+#   By: lmunoz-q <lmunoz-q@student.42.fr>		 +#+  +:+	 +#+	   #
+#												+#+#+#+#+#+   +#+		  #
+#   Created: 2018/09/05 23:27:31 by lmunoz-q		  #+#   #+#		   #
+#   Updated: 2018/11/22 18:19:43 by lmunoz-q		 ###   ########.fr	  #
+#																			 #
 # **************************************************************************** #
 
 NAME = wolf3d
@@ -34,7 +34,8 @@ SRCFILES = main.c \
 INC = inc \
 	  glfw-3.2.1/include \
 	  glfw-3.2.1/glad/include \
-	  libft
+	  libft \
+	  glfw-3.2.1/freetype-2.9.1/include
 
 DIRS =	parsing \
 		glfw_wrapper \
@@ -55,11 +56,13 @@ GLFWLIB := glfw-3.2.1/src/libglfw3.a
 
 GLADLIB := glfw-3.2.1/glad/libglad.a
 
+FT2LIB := glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.a
+
 vpath %.c src $(SRCDIRS)
 
 all: $(NAME)
 
-$(NAME): libft/libft.a $(GLFWLIB) $(GLADLIB) $(OBJECTS)
+$(NAME): libft/libft.a $(GLFWLIB) $(GLADLIB) $(FT2LIB) $(OBJECTS)
 	$(CC) $(INCDIRS) $(CLIB) -o $@ $(OBJECTS)
 
 $(OBJDIR)/%.o : %.c $(INCLUDES) | $(OBJDIR)
@@ -81,6 +84,12 @@ $(GLADLIB):
 	cd glfw-3.2.1/glad/; \
 	make; \
 	cd ../..
+
+$(FT2LIB):
+	cd glfw-3.2.1/freetype-2.9.1; \
+	./configure; \
+	make; \
+	cd ..
 
 clean:
 	rm -rf $(OBJDIR)
