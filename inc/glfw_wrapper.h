@@ -94,4 +94,8 @@ t_glfw_window				*draw_line(t_glfw_window *win,
 										t_vec b,
 										uint32_t color);
 
+uint32_t					color_blend(uint32_t c1,
+										uint32_t c2,
+										double f);
+
 #endif

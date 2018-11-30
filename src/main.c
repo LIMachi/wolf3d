@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/glfw_wrapper.h"
-#include "../inc/env.h"
+#include <glfw_wrapper.h>
+#include <env.h>
 
 void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 {
@@ -22,8 +22,6 @@ void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 	if (key == GLFW_KEY_Q && act == GLFW_PRESS)
 		glfwSetWindowShouldClose(win, 1);
 	s = (char*)glfwGetKeyName(key, scan);
-//	if (s != NULL && !strcmp(s, "m") && act == GLFW_PRESS)
-//		map_editor();
 	return (NULL);
 }
 
@@ -64,7 +62,7 @@ int	main(int ac, const char **av)
 	(void)set_env(&e);
 	if (FT_Init_FreeType(&e.ft2_lib))
 		return (-1);
-	if (FT_New_Face(e.ft2_lib, "/Library/Fonts/Arial Unicode.ttf", 0, &e.font))
+	if (FT_New_Face(e.ft2_lib, "/Library/Fonts/Papyrus.ttc", 0, &e.font))
 		return (-1);
 	(void)av;
 	if (ac == 2)
@@ -81,9 +79,9 @@ int	main(int ac, const char **av)
 		for (int x = 0; x < SX; ++x)
 			for (int y = 0; y < SY; ++y)
 			{
-				win->vb[(y * SX + x) * 3] = rand() % 256;
-				win->vb[(y * SX + x) * 3 + 1] = rand() % 256;
-				win->vb[(y * SX + x) * 3 + 2] = rand() % 256;
+				win->vb[(y * SX + x) * 3] = (char)rand();
+				win->vb[(y * SX + x) * 3 + 1] = (char)rand();
+				win->vb[(y * SX + x) * 3 + 2] = (char)rand();
 			}
 		while (!glfwWindowShouldClose(win->w))
 		{
