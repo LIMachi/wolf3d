@@ -79,7 +79,7 @@ T := -o$(space)
 #   We use our own FreeType configuration file.
 #
 CPPFLAGS := 
-CFLAGS   := -c -Wall -g -O2 -fvisibility=hidden -DDARWIN_NO_CARBON   -I/Users/hmartzol/.brew/Cellar/libpng/1.6.34/include/libpng16 -DFT_CONFIG_CONFIG_H="<ftconfig.h>"
+CFLAGS   := -c -Wall -g -O2 -fvisibility=hidden -DDARWIN_NO_CARBON   -DFT_CONFIG_CONFIG_H="<ftconfig.h>"
 
 # ANSIFLAGS: Put there the flags used to make your compiler ANSI-compliant.
 #
@@ -99,7 +99,7 @@ endif
 
 # Linker flags.
 #
-LDFLAGS           :=  -lz -lbz2 -L/Users/hmartzol/.brew/Cellar/libpng/1.6.34/lib -lpng16 -lz
+LDFLAGS           :=  -lz -lbz2
 LIB_CLOCK_GETTIME :=   # for ftbench
 
 

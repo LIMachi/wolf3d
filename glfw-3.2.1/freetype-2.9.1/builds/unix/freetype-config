@@ -14,7 +14,7 @@ export LC_ALL
 
 
 # if `pkg-config' is available, use values from `freetype2.pc'
-/Users/hmartzol/.brew/bin/pkg-config --atleast-pkgconfig-version 0.24 >/dev/null 2>&1
+/Users/lmunoz-q/.brew/bin/pkg-config --atleast-pkgconfig-version 0.24 >/dev/null 2>&1
 if test $? -eq 0 ; then
   # note that option `--variable' is not affected by the
   # PKG_CONFIG_SYSROOT_DIR environment variable
@@ -23,17 +23,17 @@ if test $? -eq 0 ; then
     export PKG_CONFIG_SYSROOT_DIR
   fi
 
-  prefix=`/Users/hmartzol/.brew/bin/pkg-config --variable prefix freetype2`
-  exec_prefix=`/Users/hmartzol/.brew/bin/pkg-config --variable exec_prefix freetype2`
+  prefix=`/Users/lmunoz-q/.brew/bin/pkg-config --variable prefix freetype2`
+  exec_prefix=`/Users/lmunoz-q/.brew/bin/pkg-config --variable exec_prefix freetype2`
 
-  includedir=`/Users/hmartzol/.brew/bin/pkg-config --variable includedir freetype2`
-  libdir=`/Users/hmartzol/.brew/bin/pkg-config --variable libdir freetype2`
+  includedir=`/Users/lmunoz-q/.brew/bin/pkg-config --variable includedir freetype2`
+  libdir=`/Users/lmunoz-q/.brew/bin/pkg-config --variable libdir freetype2`
 
-  version=`/Users/hmartzol/.brew/bin/pkg-config --modversion freetype2`
+  version=`/Users/lmunoz-q/.brew/bin/pkg-config --modversion freetype2`
 
-  cflags=`/Users/hmartzol/.brew/bin/pkg-config --cflags freetype2`
-  dynamic_libs=`/Users/hmartzol/.brew/bin/pkg-config --libs freetype2`
-  static_libs=`/Users/hmartzol/.brew/bin/pkg-config --static --libs freetype2`
+  cflags=`/Users/lmunoz-q/.brew/bin/pkg-config --cflags freetype2`
+  dynamic_libs=`/Users/lmunoz-q/.brew/bin/pkg-config --libs freetype2`
+  static_libs=`/Users/lmunoz-q/.brew/bin/pkg-config --static --libs freetype2`
 else
   prefix="/usr/local"
   exec_prefix="/usr/local"
@@ -45,7 +45,7 @@ else
 
   cflags="-I${SYSROOT}$includedir/freetype2"
   dynamic_libs="-lfreetype"
-  static_libs="-lfreetype -lz -lbz2 -L/Users/hmartzol/.brew/Cellar/libpng/1.6.34/lib -lpng16 -lz"
+  static_libs="-lfreetype -lz -lbz2"
   if test "${SYSROOT}$libdir" != "/usr/lib"   &&
      test "${SYSROOT}$libdir" != "/usr/lib64" ; then
     libs_L="-L${SYSROOT}$libdir"
