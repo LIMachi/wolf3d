@@ -2258,6 +2258,9 @@
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/color_blend.c">
 			<Option target="wolf3d"/>
 		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/char.c">
+			<Option target="wolf3d"/>
+		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/line.c">
 			<Option target="wolf3d"/>
 		</Unit>

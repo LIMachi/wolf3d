@@ -24,7 +24,8 @@ SRCFILES = main.c \
 		   square.c \
 		   init.c \
 		   text.c \
-		   get_pixel.c
+		   get_pixel.c \
+		   char.c
 
 INC = inc \
 	  glfw-3.2.1/include \

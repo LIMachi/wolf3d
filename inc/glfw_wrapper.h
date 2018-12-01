@@ -130,7 +130,9 @@ uint32_t					get_pixel(t_glfw_window *win,
 										uint32_t y);
 
 t_vec						draw_char(t_glfw_window *win,
-										const char c);
+										t_vec pos,
+										const char c,
+										uint32_t color);
 
 t_vec						draw_text(t_glfw_window *win,
 										t_vec pos,

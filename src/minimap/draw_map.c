@@ -39,6 +39,6 @@ t_glfw_window		*draw_map(t_glfw_window *win,
 		(t_vec){.x = look.x + map->startx * sx, .y = look.y + map->starty * sy},
 		0xFF0000);
 	draw_text(win, (t_vec){.x = 2, .y = 2}, "this is a complicated text\nthat\t"
-			"uses special characters\vto format itself", 0xFF0000);
+			"uses special\vcharacters to format\fitself", 0xFF0000);
 	return (win);
 }

@@ -389,6 +389,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/wolf3d.dir/src/graphic/draw/text.c.o"
   "CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.o"
   "CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.o"
+  "CMakeFiles/wolf3d.dir/src/graphic/draw/char.c.o"
   "wolf3d.pdb"
   "wolf3d"
 )
