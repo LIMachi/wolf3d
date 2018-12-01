@@ -21,8 +21,6 @@ t_glfw_window		*draw_map(t_glfw_window *win,
 	double			sx;
 	double			sy;
 	t_vector		look;
-	FT_GlyphSlot	slot;
-	double			gray;
 
 	x = -1;
 	sx = (double)win->vb_width / (double)map->width;
@@ -40,16 +38,7 @@ t_glfw_window		*draw_map(t_glfw_window *win,
 		(t_vec){.x = map->startx * sx, .y = map->starty * sy},
 		(t_vec){.x = look.x + map->startx * sx, .y = look.y + map->starty * sy},
 		0xFF0000);
-	FT_Set_Pixel_Sizes(env()->font, 0, 128);
-	slot = env()->font->glyph;
-	FT_Load_Char(env()->font, 'a', FT_LOAD_RENDER);
-	printf("pixel mode: %d\n", slot->bitmap.pixel_mode);
-	for (x = 0; x < slot->bitmap.width; ++x)
-		for (y = 0; y < slot->bitmap.rows; ++y)
-			if (slot->bitmap.buffer[x + y * slot->bitmap.width])
-			{
-				gray = (double)slot->bitmap.buffer[x + y * slot->bitmap.width] / 256.0;
-				draw_pixel(win, x, y, color_blend(0xFF, 0xFFFFFF, gray));
-			}
+	draw_text(win, (t_vec){.x = 2, .y = 2}, "this is a complicated text\nthat\t"
+			"uses special characters\vto format itself", 0xFF0000);
 	return (win);
 }

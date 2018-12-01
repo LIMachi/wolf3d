@@ -5101,6 +5101,32 @@ CMakeFiles/wolf3d.dir/src/graphic/draw/text.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/graphic/draw/text.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/text.c -o CMakeFiles/wolf3d.dir/src/graphic/draw/text.c.s
 
+CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.o: src/graphic/get_pixel.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_389) "Building C object CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/graphic/get_pixel.c
+
+CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/graphic/get_pixel.c > CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.i
+
+CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/graphic/get_pixel.c -o CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.s
+
+CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.o: src/graphic/pen/init.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_390) "Building C object CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/graphic/pen/init.c
+
+CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/graphic/pen/init.c > CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.i
+
+CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/graphic/pen/init.c -o CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.s
+
 # Object files for target wolf3d
 wolf3d_OBJECTS = \
 "CMakeFiles/wolf3d.dir/glfw-3.2.1/deps/getopt.c.o" \
@@ -5490,7 +5516,9 @@ wolf3d_OBJECTS = \
 "CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o" \
 "CMakeFiles/wolf3d.dir/src/graphic/draw/pixel.c.o" \
 "CMakeFiles/wolf3d.dir/src/graphic/draw/square.c.o" \
-"CMakeFiles/wolf3d.dir/src/graphic/draw/text.c.o"
+"CMakeFiles/wolf3d.dir/src/graphic/draw/text.c.o" \
+"CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.o" \
+"CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.o"
 
 # External object files for target wolf3d
 wolf3d_EXTERNAL_OBJECTS =
@@ -5883,9 +5911,11 @@ wolf3d: CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/graphic/draw/pixel.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/graphic/draw/square.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/graphic/draw/text.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.o
 wolf3d: CMakeFiles/wolf3d.dir/build.make
 wolf3d: CMakeFiles/wolf3d.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_389) "Linking CXX executable wolf3d"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_391) "Linking CXX executable wolf3d"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/wolf3d.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

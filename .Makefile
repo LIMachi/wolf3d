@@ -21,7 +21,10 @@ SRCFILES = main.c \
 		   line.c \
 		   color_blend.c \
 		   pixel.c \
-		   square.c
+		   square.c \
+		   init.c \
+		   text.c \
+		   get_pixel.c
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -35,6 +38,7 @@ DIRS =	parsing \
 		vector \
 		graphic \
 		graphic/draw \
+		graphic/pen
 
 INCDIRS = $(addprefix -I,$(INC))
 

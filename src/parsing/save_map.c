@@ -41,7 +41,6 @@ int	save_map(const char *path, t_header *header)
 			|| (fd = open(path, O_CREAT | O_TRUNC | O_WRONLY, 0644)) == -1)
 		return (-1);
 	size = sizeof(t_header) + header->width * header->height * sizeof(uint8_t);
-	printf("prout: %d\n", (int)size);
 	if (write(fd, header, size) != size)
 	{
 		close(fd);

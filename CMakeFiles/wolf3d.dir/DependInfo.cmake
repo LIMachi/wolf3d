@@ -382,6 +382,8 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/pixel.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/graphic/draw/pixel.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/square.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/graphic/draw/square.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/text.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/graphic/draw/text.c.o"
+  "/Users/hmartzol/Desktop/wolf3d/src/graphic/get_pixel.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.o"
+  "/Users/hmartzol/Desktop/wolf3d/src/graphic/pen/init.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/graphic/pen/init.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/main.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/main.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/map_editor.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/map_editor.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/minimap/draw_map.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/minimap/draw_map.c.o"

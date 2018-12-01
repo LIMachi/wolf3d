@@ -35,6 +35,37 @@
 # define MSX 5
 # define MSY 5
 
+typedef struct				s_vec
+{
+	int						x;
+	int						y;
+}							t_vec;
+
+/*
+** t_pen:
+**  pos: current position of the pen
+**  top_left: top_left limit of the pen movement
+**  bottom_right: bottom_right limit of the pen movement
+**  color: color to be used
+**  font: font id
+**  px: size of character
+**  spx: sparation beetween character, x used horizontaly and y vertically
+**   one space will be interpreted as spx.x * 4
+**   one tab will be interpreted as spx.x * 16
+**   \v\f\n\r vertical jump will be interpreted as ps.y + spx.y
+*/
+
+typedef struct				s_pen
+{
+	t_vec					pos;
+	t_vec					top_left;
+	t_vec					bottom_right;
+	uint32_t				color;
+	FT_Face					font;
+	t_vec					px;
+	t_vec					spx;
+}							t_pen;
+
 typedef struct				s_glfw_window
 {
 	struct s_glfw_window	*prev;
@@ -48,20 +79,14 @@ typedef struct				s_glfw_window
 	GLuint					texture;
 	GLuint					program;
 	GLuint					vao;
+	t_pen					pen;
 	void					*user_ptr;
 }							t_glfw_window;
-
-typedef struct				s_vec
-{
-	int						x;
-	int						y;
-}							t_vec;
 
 typedef struct				s_glfw_env
 {
 	t_glfw_window			*window;
 	FT_Library				ft2_lib;
-	FT_Face					font;
 }							t_glfw_env;
 
 t_glfw_env					*set_env(t_glfw_env *set);
@@ -74,6 +99,8 @@ t_glfw_window				*glfw_new_window(size_t width,
 											size_t length,
 											char *name,
 											void *user_ptr);
+
+int							init_pen(t_glfw_window *win);
 
 void						glfw_refresh_window(t_glfw_window *win);
 
@@ -97,5 +124,17 @@ t_glfw_window				*draw_line(t_glfw_window *win,
 uint32_t					color_blend(uint32_t c1,
 										uint32_t c2,
 										double f);
+
+uint32_t					get_pixel(t_glfw_window *win,
+										uint32_t x,
+										uint32_t y);
+
+t_vec						draw_char(t_glfw_window *win,
+										const char c);
+
+t_vec						draw_text(t_glfw_window *win,
+										t_vec pos,
+										char *text,
+										uint32_t color);
 
 #endif

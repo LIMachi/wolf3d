@@ -21,7 +21,10 @@ SRCFILES = main.c \
 		   line.c \
 		   color_blend.c \
 		   pixel.c \
-		   square.c
+		   square.c \
+		   init.c \
+		   text.c \
+		   get_pixel.c
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -35,6 +38,7 @@ DIRS =	parsing \
 		vector \
 		graphic \
 		graphic/draw \
+		graphic/pen
 
 INCDIRS = $(addprefix -I,$(INC))
 
@@ -83,8 +87,8 @@ $(FT2LIB):
 	cd glfw-3.2.1/freetype-2.9.1; \
 	./configure; \
 	make; \
-	cd ../..; \
-	install_name_tool -id "glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib" glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib;
+	install_name_tool -id "glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib" glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib; \
+	cd ..
 
 clean:
 	rm -rf $(OBJDIR)

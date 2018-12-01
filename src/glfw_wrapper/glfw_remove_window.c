@@ -16,6 +16,7 @@ void	glfw_remove_window(t_glfw_window *win)
 {
 	glfwDestroyWindow(win->w);
 	free(win->vb);
+	FT_Done_Face(win->pen.font);
 	if (win->prev != NULL)
 		win->prev->next = win->next;
 	if (win->next != NULL)

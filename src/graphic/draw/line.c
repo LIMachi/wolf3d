@@ -12,7 +12,6 @@
 
 #include <glfw_wrapper.h>
 
-
 static inline void	draw_line_0(t_glfw_window *win,
 								t_vec v[4],
 								int e,

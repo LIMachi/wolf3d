@@ -2270,6 +2270,12 @@
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/text.c">
 			<Option target="wolf3d"/>
 		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/get_pixel.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/pen/init.c">
+			<Option target="wolf3d"/>
+		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/main.c">
 			<Option target="wolf3d"/>
 		</Unit>

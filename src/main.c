@@ -62,8 +62,6 @@ int	main(int ac, const char **av)
 	(void)set_env(&e);
 	if (FT_Init_FreeType(&e.ft2_lib))
 		return (-1);
-	if (FT_New_Face(e.ft2_lib, "/Library/Fonts/Papyrus.ttc", 0, &e.font))
-		return (-1);
 	(void)av;
 	if (ac == 2)
 	{

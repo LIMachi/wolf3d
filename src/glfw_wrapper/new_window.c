@@ -59,6 +59,21 @@ static inline t_glfw_window	*i_new_window(t_glfw_window *out)
 	return (env()->window = out);
 }
 
+static inline t_glfw_window	*i_clean(t_glfw_window *out)
+{
+	if (out != NULL)
+	{
+		if (out->vb != NULL)
+			free(out->vb);
+		if (out->w != NULL)
+			glfwDestroyWindow(out->w);
+		if (out->pen.font != NULL)
+			FT_Done_Face(out->pen.font);
+		free(out);
+	}
+	return (NULL);
+}
+
 t_glfw_window				*glfw_new_window(size_t width,
 											size_t height,
 											char *name,
@@ -73,13 +88,8 @@ t_glfw_window				*glfw_new_window(size_t width,
 		.vb = malloc(width * height * 3), .vb_width = width,
 		.w_height = height, .w = glfwCreateWindow(
 			width, height, name, NULL, NULL), .user_ptr = user_ptr};
-	if (out->vb == NULL || out->w == NULL)
-	{
-		free(out->vb);
-		free(out->w);
-		free(out);
-		return (NULL);
-	}
+	if (out->vb == NULL || out->w == NULL || init_pen(out))
+		return (i_clean(out));
 	glfwMakeContextCurrent(out->w);
 	gladLoadGL();
 	out->program = i_program("#version 400 core\nin vec2 texture_coordinates;ou"
