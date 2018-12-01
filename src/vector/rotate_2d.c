@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <env.h>
+#include <wolf3d.h>
 
 t_vector	rotate_2d(t_vector vec, double deg)
 {

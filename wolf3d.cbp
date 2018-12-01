@@ -2033,13 +2033,10 @@
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/tests/windows.c">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/inc/env.h">
-			<Option target="wolf3d"/>
-		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/inc/glfw_wrapper.h">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/inc/render.h">
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/inc/wolf3d.h">
 			<Option target="wolf3d"/>
 		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/libft/ft_atoi.c">
@@ -2240,6 +2237,12 @@
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/libft/libft.h">
 			<Option target="wolf3d"/>
 		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_attach_callback.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_callbacks.c">
+			<Option target="wolf3d"/>
+		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_env.c">
 			<Option target="wolf3d"/>
 		</Unit>
@@ -2250,6 +2253,9 @@
 			<Option target="wolf3d"/>
 		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_remove_window.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_update_callbacks.c">
 			<Option target="wolf3d"/>
 		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/color_blend.c">

@@ -3484,8 +3484,8 @@ CMakeFiles/wolf3d.dir/src/main.c.o
  glfw-3.2.1/freetype-2.9.1/include/ft2build.h
  glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
- inc/env.h
  inc/glfw_wrapper.h
+ inc/wolf3d.h
  libft/libft.h
 CMakeFiles/wolf3d.dir/src/map_editor.c.o
  /Users/hmartzol/Desktop/wolf3d/src/map_editor.c
@@ -3497,8 +3497,8 @@ CMakeFiles/wolf3d.dir/src/map_editor.c.o
  glfw-3.2.1/freetype-2.9.1/include/ft2build.h
  glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
- inc/env.h
  inc/glfw_wrapper.h
+ inc/wolf3d.h
  libft/libft.h
 CMakeFiles/wolf3d.dir/src/minimap/draw_map.c.o
  /Users/hmartzol/Desktop/wolf3d/src/minimap/draw_map.c
@@ -3510,8 +3510,8 @@ CMakeFiles/wolf3d.dir/src/minimap/draw_map.c.o
  glfw-3.2.1/freetype-2.9.1/include/ft2build.h
  glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
- inc/env.h
  inc/glfw_wrapper.h
+ inc/wolf3d.h
  libft/libft.h
 CMakeFiles/wolf3d.dir/src/parsing/default_map.c.o
  /Users/hmartzol/Desktop/wolf3d/src/parsing/default_map.c
@@ -3523,8 +3523,8 @@ CMakeFiles/wolf3d.dir/src/parsing/default_map.c.o
  glfw-3.2.1/freetype-2.9.1/include/ft2build.h
  glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
- inc/env.h
  inc/glfw_wrapper.h
+ inc/wolf3d.h
  libft/libft.h
 CMakeFiles/wolf3d.dir/src/parsing/load_map.c.o
  /Users/hmartzol/Desktop/wolf3d/src/parsing/load_map.c
@@ -3536,8 +3536,8 @@ CMakeFiles/wolf3d.dir/src/parsing/load_map.c.o
  glfw-3.2.1/freetype-2.9.1/include/ft2build.h
  glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
- inc/env.h
  inc/glfw_wrapper.h
+ inc/wolf3d.h
  libft/libft.h
 CMakeFiles/wolf3d.dir/src/parsing/save_map.c.o
  /Users/hmartzol/Desktop/wolf3d/src/parsing/save_map.c
@@ -3549,8 +3549,8 @@ CMakeFiles/wolf3d.dir/src/parsing/save_map.c.o
  glfw-3.2.1/freetype-2.9.1/include/ft2build.h
  glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
- inc/env.h
  inc/glfw_wrapper.h
+ inc/wolf3d.h
  libft/libft.h
 CMakeFiles/wolf3d.dir/src/vector/rotate_2d.c.o
  /Users/hmartzol/Desktop/wolf3d/src/vector/rotate_2d.c
@@ -3562,6 +3562,18 @@ CMakeFiles/wolf3d.dir/src/vector/rotate_2d.c.o
  glfw-3.2.1/freetype-2.9.1/include/ft2build.h
  glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
- inc/env.h
  inc/glfw_wrapper.h
+ inc/wolf3d.h
  libft/libft.h
+CMakeFiles/wolf3d.dir/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/ftfuzzer.cc.o
+ /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/ftfuzzer.cc
+ glfw-3.2.1/freetype-2.9.1/devel/ft2build.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+CMakeFiles/wolf3d.dir/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/ftmutator.cc.o
+ /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/ftmutator.cc
+CMakeFiles/wolf3d.dir/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/rasterfuzzer.cc.o
+ /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/rasterfuzzer.cc
+ glfw-3.2.1/freetype-2.9.1/devel/ft2build.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+CMakeFiles/wolf3d.dir/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/runinput.cc.o
+ /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/runinput.cc

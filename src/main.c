@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <glfw_wrapper.h>
-#include <env.h>
+#include <wolf3d.h>
 
 void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 {
@@ -52,21 +52,38 @@ void	*print_mouse_button(GLFWwindow *win, int key, int act, int mod)
 	return (NULL);
 }
 
+void test_mouse(int id, t_mouse_status *mouse, void *data)
+{
+	(void)id;
+	(void)data;
+	printf("detected mouse %f %f\n", mouse->pos_x, mouse->pos_y);
+}
+
 int	main(int ac, const char **av)
 {
 	t_glfw_window	*win;
-	t_header		*map;
+	t_map_file		*map;
+	t_glfw_callback_holder	test_cbh = {
+		.cb = NULL,
+		.user_data = NULL,
+		.data = CFD_MOUSE,
+		.watch = CFW_MOUSE_MOVE,
+		.size = (t_vec){.x = SX / 2, .y = SY / 2},
+		.position = (t_vec){.x = SX / 4, .y = SY / 4},
+		.id = 0};
 	int tick = 0;
 	int second = (int)time(NULL);
 
 	(void)av;
+	test_cbh.cb = (t_glfw_callback)&test_mouse;
 	if (ac == 2)
 	{
 		if ((win = glfw_new_window(SX, SY, "Wolf3d", NULL)) == NULL)
 			return (-42);
-		glfwSetKeyCallback(win->w, (GLFWkeyfun)&print_key);
-		glfwSetMouseButtonCallback(win->w, (GLFWmousebuttonfun)&print_mouse_button);
-		glfwSetCursorPosCallback(win->w, (GLFWcursorposfun)&print_cursor_pos);
+		glfw_attach_callback(win, &test_cbh);
+//		glfwSetKeyCallback(win->w, (GLFWkeyfun)&print_key);
+//		glfwSetMouseButtonCallback(win->w, (GLFWmousebuttonfun)&print_mouse_button);
+//		glfwSetCursorPosCallback(win->w, (GLFWcursorposfun)&print_cursor_pos);
 		if ((map = load_map(av[1])) == NULL)
 			if ((map = default_map()) == NULL)
 				return (-1);

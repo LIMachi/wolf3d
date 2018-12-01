@@ -42,11 +42,11 @@
 # define PEN_DEFAULT_SPX_Y 4
 # define PEN_DEFAULT_COLOR 0x0
 
-typedef struct				s_vec
+typedef struct							s_vec
 {
-	int						x;
-	int						y;
-}							t_vec;
+	int									x;
+	int									y;
+}										t_vec;
 
 /*
 ** t_pen:
@@ -62,98 +62,214 @@ typedef struct				s_vec
 **   \v\f\n\r vertical jump will be interpreted as ps.y + spx.y
 */
 
-typedef struct				s_pen
+typedef struct							s_pen
 {
-	t_vec					pos;
-	t_vec					top_left;
-	t_vec					bottom_right;
-	uint32_t				color;
-	FT_Face					font;
-	t_vec					px;
-	t_vec					spx;
-}							t_pen;
+	t_vec								pos;
+	t_vec								top_left;
+	t_vec								bottom_right;
+	uint32_t							color;
+	FT_Face								font;
+	t_vec								px;
+	t_vec								spx;
+}										t_pen;
 
-typedef struct				s_glfw_window
+/*
+** types:
+**  click (active only while the mouse button is held down)
+**  toggle (switch state on each click)
+**  slider (vertical or horizontal rectangle detecting click/drag)
+**  composite slider (same as slider, but with additional click button)
+**  text input (once clicked, catch keyboard input as text until esc is pressed
+**   or click is detected elsewhere)
+**  composite input (once clicked, change the behavior of keyboard and mouse)
+*/
+
+/*
+** typedef enum				e_button_type
+** {
+** 	BUTTON_UNDEFINED = 0,
+** 	BUTTON_CLICK,
+** 	BUTTON_TOGGLE,
+** 	BUTTON_SLIDER,
+** 	BUTTON_COMPOSITE_SLIDER,
+** 	BUTTON_TEXT_INPUT,
+** 	BUTTON_COMPOSITE_INPUT
+** }							t_button_type;
+** void						button_click_callback(int status, t_vec pos)
+** typedef struct				s_button_click
+** {
+**
+** }							t_button_click;
+** union						u_button
+** {
+** 	t_button_click			click;
+** };
+** typedef struct				s_button
+** {
+** 	t_vec					pos;
+** 	t_vec					size;
+** 	t_button_type			type;
+** 	union u_button			button;
+** }							t_button;
+*/
+
+typedef struct s_glfw_window			t_glfw_window;
+
+typedef enum							e_mouse_status_action
 {
-	struct s_glfw_window	*prev;
-	struct s_glfw_window	*next;
-	size_t					vb_width;
-	size_t					vb_height;
-	char					*vb;
-	int						w_width;
-	int						w_height;
-	GLFWwindow				*w;
-	GLuint					texture;
-	GLuint					program;
-	GLuint					vao;
-	t_pen					pen;
-	void					*user_ptr;
-}							t_glfw_window;
+	ACTION_MOVE = (unsigned int)-1,
+	ACTION_SCROLL = (unsigned int)-2
+}										t_mouse_status_action;
 
-typedef struct				s_glfw_env
+typedef struct							s_mouse_status
 {
-	int						status;
-	t_glfw_window			*window;
-	FT_Library				ft2_lib;
-}							t_glfw_env;
+	t_mouse_status_action				last_action;
+	int									button[GLFW_MOUSE_BUTTON_LAST + 1];
+	double								pos_x;
+	double								pos_y;
+	double								scroll_x;
+	double								scroll_y;
+}										t_mouse_status;
 
-t_glfw_env					*glfw_set_env(t_glfw_env *set);
+typedef struct							s_keyboard_status
+{
+	int									last_key;
+	int									last_scancode;
+	int									key[GLFW_KEY_LAST + 1];
+}										t_keyboard_status;
 
-t_glfw_env					*glfw_env(void);
+typedef enum							e_glfw_callback_flags_watch
+{
+	CFW_NONE = 0,
+	CFW_KEYBOARD_DOWN = 1,
+	CFW_KEYBOARD_UP = 2,
+	CFW_KEYBOARD_REPEAT = 4,
+	CFW_KEYBOARD = 7,
+	CFW_MOUSE_DOWN = 8,
+	CFW_MOUSE_UP = 16,
+	CFW_MOUSE_CLICK = 24,
+	CFW_MOUSE_MOVE = 32,
+	CFW_MOUSE_SCROLL = 64
+}										t_glfw_callback_flags_watch;
 
-void						glfw_init(void);
+typedef enum							e_glfw_callback_flags_data
+{
+	CFD_NONE = 0,
+	CFD_KEYBOARD,
+	CFD_MOUSE
+}										t_glfw_callback_flags_data;
 
-t_glfw_window				*glfw_new_window(size_t width,
-											size_t length,
-											char *name,
-											void *user_ptr);
+/*
+** (*callback)(int id, void *data, void *user_data)
+*/
 
-int							pen_init(t_glfw_window *win);
+typedef void							(*t_glfw_callback)(int, void *, void *);
 
-int							pen_set_font(t_glfw_window *win,
-										const char *font_path,
-										t_vec character_size,
-										t_vec spacing);
+typedef struct s_glfw_callback_holder	t_glfw_callback_holder;
+struct									s_glfw_callback_holder
+{
+	t_glfw_callback_holder				*prev;
+	t_glfw_callback_holder				*next;
+	t_glfw_callback_flags_watch			watch;
+	t_glfw_callback_flags_data			data;
+	t_vec								position;
+	t_vec								size;
+	int									id;
+	void								*user_data;
+	t_glfw_callback						cb;
+};
 
-int							pen_set_work_area(t_glfw_window *win,
-												t_vec top_left,
-												t_vec bottom_right);
+struct									s_glfw_window
+{
+	struct s_glfw_window				*prev;
+	struct s_glfw_window				*next;
+	size_t								vb_width;
+	size_t								vb_height;
+	char								*vb;
+	int									w_width;
+	int									w_height;
+	GLFWwindow							*w;
+	GLuint								texture;
+	GLuint								program;
+	GLuint								vao;
+	t_pen								pen;
+	t_glfw_callback_holder				*callback;
+	t_mouse_status						mouse;
+	t_keyboard_status					keyboard;
+	void								*user_ptr;
+};
 
-void						glfw_refresh_window(t_glfw_window *win);
+void									glfw_attach_callback(t_glfw_window *win,
+													t_glfw_callback_holder *cb);
 
-void						glfw_remove_window(t_glfw_window *win);
+typedef struct							s_glfw_env
+{
+	int									status;
+	t_glfw_window						*window;
+	FT_Library							ft2_lib;
+}										t_glfw_env;
 
-t_glfw_window				*draw_square(t_glfw_window *win,
-										t_vec pos,
-										t_vec size,
-										uint32_t color);
+t_glfw_env								*glfw_set_env(t_glfw_env *set);
 
-t_glfw_window				*draw_pixel(t_glfw_window *win,
-										uint32_t x,
-										uint32_t y,
-										uint32_t color);
+t_glfw_env								*glfw_env(void);
 
-t_glfw_window				*draw_line(t_glfw_window *win,
-										t_vec a,
-										t_vec b,
-										uint32_t color);
+void									glfw_update_callbacks(
+											t_glfw_window *win,
+											t_glfw_callback_flags_watch flags);
 
-uint32_t					color_blend(uint32_t c1,
-										uint32_t c2,
-										double f);
+t_glfw_window							*glfw_new_window(size_t width,
+														size_t length,
+														char *name,
+														void *user_ptr);
 
-uint32_t					get_pixel(t_glfw_window *win,
-										uint32_t x,
-										uint32_t y);
+void									glfw_callbacks(t_glfw_window *win);
 
-t_vec						draw_char(t_glfw_window *win,
-										t_vec pos,
-										const char c,
-										uint32_t color);
+int										pen_init(t_glfw_window *win);
 
-t_vec						draw_text(t_glfw_window *win,
-										t_vec pos,
-										char *text,
-										uint32_t color);
+int										pen_set_font(t_glfw_window *win,
+													const char *font_path,
+													t_vec character_size,
+													t_vec spacing);
+
+int										pen_set_work_area(t_glfw_window *win,
+														t_vec top_left,
+														t_vec bottom_right);
+
+void									glfw_refresh_window(t_glfw_window *win);
+
+void									glfw_remove_window(t_glfw_window *win);
+
+t_glfw_window							*draw_square(t_glfw_window *win,
+													t_vec pos,
+													t_vec size,
+													uint32_t color);
+
+t_glfw_window							*draw_pixel(t_glfw_window *win,
+													uint32_t x,
+													uint32_t y,
+													uint32_t color);
+
+t_glfw_window							*draw_line(t_glfw_window *win,
+													t_vec a,
+													t_vec b,
+													uint32_t color);
+
+uint32_t								color_blend(uint32_t c1,
+													uint32_t c2,
+													double f);
+
+uint32_t								get_pixel(t_glfw_window *win,
+													uint32_t x,
+													uint32_t y);
+
+t_vec									draw_char(t_glfw_window *win,
+													t_vec pos,
+													const char c,
+													uint32_t color);
+
+t_vec									draw_text(t_glfw_window *win,
+													t_vec pos,
+													char *text,
+													uint32_t color);
 
 #endif

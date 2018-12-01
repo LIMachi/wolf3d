@@ -391,6 +391,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/wolf3d.dir/src/vector/rotate_2d.c.o"
   "CMakeFiles/wolf3d.dir/src/main.c.o"
   "CMakeFiles/wolf3d.dir/src/map_editor.c.o"
+  "CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o"
+  "CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o"
+  "CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o"
   "wolf3d.pdb"
   "wolf3d"
 )

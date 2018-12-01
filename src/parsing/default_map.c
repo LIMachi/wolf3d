@@ -10,21 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <env.h>
+#include <wolf3d.h>
 
 /*
 ** <env.h>
-** typedef struct s_header t_header
+** typedef struct s_header t_map_file
 */
 
-t_header	*default_map(void)
+t_map_file	*default_map(void)
 {
 	uint32_t				i;
-	t_header				*out;
+	t_map_file				*out;
 
-	if ((out = malloc(sizeof(t_header) + 121 * sizeof(uint32_t))) == NULL)
+	if ((out = malloc(sizeof(t_map_file) + 121 * sizeof(uint32_t))) == NULL)
 		return (NULL);
-	*out = (t_header){.magic = W3D_MAGIC, .height = 11, .width = 11,
+	*out = (t_map_file){.magic = W3DM_MAGIC, .height = 11, .width = 11,
 		.startx = 5, .starty = 5, .look = 0};
 	i = -1;
 	while (++i < 121)

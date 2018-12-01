@@ -56,6 +56,7 @@ static inline t_glfw_window	*i_new_window(t_glfw_window *out)
 	if (glfw_env()->window != NULL)
 		glfw_env()->window->prev = out;
 	glfwSetWindowUserPointer(out->w, out);
+	glfw_callbacks(out);
 	return (glfw_env()->window = out);
 }
 

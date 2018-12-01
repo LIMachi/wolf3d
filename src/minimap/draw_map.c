@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include <glfw_wrapper.h>
-#include <env.h>
+#include <wolf3d.h>
 
 t_glfw_window		*draw_map(t_glfw_window *win,
-							t_header *map)
+							t_map_file *map)
 {
 	uint32_t		x;
 	uint32_t		y;

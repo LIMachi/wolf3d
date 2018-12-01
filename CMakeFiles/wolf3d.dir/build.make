@@ -5153,6 +5153,45 @@ CMakeFiles/wolf3d.dir/src/map_editor.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/map_editor.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/map_editor.c -o CMakeFiles/wolf3d.dir/src/map_editor.c.s
 
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o: src/glfw_wrapper/glfw_callbacks.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_393) "Building C object CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_callbacks.c
+
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_callbacks.c > CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.i
+
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_callbacks.c -o CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.s
+
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o: src/glfw_wrapper/glfw_update_callbacks.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_394) "Building C object CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_update_callbacks.c
+
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_update_callbacks.c > CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.i
+
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_update_callbacks.c -o CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.s
+
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o: src/glfw_wrapper/glfw_attach_callback.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_395) "Building C object CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_attach_callback.c
+
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_attach_callback.c > CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.i
+
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_attach_callback.c -o CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.s
+
 # Object files for target wolf3d
 wolf3d_OBJECTS = \
 "CMakeFiles/wolf3d.dir/glfw-3.2.1/deps/getopt.c.o" \
@@ -5546,7 +5585,10 @@ wolf3d_OBJECTS = \
 "CMakeFiles/wolf3d.dir/src/parsing/save_map.c.o" \
 "CMakeFiles/wolf3d.dir/src/vector/rotate_2d.c.o" \
 "CMakeFiles/wolf3d.dir/src/main.c.o" \
-"CMakeFiles/wolf3d.dir/src/map_editor.c.o"
+"CMakeFiles/wolf3d.dir/src/map_editor.c.o" \
+"CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o" \
+"CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o" \
+"CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o"
 
 # External object files for target wolf3d
 wolf3d_EXTERNAL_OBJECTS =
@@ -5943,9 +5985,12 @@ wolf3d: CMakeFiles/wolf3d.dir/src/parsing/save_map.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/vector/rotate_2d.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/main.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/map_editor.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o
 wolf3d: CMakeFiles/wolf3d.dir/build.make
 wolf3d: CMakeFiles/wolf3d.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_393) "Linking CXX executable wolf3d"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_396) "Linking CXX executable wolf3d"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/wolf3d.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

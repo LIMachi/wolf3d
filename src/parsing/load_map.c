@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <env.h>
+#include <wolf3d.h>
 
 /*
 ** <env.h>
-** typedef struct s_header t_header
+** typedef struct s_header t_map_file
 */
 
 #include <fcntl.h>
@@ -38,16 +38,16 @@
 **  void *malloc(size_t size);
 */
 
-t_header	*load_map(const char *path)
+t_map_file	*load_map(const char *path)
 {
 	int			fd;
-	t_header	*file;
-	t_header	tmp;
+	t_map_file	*file;
+	t_map_file	tmp;
 	ssize_t		size;
 
 	if (path == NULL || (fd = open(path, O_RDONLY)) == -1)
 		return (NULL);
-	if (read(fd, &tmp, sizeof(tmp)) != sizeof(tmp) || tmp.magic != W3D_MAGIC)
+	if (read(fd, &tmp, sizeof(tmp)) != sizeof(tmp) || tmp.magic != W3DM_MAGIC)
 		return (NULL);
 	size = tmp.height * tmp.width * sizeof(uint8_t);
 	if ((file = malloc(sizeof(tmp) + size)) == NULL)

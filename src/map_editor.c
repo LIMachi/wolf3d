@@ -10,23 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <env.h>
+#include <wolf3d.h>
 #include <glfw_wrapper.h>
 
-t_header	*map_scale(t_header *map, uint32_t width, uint32_t height)
+t_map_file	*map_scale(t_map_file *map, uint32_t width, uint32_t height)
 {
-	t_header	*out;
+	t_map_file	*out;
 	uint32_t	x;
 	uint32_t	y;
 
 	if (width == map->width && height == map->height)
 		return (map);
-	if ((out = malloc(sizeof(t_header) + width * height)) == NULL)
+	if ((out = malloc(sizeof(t_map_file) + width * height)) == NULL)
 	{
 		free(map);
 		return (NULL);
 	}
-	*out = (t_header){.magic = W3D_MAGIC, .height = height, .width = width,
+	*out = (t_map_file){.magic = W3DM_MAGIC, .height = height, .width = width,
 		.startx = width / 2, .starty = height / 2, .look = 0};
 	y = -1;
 	while (++y < height && y < map->height)
@@ -39,7 +39,7 @@ t_header	*map_scale(t_header *map, uint32_t width, uint32_t height)
 	return (out);
 }
 
-void		click_block(t_glfw_window *win, t_header *map, double x, double y)
+void		click_block(t_glfw_window *win, t_map_file *map, double x, double y)
 {
 	double			sx;
 	double			sy;
@@ -71,7 +71,7 @@ void		*click(GLFWwindow *win, int key, int act, int mod)
 	return (NULL);
 }
 
-t_header	*map_editor(t_header *out)
+t_map_file	*map_editor(t_map_file *out)
 {
 	t_glfw_window	*win;
 

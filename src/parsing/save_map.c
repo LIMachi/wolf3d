@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <env.h>
+#include <wolf3d.h>
 
 /*
 ** <env.h>
-** typedef struct s_header t_header
+** typedef struct s_header t_map_file
 */
 
 #include <fcntl.h>
@@ -32,7 +32,7 @@
 ** int close(int fildes);
 */
 
-int	save_map(const char *path, t_header *header)
+int	save_map(const char *path, t_map_file *header)
 {
 	int		fd;
 	ssize_t	size;
@@ -40,7 +40,8 @@ int	save_map(const char *path, t_header *header)
 	if (path == NULL || header == NULL
 			|| (fd = open(path, O_CREAT | O_TRUNC | O_WRONLY, 0644)) == -1)
 		return (-1);
-	size = sizeof(t_header) + header->width * header->height * sizeof(uint8_t);
+	size = sizeof(t_map_file)
+		+ header->width * header->height * sizeof(uint8_t);
 	if (write(fd, header, size) != size)
 	{
 		close(fd);
