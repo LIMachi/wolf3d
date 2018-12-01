@@ -7,10 +7,9 @@ CFLAGS = -Wall -Wextra -Werror -g
 CLIB = -L libft -lft -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -L glfw-3.2.1/freetype-2.9.1/objs/.libs -lfreetype glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib
 
 SRCFILES = main.c \
-		   glfw_init.c \
-		   new_window.c \
-		   refresh_window.c \
-		   env.c \
+		   glfw_new_window.c \
+		   glfw_refresh_window.c \
+		   glfw_env.c \
 		   map_editor.c \
 		   default_map.c \
 		   glfw_remove_window.c \
@@ -18,14 +17,16 @@ SRCFILES = main.c \
 		   load_map.c \
 		   save_map.c \
 		   rotate_2d.c \
-		   line.c \
+		   draw_line.c \
 		   color_blend.c \
-		   pixel.c \
-		   square.c \
-		   init.c \
-		   text.c \
+		   draw_pixel.c \
+		   draw_square.c \
+		   pen_init.c \
+		   draw_text.c \
 		   get_pixel.c \
-		   char.c
+		   draw_char.c \
+		   pen_set_font.c \
+		   pen_set_work_area.c
 
 INC = inc \
 	  glfw-3.2.1/include \

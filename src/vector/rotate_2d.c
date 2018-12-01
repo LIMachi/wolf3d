@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/env.h"
+#include <env.h>
 
 t_vector	rotate_2d(t_vector vec, double deg)
 {

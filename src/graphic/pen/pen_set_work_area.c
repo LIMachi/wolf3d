@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   pen_set_work_area.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,14 +12,11 @@
 
 #include <glfw_wrapper.h>
 
-int	init_pen(t_glfw_window *win)
+int	pen_set_work_area(t_glfw_window *win, t_vec top_left, t_vec bottom_right)
 {
-	win->pen = (t_pen){.pos = {1, 1}, .top_left = {1, 1},
-		.bottom_right = {win->vb_width - 1, win->w_height - 1},
-		.color = 0, .font = NULL, .px = {16, 16}, .spx = {2, 4}};
-	if (FT_New_Face(env()->ft2_lib, "/Library/Fonts/Arial.ttf",
-					0, &win->pen.font))
+	if (win == NULL)
 		return (-1);
-	FT_Set_Pixel_Sizes(win->pen.font, 16, 16);
+	win->pen.top_left = top_left;
+	win->pen.bottom_right = bottom_right;
 	return (0);
 }

@@ -2240,43 +2240,46 @@
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/libft/libft.h">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/env.c">
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_env.c">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_init.c">
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_new_window.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_refresh_window.c">
 			<Option target="wolf3d"/>
 		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_remove_window.c">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/new_window.c">
-			<Option target="wolf3d"/>
-		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/refresh_window.c">
-			<Option target="wolf3d"/>
-		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/color_blend.c">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/char.c">
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_char.c">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/line.c">
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_line.c">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/pixel.c">
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_pixel.c">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/square.c">
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_square.c">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/text.c">
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_text.c">
 			<Option target="wolf3d"/>
 		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/get_pixel.c">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/pen/init.c">
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/pen/pen_init.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/pen/pen_set_font.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/pen/pen_set_work_area.c">
 			<Option target="wolf3d"/>
 		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/main.c">

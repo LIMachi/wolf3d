@@ -32,8 +32,15 @@
 # define SX 1920
 # define SY 1080
 
-# define MSX 5
-# define MSY 5
+# define GLFW_OPENGL_VERSION_MAJOR 4
+# define GLFW_OPENGL_VERSION_MINOR 0
+
+# define PEN_DEFAULT_FONT "/Library/Fonts/Arial.ttf"
+# define PEN_DEFAULT_PX_X 16
+# define PEN_DEFAULT_PX_Y 16
+# define PEN_DEFAULT_SPX_X 2
+# define PEN_DEFAULT_SPX_Y 4
+# define PEN_DEFAULT_COLOR 0x0
 
 typedef struct				s_vec
 {
@@ -85,13 +92,14 @@ typedef struct				s_glfw_window
 
 typedef struct				s_glfw_env
 {
+	int						status;
 	t_glfw_window			*window;
 	FT_Library				ft2_lib;
 }							t_glfw_env;
 
-t_glfw_env					*set_env(t_glfw_env *set);
+t_glfw_env					*glfw_set_env(t_glfw_env *set);
 
-t_glfw_env					*env(void);
+t_glfw_env					*glfw_env(void);
 
 void						glfw_init(void);
 
@@ -100,7 +108,16 @@ t_glfw_window				*glfw_new_window(size_t width,
 											char *name,
 											void *user_ptr);
 
-int							init_pen(t_glfw_window *win);
+int							pen_init(t_glfw_window *win);
+
+int							pen_set_font(t_glfw_window *win,
+										const char *font_path,
+										t_vec character_size,
+										t_vec spacing);
+
+int							pen_set_work_area(t_glfw_window *win,
+												t_vec top_left,
+												t_vec bottom_right);
 
 void						glfw_refresh_window(t_glfw_window *win);
 

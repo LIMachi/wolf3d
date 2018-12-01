@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_window.c                                       :+:      :+:    :+:   */
+/*   glfw_new_window.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/glfw_wrapper.h"
+#include <glfw_wrapper.h>
 
 static inline int			i_program(const char *fragment, const char *vertex)
 {
@@ -53,10 +53,10 @@ static inline t_glfw_window	*i_new_window(t_glfw_window *out)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	if (env()->window != NULL)
-		env()->window->prev = out;
+	if (glfw_env()->window != NULL)
+		glfw_env()->window->prev = out;
 	glfwSetWindowUserPointer(out->w, out);
-	return (env()->window = out);
+	return (glfw_env()->window = out);
 }
 
 static inline t_glfw_window	*i_clean(t_glfw_window *out)
@@ -83,12 +83,12 @@ t_glfw_window				*glfw_new_window(size_t width,
 
 	if ((out = malloc(sizeof(t_glfw_window))) == NULL)
 		return (NULL);
-	*out = (t_glfw_window){.prev = NULL, .next = env()->window,
+	*out = (t_glfw_window){.prev = NULL, .next = glfw_env()->window,
 		.w_width = width, .vb_height = height,
 		.vb = malloc(width * height * 3), .vb_width = width,
 		.w_height = height, .w = glfwCreateWindow(
 			width, height, name, NULL, NULL), .user_ptr = user_ptr};
-	if (out->vb == NULL || out->w == NULL || init_pen(out))
+	if (out->vb == NULL || out->w == NULL || pen_init(out))
 		return (i_clean(out));
 	glfwMakeContextCurrent(out->w);
 	gladLoadGL();

@@ -3320,54 +3320,41 @@ CMakeFiles/wolf3d.dir/libft/ft_toupper.c.o
 CMakeFiles/wolf3d.dir/libft/get_next_line.c.o
  /Users/hmartzol/Desktop/wolf3d/libft/get_next_line.c
  /Users/hmartzol/Desktop/wolf3d/libft/libft.h
-CMakeFiles/wolf3d.dir/src/glfw_wrapper/env.c.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/ft2build.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/glad/include/glad/glad.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/include/GLFW/glfw3.h
- /Users/hmartzol/Desktop/wolf3d/inc/glfw_wrapper.h
- /Users/hmartzol/Desktop/wolf3d/libft/libft.h
- /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/env.c
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_env.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_env.c
  glfw-3.2.1/deps/KHR/khrplatform.h
- glfw-3.2.1/deps/vulkan/vk_platform.h
- glfw-3.2.1/deps/vulkan/vulkan.h
-CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_init.c.o
- /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_init.c
- glfw-3.2.1/deps/KHR/khrplatform.h
- glfw-3.2.1/deps/glad/glad.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h
  glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
  glfw-3.2.1/freetype-2.9.1/include/ft2build.h
  glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
- inc/env.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_new_window.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_new_window.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_refresh_window.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_refresh_window.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
  inc/glfw_wrapper.h
  libft/libft.h
 CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_remove_window.c.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/ft2build.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/glad/include/glad/glad.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/include/GLFW/glfw3.h
- /Users/hmartzol/Desktop/wolf3d/inc/glfw_wrapper.h
- /Users/hmartzol/Desktop/wolf3d/libft/libft.h
  /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_remove_window.c
- glfw-3.2.1/deps/KHR/khrplatform.h
- glfw-3.2.1/deps/vulkan/vk_platform.h
- glfw-3.2.1/deps/vulkan/vulkan.h
-CMakeFiles/wolf3d.dir/src/glfw_wrapper/new_window.c.o
- /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/new_window.c
- glfw-3.2.1/deps/KHR/khrplatform.h
- glfw-3.2.1/deps/vulkan/vk_platform.h
- glfw-3.2.1/deps/vulkan/vulkan.h
- glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
- glfw-3.2.1/freetype-2.9.1/include/ft2build.h
- glfw-3.2.1/glad/include/glad/glad.h
- glfw-3.2.1/include/GLFW/glfw3.h
- inc/glfw_wrapper.h
- libft/libft.h
-CMakeFiles/wolf3d.dir/src/glfw_wrapper/refresh_window.c.o
- /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/refresh_window.c
  glfw-3.2.1/deps/KHR/khrplatform.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h
@@ -3388,8 +3375,96 @@ CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o
  glfw-3.2.1/include/GLFW/glfw3.h
  inc/glfw_wrapper.h
  libft/libft.h
-CMakeFiles/wolf3d.dir/src/graphic/draw/line.c.o
- /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/line.c
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_char.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_char.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_line.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_line.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_pixel.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_pixel.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_square.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_square.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_text.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_text.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/graphic/get_pixel.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/get_pixel.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/graphic/pen/pen_init.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/pen/pen_init.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/graphic/pen/pen_set_font.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/pen/pen_set_font.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/graphic/pen/pen_set_work_area.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/pen/pen_set_work_area.c
  glfw-3.2.1/deps/KHR/khrplatform.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h
@@ -3413,98 +3488,80 @@ CMakeFiles/wolf3d.dir/src/main.c.o
  inc/glfw_wrapper.h
  libft/libft.h
 CMakeFiles/wolf3d.dir/src/map_editor.c.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/ft2build.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/glad/include/glad/glad.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/include/GLFW/glfw3.h
- /Users/hmartzol/Desktop/wolf3d/inc/env.h
- /Users/hmartzol/Desktop/wolf3d/inc/glfw_wrapper.h
- /Users/hmartzol/Desktop/wolf3d/libft/libft.h
  /Users/hmartzol/Desktop/wolf3d/src/map_editor.c
  glfw-3.2.1/deps/KHR/khrplatform.h
  glfw-3.2.1/deps/glad/glad.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
+ inc/env.h
+ inc/glfw_wrapper.h
+ libft/libft.h
 CMakeFiles/wolf3d.dir/src/minimap/draw_map.c.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/ft2build.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/glad/include/glad/glad.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/include/GLFW/glfw3.h
- /Users/hmartzol/Desktop/wolf3d/inc/env.h
- /Users/hmartzol/Desktop/wolf3d/inc/glfw_wrapper.h
- /Users/hmartzol/Desktop/wolf3d/libft/libft.h
  /Users/hmartzol/Desktop/wolf3d/src/minimap/draw_map.c
  glfw-3.2.1/deps/KHR/khrplatform.h
  glfw-3.2.1/deps/glad/glad.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
+ inc/env.h
+ inc/glfw_wrapper.h
+ libft/libft.h
 CMakeFiles/wolf3d.dir/src/parsing/default_map.c.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/ft2build.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/glad/include/glad/glad.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/include/GLFW/glfw3.h
- /Users/hmartzol/Desktop/wolf3d/inc/env.h
- /Users/hmartzol/Desktop/wolf3d/inc/glfw_wrapper.h
- /Users/hmartzol/Desktop/wolf3d/libft/libft.h
  /Users/hmartzol/Desktop/wolf3d/src/parsing/default_map.c
  glfw-3.2.1/deps/KHR/khrplatform.h
  glfw-3.2.1/deps/glad/glad.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
+ inc/env.h
+ inc/glfw_wrapper.h
+ libft/libft.h
 CMakeFiles/wolf3d.dir/src/parsing/load_map.c.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/ft2build.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/glad/include/glad/glad.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/include/GLFW/glfw3.h
- /Users/hmartzol/Desktop/wolf3d/inc/env.h
- /Users/hmartzol/Desktop/wolf3d/inc/glfw_wrapper.h
- /Users/hmartzol/Desktop/wolf3d/libft/libft.h
  /Users/hmartzol/Desktop/wolf3d/src/parsing/load_map.c
  glfw-3.2.1/deps/KHR/khrplatform.h
  glfw-3.2.1/deps/glad/glad.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
+ inc/env.h
+ inc/glfw_wrapper.h
+ libft/libft.h
 CMakeFiles/wolf3d.dir/src/parsing/save_map.c.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/ft2build.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/glad/include/glad/glad.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/include/GLFW/glfw3.h
- /Users/hmartzol/Desktop/wolf3d/inc/env.h
- /Users/hmartzol/Desktop/wolf3d/inc/glfw_wrapper.h
- /Users/hmartzol/Desktop/wolf3d/libft/libft.h
  /Users/hmartzol/Desktop/wolf3d/src/parsing/save_map.c
  glfw-3.2.1/deps/KHR/khrplatform.h
  glfw-3.2.1/deps/glad/glad.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
+ inc/env.h
+ inc/glfw_wrapper.h
+ libft/libft.h
 CMakeFiles/wolf3d.dir/src/vector/rotate_2d.c.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/include/ft2build.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/glad/include/glad/glad.h
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/include/GLFW/glfw3.h
- /Users/hmartzol/Desktop/wolf3d/inc/env.h
- /Users/hmartzol/Desktop/wolf3d/inc/glfw_wrapper.h
- /Users/hmartzol/Desktop/wolf3d/libft/libft.h
  /Users/hmartzol/Desktop/wolf3d/src/vector/rotate_2d.c
  glfw-3.2.1/deps/KHR/khrplatform.h
  glfw-3.2.1/deps/glad/glad.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
  glfw-3.2.1/include/GLFW/glfw3.h
-CMakeFiles/wolf3d.dir/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/ftfuzzer.cc.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/ftfuzzer.cc
- glfw-3.2.1/freetype-2.9.1/devel/ft2build.h
- glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
-CMakeFiles/wolf3d.dir/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/ftmutator.cc.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/ftmutator.cc
-CMakeFiles/wolf3d.dir/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/rasterfuzzer.cc.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/rasterfuzzer.cc
- glfw-3.2.1/freetype-2.9.1/devel/ft2build.h
- glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
-CMakeFiles/wolf3d.dir/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/runinput.cc.o
- /Users/hmartzol/Desktop/wolf3d/glfw-3.2.1/freetype-2.9.1/src/tools/ftfuzzer/runinput.cc
+ inc/env.h
+ inc/glfw_wrapper.h
+ libft/libft.h

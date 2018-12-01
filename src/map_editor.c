@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/env.h"
-#include "../inc/glfw_wrapper.h"
+#include <env.h>
+#include <glfw_wrapper.h>
 
 t_header	*map_scale(t_header *map, uint32_t width, uint32_t height)
 {

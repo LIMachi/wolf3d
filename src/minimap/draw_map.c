@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/glfw_wrapper.h"
-#include "../../inc/env.h"
+#include <glfw_wrapper.h>
+#include <env.h>
 
 t_glfw_window		*draw_map(t_glfw_window *win,
 							t_header *map)

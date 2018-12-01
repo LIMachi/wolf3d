@@ -54,18 +54,14 @@ void	*print_mouse_button(GLFWwindow *win, int key, int act, int mod)
 
 int	main(int ac, const char **av)
 {
-	t_glfw_env		e;
 	t_glfw_window	*win;
 	t_header		*map;
 	int tick = 0;
 	int second = (int)time(NULL);
-	(void)set_env(&e);
-	if (FT_Init_FreeType(&e.ft2_lib))
-		return (-1);
+
 	(void)av;
 	if (ac == 2)
 	{
-		glfw_init();
 		if ((win = glfw_new_window(SX, SY, "Wolf3d", NULL)) == NULL)
 			return (-42);
 		glfwSetKeyCallback(win->w, (GLFWkeyfun)&print_key);

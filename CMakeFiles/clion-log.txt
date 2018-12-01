@@ -1,0 +1,4 @@
+/Users/hmartzol/.brew/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/hmartzol/Desktop/wolf3d
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/hmartzol/Desktop/wolf3d
