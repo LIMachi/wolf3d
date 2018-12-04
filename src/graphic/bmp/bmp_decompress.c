@@ -35,16 +35,17 @@ inline static void		i_bmp_decompress(t_bitmap *bmp,
 										t_vec p,
 										int x)
 {
-	int	t1;
-	int	t2;
-	int	y;
+	uint32_t	t1;
+	uint32_t	t2;
+	int			y;
+	(void)x;
 
 	t1 = (bmp->info.height - p.y - 1) * bmp->info.width + p.x;
 	out->data[t1] = 0;
 	y = -1;
 	while (++y < 4)
-		out->data[t1] |= bmp->data[
-			p.y * x + p.x * (bmp->info.bit_count >> 3) + y] << (y << 3);
+		out->data[t1] |= ((uint32_t)bmp->data[
+			p.y * x + p.x * (bmp->info.bit_count >> 3) + y]) << (y << 3);
 	if (bmp->info.bit_count < 32)
 		out->data[t1] &= (0xFFFFFFFF >> (32 - bmp->info.bit_count));
 	if (bmp->info.bit_compression == 3)
@@ -74,8 +75,17 @@ t_ubmp					*bmp_decompress(t_bitmap *bmp)
 	x = (bmp->info.width * bmp->info.bit_count) >> 3;
 	x += ((bmp->info.width * bmp->info.bit_count) & 7) != 0;
 	p.y = bmp->info.height;
-	while (--p.y >= 0 && (p.x = -1))
-		while (++p.x < x / (bmp->info.bit_count >> 3))
-			i_bmp_decompress(bmp, out, p, x);
+	if (bmp->info.bit_compression != 0)
+		while (--p.y >= 0 && (p.x = -1))
+			while (++p.x < x / (bmp->info.bit_count >> 3))
+				i_bmp_decompress(bmp, out, p, x);
+	else
+		while (--p.y >= 0 && (p.x = -1))
+			while (++p.x < x)
+				out->data[p.x + (bmp->info.height - p.y - 1) * bmp->info.width]
+					= 0xFF000000
+					| (bmp->data[p.x + p.y * bmp->info.width] << 16)
+					| (bmp->data[(p.x + p.y * bmp->info.width) * 3 + 1] << 8)
+					| (bmp->data[(p.x + p.y * bmp->info.width) * 3 + 2]);
 	return (out);
 }

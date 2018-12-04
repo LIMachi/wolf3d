@@ -96,8 +96,8 @@ $(FT2LIB):
 	cd glfw-3.2.1/freetype-2.9.1; \
 	./configure; \
 	make; \
-	install_name_tool -id "glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib" glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib; \
-	cd ..
+	cd ../..; \
+	install_name_tool -id "glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib" glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib;
 
 clean:
 	rm -rf $(OBJDIR)

@@ -29,11 +29,14 @@ t_glfw_window		*draw_bmp(t_glfw_window *win,
 		{
 			tx = (double)x * (double)ubmp->size.x / (double)size.x;
 			ty = (double)y * (double)ubmp->size.y / (double)size.y;
+			/*
 			color = color_blend(color_blend(
 				ubmp->data[(int)tx + 1 + ((int)ty + 1) * ubmp->size.x],
 				ubmp->data[(int)tx + ((int)ty + 1) * ubmp->size.x], tx - (int)tx),
 					color_blend(ubmp->data[(int)tx + 1 + (int)ty * ubmp->size.x],
 						ubmp->data[(int)tx + (int)ty * ubmp->size.x], tx - (int)tx), ty - (int)ty);
+			*/
+			color = ubmp->data[(int)tx + ((int)ty) * ubmp->size.x];
 			draw_pixel(win, x + pos.x, y + pos.y, color);
 		}
 	return (win);
