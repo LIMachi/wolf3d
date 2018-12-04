@@ -29,7 +29,10 @@ SRCFILES = main.c \
 		   pen_set_work_area.c \
 		   glfw_callbacks.c \
 		   glfw_update_callbacks.c \
-		   glfw_attach_callback.c
+		   glfw_attach_callback.c \
+		   bmp_file_load.c \
+		   bmp_decompress.c \
+		   draw_bmp.c
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -43,7 +46,8 @@ DIRS =	parsing \
 		vector \
 		graphic \
 		graphic/draw \
-		graphic/pen
+		graphic/pen \
+		graphic/bmp
 
 INCDIRS = $(addprefix -I,$(INC))
 

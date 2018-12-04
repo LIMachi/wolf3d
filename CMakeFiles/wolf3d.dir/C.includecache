@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_attach_callback.c
+glfw_wrapper.h
+-
+
+/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_callbacks.c
+glfw_wrapper.h
+-
+
 /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_env.c
 glfw_wrapper.h
 -
@@ -19,6 +27,10 @@ glfw_wrapper.h
 -
 
 /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_remove_window.c
+glfw_wrapper.h
+-
+
+/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_update_callbacks.c
 glfw_wrapper.h
 -
 

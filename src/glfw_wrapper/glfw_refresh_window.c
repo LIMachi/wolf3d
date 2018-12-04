@@ -14,8 +14,8 @@
 
 void	glfw_refresh_window(t_glfw_window *win)
 {
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, win->vb_width, win->vb_height, 0,
-		GL_RGB, GL_UNSIGNED_BYTE, win->vb);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, win->vb_width, win->vb_height, 0,
+		GL_BGRA, GL_UNSIGNED_BYTE, win->vb);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBindTexture(GL_TEXTURE_2D, win->texture);
 	glUseProgram(win->program);

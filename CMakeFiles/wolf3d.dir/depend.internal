@@ -3320,6 +3320,28 @@ CMakeFiles/wolf3d.dir/libft/ft_toupper.c.o
 CMakeFiles/wolf3d.dir/libft/get_next_line.c.o
  /Users/hmartzol/Desktop/wolf3d/libft/get_next_line.c
  /Users/hmartzol/Desktop/wolf3d/libft/libft.h
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_attach_callback.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_callbacks.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
 CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_env.c.o
  /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_env.c
  glfw-3.2.1/deps/KHR/khrplatform.h
@@ -3355,6 +3377,17 @@ CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_refresh_window.c.o
  libft/libft.h
 CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_remove_window.c.o
  /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_remove_window.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_update_callbacks.c
  glfw-3.2.1/deps/KHR/khrplatform.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h

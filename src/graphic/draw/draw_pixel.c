@@ -19,8 +19,6 @@ t_glfw_window		*draw_pixel(t_glfw_window *win,
 {
 	if (win == NULL || x >= win->vb_width || y >= win->vb_height)
 		return (win);
-	win->vb[(x + y * (win->vb_width + 1)) * 3] = (char)(color >> 16);
-	win->vb[(x + y * (win->vb_width + 1)) * 3 + 1] = (char)(color >> 8);
-	win->vb[(x + y * (win->vb_width + 1)) * 3 + 2] = (char)color;
+	((uint32_t*)win->vb)[x + y * win->vb_width] = color;
 	return (win);
 }

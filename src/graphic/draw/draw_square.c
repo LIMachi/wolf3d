@@ -19,19 +19,24 @@ t_glfw_window		*draw_square(t_glfw_window *win,
 {
 	int x;
 	int y;
-	int i;
 
 	x = -1;
+	if (pos.x < 0)
+	{
+		size.x += pos.x;
+		pos.x = 0;
+	}
+	if (pos.y < 0)
+	{
+		size.y += pos.y;
+		pos.y = 0;
+	}
 	while (++x < size.x && x < (ssize_t)win->vb_width)
 	{
 		y = -1;
 		while (++y < size.y && y < (ssize_t)win->vb_height)
-		{
-			i = (int)(x + pos.x + (y + pos.y) * (win->vb_width + 1)) * 3;
-			win->vb[i] = (char)(color >> 16);
-			win->vb[i + 1] = (char)(color >> 8);
-			win->vb[i + 2] = (char)color;
-		}
+			((uint32_t*)win->vb)[
+				x + pos.x + (y + pos.y) * win->vb_width] = color;
 	}
 	return (win);
 }

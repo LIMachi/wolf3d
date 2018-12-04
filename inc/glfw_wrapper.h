@@ -29,13 +29,20 @@
 ** https://www.freetype.org/freetype2/docs/tutorial/step1.html
 */
 
+# ifndef __WINDOWS__
+#  define WORD uint16_t
+#  define DWORD uint32_t
+#  define LONG uint32_t
+#  define O_BINARY 0
+# endif
+
 # define SX 1920
 # define SY 1080
 
 # define GLFW_OPENGL_VERSION_MAJOR 4
 # define GLFW_OPENGL_VERSION_MINOR 0
 
-# define PEN_DEFAULT_FONT "/Library/Fonts/Arial.ttf"
+# define PEN_DEFAULT_FONT "assets/fonts/Arial Unicode.ttf"
 # define PEN_DEFAULT_PX_X 16
 # define PEN_DEFAULT_PX_Y 16
 # define PEN_DEFAULT_SPX_X 2
@@ -47,6 +54,58 @@ typedef struct							s_vec
 	int									x;
 	int									y;
 }										t_vec;
+
+# pragma pack(push, 1)
+
+typedef struct						s_bitmap_file_header
+{
+	WORD							file_type;
+	DWORD							file_size;
+	DWORD							reserved;
+	DWORD							offset;
+}									t_bitmap_file_header;
+
+typedef struct						s_dib_header
+{
+	DWORD								dib_size;
+	LONG								width;
+	LONG								height;
+	WORD								planes;
+	WORD								bit_count;
+	DWORD								bit_compression;
+	DWORD								size_image;
+	LONG								x_pixels_meter;
+	LONG								y_pixels_meter;
+	DWORD								colors_in_tab;
+	DWORD								color_important;
+	DWORD								red_bmask;
+	DWORD								green_bmask;
+	DWORD								blue_bmask;
+	DWORD								alpha_bmask;
+	DWORD								color_space_type;
+	char								color_space_endpoint[36];
+	DWORD								gamma_red;
+	DWORD								gamma_green;
+	DWORD								gamma_blue;
+	DWORD								intent;
+	DWORD								icc_profile_data;
+	DWORD								icc_profile_size;
+	DWORD								reserved;
+}										t_dib_header;
+
+# pragma pack(pop)
+
+typedef struct							s_bitmap
+{
+	t_dib_header						info;
+	uint8_t								data[0];
+}										t_bitmap;
+
+typedef	struct							s_ubmp
+{
+	t_vec								size;
+	uint32_t							data[0];
+}										t_ubmp;
 
 /*
 ** t_pen:
@@ -160,10 +219,11 @@ typedef enum							e_glfw_callback_flags_data
 }										t_glfw_callback_flags_data;
 
 /*
-** (*callback)(int id, void *data, void *user_data)
+** int (*callback)(int id, void *data, void *user_data)
+** if returned value is not zero, do not forward updates to other callbacks
 */
 
-typedef void							(*t_glfw_callback)(int, void *, void *);
+typedef int								(*t_glfw_callback)(int, void *, void *);
 
 typedef struct s_glfw_callback_holder	t_glfw_callback_holder;
 struct									s_glfw_callback_holder
@@ -223,6 +283,15 @@ t_glfw_window							*glfw_new_window(size_t width,
 														void *user_ptr);
 
 void									glfw_callbacks(t_glfw_window *win);
+
+t_bitmap								*bmp_file_load(const char *path);
+
+t_ubmp									*bmp_decompress(t_bitmap *bmp);
+
+t_glfw_window							*draw_bmp(t_glfw_window *win,
+													t_vec pos,
+													t_vec size,
+													t_ubmp *ubmp);
 
 int										pen_init(t_glfw_window *win);
 

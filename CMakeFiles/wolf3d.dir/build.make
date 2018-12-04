@@ -5192,6 +5192,45 @@ CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_attach_callback.c -o CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.s
 
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: src/graphic/bmp/bmp_file_load.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_396) "Building C object CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/graphic/bmp/bmp_file_load.c
+
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/graphic/bmp/bmp_file_load.c > CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.i
+
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/graphic/bmp/bmp_file_load.c -o CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.s
+
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.o: src/graphic/bmp/bmp_decompress.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_397) "Building C object CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/graphic/bmp/bmp_decompress.c
+
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/graphic/bmp/bmp_decompress.c > CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.i
+
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/graphic/bmp/bmp_decompress.c -o CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.s
+
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: src/graphic/draw/draw_bmp.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_398) "Building C object CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_bmp.c
+
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_bmp.c > CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.i
+
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_bmp.c -o CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.s
+
 # Object files for target wolf3d
 wolf3d_OBJECTS = \
 "CMakeFiles/wolf3d.dir/glfw-3.2.1/deps/getopt.c.o" \
@@ -5588,7 +5627,10 @@ wolf3d_OBJECTS = \
 "CMakeFiles/wolf3d.dir/src/map_editor.c.o" \
 "CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o" \
 "CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o" \
-"CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o"
+"CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o" \
+"CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o" \
+"CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.o" \
+"CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o"
 
 # External object files for target wolf3d
 wolf3d_EXTERNAL_OBJECTS =
@@ -5988,9 +6030,12 @@ wolf3d: CMakeFiles/wolf3d.dir/src/map_editor.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o
 wolf3d: CMakeFiles/wolf3d.dir/build.make
 wolf3d: CMakeFiles/wolf3d.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_396) "Linking CXX executable wolf3d"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_399) "Linking CXX executable wolf3d"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/wolf3d.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

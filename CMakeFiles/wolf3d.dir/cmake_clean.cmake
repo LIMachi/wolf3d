@@ -394,6 +394,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o"
   "CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o"
   "CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o"
+  "CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o"
+  "CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_decompress.c.o"
+  "CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o"
   "wolf3d.pdb"
   "wolf3d"
 )

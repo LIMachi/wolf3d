@@ -52,11 +52,12 @@ void	*print_mouse_button(GLFWwindow *win, int key, int act, int mod)
 	return (NULL);
 }
 
-void test_mouse(int id, t_mouse_status *mouse, void *data)
+int test_mouse(int id, t_mouse_status *mouse, void *data)
 {
 	(void)id;
 	(void)data;
 	printf("detected mouse %f %f\n", mouse->pos_x, mouse->pos_y);
+	return (0);
 }
 
 int	main(int ac, const char **av)
@@ -81,23 +82,19 @@ int	main(int ac, const char **av)
 		if ((win = glfw_new_window(SX, SY, "Wolf3d", NULL)) == NULL)
 			return (-42);
 		glfw_attach_callback(win, &test_cbh);
-//		glfwSetKeyCallback(win->w, (GLFWkeyfun)&print_key);
-//		glfwSetMouseButtonCallback(win->w, (GLFWmousebuttonfun)&print_mouse_button);
-//		glfwSetCursorPosCallback(win->w, (GLFWcursorposfun)&print_cursor_pos);
 		if ((map = load_map(av[1])) == NULL)
 			if ((map = default_map()) == NULL)
 				return (-1);
 		for (int x = 0; x < SX; ++x)
 			for (int y = 0; y < SY; ++y)
-			{
-				win->vb[(y * SX + x) * 3] = (char)rand();
-				win->vb[(y * SX + x) * 3 + 1] = (char)rand();
-				win->vb[(y * SX + x) * 3 + 2] = (char)rand();
-			}
+				*((uint32_t*)&win->vb[(y * SX + x) * 4]) = 0xFF0000;
+		t_bitmap	*bitmap = bmp_file_load("assets/images/bmp0_test_image.bmp");
+		t_ubmp		*bmp = bmp_decompress(bitmap);
+		free(bitmap);
+		draw_bmp(win, (t_vec){10, 10}, (t_vec){bmp->size.x * 5.5, bmp->size.y * 5.5}, bmp);
+		free(bmp);
 		while (!glfwWindowShouldClose(win->w))
 		{
-			for (int i = 0; i < SX * SY * 3; ++i)
-				++win->vb[i];
 			glfw_refresh_window(win);
 			glfwPollEvents();
 			if (glfwGetKey(win->w, GLFW_KEY_M))

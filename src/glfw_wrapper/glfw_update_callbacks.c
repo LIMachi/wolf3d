@@ -31,7 +31,8 @@ inline void	glfw_update_callbacks(t_glfw_window *win,
 				data = (void*)&win->keyboard;
 			if (cbh->data == CFD_MOUSE)
 				data = (void*)&win->mouse;
-			cbh->cb(cbh->id, data, cbh->user_data);
+			if (cbh->cb(cbh->id, data, cbh->user_data))
+				break ;
 		}
 		cbh = cbh->next;
 	}

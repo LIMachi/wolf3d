@@ -86,7 +86,7 @@ t_glfw_window				*glfw_new_window(size_t width,
 		return (NULL);
 	*out = (t_glfw_window){.prev = NULL, .next = glfw_env()->window,
 		.w_width = width, .vb_height = height,
-		.vb = malloc(width * height * 3), .vb_width = width,
+		.vb = malloc(width * height * 4), .vb_width = width,
 		.w_height = height, .w = glfwCreateWindow(
 			width, height, name, NULL, NULL), .user_ptr = user_ptr};
 	if (out->vb == NULL || out->w == NULL || pen_init(out))
