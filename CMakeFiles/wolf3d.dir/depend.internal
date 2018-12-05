@@ -3320,6 +3320,8 @@ CMakeFiles/wolf3d.dir/libft/ft_toupper.c.o
 CMakeFiles/wolf3d.dir/libft/get_next_line.c.o
  /Users/hmartzol/Desktop/wolf3d/libft/get_next_line.c
  /Users/hmartzol/Desktop/wolf3d/libft/libft.h
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/error.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/error.c
 CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o
  /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_attach_callback.c
  glfw-3.2.1/deps/KHR/khrplatform.h
@@ -3397,8 +3399,30 @@ CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o
  glfw-3.2.1/include/GLFW/glfw3.h
  inc/glfw_wrapper.h
  libft/libft.h
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/bmp/bmp_file_load.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
 CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o
  /Users/hmartzol/Desktop/wolf3d/src/graphic/color_blend.c
+ glfw-3.2.1/deps/KHR/khrplatform.h
+ glfw-3.2.1/deps/vulkan/vk_platform.h
+ glfw-3.2.1/deps/vulkan/vulkan.h
+ glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+ glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+ glfw-3.2.1/glad/include/glad/glad.h
+ glfw-3.2.1/include/GLFW/glfw3.h
+ inc/glfw_wrapper.h
+ libft/libft.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o
+ /Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_bmp.c
  glfw-3.2.1/deps/KHR/khrplatform.h
  glfw-3.2.1/deps/vulkan/vk_platform.h
  glfw-3.2.1/deps/vulkan/vulkan.h

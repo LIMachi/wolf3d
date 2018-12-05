@@ -57,26 +57,73 @@ typedef struct							s_vec
 
 # pragma pack(push, 1)
 
-typedef struct						s_bitmap_file_header
-{
-	WORD							file_type;
-	DWORD							file_size;
-	DWORD							reserved;
-	DWORD							offset;
-}									t_bitmap_file_header;
+# define BITMAPSIGNATURE1 ((WORD)(('M' << 8) | 'B'))
+# define BITMAPSIGNATURE2 ((WORD)(('A' << 8) | 'B'))
 
-typedef struct						s_dib_header
+typedef struct							s_bitmap_file_header
+{
+	WORD								file_type;
+	DWORD								file_size;
+	DWORD								reserved;
+	DWORD								offset;
+}										t_bitmap_file_header;
+
+/*
+** unsuported format
+*/
+
+# define BITMAPCOREHEADER 12
+# define OS21XBITMAPHEADER 12
+
+/*
+** supported format
+*/
+
+# define OS22XBITMAPHEADER 64
+# define OS22XBITMAPHEADERV 16
+# define BITMAPINFOHEADER 40
+# define BITMAPV2INFOHEADER 52
+# define BITMAPV3INFOHEADER 56
+
+/*
+** partially supported format
+*/
+
+# define BITMAPV4HEADER 108
+# define BITMAPV5HEADER 124
+
+/*
+** supported compression
+*/
+
+# define BI_RGB 0
+# define BI_BITFIELDS 3
+# define BI_ALPHABITFIELDS 6
+
+/*
+** unsupported compression
+*/
+
+# define BI_RLE8 1
+# define BI_RLE4 2
+# define BI_JPEG 4
+# define BI_PNG 5
+# define BI_CMYK 11
+# define BI_CMYKRLE8 12
+# define BI_CMYKRLE4 13
+
+typedef struct							s_dib
 {
 	DWORD								dib_size;
 	LONG								width;
 	LONG								height;
 	WORD								planes;
-	WORD								bit_count;
-	DWORD								bit_compression;
+	WORD								bit_per_pixel;
+	DWORD								compression;
 	DWORD								size_image;
 	LONG								x_pixels_meter;
 	LONG								y_pixels_meter;
-	DWORD								colors_in_tab;
+	DWORD								palette;
 	DWORD								color_important;
 	DWORD								red_bmask;
 	DWORD								green_bmask;
@@ -91,21 +138,23 @@ typedef struct						s_dib_header
 	DWORD								icc_profile_data;
 	DWORD								icc_profile_size;
 	DWORD								reserved;
-}										t_dib_header;
+}										t_dib;
 
 # pragma pack(pop)
 
-typedef struct							s_bitmap
+typedef struct							s_bmp_file
 {
-	t_dib_header						info;
-	uint8_t								data[0];
-}										t_bitmap;
+	t_bitmap_file_header				head;
+	t_dib								dib;
+	uint32_t							*color_palette;
+	uint8_t								*data;
+}										t_bmp_file;
 
-typedef	struct							s_ubmp
+typedef	struct							s_bmp
 {
 	t_vec								size;
 	uint32_t							data[0];
-}										t_ubmp;
+}										t_bmp;
 
 /*
 ** t_pen:
@@ -284,14 +333,12 @@ t_glfw_window							*glfw_new_window(size_t width,
 
 void									glfw_callbacks(t_glfw_window *win);
 
-t_bitmap								*bmp_file_load(const char *path);
-
-t_ubmp									*bmp_decompress(t_bitmap *bmp);
+t_bmp									*bmp_file_load(const char *path);
 
 t_glfw_window							*draw_bmp(t_glfw_window *win,
 													t_vec pos,
 													t_vec size,
-													t_ubmp *ubmp);
+													t_bmp *bmp);
 
 int										pen_init(t_glfw_window *win);
 
@@ -340,5 +387,7 @@ t_vec									draw_text(t_glfw_window *win,
 													t_vec pos,
 													char *text,
 													uint32_t color);
+
+void									*error(char *form, ...);
 
 #endif

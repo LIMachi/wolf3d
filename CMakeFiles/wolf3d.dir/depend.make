@@ -3320,6 +3320,8 @@ CMakeFiles/wolf3d.dir/libft/ft_toupper.c.o: libft/ft_toupper.c
 CMakeFiles/wolf3d.dir/libft/get_next_line.c.o: libft/get_next_line.c
 CMakeFiles/wolf3d.dir/libft/get_next_line.c.o: libft/libft.h
 
+CMakeFiles/wolf3d.dir/src/glfw_wrapper/error.c.o: src/glfw_wrapper/error.c
+
 CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o: src/glfw_wrapper/glfw_attach_callback.c
 CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o: glfw-3.2.1/deps/KHR/khrplatform.h
 CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o: glfw-3.2.1/deps/vulkan/vk_platform.h
@@ -3397,6 +3399,17 @@ CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o: glfw-3.2.1/inc
 CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o: inc/glfw_wrapper.h
 CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o: libft/libft.h
 
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: src/graphic/bmp/bmp_file_load.c
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: glfw-3.2.1/deps/KHR/khrplatform.h
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: glfw-3.2.1/deps/vulkan/vk_platform.h
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: glfw-3.2.1/deps/vulkan/vulkan.h
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: glfw-3.2.1/glad/include/glad/glad.h
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: glfw-3.2.1/include/GLFW/glfw3.h
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: inc/glfw_wrapper.h
+CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o: libft/libft.h
+
 CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o: src/graphic/color_blend.c
 CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o: glfw-3.2.1/deps/KHR/khrplatform.h
 CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o: glfw-3.2.1/deps/vulkan/vk_platform.h
@@ -3407,6 +3420,17 @@ CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o: glfw-3.2.1/glad/include/glad/
 CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o: glfw-3.2.1/include/GLFW/glfw3.h
 CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o: inc/glfw_wrapper.h
 CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o: libft/libft.h
+
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: src/graphic/draw/draw_bmp.c
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: glfw-3.2.1/deps/KHR/khrplatform.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: glfw-3.2.1/deps/vulkan/vk_platform.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: glfw-3.2.1/deps/vulkan/vulkan.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: glfw-3.2.1/freetype-2.9.1/include/freetype/config/ftheader.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: glfw-3.2.1/freetype-2.9.1/include/ft2build.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: glfw-3.2.1/glad/include/glad/glad.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: glfw-3.2.1/include/GLFW/glfw3.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: inc/glfw_wrapper.h
+CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o: libft/libft.h
 
 CMakeFiles/wolf3d.dir/src/graphic/draw/draw_char.c.o: src/graphic/draw/draw_char.c
 CMakeFiles/wolf3d.dir/src/graphic/draw/draw_char.c.o: glfw-3.2.1/deps/KHR/khrplatform.h

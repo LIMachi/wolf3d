@@ -88,11 +88,18 @@ int	main(int ac, const char **av)
 		for (int x = 0; x < SX; ++x)
 			for (int y = 0; y < SY; ++y)
 				*((uint32_t*)&win->vb[(y * SX + x) * 4]) = 0xFF0000;
-		t_bitmap	*bitmap = bmp_file_load("assets/images/bmp0_test_image.bmp");
-		t_ubmp		*bmp = bmp_decompress(bitmap);
-		free(bitmap);
-		draw_bmp(win, (t_vec){10, 10}, (t_vec){bmp->size.x * 5.5, bmp->size.y * 5.5}, bmp);
+
+		t_bmp	*bmp;
+		bmp = bmp_file_load("assets/images/sprites/guard/shoot/1.bmp");
+		draw_bmp(win, (t_vec){0, 0}, (t_vec){bmp->size.x * 4, bmp->size.y * 4}, bmp);
 		free(bmp);
+		bmp = bmp_file_load("assets/images/sprites/guard/shoot/2.bmp");
+		draw_bmp(win, (t_vec){256, 0}, (t_vec){bmp->size.x * 4, bmp->size.y * 4}, bmp);
+		free(bmp);
+		bmp = bmp_file_load("assets/images/sprites/guard/shoot/3.bmp");
+		draw_bmp(win, (t_vec){512, 0}, (t_vec){bmp->size.x * 4, bmp->size.y * 4}, bmp);
+		free(bmp);
+
 		while (!glfwWindowShouldClose(win->w))
 		{
 			glfw_refresh_window(win);

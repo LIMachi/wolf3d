@@ -12,10 +12,19 @@
 
 #include <glfw_wrapper.h>
 
+/*
+** alternative color picker:
+** color = color_blend(color_blend(
+** 	bmp->data[(int)tx + 1 + ((int)ty + 1) * bmp->size.x],
+** 	bmp->data[(int)tx + ((int)ty + 1) * bmp->size.x], tx - (int)tx),
+** 	color_blend(bmp->data[(int)tx + 1 + (int)ty * bmp->size.x],
+** 	bmp->data[(int)tx + (int)ty * bmp->size.x], tx - (int)tx), ty - (int)ty);
+*/
+
 t_glfw_window		*draw_bmp(t_glfw_window *win,
 							t_vec pos,
 							t_vec size,
-							t_ubmp *ubmp)
+							t_bmp *bmp)
 {
 	int			x;
 	int			y;
@@ -27,16 +36,9 @@ t_glfw_window		*draw_bmp(t_glfw_window *win,
 	while (++y < size.y && (x = -1))
 		while (++x < size.x)
 		{
-			tx = (double)x * (double)ubmp->size.x / (double)size.x;
-			ty = (double)y * (double)ubmp->size.y / (double)size.y;
-			/*
-			color = color_blend(color_blend(
-				ubmp->data[(int)tx + 1 + ((int)ty + 1) * ubmp->size.x],
-				ubmp->data[(int)tx + ((int)ty + 1) * ubmp->size.x], tx - (int)tx),
-					color_blend(ubmp->data[(int)tx + 1 + (int)ty * ubmp->size.x],
-						ubmp->data[(int)tx + (int)ty * ubmp->size.x], tx - (int)tx), ty - (int)ty);
-			*/
-			color = ubmp->data[(int)tx + ((int)ty) * ubmp->size.x];
+			tx = (double)x * (double)bmp->size.x / (double)size.x;
+			ty = (double)y * (double)bmp->size.y / (double)size.y;
+			color = bmp->data[(int)tx + ((int)ty) * bmp->size.x];
 			draw_pixel(win, x + pos.x, y + pos.y, color);
 		}
 	return (win);
