@@ -32,7 +32,8 @@ SRCFILES = main.c \
 		   glfw_attach_callback.c \
 		   bmp_file_load.c \
 		   draw_bmp.c \
-		   error.c
+		   error.c \
+		   glfw_window_resize_video_buffer.c
 
 INC = inc \
 	  glfw-3.2.1/include \

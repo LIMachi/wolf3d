@@ -331,6 +331,11 @@ t_glfw_window							*glfw_new_window(size_t width,
 														char *name,
 														void *user_ptr);
 
+t_glfw_window							*glfw_window_resize_video_buffer(
+															t_glfw_window *win,
+															int x,
+															int y);
+
 void									glfw_callbacks(t_glfw_window *win);
 
 t_bmp									*bmp_file_load(const char *path);

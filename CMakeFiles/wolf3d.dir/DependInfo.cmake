@@ -380,6 +380,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_refresh_window.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_refresh_window.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_remove_window.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_remove_window.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_update_callbacks.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_update_callbacks.c.o"
+  "/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_window_resize_video_buffer.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_window_resize_video_buffer.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/graphic/bmp/bmp_file_load.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/graphic/color_blend.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/graphic/color_blend.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/graphic/draw/draw_bmp.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o"

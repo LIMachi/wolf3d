@@ -2261,6 +2261,9 @@
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_update_callbacks.c">
 			<Option target="wolf3d"/>
 		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_window_resize_video_buffer.c">
+			<Option target="wolf3d"/>
+		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/bmp/bmp_file_load.c">
 			<Option target="wolf3d"/>
 		</Unit>
