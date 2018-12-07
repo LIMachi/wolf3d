@@ -1,19 +1,34 @@
-un menu quand on lance le programme:
-nouveau jeu
-continuer
-editeur de map (éditer une map exitante ou crée une nouvelle map)
-options (keybind, autres)
-quiter
+hugo:
+  un menu quand on lance le programme:
+  nouveau jeu
+  continuer
+  editeur de map (éditer une map exitante ou crée une nouvelle map)
+  options (keybind, autres)
+  quiter
 
-un menu quand on fait echap en jeu:
-sauvegarder
-charger
-quitter (revient au menu pricipal)
-annuler
+  un menu quand on fait echap en jeu:
+  sauvegarder
+  charger
+  quitter (revient au menu pricipal)
+  annuler
 
-un menu quand on fait echap dans l'editeur
-charger
-sauvegarder
-changer la taille
-quitter (revient au menu principal)
-annuler
+  un menu quand on fait echap dans l'editeur
+  charger
+  sauvegarder
+  changer la taille
+  quitter (revient au menu principal)
+  annuler
+
+  ce doccumenter sur portaudio et le format WAV (basiquement, un format brut de musique)
+  utiliser le multi-threading et la gestion du temps de glfw pour manipuler portaudio
+
+leonardo:
+  le ray-casting (et eventuellement une version avec plusieures colisions pour des blocks/objets semi-trasnparents, on affiche les objets dans l'ordre inverse des collisions, les plus lointain en premier et les plus proches en dernier)
+  le ray-casting doit avoir une limite, le rayon ne doit pas parcourir une distance infinie, et si la transparence a ete implementee, le rayon ne doit pas continuer si collision avec un objet totalement opaque
+  la minimap (option vision du joueur et vision des enemis :p)
+  utiliser le multi-threading et la gesion du temps de glfw pour separer la partie graphique (affichage) de la partie i/o (clavier/souris/manette)
+
+idees pour plus tard:
+  ce documenter sur l'interfaçage reseau pour du mutlijoueur (ce qui donne jusqu'a 4 threads clients et 2 threads serveurs si on fait bien les choses:
+  - client: graphique, i/o joueur, sons, i/o client - serveur
+  - serveur: main, i/o serveur - client
