@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/09 17:44:10 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/09 23:21:15 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void			draw(t_glfw_window *win)
 		for (int y = 0; y < win->w_height; ++y)
 			*((uint32_t*)&win->vb[(y * win->w_width + x) * 4]) = 0xFF0000;
 	t_bmp	*bmp;
-	bmp = bmp_file_load("assets/images/C_OPTIONSPIC");
-	draw_bmp(win, (t_vec){0, 0}, (t_vec){bmp->size.x * 4, bmp->size.y * 4}, bmp);
+	bmp = bmp_file_load("assets/images/sprites/guard/die/1.bmp");
+	draw_bmp(win, (t_vec){0, 0}, (t_vec){bmp->size.x * 2, bmp->size.y * 2}, bmp);
 	free(bmp);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/09 17:52:11 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/09 23:37:20 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,26 @@ void		*click(GLFWwindow *win, int key, int act, int mod)
 	return (NULL);
 }
 
+void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
+{
+	t_glfw_window	*cheat;
+	t_env			*env;
+
+	(void)scan;
+	(void)mod;
+	cheat = glfwGetWindowUserPointer(win);
+	env = cheat->user_ptr;
+	if (key == GLFW_KEY_DOWN && (act == GLFW_PRESS || act == GLFW_REPEAT))
+		env->player.pos.y += 0.5;
+	else if (key == GLFW_KEY_LEFT && act == GLFW_PRESS)
+		env->player.pos.x -= 0.5;
+	else if (key == GLFW_KEY_RIGHT && act == GLFW_PRESS)
+		env->player.pos.x += 0.5;
+	else if (key == GLFW_KEY_UP && act == GLFW_PRESS)
+		env->player.pos.y -= 0.5;
+	return (NULL);
+}
+
 t_env	*map_editor(t_env *env)
 {
 	t_glfw_window	*win;
@@ -89,6 +109,7 @@ t_env	*map_editor(t_env *env)
 		draw_map(win, env);
 		glfw_refresh_window(win);
 		glfwPollEvents();
+		glfwSetKeyCallback(win->w, (GLFWkeyfun)moove_player);
 		if (glfwGetKey(win->w, GLFW_KEY_S) == GLFW_PRESS)
 			save_map("test.w3d", env->map_file);
 	}
