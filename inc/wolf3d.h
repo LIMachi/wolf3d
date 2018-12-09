@@ -20,7 +20,6 @@
 # include <stdio.h>
 # include <stdint.h>
 # include <stdlib.h>
-# include <time.h>
 # include <math.h>
 # include "../libft/libft.h"
 # include "glfw_wrapper.h"
@@ -65,19 +64,21 @@ typedef struct		s_player
 typedef struct		s_config_file
 {
 	uint32_t		magic;
-	uint32_t		forward;
-	uint32_t		backward;
-	uint32_t		strafe_left;
-	uint32_t		strafe_right;
-	uint32_t		turn_left;
-	uint32_t		turn_right;
-	uint32_t		action;
+	int32_t			forward;
+	int32_t			backward;
+	int32_t			strafe_left;
+	int32_t			strafe_right;
+	int32_t			turn_left;
+	int32_t			turn_right;
+	int32_t			action;
 }					t_config_file;
 
 typedef struct		s_save_file
 {
 	uint32_t		magic;
-	t_player		player;
+	uint32_t		posx;
+	uint32_t		posy;
+	uint32_t		look;
 	t_config_file	config_file;
 	t_map_file		map_file;
 }					t_save_file;
@@ -85,13 +86,18 @@ typedef struct		s_save_file
 typedef struct		s_env
 {
 	t_map_file		*map_file;
-	t_config_file	*config_file;
+	t_config_file	config_file;
 	t_player		player;
 }					t_env;
 
 t_map_file			*default_map(t_env *env);
-t_map_file			*load_map(const char *path);
+t_map_file			*load_map(const char *path, t_env *env);
 int					save_map(const char *path, t_map_file *header);
+
+t_config_file		*default_config(t_env *env);
+t_config_file		*load_config(const char *path, t_env *env);
+int					save_config(const char *path, t_config_file *config_file);
+
 t_env				*map_editor(t_env *env);
 t_glfw_window		*draw_map(t_glfw_window *win, t_env *env);
 t_vector			rotate_2d(t_vector vec, double deg);

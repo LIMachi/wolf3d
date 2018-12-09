@@ -5244,6 +5244,45 @@ CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_window_resize_video_buffer.c.s: cmak
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_window_resize_video_buffer.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_window_resize_video_buffer.c -o CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_window_resize_video_buffer.c.s
 
+CMakeFiles/wolf3d.dir/src/parsing/default_config.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/parsing/default_config.c.o: src/parsing/default_config.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_400) "Building C object CMakeFiles/wolf3d.dir/src/parsing/default_config.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/parsing/default_config.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/parsing/default_config.c
+
+CMakeFiles/wolf3d.dir/src/parsing/default_config.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/parsing/default_config.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/parsing/default_config.c > CMakeFiles/wolf3d.dir/src/parsing/default_config.c.i
+
+CMakeFiles/wolf3d.dir/src/parsing/default_config.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/parsing/default_config.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/parsing/default_config.c -o CMakeFiles/wolf3d.dir/src/parsing/default_config.c.s
+
+CMakeFiles/wolf3d.dir/src/parsing/load_config.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/parsing/load_config.c.o: src/parsing/load_config.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_401) "Building C object CMakeFiles/wolf3d.dir/src/parsing/load_config.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/parsing/load_config.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/parsing/load_config.c
+
+CMakeFiles/wolf3d.dir/src/parsing/load_config.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/parsing/load_config.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/parsing/load_config.c > CMakeFiles/wolf3d.dir/src/parsing/load_config.c.i
+
+CMakeFiles/wolf3d.dir/src/parsing/load_config.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/parsing/load_config.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/parsing/load_config.c -o CMakeFiles/wolf3d.dir/src/parsing/load_config.c.s
+
+CMakeFiles/wolf3d.dir/src/parsing/save_config.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/parsing/save_config.c.o: src/parsing/save_config.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_402) "Building C object CMakeFiles/wolf3d.dir/src/parsing/save_config.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/parsing/save_config.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/parsing/save_config.c
+
+CMakeFiles/wolf3d.dir/src/parsing/save_config.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/parsing/save_config.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/parsing/save_config.c > CMakeFiles/wolf3d.dir/src/parsing/save_config.c.i
+
+CMakeFiles/wolf3d.dir/src/parsing/save_config.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/parsing/save_config.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/parsing/save_config.c -o CMakeFiles/wolf3d.dir/src/parsing/save_config.c.s
+
 # Object files for target wolf3d
 wolf3d_OBJECTS = \
 "CMakeFiles/wolf3d.dir/glfw-3.2.1/deps/getopt.c.o" \
@@ -5644,7 +5683,10 @@ wolf3d_OBJECTS = \
 "CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o" \
 "CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o" \
 "CMakeFiles/wolf3d.dir/src/glfw_wrapper/error.c.o" \
-"CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_window_resize_video_buffer.c.o"
+"CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_window_resize_video_buffer.c.o" \
+"CMakeFiles/wolf3d.dir/src/parsing/default_config.c.o" \
+"CMakeFiles/wolf3d.dir/src/parsing/load_config.c.o" \
+"CMakeFiles/wolf3d.dir/src/parsing/save_config.c.o"
 
 # External object files for target wolf3d
 wolf3d_EXTERNAL_OBJECTS =
@@ -6048,9 +6090,12 @@ wolf3d: CMakeFiles/wolf3d.dir/src/graphic/bmp/bmp_file_load.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/graphic/draw/draw_bmp.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/glfw_wrapper/error.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_window_resize_video_buffer.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/parsing/default_config.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/parsing/load_config.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/parsing/save_config.c.o
 wolf3d: CMakeFiles/wolf3d.dir/build.make
 wolf3d: CMakeFiles/wolf3d.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_400) "Linking CXX executable wolf3d"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_403) "Linking CXX executable wolf3d"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/wolf3d.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

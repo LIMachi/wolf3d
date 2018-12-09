@@ -78,15 +78,17 @@ void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 
 	(void)scan;
 	(void)mod;
+	if (act != GLFW_PRESS && act != GLFW_REPEAT)
+		return (NULL);
 	cheat = glfwGetWindowUserPointer(win);
 	env = cheat->user_ptr;
-	if (key == GLFW_KEY_DOWN && (act == GLFW_PRESS || act == GLFW_REPEAT))
+	if (key == env->config_file.backward)
 		env->player.pos.y += 0.5;
-	else if (key == GLFW_KEY_LEFT && act == GLFW_PRESS)
+	else if (key == env->config_file.strafe_left)
 		env->player.pos.x -= 0.5;
-	else if (key == GLFW_KEY_RIGHT && act == GLFW_PRESS)
+	else if (key == env->config_file.strafe_right)
 		env->player.pos.x += 0.5;
-	else if (key == GLFW_KEY_UP && act == GLFW_PRESS)
+	else if (key == env->config_file.forward)
 		env->player.pos.y -= 0.5;
 	return (NULL);
 }
@@ -99,10 +101,7 @@ t_env	*map_editor(t_env *env)
 		return (NULL);
 	if ((win = glfw_new_window(env->map_file->width * 25, env->map_file->height * 25,
 					"map editor", env)) == NULL)
-	{
-		free(env);
 		return (NULL);
-	}
 	glfwSetMouseButtonCallback(win->w, (GLFWmousebuttonfun) & click);
 	while (!glfwWindowShouldClose(win->w))
 	{

@@ -12,11 +12,6 @@
 
 #include <wolf3d.h>
 
-/*
-** <env.h>
-** typedef struct s_header t_map_file
-*/
-
 #include <fcntl.h>
 
 /*
@@ -32,43 +27,19 @@
 ** int close(int fildes);
 */
 
-#include <stdlib.h>
-
-/*
-**  void *malloc(size_t size);
-*/
-
-static inline void	i_clear_map(t_env *env)
+t_config_file	*load_config(const char *path, t_env *env)
 {
-	if (env->map_file != NULL)
-	{
-		free(env->map_file);
-		env->map_file = NULL;
-	}
-}
-
-t_map_file			*load_map(const char *path, t_env *env)
-{
-	int			fd;
-	t_map_file	tmp;
-	ssize_t		size;
+	int				fd;
+	t_config_file	tmp;
 
 	if (path == NULL || (fd = open(path, O_RDONLY)) == -1)
 		return (NULL);
-	i_clear_map(env);
-	if (read(fd, &tmp, sizeof(tmp)) != sizeof(tmp) || tmp.magic != W3DM_MAGIC
-		|| (size = tmp.height * tmp.width * sizeof(uint8_t)) == 0
-		|| (env->map_file = malloc(sizeof(tmp) + size)) == NULL)
+	if (read(fd, &tmp, sizeof(tmp)) != sizeof(tmp) || tmp.magic != W3DC_MAGIC)
 	{
 		close(fd);
 		return (NULL);
 	}
-	*env->map_file = tmp;
-	env->player.pos = (t_vector){.x = env->map_file->startx + 0.5,
-		.y = env->map_file->starty + 0.5};
-	env->player.look = (double)env->map_file->look / 100.0;
-	if (read(fd, env->map_file->map, size) != size)
-		i_clear_map(env);
 	close(fd);
-	return (env->map_file);
+	env->config_file = tmp;
+	return (&env->config_file);
 }

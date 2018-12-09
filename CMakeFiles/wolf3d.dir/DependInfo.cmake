@@ -396,8 +396,11 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/hmartzol/Desktop/wolf3d/src/main.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/main.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/map_editor.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/map_editor.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/minimap/draw_map.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/minimap/draw_map.c.o"
+  "/Users/hmartzol/Desktop/wolf3d/src/parsing/default_config.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/parsing/default_config.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/parsing/default_map.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/parsing/default_map.c.o"
+  "/Users/hmartzol/Desktop/wolf3d/src/parsing/load_config.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/parsing/load_config.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/parsing/load_map.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/parsing/load_map.c.o"
+  "/Users/hmartzol/Desktop/wolf3d/src/parsing/save_config.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/parsing/save_config.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/parsing/save_map.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/parsing/save_map.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/vector/rotate_2d.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/vector/rotate_2d.c.o"
   )

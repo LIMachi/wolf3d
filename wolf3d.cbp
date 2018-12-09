@@ -2309,10 +2309,19 @@
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/minimap/draw_map.c">
 			<Option target="wolf3d"/>
 		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/parsing/default_config.c">
+			<Option target="wolf3d"/>
+		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/parsing/default_map.c">
 			<Option target="wolf3d"/>
 		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/parsing/load_config.c">
+			<Option target="wolf3d"/>
+		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/parsing/load_map.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/parsing/save_config.c">
 			<Option target="wolf3d"/>
 		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/parsing/save_map.c">

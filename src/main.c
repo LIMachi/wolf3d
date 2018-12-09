@@ -77,13 +77,16 @@ void	*resize(GLFWwindow *win, int x, int y)
 
 int	main(void)
 {
-	t_env	env;
+	t_env			env;
 	t_glfw_window	*win;
 	int tick = 0;
 	int second = (int)time(NULL);
 
 	if ((win = glfw_new_window(SX, SY, "Wolf3d", NULL)) == NULL)
 		return (-42);
+	env.map_file = NULL;
+	if (NULL == load_config("config.w3c", &env))
+		default_config(&env);
 	draw(win);
 	glfwSetKeyCallback(win->w, (GLFWkeyfun)print_key);
 	glfwSetMouseButtonCallback(win->w, (GLFWmousebuttonfun)print_mouse_button);
@@ -104,5 +107,6 @@ int	main(void)
 		++tick;
 	}
 	glfwTerminate();
+	save_config("config.w3c", &env.config_file);
 	return (0);
 }

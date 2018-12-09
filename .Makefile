@@ -33,7 +33,10 @@ SRCFILES = main.c \
 		   bmp_file_load.c \
 		   draw_bmp.c \
 		   error.c \
-		   glfw_window_resize_video_buffer.c
+		   glfw_window_resize_video_buffer.c \
+		   default_config.c \
+		   load_config.c \
+		   save_config.c
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -56,7 +59,8 @@ OBJDIR = obj
 
 OBJECTS = $(SRCFILES:%.c=$(OBJDIR)/%.o)
 
-INCLUDES := inc/glfw_wrapper.h
+INCLUDES := inc/glfw_wrapper.h \
+			inc/wolf3d.h
 
 SRCDIRS := $(addprefix src/,$(DIRS))
 
