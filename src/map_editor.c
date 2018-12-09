@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/11/22 18:19:19 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/09 17:52:11 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,32 +66,32 @@ void		*click(GLFWwindow *win, int key, int act, int mod)
 		if (x < 0.0 || y < 0.0 || x > (double)u_win->w_width
 				|| y > (double)u_win->w_height)
 			return (NULL);
-		click_block(u_win, u_win->user_ptr, x, y);
+		click_block(u_win, ((t_env*)u_win->user_ptr)->map_file, x, y);
 	}
 	return (NULL);
 }
 
-t_map_file	*map_editor(t_map_file *out)
+t_env	*map_editor(t_env *env)
 {
 	t_glfw_window	*win;
 
-	if (out == NULL && (out = default_map()) == NULL)
+	if (env->map_file == NULL && (default_map(env)) == NULL)
 		return (NULL);
-	if ((win = glfw_new_window(out->width * 25, out->height * 25,
-					"map editor", out)) == NULL)
+	if ((win = glfw_new_window(env->map_file->width * 25, env->map_file->height * 25,
+					"map editor", env)) == NULL)
 	{
-		free(out);
+		free(env);
 		return (NULL);
 	}
 	glfwSetMouseButtonCallback(win->w, (GLFWmousebuttonfun) & click);
 	while (!glfwWindowShouldClose(win->w))
 	{
-		draw_map(win, out);
+		draw_map(win, env);
 		glfw_refresh_window(win);
 		glfwPollEvents();
 		if (glfwGetKey(win->w, GLFW_KEY_S) == GLFW_PRESS)
-			save_map("test.w3d", out);
+			save_map("test.w3d", env->map_file);
 	}
 	glfw_remove_window(win);
-	return (out);
+	return (env);
 }

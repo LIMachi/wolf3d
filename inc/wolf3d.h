@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 18:37:25 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/11/22 18:32:18 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/09 17:50:55 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ typedef struct		s_env
 	t_player		player;
 }					t_env;
 
-t_map_file			*default_map(void);
+t_map_file			*default_map(t_env *env);
 t_map_file			*load_map(const char *path);
 int					save_map(const char *path, t_map_file *header);
-t_map_file			*map_editor(t_map_file *out);
-t_glfw_window		*draw_map(t_glfw_window *win, t_map_file *map);
+t_env				*map_editor(t_env *env);
+t_glfw_window		*draw_map(t_glfw_window *win, t_env *env);
 t_vector			rotate_2d(t_vector vec, double deg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 17:33:49 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/11/22 18:30:38 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/09 17:52:51 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <wolf3d.h>
 
 t_glfw_window		*draw_map(t_glfw_window *win,
-							t_map_file *map)
+							t_env *env)
 {
 	uint32_t		x;
 	uint32_t		y;
@@ -23,20 +23,20 @@ t_glfw_window		*draw_map(t_glfw_window *win,
 	t_vector		look;
 
 	x = -1;
-	sx = (double)win->vb_width / (double)map->width;
-	sy = (double)win->vb_height / (double)map->height;
-	while (++x < map->width && (y = -1))
-		while (++y < map->height)
+	sx = (double)win->vb_width / (double)env->map_file->width;
+	sy = (double)win->vb_height / (double)env->map_file->height;
+	while (++x < env->map_file->width && (y = -1))
+		while (++y < env->map_file->height)
 			draw_square(win, (t_vec){(uint32_t)(x * sx), (uint32_t)(y * sy)},
 				(t_vec){(uint32_t)sx, (uint32_t)sy},
-				map->map[x + y * map->width] ? 0 : 0xFFFFFF);
-	look = rotate_2d((t_vector){.x = 0, .y = -10}, (double)map->look / 100.0);
+				env->map_file->map[x + y * env->map_file->width] ? 0 : 0xFFFFFF);
+	look = rotate_2d((t_vector){.x = 0, .y = -10}, env->player.look);
 	draw_square(win,
-		(t_vec){.x = map->startx * sx - 2, .y = map->starty * sy - 2},
+		(t_vec){.x = env->player.pos.x * sx - 2, .y = env->player.pos.y * sy - 2},
 		(t_vec){.x = 5, .y = 5}, 0xFF00);
 	draw_line(win,
-		(t_vec){.x = map->startx * sx, .y = map->starty * sy},
-		(t_vec){.x = look.x + map->startx * sx, .y = look.y + map->starty * sy},
+		(t_vec){.x = env->player.pos.x * sx, .y = env->player.pos.y * sy},
+		(t_vec){.x = look.x + env->player.pos.x * sx, .y = look.y + env->player.pos.y * sy},
 		0xFF0000);
 	draw_text(win, (t_vec){.x = 2, .y = 2}, "this is a complicated text\nthat\t"
 			"uses special\vcharacters to format\fitself", 0xFF0000);

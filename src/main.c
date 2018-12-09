@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/11/22 18:19:19 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/09 17:44:10 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	*resize(GLFWwindow *win, int x, int y)
 
 int	main(void)
 {
+	t_env	env;
 	t_glfw_window	*win;
 	int tick = 0;
 	int second = (int)time(NULL);
@@ -93,7 +94,7 @@ int	main(void)
 		glfw_refresh_window(win);
 		glfwPollEvents();
 		if (glfwGetKey(win->w, GLFW_KEY_M))
-			map_editor(NULL);
+			map_editor(&env);
 		if (second != (int)time(NULL))
 		{
 			second = (int)time(NULL);
