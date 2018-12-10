@@ -71,6 +71,7 @@ typedef struct		s_config_file
 	int32_t			turn_left;
 	int32_t			turn_right;
 	int32_t			action;
+	uint32_t		fov;
 }					t_config_file;
 
 typedef struct		s_save_file

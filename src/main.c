@@ -105,6 +105,33 @@ void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 	return (NULL);
 }
 
+t_vector	ray_cast(t_env *env, t_vector pos, double dir)
+{
+
+}
+
+/*
+** formule: look - fov / 2.0 + fov * (i / x)
+*/
+
+void	ray_caster(t_player p, t_env *e, int mc)
+{
+	double		fov;
+	t_vector	collision;
+	int			i;
+
+	if (mc)
+		fov = (double)e->config_file.fov / 100.0;
+	else
+		fov = 90.0;
+	i = -1;
+	while (++i < e->wolf3d->vb_width)
+	{
+		collision = ray_cast(e, p.pos,
+			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);
+	}
+}
+
 int	main(void)
 {
 	t_env			env;

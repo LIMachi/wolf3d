@@ -18,6 +18,7 @@ t_config_file	*default_config(t_env *env)
 		.action = GLFW_MOUSE_BUTTON_1 | MASK_FLAG_MOUSE_BUTTON,
 		.backward = GLFW_KEY_S, .forward = GLFW_KEY_W,
 		.strafe_left = GLFW_KEY_A, .strafe_right = GLFW_KEY_D,
-		.turn_left = GLFW_KEY_LEFT, .turn_right = GLFW_KEY_RIGHT};
+		.turn_left = GLFW_KEY_LEFT, .turn_right = GLFW_KEY_RIGHT,
+		.fov = 6000};
 	return (&env->config_file);
 }
