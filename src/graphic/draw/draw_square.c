@@ -6,7 +6,7 @@
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 19:13:02 by hmartzol          #+#    #+#             */
-/*   Updated: 2018/11/22 18:28:03 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/10 16:21:40 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ t_glfw_window		*draw_square(t_glfw_window *win,
 		size.y += pos.y;
 		pos.y = 0;
 	}
-	while (++x < size.x && x < (ssize_t)win->vb_width)
+	while (++x < size.x && x + pos.x < (ssize_t)win->vb_width)
 	{
 		y = -1;
-		while (++y < size.y && y < (ssize_t)win->vb_height)
+		while (++y < size.y && y + pos.y < (ssize_t)win->vb_height)
 			((uint32_t*)win->vb)[
 				x + pos.x + (y + pos.y) * win->vb_width] = color;
 	}

@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/09 23:37:20 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/10 16:16:11 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,12 @@ void		*click(GLFWwindow *win, int key, int act, int mod)
 	return (NULL);
 }
 
+
 void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 {
 	t_glfw_window	*cheat;
 	t_env			*env;
+	t_vector		vlook;
 
 	(void)scan;
 	(void)mod;
@@ -83,13 +85,33 @@ void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 	cheat = glfwGetWindowUserPointer(win);
 	env = cheat->user_ptr;
 	if (key == env->config_file.backward)
-		env->player.pos.y += 0.5;
+	{
+		vlook = rotate_2d((t_vector){0, 0.5}, env->player.look);
+		env->player.pos.x += vlook.x;
+		env->player.pos.y += vlook.y;
+	}
 	else if (key == env->config_file.strafe_left)
-		env->player.pos.x -= 0.5;
+	{
+		vlook = rotate_2d((t_vector){-0.5, 0}, env->player.look);
+		env->player.pos.x += vlook.x;
+		env->player.pos.y += vlook.y;
+	}
 	else if (key == env->config_file.strafe_right)
-		env->player.pos.x += 0.5;
+	{
+		vlook = rotate_2d((t_vector){0.5, 0}, env->player.look);
+		env->player.pos.x += vlook.x;
+		env->player.pos.y += vlook.y;
+	}
 	else if (key == env->config_file.forward)
-		env->player.pos.y -= 0.5;
+	{
+		vlook = rotate_2d((t_vector){0, -0.5}, env->player.look);
+		env->player.pos.x += vlook.x;
+		env->player.pos.y += vlook.y;
+	}
+	else if (key == GLFW_KEY_E)
+		env->player.look += 4;
+	else if (key == GLFW_KEY_Q)
+		env->player.look -= 4;
 	return (NULL);
 }
 
