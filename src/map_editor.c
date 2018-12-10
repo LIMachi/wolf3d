@@ -71,69 +71,23 @@ void		*click(GLFWwindow *win, int key, int act, int mod)
 	return (NULL);
 }
 
-
-void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
-{
-	t_glfw_window	*cheat;
-	t_env			*env;
-	t_vector		vlook;
-
-	(void)scan;
-	(void)mod;
-	if (act != GLFW_PRESS && act != GLFW_REPEAT)
-		return (NULL);
-	cheat = glfwGetWindowUserPointer(win);
-	env = cheat->user_ptr;
-	if (key == env->config_file.backward)
-	{
-		vlook = rotate_2d((t_vector){0, 0.5}, env->player.look);
-		env->player.pos.x += vlook.x;
-		env->player.pos.y += vlook.y;
-	}
-	else if (key == env->config_file.strafe_left)
-	{
-		vlook = rotate_2d((t_vector){-0.5, 0}, env->player.look);
-		env->player.pos.x += vlook.x;
-		env->player.pos.y += vlook.y;
-	}
-	else if (key == env->config_file.strafe_right)
-	{
-		vlook = rotate_2d((t_vector){0.5, 0}, env->player.look);
-		env->player.pos.x += vlook.x;
-		env->player.pos.y += vlook.y;
-	}
-	else if (key == env->config_file.forward)
-	{
-		vlook = rotate_2d((t_vector){0, -0.5}, env->player.look);
-		env->player.pos.x += vlook.x;
-		env->player.pos.y += vlook.y;
-	}
-	else if (key == GLFW_KEY_E)
-		env->player.look += 4;
-	else if (key == GLFW_KEY_Q)
-		env->player.look -= 4;
-	return (NULL);
-}
-
 t_env	*map_editor(t_env *env)
 {
-	t_glfw_window	*win;
+//	t_glfw_window	*win;
 
 	if (env->map_file == NULL && (default_map(env)) == NULL)
 		return (NULL);
-	if ((win = glfw_new_window(env->map_file->width * 25, env->map_file->height * 25,
+	if ((env->minimap = glfw_new_window(env->map_file->width * 25, env->map_file->height * 25,
 					"map editor", env)) == NULL)
 		return (NULL);
-	glfwSetMouseButtonCallback(win->w, (GLFWmousebuttonfun) & click);
-	while (!glfwWindowShouldClose(win->w))
-	{
-		draw_map(win, env);
-		glfw_refresh_window(win);
-		glfwPollEvents();
-		glfwSetKeyCallback(win->w, (GLFWkeyfun)moove_player);
-		if (glfwGetKey(win->w, GLFW_KEY_S) == GLFW_PRESS)
-			save_map("test.w3d", env->map_file);
-	}
-	glfw_remove_window(win);
+	glfwSetMouseButtonCallback(env->minimap->w, (GLFWmousebuttonfun) & click);
+
+//	while (!glfwWindowShouldClose(win->w))
+//	{
+//		draw_map(win, env);
+//		glfw_refresh_window(win);
+//		glfwPollEvents();
+//	}
+//	glfw_remove_window(win);
 	return (env);
 }

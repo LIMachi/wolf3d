@@ -88,6 +88,8 @@ typedef struct		s_env
 	t_map_file		*map_file;
 	t_config_file	config_file;
 	t_player		player;
+	t_glfw_window	*wolf3d;
+	t_glfw_window	*minimap;
 }					t_env;
 
 t_map_file			*default_map(t_env *env);

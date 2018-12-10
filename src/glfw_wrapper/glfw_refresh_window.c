@@ -14,6 +14,10 @@
 
 void	glfw_refresh_window(t_glfw_window *win)
 {
+	GLFWwindow	*w;
+
+	w = glfwGetCurrentContext();
+	glfwMakeContextCurrent(win->w);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, win->vb_width, win->vb_height, 0,
 		GL_BGRA, GL_UNSIGNED_BYTE, win->vb);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -22,4 +26,5 @@ void	glfw_refresh_window(t_glfw_window *win)
 	glBindVertexArray(win->vao);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glfwSwapBuffers(win->w);
+	glfwMakeContextCurrent(w);
 }
