@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/09 23:21:15 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/10 19:04:59 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,20 @@ void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 
 t_vector	ray_cast(t_env *env, t_vector pos, double dir)
 {
+	double xa;
+	double ya;
 
+	ya = 1.0 / tan(dir);
+	xa = tan(dir);   //pck ya vaut 1
+
+	if (xa < ya)
+	{
+		pos
+	}
+	else
+	{
+	
+	}
 }
 
 /*
