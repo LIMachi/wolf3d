@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/11 20:29:45 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:34:53 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,9 +170,9 @@ t_vector	ray_cast(t_env *env, t_vector pos, double dir)
 ** formule: look - fov / 2.0 + fov * (i / x)
 */
 
-t_vec	vecftoveci(t_vector v)
+t_vec	vecftoveci(t_vector v, double sx, double sy)
 {
-	return ((t_vec){.x = (int)v.x, .y = (int)v.y});
+	return ((t_vec){.x = (int)(v.x * sx), .y = (int)(v.y * sy)});
 }
 
 void	ray_caster(t_player p, t_env *e, int mc)
@@ -181,6 +181,11 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	t_vector	collision;
 	size_t			i;
 
+	double sx;
+	double sy;
+
+	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
+	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
 	if (mc)
 		fov = (double)e->config_file.fov / 100.0;
 	else
@@ -190,7 +195,7 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	{
 		collision = ray_cast(e, p.pos,
 			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);
-		draw_line(e->minimap, vecftoveci(p.pos), vecftoveci(collision), 0xFFFF00);
+		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(collision, sx, sy), 0xFFFF00);
 	}
 }
 
