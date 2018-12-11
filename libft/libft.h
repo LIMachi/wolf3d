@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:53:31 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/04/18 18:55:59 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/11 17:36:31 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <string.h>
 
 # define BUFF_SIZE 4096
-# define ABS(Value)		(((Value) < 0) ? -(Value) : (Value))
 
 typedef struct		s_list
 {
