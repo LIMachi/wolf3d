@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/14 00:01:13 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/14 00:14:57 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,8 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	int			sizewall = 40;
 	double		distcam = 1.0;
 	double		hauteur;
-//	double		real;
+	double		cheat;
+	double		real;
 
 	double sx;
 	double sy;
@@ -213,18 +214,20 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	{
 		/*collision = ray_cast(e, p.pos,
 			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);*/
-		ray = rotate_2d((t_vector){0, -1}, p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);
+		cheat = p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width;
+		ray = rotate_2d((t_vector){0, -1}, cheat);
 		df = ray_cast(e, p.pos, ray);
 		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
 		hauteur = (distcam * sizewall) / df.dist;
+		real = df.dist / cos(DEG_TO_RAD * cheat);
 		if (mc)
 		{
 			if (df.face == 1)
-				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, 0x0000ff);
+				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + real},
+					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - real}, 0x0000ff);
 			else
-				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
+				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + real},
+					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - real}, (0x0000ff / 2));
 		}
 
 	}
