@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/13 21:27:06 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/13 22:43:55 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	int			sizewall = 40;
 	double		distcam = 1.0;
 	double		hauteur;
+	double		REAL;
 
 	double sx;
 	double sy;
@@ -216,6 +217,7 @@ void	ray_caster(t_player p, t_env *e, int mc)
 		df = ray_cast(e, p.pos, ray);
 		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
 		hauteur = (distcam * sizewall) / df.dist;
+		REAL = df.dist * cos(p.look);
 		if (mc)
 		{
 			if (df.face == 1)
