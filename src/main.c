@@ -214,6 +214,49 @@ typedef struct
 	drwav_uint64 right_phase;
 } paTestData;
 
+/*
+** t_sound are treated as being const and should not be modified
+*/
+
+typedef struct		s_sound
+{
+	float			*data;
+	unsigned int	channels;
+	unsigned int	sampleRate;
+	drwav_uint64	totalSampleCount;
+}					t_sound;
+
+#define MAXIMUM_SOUND_SUPERPOSITION 10
+
+typedef enum		e_sound_flags
+{
+	SOUND_NONE,
+	SOUND_LOOP,
+	SOUND_PLAY_ONCE
+}					t_sound_flags;
+
+typedef struct		s_sound_playing
+{
+	t_sound_flags	flags;
+	float			left_gain;
+	float			right_gain;
+	drwav_uint64	left_phase;
+	drwav_uint64	right_phase;
+	unsigned int	currentSample;
+}					t_sound_playing;
+
+typedef struct		s_sound_player
+{
+	int				nb_sounds;
+	t_sound			*sound[MAXIMUM_SOUND_SUPERPOSITION];
+	t_sound_playing	playing[MAXIMUM_SOUND_SUPERPOSITION];
+}					t_sound_player;
+
+//gain equation -> g = 10 log10(out / int)
+//g / 10 = log10(out / in)
+//10 ^ (g / 10) = out / in
+//out = in * pow(10, (g / 10))
+
 int paudioCallback(const void *input,
 					void *output,
 					unsigned long fpb,
@@ -221,20 +264,34 @@ int paudioCallback(const void *input,
 					PaStreamCallbackFlags flags,
 					void *user_ptr)
 {
-	paTestData *test = (paTestData*)user_ptr;
-	float *out = (float*)output;
-	unsigned long i;
+	t_sound_player	*player;
+	float			*out;
+	unsigned long	i;
 
 	(void)ti; /* Prevent unused variable warnings. */
 	(void)flags;
 	(void)input;
+	out = (float*)output;
+	player = (t_sound_player*)user_ptr;
 	for(i = 0; i < fpb; ++i)
 	{
-		if (test->currentSample * test->channels >= test->totalSampleCount)
-			return paComplete;
-		*out++ = test->data[test->left_phase + test->currentSample * test->channels];
-		*out++ = test->data[test->right_phase + test->currentSample * test->channels];
-		++test->currentSample;
+		out[0] = 0;
+		out[1] = 0;
+		for (int j = 0; j < player->nb_sounds; ++j)
+		{
+			if (player->playing[j].currentSample * player->sound[j]->channels >= player->sound[j]->totalSampleCount)
+			{
+				player->playing[j].currentSample = 0;
+				if (player->playing[j].flags == SOUND_PLAY_ONCE)
+					player->playing[j].flags = SOUND_NONE;
+			}
+			if (player->playing[j].flags == SOUND_NONE)
+				break ;
+			out[0] += pow(10, player->playing[j].left_gain / 10) * player->sound[j]->data[player->playing[j].left_phase + player->playing[j].currentSample * player->sound[j]->channels];
+			out[1] += pow(10, player->playing[j].right_gain / 10) * player->sound[j]->data[player->playing[j].right_phase + player->playing[j].currentSample * player->sound[j]->channels];
+			++player->playing[j].currentSample;
+		}
+		out += 2;
 	}
 	return (paContinue);
 }
@@ -267,9 +324,11 @@ int	main(void)
 	int second = (int)time(NULL);
 
 	//
-	PaStream *stream;
-	paTestData	data;
-	data.left_phase = data.right_phase = 0;
+	PaStream		*stream;
+	t_sound			sound1;
+	t_sound			sound2;
+	t_sound_player	player;
+
 	if (paNoError != Pa_Initialize())
 		return (0 & printf("can't load portaudio\n"));
 	PaStreamParameters outputParameters;
@@ -281,14 +340,17 @@ int	main(void)
 	outputParameters.suggestedLatency = Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
 	outputParameters.hostApiSpecificStreamInfo = NULL;
 //	sin_wave(2.0, &data);
-	data.data = drwav_open_and_read_file_f32("assets/sounds/Hydra - Lava Reef Zone (Hydra Remix).wav", &data.channels, &data.sampleRate, &data.totalSampleCount);
-	printf("loadded song, channels: %u, sr: %u, total: %llu\n", data.channels, data.sampleRate, data.totalSampleCount);
-	data.left_phase = 0;
-	data.right_phase = data.channels > 1;
-	data.currentSample = 0;
-	if (data.data == NULL)
+	sound1.data = drwav_open_and_read_file_f32("assets/sounds/Hydra - Lava Reef Zone (Hydra Remix).wav", &sound1.channels, &sound1.sampleRate, &sound1.totalSampleCount);
+	printf("loadded song, channels: %u, sr: %u, total: %llu\n", sound1.channels, sound1.sampleRate, sound1.totalSampleCount);
+	sound2.data = drwav_open_and_read_file_f32("assets/sounds/LRMonoPhase4test.wav", &sound2.channels, &sound2.sampleRate, &sound2.totalSampleCount);
+	printf("loadded song, channels: %u, sr: %u, total: %llu\n", sound2.channels, sound2.sampleRate, sound2.totalSampleCount);
+	player = (t_sound_player){.nb_sounds = 2, .playing = {
+		{.flags = SOUND_PLAY_ONCE, .currentSample = 0, .right_gain = 0, .left_gain = 0, .left_phase = 0, .right_phase = sound1.channels > 1},
+		{.flags = SOUND_LOOP, .currentSample = 0, .right_gain = 0, .left_gain = 0, .left_phase = 0, .right_phase = sound2.channels > 1}},
+		.sound = {&sound1, &sound2}};
+	if (sound1.data == NULL || sound2.data == NULL)
 		return (0 & printf("can't read audio file\n"));
-	Pa_OpenStream(&stream, NULL, &outputParameters, data.sampleRate, 0, paClipOff, paudioCallback, &data);
+	Pa_OpenStream(&stream, NULL, &outputParameters, 44100, 0, paClipOff, paudioCallback, &player);
 	Pa_SetStreamFinishedCallback(stream, StreamFinished);
 	Pa_StartStream(stream);
 	//
@@ -315,6 +377,16 @@ int	main(void)
 		glfwPollEvents();
 		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_ESCAPE))
 			glfwSetWindowShouldClose(env.wolf3d->w, 1);
+		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_KP_SUBTRACT))
+		{
+			--player.playing[0].left_gain;
+			--player.playing[0].right_gain;
+		}
+		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_KP_ADD))
+		{
+			++player.playing[0].left_gain;
+			++player.playing[0].right_gain;
+		}
 		if (second != (int)time(NULL))
 		{
 			second = (int)time(NULL);
@@ -327,7 +399,8 @@ int	main(void)
 	Pa_StopStream(stream);
 	Pa_CloseStream(stream);
 	Pa_Terminate();
-	drwav_free(data.data);
+	drwav_free(sound1.data);
+	drwav_free(sound2.data);
 	save_config("config.w3c", &env.config_file);
 	return (0);
 }
