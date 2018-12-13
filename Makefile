@@ -4,7 +4,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-CLIB = -L libft -lft -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -L glfw-3.2.1/freetype-2.9.1/objs/.libs -lfreetype glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib
+CLIB = -L libft -lft -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework Carbon -framework AudioUnit -framework AudioToolbox -framework CoreAudio -L glfw-3.2.1/freetype-2.9.1/objs/.libs -lfreetype glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib portaudio/lib/.libs/libportaudio.a portaudio/dr_wav/dr_wav.a
 
 SRCFILES = main.c \
 		   glfw_new_window.c \
@@ -42,7 +42,9 @@ INC = inc \
 	  glfw-3.2.1/include \
 	  glfw-3.2.1/glad/include \
 	  libft \
-	  glfw-3.2.1/freetype-2.9.1/include
+	  glfw-3.2.1/freetype-2.9.1/include \
+	  portaudio/include \
+	  portaudio/dr_wav
 
 DIRS =	parsing \
 		glfw_wrapper \
@@ -70,11 +72,15 @@ GLADLIB := glfw-3.2.1/glad/libglad.a
 
 FT2LIB := glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.a
 
+PORTAUDIOLIB := portaudio/lib/libportaudio.la
+
+DR_WAVLIB := portaudio/dr_wav/dr_wav.a
+
 vpath %.c src $(SRCDIRS)
 
 all: $(NAME)
 
-$(NAME): libft/libft.a $(GLFWLIB) $(GLADLIB) $(FT2LIB) $(OBJECTS) Makefile
+$(NAME): libft/libft.a $(GLFWLIB) $(GLADLIB) $(FT2LIB) $(DR_WAVLIB) $(PORTAUDIOLIB) $(OBJECTS) Makefile
 	$(CC) $(INCDIRS) $(CLIB) -o $@ $(OBJECTS)
 
 $(OBJDIR)/%.o : %.c $(INCLUDES) | $(OBJDIR)
@@ -103,6 +109,17 @@ $(FT2LIB):
 	make; \
 	cd ../..; \
 	install_name_tool -id "glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib" glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib;
+
+$(PORTAUDIOLIB):
+	cd portaudio; \
+	./configure --disable-mac-universal; \
+	make; \
+	cd ..
+
+$(DR_WAVLIB):
+	cd portaudio/dr_wav; \
+	./compile.sh; \
+	cd ../..
 
 clean:
 	rm -rf $(OBJDIR)

@@ -372,6 +372,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/hmartzol/Desktop/wolf3d/libft/ft_tolower.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/libft/ft_tolower.c.o"
   "/Users/hmartzol/Desktop/wolf3d/libft/ft_toupper.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/libft/ft_toupper.c.o"
   "/Users/hmartzol/Desktop/wolf3d/libft/get_next_line.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/libft/get_next_line.c.o"
+  "/Users/hmartzol/Desktop/wolf3d/portaudio/dr_wav/dr_wav.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/portaudio/dr_wav/dr_wav.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/error.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/glfw_wrapper/error.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_attach_callback.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_attach_callback.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/glfw_wrapper/glfw_callbacks.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/glfw_wrapper/glfw_callbacks.c.o"

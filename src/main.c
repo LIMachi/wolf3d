@@ -195,17 +195,105 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	i = -1;
 	while (++i < e->wolf3d->vb_width)
 	{
+		/*collision = ray_cast(e, p.pos,
+			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);*/
 		collision = ray_cast(e, p.pos,
 			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);
 		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(collision, sx, sy), 0xFFFF00);
 	}
 }
 
+#define TABLE_SIZE   (1000)
+typedef struct
+{
+//	float sine[TABLE_SIZE];
+	float *data;
+	unsigned int channels;
+	unsigned int sampleRate;
+	unsigned int currentSample;
+	drwav_uint64 totalSampleCount;
+	drwav_uint64 left_phase;
+	drwav_uint64 right_phase;
+} paTestData;
+
+int paudioCallback(const void *input,
+					void *output,
+					unsigned long fpb,
+					const PaStreamCallbackTimeInfo *ti,
+					PaStreamCallbackFlags flags,
+					void *user_ptr)
+{
+	paTestData *test = (paTestData*)user_ptr;
+	float *out = (float*)output;
+	unsigned long i;
+
+	(void)ti; /* Prevent unused variable warnings. */
+	(void)flags;
+	(void)input;
+	for(i = 0; i < fpb; ++i)
+	{
+		if (test->currentSample * test->channels >= test->totalSampleCount)
+			return paComplete;
+		*out++ = test->data[test->left_phase + test->currentSample * test->channels];
+		*out++ = test->data[test->right_phase + test->currentSample * test->channels];
+		++test->currentSample;
+	}
+	return (paContinue);
+}
+
+void StreamFinished( void* userData )
+{
+	(void)userData;
+	printf( "Stream Completed\n");
+}
+
+/*
+void sin_wave(double factor, paTestData *data)
+{
+	if (factor < 0)
+		factor = -factor;
+	while (factor > 10.0)
+		factor -= 10.0;
+	data->local_size = (int)(100.0 * factor);
+	for(int i=0; i<data->local_size; i++ )
+	{
+		data->sine[i] = (float) sin( ((double)i/(double)200) * M_PI * factor );
+	}
+}
+*/
+
 int	main(void)
 {
 	t_env			env;
 	int tick = 0;
 	int second = (int)time(NULL);
+
+	//
+	PaStream *stream;
+	paTestData	data;
+	data.left_phase = data.right_phase = 0;
+	if (paNoError != Pa_Initialize())
+		return (0 & printf("can't load portaudio\n"));
+	PaStreamParameters outputParameters;
+	outputParameters.device = Pa_GetDefaultOutputDevice();
+	if (outputParameters.device == paNoDevice)
+		return (0 & printf("no valid sound device found\n"));
+	outputParameters.channelCount = 2;       /* stereo output */
+	outputParameters.sampleFormat = paFloat32; /* 32 bit floating point output */
+	outputParameters.suggestedLatency = Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
+	outputParameters.hostApiSpecificStreamInfo = NULL;
+//	sin_wave(2.0, &data);
+	data.data = drwav_open_and_read_file_f32("assets/sounds/Hydra - Lava Reef Zone (Hydra Remix).wav", &data.channels, &data.sampleRate, &data.totalSampleCount);
+	printf("loadded song, channels: %u, sr: %u, total: %llu\n", data.channels, data.sampleRate, data.totalSampleCount);
+	data.left_phase = 0;
+	data.right_phase = data.channels > 1;
+	data.currentSample = 0;
+	if (data.data == NULL)
+		return (0 & printf("can't read audio file\n"));
+	Pa_OpenStream(&stream, NULL, &outputParameters, data.sampleRate, 0, paClipOff, paudioCallback, &data);
+	Pa_SetStreamFinishedCallback(stream, StreamFinished);
+	Pa_StartStream(stream);
+	//
 
 	if ((env.wolf3d = glfw_new_window(SX, SY, "Wolf3d", &env)) == NULL)
 		return (-42);
@@ -238,6 +326,10 @@ int	main(void)
 		++tick;
 	}
 	glfwTerminate();
+	Pa_StopStream(stream);
+	Pa_CloseStream(stream);
+	Pa_Terminate();
+	drwav_free(data.data);
 	save_config("config.w3c", &env.config_file);
 	return (0);
 }

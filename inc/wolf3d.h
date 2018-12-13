@@ -23,6 +23,8 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include "glfw_wrapper.h"
+# include "portaudio.h"
+# include "../portaudio/dr_wav/dr_wav.h"
 
 /*
 ** <stdint.h>
