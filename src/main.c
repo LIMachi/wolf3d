@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/10 19:04:59 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:34:53 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,46 +105,99 @@ void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 	return (NULL);
 }
 
-/*
 t_vector	ray_cast(t_env *env, t_vector pos, double dir)
 {
-	double xa;
-	double ya;
+	int stepx;
+	int stepy;
+	int side;
+	t_vector	inter;
 
-	ya = 1.0 / tan(dir);
-	xa = tan(dir);   //pck ya vaut 1
+	t_vector ray = rotate_2d((t_vector){.x = 0, .y = -1}, dir);
+	int mapX = (int)pos.x;
+	int mapY = (int)pos.y;
+	int hit = 0;
+	double dx = fabs(1 / ray.x);
+	double dy = fabs(1 / ray.y);
+	double dist;
 
-	if (xa < ya)
+	if (ray.x < 0)
 	{
-		pos
+		stepx = -1;
+		inter.x = (pos.x - mapX) * dx;
 	}
 	else
 	{
-	
+		stepx = 1;
+		inter.x = (mapX + 1.0 - pos.x) * dx;
 	}
+	if (ray.y < 0)
+	{
+		stepy = -1;
+		inter.y = (pos.y - mapY) * dy;
+	}
+	else
+	{
+		stepy = 1;
+		inter.y = (mapY + 1.0 - pos.y) * dy;
+	}
+	while (hit == 0)
+	{
+		if (inter.x < inter.y)
+		{
+			inter.x += dx;
+			mapX += stepx;
+			side = 0;
+		}
+		else
+		{
+			inter.y += dy;
+			mapY += stepy;
+			side = 1;
+		}
+
+		if (env->map_file->map[mapX + mapY * env->map_file->width] > 0)
+			hit = 1;
+	}
+
+	if (side == 0)
+		dist = (mapX - pos.x + (1 - stepx) / 2) / ray.x;
+	else
+		dist = (mapY - pos.y + (1 - stepy) / 2) / ray.y;
+	return ((t_vector){.x = pos.x + ray.x * dist, .y = pos.y + ray.y * dist});
 }
-*/
 
 /*
 ** formule: look - fov / 2.0 + fov * (i / x)
 */
 
+t_vec	vecftoveci(t_vector v, double sx, double sy)
+{
+	return ((t_vec){.x = (int)(v.x * sx), .y = (int)(v.y * sy)});
+}
+
 void	ray_caster(t_player p, t_env *e, int mc)
 {
 	double		fov;
-//	t_vector	collision;
-	int			i;
+	t_vector	collision;
+	size_t			i;
 
-	(void)p;
+	double sx;
+	double sy;
+
+	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
+	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
 	if (mc)
 		fov = (double)e->config_file.fov / 100.0;
 	else
 		fov = 90.0;
 	i = -1;
-	while (++i < (int)e->wolf3d->vb_width)
+	while (++i < e->wolf3d->vb_width)
 	{
 		/*collision = ray_cast(e, p.pos,
 			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);*/
+		collision = ray_cast(e, p.pos,
+			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);
+		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(collision, sx, sy), 0xFFFF00);
 	}
 }
 
@@ -247,6 +300,7 @@ int	main(void)
 		draw(env.wolf3d);
 		glfw_refresh_window(env.wolf3d);
 		draw_map(env.minimap, &env);
+		ray_caster(env.player, &env, 1);
 		glfw_refresh_window(env.minimap);
 		glfwPollEvents();
 		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_ESCAPE))
