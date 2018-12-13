@@ -112,7 +112,7 @@ $(FT2LIB):
 
 $(PORTAUDIOLIB):
 	cd portaudio; \
-	./configure --diable-mac-universal; \
+	./configure --disable-mac-universal; \
 	make; \
 	cd ..
 

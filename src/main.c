@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/11 20:34:53 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/12 15:09:13 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,10 @@ t_vector	ray_cast(t_env *env, t_vector pos, double dir)
 
 		if (env->map_file->map[mapX + mapY * env->map_file->width] > 0)
 			hit = 1;
+
 	}
 
+	printf("inter.x : %f\ninter.y : %f\n", inter.x, inter.y);
 	if (side == 0)
 		dist = (mapX - pos.x + (1 - stepx) / 2) / ray.x;
 	else
