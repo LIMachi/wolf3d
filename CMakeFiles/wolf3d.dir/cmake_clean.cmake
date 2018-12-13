@@ -401,6 +401,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/wolf3d.dir/src/parsing/default_config.c.o"
   "CMakeFiles/wolf3d.dir/src/parsing/load_config.c.o"
   "CMakeFiles/wolf3d.dir/src/parsing/save_config.c.o"
+  "CMakeFiles/wolf3d.dir/portaudio/dr_wav/dr_wav.c.o"
   "wolf3d.pdb"
   "wolf3d"
 )

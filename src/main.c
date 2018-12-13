@@ -105,6 +105,7 @@ void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 	return (NULL);
 }
 
+/*
 t_vector	ray_cast(t_env *env, t_vector pos, double dir)
 {
 	double xa;
@@ -122,6 +123,7 @@ t_vector	ray_cast(t_env *env, t_vector pos, double dir)
 	
 	}
 }
+*/
 
 /*
 ** formule: look - fov / 2.0 + fov * (i / x)
@@ -130,26 +132,103 @@ t_vector	ray_cast(t_env *env, t_vector pos, double dir)
 void	ray_caster(t_player p, t_env *e, int mc)
 {
 	double		fov;
-	t_vector	collision;
+//	t_vector	collision;
 	int			i;
 
+	(void)p;
 	if (mc)
 		fov = (double)e->config_file.fov / 100.0;
 	else
 		fov = 90.0;
 	i = -1;
-	while (++i < e->wolf3d->vb_width)
+	while (++i < (int)e->wolf3d->vb_width)
 	{
-		collision = ray_cast(e, p.pos,
-			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);
+		/*collision = ray_cast(e, p.pos,
+			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);*/
+	}
+}
+
+#define TABLE_SIZE   (1000)
+typedef struct
+{
+	float sine[TABLE_SIZE];
+	int local_size;
+	int left_phase;
+	int right_phase;
+}
+	paTestData;
+
+int paudioCallback(const void *input,
+					void *output,
+					unsigned long fpb,
+					const PaStreamCallbackTimeInfo *ti,
+					PaStreamCallbackFlags flags,
+					void *user_ptr)
+{
+	paTestData *data = (paTestData*)user_ptr;
+	float *out = (float*)output;
+	unsigned long i;
+
+	(void) ti; /* Prevent unused variable warnings. */
+	(void) flags;
+	(void) input;
+	for( i=0; i<fpb; i++ )
+	{
+		*out++ = data->sine[data->left_phase];  /* left */
+		*out++ = data->sine[data->right_phase];  /* right */
+		data->left_phase += 1;
+		if( data->left_phase >= data->local_size ) data->left_phase -= data->local_size;
+		data->right_phase += 1; /* higher pitch so we can distinguish left and right. */
+		if( data->right_phase >= data->local_size ) data->right_phase -= data->local_size;
+	}
+	return paContinue;
+}
+
+void StreamFinished( void* userData )
+{
+	(void)userData;
+	printf( "Stream Completed\n");
+}
+
+void sin_wave(double factor, paTestData *data)
+{
+	if (factor < 0)
+		factor = -factor;
+	while (factor > 10.0)
+		factor -= 10.0;
+	data->local_size = (int)(100.0 * factor);
+	for(int i=0; i<data->local_size; i++ )
+	{
+		data->sine[i] = (float) sin( ((double)i/(double)200) * M_PI * factor );
 	}
 }
 
 int	main(void)
 {
 	t_env			env;
+	double			sinem = 2.0;
 	int tick = 0;
 	int second = (int)time(NULL);
+
+	//
+	PaStream *stream;
+	paTestData	data;
+	data.left_phase = data.right_phase = 0;
+	if (paNoError != Pa_Initialize())
+		return (0 & printf("can't load portaudio\n"));
+	PaStreamParameters outputParameters;
+	outputParameters.device = Pa_GetDefaultOutputDevice();
+	if (outputParameters.device == paNoDevice)
+		return (0 & printf("no valid sound device found\n"));
+	outputParameters.channelCount = 2;       /* stereo output */
+	outputParameters.sampleFormat = paFloat32; /* 32 bit floating point output */
+	outputParameters.suggestedLatency = Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
+	outputParameters.hostApiSpecificStreamInfo = NULL;
+	sin_wave(2.0, &data);
+	Pa_OpenStream(&stream, NULL, &outputParameters, 44100, 64, paClipOff, paudioCallback, &data);
+	Pa_SetStreamFinishedCallback(stream, StreamFinished);
+	Pa_StartStream(stream);
+	//
 
 	if ((env.wolf3d = glfw_new_window(SX, SY, "Wolf3d", &env)) == NULL)
 		return (-42);
@@ -172,6 +251,16 @@ int	main(void)
 		glfwPollEvents();
 		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_ESCAPE))
 			glfwSetWindowShouldClose(env.wolf3d->w, 1);
+		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_KP_ADD))
+		{
+			sin_wave(sinem += 0.01, &data);
+			printf("sin: %f\n", sinem);
+		}
+		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_KP_SUBTRACT))
+		{
+			sin_wave(sinem -= 0.01, &data);
+			printf("sin: %f\n", sinem);
+		}
 		if (second != (int)time(NULL))
 		{
 			second = (int)time(NULL);
@@ -181,6 +270,9 @@ int	main(void)
 		++tick;
 	}
 	glfwTerminate();
+	Pa_StopStream(stream);
+	Pa_CloseStream(stream);
+	Pa_Terminate();
 	save_config("config.w3c", &env.config_file);
 	return (0);
 }
