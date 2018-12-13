@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/12 15:09:13 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/13 21:27:06 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,67 +105,67 @@ void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 	return (NULL);
 }
 
-t_vector	ray_cast(t_env *env, t_vector pos, double dir)
+t_distface	ray_cast(t_env *env, t_vector pos, t_vector ray)
 {
 	int stepx;
 	int stepy;
-	int side;
 	t_vector	inter;
 
-	t_vector ray = rotate_2d((t_vector){.x = 0, .y = -1}, dir);
-	int mapX = (int)pos.x;
-	int mapY = (int)pos.y;
+//	t_vector ray = rotate_2d((t_vector){.x = 0, .y = -1}, dir);
+	int mapx = (int)pos.x;
+	int mapy = (int)pos.y;
 	int hit = 0;
 	double dx = fabs(1 / ray.x);
 	double dy = fabs(1 / ray.y);
-	double dist;
+	t_distface	df;
 
 	if (ray.x < 0)
 	{
 		stepx = -1;
-		inter.x = (pos.x - mapX) * dx;
+		inter.x = (pos.x - mapx) * dx;
 	}
 	else
 	{
 		stepx = 1;
-		inter.x = (mapX + 1.0 - pos.x) * dx;
+		inter.x = (mapx + 1.0 - pos.x) * dx;
 	}
 	if (ray.y < 0)
 	{
 		stepy = -1;
-		inter.y = (pos.y - mapY) * dy;
+		inter.y = (pos.y - mapy) * dy;
 	}
 	else
 	{
 		stepy = 1;
-		inter.y = (mapY + 1.0 - pos.y) * dy;
+		inter.y = (mapy + 1.0 - pos.y) * dy;
 	}
 	while (hit == 0)
 	{
 		if (inter.x < inter.y)
 		{
 			inter.x += dx;
-			mapX += stepx;
-			side = 0;
+			mapx += stepx;
+			df.face = 0;
 		}
 		else
 		{
 			inter.y += dy;
-			mapY += stepy;
-			side = 1;
+			mapy += stepy;
+			df.face = 1;
 		}
 
-		if (env->map_file->map[mapX + mapY * env->map_file->width] > 0)
+		if (mapx < 0 || mapx >= (int)env->map_file->width || mapy < 0 || mapy >= (int)env->map_file->height)
 			hit = 1;
+		else if (env->map_file->map[mapx + mapy * env->map_file->width] > 0)
+			hit = 1;
+}
 
-	}
-
-	printf("inter.x : %f\ninter.y : %f\n", inter.x, inter.y);
-	if (side == 0)
-		dist = (mapX - pos.x + (1 - stepx) / 2) / ray.x;
+	if (df.face == 0)
+		df.dist = (mapx - pos.x + (1 - stepx) / 2) / ray.x;
 	else
-		dist = (mapY - pos.y + (1 - stepy) / 2) / ray.y;
-	return ((t_vector){.x = pos.x + ray.x * dist, .y = pos.y + ray.y * dist});
+		df.dist = (mapy - pos.y + (1 - stepy) / 2) / ray.y;
+	//return ((t_vector){.x = pos.x + ray.x * dist, .y = pos.y + ray.y * dist});
+	return (df);
 }
 
 /*
@@ -177,17 +177,32 @@ t_vec	vecftoveci(t_vector v, double sx, double sy)
 	return ((t_vec){.x = (int)(v.x * sx), .y = (int)(v.y * sy)});
 }
 
+t_vector	vecfscale(t_vector v, double s)
+{
+	return ((t_vector){.x = v.x * s, .y = v.y * s});
+}
+
+t_vector	vecfadd(t_vector v1, t_vector v2)
+{
+	return ((t_vector){.x = v1.x + v2.x, .y = v1.y + v2.y});
+}
+
 void	ray_caster(t_player p, t_env *e, int mc)
 {
 	double		fov;
-	t_vector	collision;
-	size_t			i;
+	t_vector	ray;
+	size_t		i;
+	t_distface	df;
+	int			sizewall = 40;
+	double		distcam = 1.0;
+	double		hauteur;
 
 	double sx;
 	double sy;
 
 	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
 	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
+
 	if (mc)
 		fov = (double)e->config_file.fov / 100.0;
 	else
@@ -197,9 +212,20 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	{
 		/*collision = ray_cast(e, p.pos,
 			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);*/
-		collision = ray_cast(e, p.pos,
-			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);
-		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(collision, sx, sy), 0xFFFF00);
+		ray = rotate_2d((t_vector){0, -1}, p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);
+		df = ray_cast(e, p.pos, ray);
+		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
+		hauteur = (distcam * sizewall) / df.dist;
+		if (mc)
+		{
+			if (df.face == 1)
+				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, 0x0000ff);
+			else
+				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
+		}
+
 	}
 }
 
@@ -346,7 +372,7 @@ int	main(void)
 	printf("loadded song, channels: %u, sr: %u, total: %llu\n", sound1.channels, sound1.sampleRate, sound1.totalSampleCount);
 	sound2.data = drwav_open_and_read_file_f32("assets/sounds/LRMonoPhase4test.wav", &sound2.channels, &sound2.sampleRate, &sound2.totalSampleCount);
 	printf("loadded song, channels: %u, sr: %u, total: %llu\n", sound2.channels, sound2.sampleRate, sound2.totalSampleCount);
-	player = (t_sound_player){.nb_sounds = 2, .playing = {
+	player = (t_sound_player){.nb_sounds = 0, .playing = {
 		{.flags = SOUND_PLAY_ONCE, .currentSample = 0, .right_gain = 0, .left_gain = 0, .left_phase = 0, .right_phase = sound1.channels > 1},
 		{.flags = SOUND_LOOP, .currentSample = 0, .right_gain = 0, .left_gain = 0, .left_phase = 0, .right_phase = sound2.channels > 1}},
 		.sound = {&sound1, &sound2}};
@@ -372,10 +398,10 @@ int	main(void)
 	while (!glfwWindowShouldClose(env.wolf3d->w))
 	{
 		draw(env.wolf3d);
-		glfw_refresh_window(env.wolf3d);
 		draw_map(env.minimap, &env);
 		ray_caster(env.player, &env, 1);
 		glfw_refresh_window(env.minimap);
+		glfw_refresh_window(env.wolf3d);
 		glfwPollEvents();
 		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_ESCAPE))
 			glfwSetWindowShouldClose(env.wolf3d->w, 1);

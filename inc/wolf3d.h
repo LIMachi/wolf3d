@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 18:37:25 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/11 17:52:06 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/13 19:35:58 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ typedef struct		s_vector
 	double			x;
 	double			y;
 }					t_vector;
+
+typedef struct		s_distface
+{
+	double	dist;
+	int		face;
+}					t_distface;
 
 typedef struct		s_map_file
 {
