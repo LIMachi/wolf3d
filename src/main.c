@@ -204,12 +204,15 @@ void	ray_caster(t_player p, t_env *e, int mc)
 #define TABLE_SIZE   (1000)
 typedef struct
 {
-	float sine[TABLE_SIZE];
-	int local_size;
-	int left_phase;
-	int right_phase;
-}
-	paTestData;
+//	float sine[TABLE_SIZE];
+	float *data;
+	unsigned int channels;
+	unsigned int sampleRate;
+	unsigned int currentSample;
+	drwav_uint64 totalSampleCount;
+	drwav_uint64 left_phase;
+	drwav_uint64 right_phase;
+} paTestData;
 
 int paudioCallback(const void *input,
 					void *output,
@@ -218,23 +221,22 @@ int paudioCallback(const void *input,
 					PaStreamCallbackFlags flags,
 					void *user_ptr)
 {
-	paTestData *data = (paTestData*)user_ptr;
+	paTestData *test = (paTestData*)user_ptr;
 	float *out = (float*)output;
 	unsigned long i;
 
-	(void) ti; /* Prevent unused variable warnings. */
-	(void) flags;
-	(void) input;
-	for( i=0; i<fpb; i++ )
+	(void)ti; /* Prevent unused variable warnings. */
+	(void)flags;
+	(void)input;
+	for(i = 0; i < fpb; ++i)
 	{
-		*out++ = data->sine[data->left_phase];  /* left */
-		*out++ = data->sine[data->right_phase];  /* right */
-		data->left_phase += 1;
-		if( data->left_phase >= data->local_size ) data->left_phase -= data->local_size;
-		data->right_phase += 1; /* higher pitch so we can distinguish left and right. */
-		if( data->right_phase >= data->local_size ) data->right_phase -= data->local_size;
+		if (test->currentSample * test->channels >= test->totalSampleCount)
+			return paComplete;
+		*out++ = test->data[test->left_phase + test->currentSample * test->channels];
+		*out++ = test->data[test->right_phase + test->currentSample * test->channels];
+		++test->currentSample;
 	}
-	return paContinue;
+	return (paContinue);
 }
 
 void StreamFinished( void* userData )
@@ -243,6 +245,7 @@ void StreamFinished( void* userData )
 	printf( "Stream Completed\n");
 }
 
+/*
 void sin_wave(double factor, paTestData *data)
 {
 	if (factor < 0)
@@ -255,11 +258,11 @@ void sin_wave(double factor, paTestData *data)
 		data->sine[i] = (float) sin( ((double)i/(double)200) * M_PI * factor );
 	}
 }
+*/
 
 int	main(void)
 {
 	t_env			env;
-	double			sinem = 2.0;
 	int tick = 0;
 	int second = (int)time(NULL);
 
@@ -277,8 +280,15 @@ int	main(void)
 	outputParameters.sampleFormat = paFloat32; /* 32 bit floating point output */
 	outputParameters.suggestedLatency = Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
 	outputParameters.hostApiSpecificStreamInfo = NULL;
-	sin_wave(2.0, &data);
-	Pa_OpenStream(&stream, NULL, &outputParameters, 44100, 64, paClipOff, paudioCallback, &data);
+//	sin_wave(2.0, &data);
+	data.data = drwav_open_and_read_file_f32("assets/sounds/Hydra - Lava Reef Zone (Hydra Remix).wav", &data.channels, &data.sampleRate, &data.totalSampleCount);
+	printf("loadded song, channels: %u, sr: %u, total: %llu\n", data.channels, data.sampleRate, data.totalSampleCount);
+	data.left_phase = 0;
+	data.right_phase = data.channels > 1;
+	data.currentSample = 0;
+	if (data.data == NULL)
+		return (0 & printf("can't read audio file\n"));
+	Pa_OpenStream(&stream, NULL, &outputParameters, data.sampleRate, 0, paClipOff, paudioCallback, &data);
 	Pa_SetStreamFinishedCallback(stream, StreamFinished);
 	Pa_StartStream(stream);
 	//
@@ -305,16 +315,6 @@ int	main(void)
 		glfwPollEvents();
 		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_ESCAPE))
 			glfwSetWindowShouldClose(env.wolf3d->w, 1);
-		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_KP_ADD))
-		{
-			sin_wave(sinem += 0.01, &data);
-			printf("sin: %f\n", sinem);
-		}
-		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_KP_SUBTRACT))
-		{
-			sin_wave(sinem -= 0.01, &data);
-			printf("sin: %f\n", sinem);
-		}
 		if (second != (int)time(NULL))
 		{
 			second = (int)time(NULL);
@@ -327,6 +327,7 @@ int	main(void)
 	Pa_StopStream(stream);
 	Pa_CloseStream(stream);
 	Pa_Terminate();
+	drwav_free(data.data);
 	save_config("config.w3c", &env.config_file);
 	return (0);
 }
