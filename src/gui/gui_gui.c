@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void noop(void)
-{
+#include <glfw_wrapper.h>
 
+t_gui	gui_gui(void)
+{
+	return ((t_gui){.selected = -1, .nb_buttons = 0, .buttons = NULL,
+		.up = NULL, .down = NULL, .left = NULL, .right = NULL});
 }

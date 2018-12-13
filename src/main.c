@@ -13,7 +13,7 @@
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
 
-void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
+void	print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 {
 	char *s;
 	(void)win;
@@ -22,7 +22,6 @@ void	*print_key(GLFWwindow *win, int key, int scan, int act, int mod)
 	if (key == GLFW_KEY_Q && act == GLFW_PRESS)
 		glfwSetWindowShouldClose(win, 1);
 	s = (char*)glfwGetKeyName(key, scan);
-	return (NULL);
 }
 
 void	center_cursor(GLFWwindow *win)
@@ -34,7 +33,7 @@ void	center_cursor(GLFWwindow *win)
 	glfwSetCursorPos(win, (double)width / 2.0, (double)height / 2.0);
 }
 
-void	*print_cursor_pos(GLFWwindow *win, double x, double y)
+void	print_cursor_pos(GLFWwindow *win, double x, double y)
 {
 	int width;
 	int height;
@@ -42,14 +41,12 @@ void	*print_cursor_pos(GLFWwindow *win, double x, double y)
 	glfwGetWindowSize(win, &width, &height);
 	printf("cursor pos: %.0f%% %.0f%%\n", (x / (double)width - 0.5) * 100.0, (0.5 - y / (double)height) * 100.0);
 //	center_cursor(win);
-	return (NULL);
 }
 
-void	*print_mouse_button(GLFWwindow *win, int key, int act, int mod)
+void	print_mouse_button(GLFWwindow *win, int key, int act, int mod)
 {
 	(void)win;
 	printf("key: %d, %s, %d\n", key, act == GLFW_PRESS ? "PRESS" : (act == GLFW_RELEASE ? "RELEASE" : "REPEAT"), mod);
-	return (NULL);
 }
 
 void			draw(t_glfw_window *win)
@@ -63,7 +60,7 @@ void			draw(t_glfw_window *win)
 //	free(bmp);
 }
 
-void	*resize(GLFWwindow *win, int x, int y)
+void	resize(GLFWwindow *win, int x, int y)
 {
 	t_glfw_window	*w;
 
@@ -72,10 +69,9 @@ void	*resize(GLFWwindow *win, int x, int y)
 	w->w_width = x;
 	glfw_window_resize_video_buffer(w, x, y);
 	draw(w);
-	return (w);
 }
 
-void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
+void	moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 {
 	t_glfw_window	*cheat;
 	t_env			*env;
@@ -84,7 +80,7 @@ void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 	(void)scan;
 	(void)mod;
 	if (act != GLFW_PRESS && act != GLFW_REPEAT)
-		return (NULL);
+		return ;
 	cheat = glfwGetWindowUserPointer(win);
 	env = cheat->user_ptr;
 	vlook = (t_vector){.x = 0.0, .y = 0.0};
@@ -102,7 +98,6 @@ void	*moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 		env->player.look -= 4;
 	env->player.pos.x += vlook.x;
 	env->player.pos.y += vlook.y;
-	return (NULL);
 }
 
 t_vector	ray_cast(t_env *env, t_vector pos, double dir)
@@ -160,7 +155,7 @@ t_vector	ray_cast(t_env *env, t_vector pos, double dir)
 
 	}
 
-	printf("inter.x : %f\ninter.y : %f\n", inter.x, inter.y);
+//	printf("inter.x : %f\ninter.y : %f\n", inter.x, inter.y);
 	if (side == 0)
 		dist = (mapX - pos.x + (1 - stepx) / 2) / ray.x;
 	else
@@ -257,7 +252,10 @@ typedef struct		s_sound_player
 //gain equation -> g = 10 log10(out / int)
 //g / 10 = log10(out / in)
 //10 ^ (g / 10) = out / in
+//for log10:
 //out = in * pow(10, (g / 10))
+//for log2:
+//out = in * pow(2, (g / 10))
 
 int paudioCallback(const void *input,
 					void *output,
@@ -269,6 +267,7 @@ int paudioCallback(const void *input,
 	t_sound_player	*player;
 	float			*out;
 	unsigned long	i;
+	unsigned long	j;
 
 	(void)ti; /* Prevent unused variable warnings. */
 	(void)flags;
@@ -279,7 +278,7 @@ int paudioCallback(const void *input,
 	{
 		out[0] = 0;
 		out[1] = 0;
-		for (int j = 0; j < player->nb_sounds; ++j)
+		for (j = 0; (int)j < player->nb_sounds; ++j)
 		{
 			if (player->playing[j].currentSample * player->sound[j]->channels >= player->sound[j]->totalSampleCount)
 			{
@@ -289,12 +288,17 @@ int paudioCallback(const void *input,
 			}
 			if (player->playing[j].flags == SOUND_NONE)
 				break ;
-			out[0] += pow(10, player->playing[j].left_gain / 10) * player->sound[j]->data[player->playing[j].left_phase + player->playing[j].currentSample * player->sound[j]->channels];
-			out[1] += pow(10, player->playing[j].right_gain / 10) * player->sound[j]->data[player->playing[j].right_phase + player->playing[j].currentSample * player->sound[j]->channels];
+			out[0] += pow(10.0, player->playing[j].left_gain / 10.0) * player->sound[j]->data[player->playing[j].left_phase + player->playing[j].currentSample * player->sound[j]->channels];
+			out[1] += pow(10.0, player->playing[j].right_gain / 10.0) * player->sound[j]->data[player->playing[j].right_phase + player->playing[j].currentSample * player->sound[j]->channels];
 			++player->playing[j].currentSample;
 		}
 		out += 2;
 	}
+	j = 0;
+	for(i = 0; (int)i < player->nb_sounds; ++i)
+		if (player->playing[i].flags != SOUND_NONE)
+			player->playing[j++] = player->playing[i];
+	player->nb_sounds = (int)j;
 	return (paContinue);
 }
 
@@ -318,6 +322,13 @@ void sin_wave(double factor, paTestData *data)
 	}
 }
 */
+
+void clicked(t_glfw_window *win, int status, void *data, t_button *button)
+{
+	(void)win;
+	(void)data;
+	printf("button updated: index: %d, status: %d\n", button->index, status);
+}
 
 int	main(void)
 {
@@ -364,11 +375,29 @@ int	main(void)
 		default_config(&env);
 	glfwSetKeyCallback(env.wolf3d->w, (GLFWkeyfun)print_key);
 	glfwSetKeyCallback(env.wolf3d->w, (GLFWkeyfun)moove_player);
+	env.wolf3d->key_cb = moove_player;
 	glfwSetMouseButtonCallback(env.wolf3d->w, (GLFWmousebuttonfun)print_mouse_button);
+	env.wolf3d->button_cb = print_mouse_button;
 	glfwSetCursorPosCallback(env.wolf3d->w, (GLFWcursorposfun)print_cursor_pos);
+	env.wolf3d->pos_cb = print_cursor_pos;
+	env.wolf3d->scroll_cb = (GLFWscrollfun)noop;
 	glfwSetFramebufferSizeCallback(env.wolf3d->w, (GLFWframebuffersizefun)resize);
 	map_editor(&env);
+	glfwSetKeyCallback(env.minimap->w, (GLFWkeyfun)moove_player);
+	t_vec pos;
+	glfwGetWindowPos(env.wolf3d->w, &pos.x, &pos.y);
+	glfwSetWindowPos(env.minimap->w, pos.x + env.wolf3d->w_width, pos.y);
 	glfwFocusWindow(env.wolf3d->w);
+
+	//
+	t_button	test_button1 = gui_button_click((t_vec){0, 0}, (t_vec){100, 100}, clicked, NULL);
+	t_button	test_button2 = gui_button_switch((t_vec){100, 100}, (t_vec){100, 100}, clicked, NULL);
+	t_gui		test_gui = gui_gui();
+	gui_attach_button(&test_gui, &test_button1);
+	gui_attach_button(&test_gui, &test_button2);
+	gui_attach_to_window(env.wolf3d, &test_gui);
+	//
+
 	while (!glfwWindowShouldClose(env.wolf3d->w))
 	{
 		draw(env.wolf3d);
@@ -381,13 +410,15 @@ int	main(void)
 			glfwSetWindowShouldClose(env.wolf3d->w, 1);
 		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_KP_SUBTRACT))
 		{
-			--player.playing[0].left_gain;
-			--player.playing[0].right_gain;
+			player.playing[0].left_gain -= 0.1;
+			player.playing[0].right_gain -= 0.1;
+			printf("gain: %f\n", player.playing[0].left_gain);
 		}
 		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_KP_ADD))
 		{
-			++player.playing[0].left_gain;
-			++player.playing[0].right_gain;
+			player.playing[0].left_gain += 0.1;
+			player.playing[0].right_gain += 0.1;
+			printf("gain: %f\n", player.playing[0].left_gain);
 		}
 		if (second != (int)time(NULL))
 		{

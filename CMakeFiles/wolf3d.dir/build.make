@@ -5296,6 +5296,71 @@ CMakeFiles/wolf3d.dir/portaudio/dr_wav/dr_wav.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/portaudio/dr_wav/dr_wav.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/portaudio/dr_wav/dr_wav.c -o CMakeFiles/wolf3d.dir/portaudio/dr_wav/dr_wav.c.s
 
+CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.o: src/gui/gui_attach_to_window.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_404) "Building C object CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/gui/gui_attach_to_window.c
+
+CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/gui/gui_attach_to_window.c > CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.i
+
+CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/gui/gui_attach_to_window.c -o CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.s
+
+CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.o: src/gui/gui_attach_button.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_405) "Building C object CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/gui/gui_attach_button.c
+
+CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/gui/gui_attach_button.c > CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.i
+
+CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/gui/gui_attach_button.c -o CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.s
+
+CMakeFiles/wolf3d.dir/src/gui/gui_button.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/gui/gui_button.c.o: src/gui/gui_button.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_406) "Building C object CMakeFiles/wolf3d.dir/src/gui/gui_button.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/gui/gui_button.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/gui/gui_button.c
+
+CMakeFiles/wolf3d.dir/src/gui/gui_button.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/gui/gui_button.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/gui/gui_button.c > CMakeFiles/wolf3d.dir/src/gui/gui_button.c.i
+
+CMakeFiles/wolf3d.dir/src/gui/gui_button.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/gui/gui_button.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/gui/gui_button.c -o CMakeFiles/wolf3d.dir/src/gui/gui_button.c.s
+
+CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.o: src/gui/gui_gui.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_407) "Building C object CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/gui/gui_gui.c
+
+CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/gui/gui_gui.c > CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.i
+
+CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/gui/gui_gui.c -o CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.s
+
+CMakeFiles/wolf3d.dir/src/noop.c.o: CMakeFiles/wolf3d.dir/flags.make
+CMakeFiles/wolf3d.dir/src/noop.c.o: src/noop.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_408) "Building C object CMakeFiles/wolf3d.dir/src/noop.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d.dir/src/noop.c.o   -c /Users/hmartzol/Desktop/wolf3d/src/noop.c
+
+CMakeFiles/wolf3d.dir/src/noop.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d.dir/src/noop.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hmartzol/Desktop/wolf3d/src/noop.c > CMakeFiles/wolf3d.dir/src/noop.c.i
+
+CMakeFiles/wolf3d.dir/src/noop.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d.dir/src/noop.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hmartzol/Desktop/wolf3d/src/noop.c -o CMakeFiles/wolf3d.dir/src/noop.c.s
+
 # Object files for target wolf3d
 wolf3d_OBJECTS = \
 "CMakeFiles/wolf3d.dir/glfw-3.2.1/deps/getopt.c.o" \
@@ -5700,7 +5765,12 @@ wolf3d_OBJECTS = \
 "CMakeFiles/wolf3d.dir/src/parsing/default_config.c.o" \
 "CMakeFiles/wolf3d.dir/src/parsing/load_config.c.o" \
 "CMakeFiles/wolf3d.dir/src/parsing/save_config.c.o" \
-"CMakeFiles/wolf3d.dir/portaudio/dr_wav/dr_wav.c.o"
+"CMakeFiles/wolf3d.dir/portaudio/dr_wav/dr_wav.c.o" \
+"CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.o" \
+"CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.o" \
+"CMakeFiles/wolf3d.dir/src/gui/gui_button.c.o" \
+"CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.o" \
+"CMakeFiles/wolf3d.dir/src/noop.c.o"
 
 # External object files for target wolf3d
 wolf3d_EXTERNAL_OBJECTS =
@@ -6108,9 +6178,14 @@ wolf3d: CMakeFiles/wolf3d.dir/src/parsing/default_config.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/parsing/load_config.c.o
 wolf3d: CMakeFiles/wolf3d.dir/src/parsing/save_config.c.o
 wolf3d: CMakeFiles/wolf3d.dir/portaudio/dr_wav/dr_wav.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/gui/gui_attach_button.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/gui/gui_button.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.o
+wolf3d: CMakeFiles/wolf3d.dir/src/noop.c.o
 wolf3d: CMakeFiles/wolf3d.dir/build.make
 wolf3d: CMakeFiles/wolf3d.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_404) "Linking CXX executable wolf3d"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hmartzol/Desktop/wolf3d/CMakeFiles --progress-num=$(CMAKE_PROGRESS_409) "Linking CXX executable wolf3d"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/wolf3d.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

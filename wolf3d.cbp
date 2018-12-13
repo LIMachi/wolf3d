@@ -2306,6 +2306,18 @@
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/graphic/pen/pen_set_work_area.c">
 			<Option target="wolf3d"/>
 		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/gui/gui_attach_button.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/gui/gui_attach_to_window.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/gui/gui_button.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/gui/gui_gui.c">
+			<Option target="wolf3d"/>
+		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/main.c">
 			<Option target="wolf3d"/>
 		</Unit>
@@ -2313,6 +2325,9 @@
 			<Option target="wolf3d"/>
 		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/minimap/draw_map.c">
+			<Option target="wolf3d"/>
+		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/noop.c">
 			<Option target="wolf3d"/>
 		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/parsing/default_config.c">

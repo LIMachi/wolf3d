@@ -23,6 +23,7 @@
 # include <time.h>
 # include "../libft/libft.h"
 # include "../glfw-3.2.1/freetype-2.9.1/include/ft2build.h"
+//# include "../glfw-3.2.1/src/internal.h" //hack
 # include FT_FREETYPE_H
 
 /*
@@ -288,6 +289,87 @@ struct									s_glfw_callback_holder
 	t_glfw_callback						cb;
 };
 
+/*
+button types:
+sinlge click
+toggle (vertical, horizontal)
+slider
+*/
+
+/*
+** basic button ellement:
+** left, right, up, down reference of other button
+** type
+** position
+** size
+** status (1 for click or toggle, any integer for slider)
+** hover/selected
+** update callback
+** user data
+*/
+
+typedef enum							e_button_type
+{
+	BUTTON_TYPE_CLICK,
+	BUTTON_TYPE_SWITCH,
+	BUTTON_TYPE_SLIDER_HORIZONTAL,
+	BUTTON_TYPE_SLIDER_VERTICAL
+}										t_button_type;
+
+typedef struct s_button					t_button;
+typedef struct s_gui					t_gui;
+
+typedef void							(*t_button_update_callback)(
+											t_glfw_window *,
+											int,
+											void *,
+											t_button *);
+
+struct									s_button
+{
+	int									index; //initialized on attach
+	t_gui								*gui; //initialized on attach
+	t_button							*left; //initialized on attach
+	t_button							*right; //initialized on attach
+	t_button							*up; //initialized on attach
+	t_button							*down; //initialized on attach
+	t_button_type						type; //determined by function name
+	t_vec								pos;
+	t_vec								size;
+	int									status; //initialized on attach
+	int									hover; //initialized on attach
+	t_button_update_callback			cb;
+	void								*user_data;
+};
+
+/*
+** gui:
+** current button: index (hover/selected)
+** nb buttons: int
+** buttons: (reference to all buttons)
+** forward callback key
+** forward callback pointer
+** forward callback button
+*/
+
+struct									s_gui
+{
+	int									selected; //-1 reserved for not selected
+	int									nb_buttons;
+	t_button							**buttons;
+	t_button							*up;
+	t_button							*down;
+	t_button							*left;
+	t_button							*right;
+};
+
+/*
+** functions needed:
+** create button
+** add button to gui
+** attach gui to window
+*/
+
 struct									s_glfw_window
 {
 	struct s_glfw_window				*prev;
@@ -306,7 +388,42 @@ struct									s_glfw_window
 	t_mouse_status						mouse;
 	t_keyboard_status					keyboard;
 	void								*user_ptr;
+	t_gui								*gui;
+	GLFWmousebuttonfun					button_cb;
+	GLFWcursorposfun					pos_cb;
+	GLFWscrollfun						scroll_cb;
+	GLFWkeyfun							key_cb;
 };
+
+void									noop(void);
+
+t_gui									gui_gui(void);
+
+void									gui_attach_to_window(t_glfw_window *win,
+															t_gui *gui);
+
+int										gui_attach_button(t_gui *gui,
+														t_button *button);
+
+t_button								gui_button_click(t_vec pos,
+													t_vec size,
+													t_button_update_callback cb,
+													void *user_data);
+
+t_button								gui_button_switch(t_vec pos,
+													t_vec size,
+													t_button_update_callback cb,
+													void *user_data);
+
+t_button								gui_button_slider_horizontal(t_vec pos,
+													t_vec size,
+													t_button_update_callback cb,
+													void *user_data);
+
+t_button								gui_button_slider_vertical(t_vec pos,
+													t_vec size,
+													t_button_update_callback cb,
+													void *user_data);
 
 void									glfw_attach_callback(t_glfw_window *win,
 													t_glfw_callback_holder *cb);

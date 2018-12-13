@@ -36,7 +36,12 @@ SRCFILES = main.c \
 		   glfw_window_resize_video_buffer.c \
 		   default_config.c \
 		   load_config.c \
-		   save_config.c
+		   save_config.c \
+		   gui_attach_button.c \
+		   gui_attach_to_window.c \
+		   gui_button.c \
+		   gui_gui.c \
+		   noop.c
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -53,7 +58,8 @@ DIRS =	parsing \
 		graphic \
 		graphic/draw \
 		graphic/pen \
-		graphic/bmp
+		graphic/bmp \
+		gui
 
 INCDIRS = $(addprefix -I,$(INC))
 
