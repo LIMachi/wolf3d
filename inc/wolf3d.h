@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 18:37:25 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/13 23:44:49 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/14 19:52:58 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ typedef struct		s_vector
 	double			y;
 }					t_vector;
 
-typedef struct		s_distface
+typedef struct		s_collision
 {
-	double	dist;
-	int		face;
-}					t_distface;
+	double			dist;
+	int				face;
+	int				mapx;
+	int				mapy;
+	double			where;
+}					t_collision;
 
 typedef struct		s_map_file
 {

@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/14 17:59:48 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/14 20:19:38 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,67 +116,81 @@ void	moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 	env->player.pos.y += vlook.y;
 }
 
-t_distface	ray_cast(t_env *env, t_vector pos, t_vector ray)
+t_collision	ray_cast(t_env *env, t_vector pos, t_vector ray)
 {
 	int stepx;
 	int stepy;
 	t_vector	inter;
 
 //	t_vector ray = rotate_2d((t_vector){.x = 0, .y = -1}, dir);
-	int mapx = (int)pos.x;
-	int mapy = (int)pos.y;
 	int hit = 0;
 	double dx = fabs(1 / ray.x);
 	double dy = fabs(1 / ray.y);
-	t_distface	df;
+	t_collision		col;
 
+	col.mapx = (int)pos.x;
+	col.mapy = (int)pos.y;
 	if (ray.x < 0)
 	{
 		stepx = -1;
-		inter.x = (pos.x - mapx) * dx;
+		inter.x = (pos.x - col.mapx) * dx;
 	}
 	else
 	{
 		stepx = 1;
-		inter.x = (mapx + 1.0 - pos.x) * dx;
+		inter.x = (col.mapx + 1.0 - pos.x) * dx;
 	}
 	if (ray.y < 0)
 	{
 		stepy = -1;
-		inter.y = (pos.y - mapy) * dy;
+		inter.y = (pos.y - col.mapy) * dy;
 	}
 	else
 	{
 		stepy = 1;
-		inter.y = (mapy + 1.0 - pos.y) * dy;
+		inter.y = (col.mapy + 1.0 - pos.y) * dy;
 	}
 	while (hit == 0)
 	{
 		if (inter.x < inter.y)
 		{
 			inter.x += dx;
-			mapx += stepx;
-			df.face = 0;
+			col.mapx += stepx;
+			col.face = 0;
 		}
 		else
 		{
 			inter.y += dy;
-			mapy += stepy;
-			df.face = 1;
+			col.mapy += stepy;
+			col.face = 1;
 		}
 
-		if (mapx < 0 || mapx >= (int)env->map_file->width || mapy < 0 || mapy >= (int)env->map_file->height)
+		if (col.mapx < 0 || col.mapx >= (int)env->map_file->width || col.mapy < 0 || col.mapy >= (int)env->map_file->height)
 			hit = 1;
-		else if (env->map_file->map[mapx + mapy * env->map_file->width] > 0)
+		else if (env->map_file->map[col.mapx + col.mapy * env->map_file->width] > 0)
 			hit = 1;
-}
+	}
 
-	if (df.face == 0)
-		df.dist = (mapx - pos.x + (1 - stepx) / 2) / ray.x;
+	if (col.face == 0)
+		col.dist = (col.mapx - pos.x + (1 - stepx) / 2) / ray.x;
 	else
-		df.dist = (mapy - pos.y + (1 - stepy) / 2) / ray.y;
+		col.dist = (col.mapy - pos.y + (1 - stepy) / 2) / ray.y;
+
+	if (stepx < 0 && col.face == 0)
+		col.face = 2;
+	if (stepy < 0 && col.face == 1)
+		col.face = 3;
 	//return ((t_vector){.x = pos.x + ray.x * dist, .y = pos.y + ray.y * dist});
-	return (df);
+	if (col.face == 0)
+		col.where = pos.y + col.dist * ray.y;
+	if (col.face == 1)
+		col.where = pos.x + col.dist * ray.x;
+	if (col.face == 2)
+		col.where = pos.y - col.dist * ray.y;
+	if (col.face == 3)
+		col.where = pos.x - col.dist * ray.x;
+	col.where -= (int)col.where;
+	return (col);
 }
 
 /*
@@ -203,7 +217,7 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	double		fov;
 	t_vector	ray;
 	size_t		i;
-	t_distface	df;
+	t_collision	df;
 	int			sizewall = 300;
 	double		distcam = 2.0;
 	double		hauteur;
@@ -212,6 +226,8 @@ void	ray_caster(t_player p, t_env *e, int mc)
 
 	double sx;
 	double sy;
+
+	t_bmp	*bmp = bmp_file_load("assets/images/sprites/guard/stand/D1.bmp");
 
 	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
 	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
@@ -233,14 +249,36 @@ void	ray_caster(t_player p, t_env *e, int mc)
 		hauteur = (distcam * sizewall) / real;
 		if (mc)
 		{
-			if (df.face == 1)
-				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, 0x0000ff);
+			//if (df.face == 1)
+//			{
+//				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+//					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, 0x0000ff);
+//			}
+			printf("df.where: %f\n", df.where);
+			if (df.face == 0)
+			{
+				int tx;
+				int ty;
+				tx = (double)bmp->size.x * df.where;
+				printf("tx: %d\n", tx);
+				for (int blurp = 0; blurp < hauteur * 2; ++blurp)
+				{
+					ty = (double)bmp->size.y * (blurp / (hauteur * 2));
+					draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - hauteur + blurp, bmp->data[tx + ty * bmp->size.x]);
+				}
+				//draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+				//	(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, text[tx + ty * 16]);
+			}
 			else
 				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (int[4]){0x0000ff, 0x00ff00, 0x00ffff, 0x777777}[df.face]);
+			/*
+				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
 					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
-		}
+		*/
+					}
 	}
+	free(bmp);
 }
 
 #define TABLE_SIZE   (1000)
