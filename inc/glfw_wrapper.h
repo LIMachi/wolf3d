@@ -339,6 +339,7 @@ struct									s_button
 	int									status; //initialized on attach
 	int									hover; //initialized on attach
 	t_button_update_callback			cb;
+	t_button_update_callback			hover_cb;
 	void								*user_data;
 };
 
@@ -396,6 +397,12 @@ struct									s_glfw_window
 };
 
 void									noop(void);
+
+void									gui_key_catch(GLFWwindow *w,
+													int key,
+													int scan,
+													int act,
+													int mod);
 
 t_gui									gui_gui(void);
 

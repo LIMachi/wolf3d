@@ -54,6 +54,22 @@ void			draw(t_glfw_window *win)
 	for (int x = 0; x < win->w_width; ++x)
 		for (int y = 0; y < win->w_height; ++y)
 			*((uint32_t*)&win->vb[(y * win->w_width + x) * 4]) = 0xFF0000;
+	for (int i = 0; i < win->gui->nb_buttons; ++i)
+	{
+		t_button *button = win->gui->buttons[i];
+		if (button->hover)
+			draw_square(win, button->pos, button->size, 0xFF00);
+		else
+			draw_square(win, button->pos, button->size, 0xFF);
+		if (win->gui->buttons[i]->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
+			draw_line(win, (t_vec){.x = button->pos.x + button->status, .y = button->pos.y},
+				(t_vec){.x = button->pos.x + button->status, .y = button->pos.y + button->size.y},
+				0x7777);
+		if (win->gui->buttons[i]->type == BUTTON_TYPE_SLIDER_VERTICAL)
+			draw_line(win, (t_vec){.y = button->pos.y + button->status, .x = button->pos.x},
+				(t_vec){.y = button->pos.y + button->status, .x = button->pos.x + button->size.x},
+				0x7777);
+	}
 //	t_bmp	*bmp;
 //	bmp = bmp_file_load("assets/images/sprites/guard/die/1.bmp");
 //	draw_bmp(win, (t_vec){0, 0}, (t_vec){bmp->size.x * 2, bmp->size.y * 2}, bmp);
@@ -330,6 +346,14 @@ void clicked(t_glfw_window *win, int status, void *data, t_button *button)
 	printf("button updated: index: %d, status: %d\n", button->index, status);
 }
 
+void hover(t_glfw_window *win, int status, void *data, t_button *button)
+{
+	(void)win;
+	(void)data;
+	(void)status;
+	printf("hover updated: index: %d\n", button->index);
+}
+
 int	main(void)
 {
 	t_env			env;
@@ -357,7 +381,7 @@ int	main(void)
 	printf("loadded song, channels: %u, sr: %u, total: %llu\n", sound1.channels, sound1.sampleRate, sound1.totalSampleCount);
 	sound2.data = drwav_open_and_read_file_f32("assets/sounds/LRMonoPhase4test.wav", &sound2.channels, &sound2.sampleRate, &sound2.totalSampleCount);
 	printf("loadded song, channels: %u, sr: %u, total: %llu\n", sound2.channels, sound2.sampleRate, sound2.totalSampleCount);
-	player = (t_sound_player){.nb_sounds = 2, .playing = {
+	player = (t_sound_player){.nb_sounds = 0, .playing = {
 		{.flags = SOUND_PLAY_ONCE, .currentSample = 0, .right_gain = 0, .left_gain = 0, .left_phase = 0, .right_phase = sound1.channels > 1},
 		{.flags = SOUND_LOOP, .currentSample = 0, .right_gain = 0, .left_gain = 0, .left_phase = 0, .right_phase = sound2.channels > 1}},
 		.sound = {&sound1, &sound2}};
@@ -392,9 +416,14 @@ int	main(void)
 	//
 	t_button	test_button1 = gui_button_click((t_vec){0, 0}, (t_vec){100, 100}, clicked, NULL);
 	t_button	test_button2 = gui_button_switch((t_vec){100, 100}, (t_vec){100, 100}, clicked, NULL);
+	t_button	test_button3 = gui_button_slider_horizontal((t_vec){200, 0}, (t_vec){100, 20}, clicked, NULL);
+	test_button1.hover_cb = hover;
+	test_button2.hover_cb = hover;
+	test_button3.hover_cb = hover;
 	t_gui		test_gui = gui_gui();
 	gui_attach_button(&test_gui, &test_button1);
 	gui_attach_button(&test_gui, &test_button2);
+	gui_attach_button(&test_gui, &test_button3);
 	gui_attach_to_window(env.wolf3d, &test_gui);
 	//
 

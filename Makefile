@@ -41,7 +41,8 @@ SRCFILES = main.c \
 		   gui_attach_to_window.c \
 		   gui_button.c \
 		   gui_gui.c \
-		   noop.c
+		   noop.c \
+		   gui_key_catch.c
 
 INC = inc \
 	  glfw-3.2.1/include \

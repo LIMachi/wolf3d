@@ -2318,6 +2318,9 @@
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/gui/gui_gui.c">
 			<Option target="wolf3d"/>
 		</Unit>
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/gui/gui_key_catch.c">
+			<Option target="wolf3d"/>
+		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/src/main.c">
 			<Option target="wolf3d"/>
 		</Unit>

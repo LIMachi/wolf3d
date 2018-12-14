@@ -407,6 +407,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/wolf3d.dir/src/gui/gui_button.c.o"
   "CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.o"
   "CMakeFiles/wolf3d.dir/src/noop.c.o"
+  "CMakeFiles/wolf3d.dir/src/gui/gui_key_catch.c.o"
   "wolf3d.pdb"
   "wolf3d"
 )

@@ -398,6 +398,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/hmartzol/Desktop/wolf3d/src/gui/gui_attach_to_window.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/gui/gui_attach_to_window.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/gui/gui_button.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/gui/gui_button.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/gui/gui_gui.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/gui/gui_gui.c.o"
+  "/Users/hmartzol/Desktop/wolf3d/src/gui/gui_key_catch.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/gui/gui_key_catch.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/main.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/main.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/map_editor.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/map_editor.c.o"
   "/Users/hmartzol/Desktop/wolf3d/src/minimap/draw_map.c" "/Users/hmartzol/Desktop/wolf3d/CMakeFiles/wolf3d.dir/src/minimap/draw_map.c.o"

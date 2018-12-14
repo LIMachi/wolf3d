@@ -12,50 +12,6 @@
 
 #include <glfw_wrapper.h>
 
-static void		gui_key_catch(GLFWwindow *w, int key, int scan, int act, int mod)
-{
-	t_glfw_window	*win;
-	t_button		*button;
-
-	win = glfwGetWindowUserPointer(w);
-	if ((act != GLFW_PRESS && act != GLFW_REPEAT))
-		win->key_cb(w, key, scan, act, mod);
-	else
-	{
-		if (win->gui->selected != -1)
-			button = win->gui->buttons[win->gui->selected];
-		else
-			button = NULL;
-		if (key == GLFW_KEY_UP)
-			if (button != NULL && button->type == BUTTON_TYPE_SLIDER_VERTICAL)
-				button->cb(win, ++button->status, button->user_data, button);
-			else
-				win->gui->selected = button != NULL ? button->up->index : win->gui->down->index;
-		else if (key == GLFW_KEY_DOWN)
-			if (button != NULL && button->type == BUTTON_TYPE_SLIDER_VERTICAL)
-				button->cb(win, --button->status, button->user_data, button);
-			else
-				win->gui->selected = button != NULL ? button->down->index : win->gui->up->index;
-		else if (key == GLFW_KEY_LEFT)
-			if (button != NULL && button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
-				button->cb(win, --button->status, button->user_data, button);
-			else
-				win->gui->selected = button != NULL ? button->left->index : win->gui->right->index;
-		else if (key == GLFW_KEY_RIGHT)
-			if (button != NULL && button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
-				button->cb(win, ++button->status, button->user_data, button);
-			else
-				win->gui->selected = button != NULL ? button->right->index : win->gui->left->index;
-		else if (key == GLFW_KEY_ENTER || key == GLFW_KEY_SPACE)
-			if (button != NULL)
-				button->cb(win, button->status, button->user_data, button);
-			else
-				win->key_cb(w, key, scan, act, mod);
-		else
-			win->key_cb(w, key, scan, act, mod);
-	}
-}
-
 static void		gui_button_catch(GLFWwindow *w, int key, int act, int mod)
 {
 	t_glfw_window	*win;
@@ -74,7 +30,7 @@ static void		gui_button_catch(GLFWwindow *w, int key, int act, int mod)
 		if (button->type == BUTTON_TYPE_CLICK)
 			button->cb(win, 1, button->user_data, button);
 		else if (button->type == BUTTON_TYPE_SWITCH)
-			button->cb(win, button->status ^= 1, button->user_data, button);
+			button->cb(win, (button->status ^= 1), button->user_data, button);
 		else
 		{
 			if (button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
@@ -100,13 +56,17 @@ static void		gui_cursor_pos_catch(GLFWwindow *w, double x, double y)
 		win->gui->buttons[win->gui->selected]->hover = 0;
 	i = win->gui->nb_buttons;
 	while (i--)
-		if (x >= (button = win->gui->buttons[i])->pos.x && x < button->size.x
-				&& y >= button->pos.y && x < button->size.y)
+		if (x >= (button = win->gui->buttons[i])->pos.x
+				&& x < button->pos.x + button->size.x
+				&& y >= button->pos.y && y < button->size.y + button->size.y)
 			break ;
 	if (i != -1)
 	{
 		win->gui->selected = i;
-		win->gui->buttons[i]->hover = 1;
+		win->gui->buttons[win->gui->selected]->hover = 1;
+		win->gui->buttons[win->gui->selected]->hover_cb(win, -1,
+			win->gui->buttons[win->gui->selected]->user_data,
+			win->gui->buttons[win->gui->selected]);
 	}
 	else
 		win->pos_cb(w, x, y);
@@ -131,8 +91,22 @@ static void		gui_scroll_catch(GLFWwindow *w, double x, double y)
 
 void			gui_attach_to_window(t_glfw_window *win, t_gui *gui)
 {
+	int	i;
+
 	win->gui = gui;
 	gui->selected = -1;
+	i = gui->nb_buttons;
+	while (i--)
+	{
+		if (gui->buttons[i]->up == NULL)
+			gui->buttons[i]->up = gui->up;
+		if (gui->buttons[i]->down == NULL)
+			gui->buttons[i]->down = gui->down;
+		if (gui->buttons[i]->left == NULL)
+			gui->buttons[i]->left = gui->left;
+		if (gui->buttons[i]->right == NULL)
+			gui->buttons[i]->right = gui->right;
+	}
 	glfwSetScrollCallback(win->w, gui_scroll_catch);
 	glfwSetMouseButtonCallback(win->w, gui_button_catch);
 	glfwSetKeyCallback(win->w, gui_key_catch);
