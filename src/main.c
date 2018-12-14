@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/14 00:14:57 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/14 17:59:48 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,13 @@ void	moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 	env = cheat->user_ptr;
 	vlook = (t_vector){.x = 0.0, .y = 0.0};
 	if (key == env->config_file.backward)
-		vlook = rotate_2d((t_vector){0, 0.5}, env->player.look);
+		vlook = rotate_2d((t_vector){0, 0.1}, env->player.look);
 	else if (key == env->config_file.strafe_left)
-		vlook = rotate_2d((t_vector){-0.5, 0}, env->player.look);
+		vlook = rotate_2d((t_vector){-0.1, 0}, env->player.look);
 	else if (key == env->config_file.strafe_right)
-		vlook = rotate_2d((t_vector){0.5, 0}, env->player.look);
+		vlook = rotate_2d((t_vector){0.1, 0}, env->player.look);
 	else if (key == env->config_file.forward)
-		vlook = rotate_2d((t_vector){0, -0.5}, env->player.look);
+		vlook = rotate_2d((t_vector){0, -0.1}, env->player.look);
 	else if (key == env->config_file.turn_right)
 		env->player.look += 4;
 	else if (key == env->config_file.turn_left)
@@ -204,8 +204,8 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	t_vector	ray;
 	size_t		i;
 	t_distface	df;
-	int			sizewall = 40;
-	double		distcam = 1.0;
+	int			sizewall = 300;
+	double		distcam = 2.0;
 	double		hauteur;
 	double		cheat;
 	double		real;
@@ -219,28 +219,27 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	if (mc)
 		fov = (double)e->config_file.fov / 100.0;
 	else
-		fov = 90.0;
+		fov = 60.0;
 	i = -1;
 	while (++i < e->wolf3d->vb_width)
 	{
 		/*collision = ray_cast(e, p.pos,
 			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);*/
-		cheat = p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width;
-		ray = rotate_2d((t_vector){0, -1}, cheat);
+		cheat = - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width;
+		ray = rotate_2d((t_vector){0, -1}, cheat + p.look);
 		df = ray_cast(e, p.pos, ray);
 		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
-		hauteur = (distcam * sizewall) / df.dist;
-		real = df.dist / cos(DEG_TO_RAD * cheat);
+		real = df.dist * cos(DEG_TO_RAD * cheat);
+		hauteur = (distcam * sizewall) / real;
 		if (mc)
 		{
 			if (df.face == 1)
-				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + real},
-					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - real}, 0x0000ff);
+				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, 0x0000ff);
 			else
-				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + real},
-					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - real}, (0x0000ff / 2));
+				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
 		}
-
 	}
 }
 
