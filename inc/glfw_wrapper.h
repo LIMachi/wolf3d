@@ -6,7 +6,7 @@
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 19:13:02 by hmartzol          #+#    #+#             */
-/*   Updated: 2018/11/22 18:28:03 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/13 19:33:11 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 #  define O_BINARY 0
 # endif
 
-# define SX 1920
-# define SY 1080
+# define SX 1500
+# define SY 1500
 
 # define GLFW_OPENGL_VERSION_MAJOR 4
 # define GLFW_OPENGL_VERSION_MINOR 0
