@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/14 20:19:38 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/14 21:38:00 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	resize(GLFWwindow *win, int x, int y)
 
 void	moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 {
-	t_glfw_window	*cheat;
+	t_glfw_window	*glfw;
 	t_env			*env;
 	t_vector		vlook;
 
@@ -97,8 +97,8 @@ void	moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 	(void)mod;
 	if (act != GLFW_PRESS && act != GLFW_REPEAT)
 		return ;
-	cheat = glfwGetWindowUserPointer(win);
-	env = cheat->user_ptr;
+	glfw = glfwGetWindowUserPointer(win);
+	env = glfw->user_ptr;
 	vlook = (t_vector){.x = 0.0, .y = 0.0};
 	if (key == env->config_file.backward)
 		vlook = rotate_2d((t_vector){0, 0.1}, env->player.look);
