@@ -1,0 +1,82 @@
+{
+  "textures": [
+    [{"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_DEAD", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_DIE_1", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_DIE_2", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_DIE_3", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_PAIN_1", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_PAIN_2", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_SHOOT1", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_SHOOT2", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_SHOOT3", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_SHOOT4", "orientations": 255}],
+    [
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_S_1", "orientations": 1},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_S_2", "orientations": 2},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_S_3", "orientations": 4},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_S_4", "orientations": 8},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_S_5", "orientations": 16},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_S_6", "orientations": 32},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_S_7", "orientations": 64},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_S_8", "orientations": 128}
+    ],
+    [
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W1_1", "orientations": 1},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W1_2", "orientations": 2},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W1_3", "orientations": 4},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W1_4", "orientations": 8},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W1_5", "orientations": 16},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W1_6", "orientations": 32},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W1_7", "orientations": 64},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W1_8", "orientations": 128}
+    ],
+    [
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W2_1", "orientations": 1},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W2_2", "orientations": 2},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W2_3", "orientations": 4},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W2_4", "orientations": 8},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W2_5", "orientations": 16},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W2_6", "orientations": 32},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W2_7", "orientations": 64},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W2_8", "orientations": 128}
+    ],
+    [
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W3_1", "orientations": 1},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W3_2", "orientations": 2},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W3_3", "orientations": 4},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W3_4", "orientations": 8},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W3_5", "orientations": 16},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W3_6", "orientations": 32},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W3_7", "orientations": 64},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W3_8", "orientations": 128}
+    ],
+    [
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W4_1", "orientations": 1},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W4_2", "orientations": 2},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W4_3", "orientations": 4},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W4_4", "orientations": 8},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W4_5", "orientations": 16},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W4_6", "orientations": 32},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W4_7", "orientations": 64},
+      {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W4_8", "orientations": 128}
+    ]
+  ],
+  "animations": {
+    "die": [
+      {"frames": [1, 2, 3], "speed": 1, "interuptible": false},
+      {"frames": [0], "speed": 15, "interuptible": false}
+    ],
+    "hurt": [
+      {"frames": [4, 5], "speed": 0.5, "interuptible": false}
+    ],
+    "shoot": [
+      {"frames": [6, 7, 8, 9], "speed": 1, "interuptible": true}
+    ],
+    "stand": [
+      {"frames": [10], "speed": 1, "interuptible": true}
+    ],
+    "walk": [
+      {"frames": [11, 12, 13, 14], "speed": 2, "interuptible": true}
+    ]
+  }
+}

@@ -4,7 +4,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-CLIB = -L libft -lft -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework Carbon -framework AudioUnit -framework AudioToolbox -framework CoreAudio -L glfw-3.2.1/freetype-2.9.1/objs/.libs -lfreetype glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib portaudio/lib/.libs/libportaudio.a portaudio/dr_wav/dr_wav.a
+CLIB = -L libft -lft -L libsjson -lsjson -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework Carbon -framework AudioUnit -framework AudioToolbox -framework CoreAudio -L glfw-3.2.1/freetype-2.9.1/objs/.libs -lfreetype glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib portaudio/lib/.libs/libportaudio.a portaudio/dr_wav/dr_wav.a
 
 SRCFILES = main.c \
 		   glfw_new_window.c \
@@ -50,7 +50,8 @@ INC = inc \
 	  libft \
 	  glfw-3.2.1/freetype-2.9.1/include \
 	  portaudio/include \
-	  portaudio/dr_wav
+	  portaudio/dr_wav \
+	  libftjson/inc
 
 DIRS =	parsing \
 		glfw_wrapper \
@@ -73,6 +74,8 @@ INCLUDES := inc/glfw_wrapper.h \
 
 SRCDIRS := $(addprefix src/,$(DIRS))
 
+SJSONLIB := libsjson/libsjson.a
+
 GLFWLIB := glfw-3.2.1/src/libglfw3.a
 
 GLADLIB := glfw-3.2.1/glad/libglad.a
@@ -87,7 +90,7 @@ vpath %.c src $(SRCDIRS)
 
 all: $(NAME)
 
-$(NAME): libft/libft.a $(GLFWLIB) $(GLADLIB) $(FT2LIB) $(DR_WAVLIB) $(PORTAUDIOLIB) $(OBJECTS) Makefile
+$(NAME): libft/libft.a $(GLFWLIB) $(GLADLIB) $(FT2LIB) $(DR_WAVLIB) $(PORTAUDIOLIB) $(SJSONLIB) $(OBJECTS) Makefile
 	$(CC) $(INCDIRS) $(CLIB) -o $@ $(OBJECTS)
 
 $(OBJDIR)/%.o : %.c $(INCLUDES) | $(OBJDIR)
@@ -98,6 +101,11 @@ $(OBJDIR):
 
 libft/libft.a:
 	$(MAKE) -w -C libft/
+
+$(SJSONLIB):
+	cd libsjson; \
+	make; \
+	cd ..
 
 $(GLFWLIB):
 	cd glfw-3.2.1; \

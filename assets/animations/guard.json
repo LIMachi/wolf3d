@@ -1,0 +1,81 @@
+{
+  "textures": [
+    [{"transparency": 9961608, "file": "assets/images/sprites/guard/dead.bmp", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/guard/die/1.bmp", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/guard/die/2.bmp", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/guard/die/3.bmp", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/guard/hurt/1.bmp", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/guard/hurt/2.bmp", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/guard/shoot/1.bmp", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/guard/shoot/2.bmp", "orientations": 255}],
+    [{"transparency": 9961608, "file": "assets/images/sprites/guard/shoot/3.bmp", "orientations": 255}],
+    [
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/stand/D1.bmp", "orientations": 1},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/stand/D2.bmp", "orientations": 2},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/stand/D3.bmp", "orientations": 4},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/stand/D4.bmp", "orientations": 8},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/stand/D5.bmp", "orientations": 16},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/stand/D6.bmp", "orientations": 32},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/stand/D7.bmp", "orientations": 64},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/stand/D8.bmp", "orientations": 128}
+    ],
+    [
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_1/D1.bmp", "orientations": 1},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_1/D2.bmp", "orientations": 2},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_1/D3.bmp", "orientations": 4},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_1/D4.bmp", "orientations": 8},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_1/D5.bmp", "orientations": 16},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_1/D6.bmp", "orientations": 32},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_1/D7.bmp", "orientations": 64},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_1/D8.bmp", "orientations": 128}
+    ],
+    [
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_2/D1.bmp", "orientations": 1},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_2/D2.bmp", "orientations": 2},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_2/D3.bmp", "orientations": 4},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_2/D4.bmp", "orientations": 8},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_2/D5.bmp", "orientations": 16},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_2/D6.bmp", "orientations": 32},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_2/D7.bmp", "orientations": 64},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_2/D8.bmp", "orientations": 128}
+    ],
+    [
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_3/D1.bmp", "orientations": 1},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_3/D2.bmp", "orientations": 2},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_3/D3.bmp", "orientations": 4},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_3/D4.bmp", "orientations": 8},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_3/D5.bmp", "orientations": 16},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_3/D6.bmp", "orientations": 32},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_3/D7.bmp", "orientations": 64},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_3/D8.bmp", "orientations": 128}
+    ],
+    [
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_4/D1.bmp", "orientations": 1},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_4/D2.bmp", "orientations": 2},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_4/D3.bmp", "orientations": 4},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_4/D4.bmp", "orientations": 8},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_4/D5.bmp", "orientations": 16},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_4/D6.bmp", "orientations": 32},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_4/D7.bmp", "orientations": 64},
+      {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_4/D8.bmp", "orientations": 128}
+    ]
+  ],
+  "animations": {
+    "die": [
+      {"frames": [1, 2, 3], "speed": 1, "interuptible": false},
+      {"frames": [0], "speed": 15, "interuptible": false}
+    ],
+    "hurt": [
+      {"frames": [4, 5], "speed": 0.5, "interuptible": false}
+    ],
+    "shoot": [
+      {"frames": [6, 7, 8], "speed": 1, "interuptible": true}
+    ],
+    "stand": [
+      {"frames": [9], "speed": 1, "interuptible": true}
+    ],
+    "walk": [
+      {"frames": [10, 11, 12, 13], "speed": 2, "interuptible": true}
+    ]
+  }
+}

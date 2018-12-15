@@ -1,0 +1,11 @@
+[submodule "libft"]
+	path = libft
+	url = https://github.com/LIMachi/libft.git
+	branch = mac
+[submodule "libsjson"]
+	path = libsjson
+	url = https://github.com/LIMachi/libsjson.git
+[submodule "Makefiles"]
+	path = Makefiles
+	url = https://github.com/LIMachi/Makefiles.git
+	branch = mac

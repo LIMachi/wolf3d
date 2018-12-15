@@ -112,6 +112,7 @@ t_bmp					*bmp_file_load(const char *path)
 	t_bmp_file				f;
 	int						fd;
 
+	f.color_palette = NULL;
 	if (path == NULL || (fd = open(path, O_RDONLY | O_BINARY, 0)) == -1)
 		return (NULL);
 	f.dib = (t_dib){.dib_size = 0, .compression = BI_RGB, .palette = 0};

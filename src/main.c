@@ -54,6 +54,7 @@ void			draw(t_glfw_window *win)
 	for (int x = 0; x < win->w_width; ++x)
 		for (int y = 0; y < win->w_height; ++y)
 			*((uint32_t*)&win->vb[(y * win->w_width + x) * 4]) = 0xFF0000;
+	/*
 	for (int i = 0; i < win->gui->nb_buttons; ++i)
 	{
 		t_button *button = win->gui->buttons[i];
@@ -70,6 +71,7 @@ void			draw(t_glfw_window *win)
 				(t_vec){.y = button->pos.y + button->status, .x = button->pos.x + button->size.x},
 				0x7777);
 	}
+	*/
 //	t_bmp	*bmp;
 //	bmp = bmp_file_load("assets/images/sprites/guard/die/1.bmp");
 //	draw_bmp(win, (t_vec){0, 0}, (t_vec){bmp->size.x * 2, bmp->size.y * 2}, bmp);
@@ -87,7 +89,33 @@ void	resize(GLFWwindow *win, int x, int y)
 	draw(w);
 }
 
-void	moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
+void	move_player(t_env *env, t_vector vlook)
+{
+	t_vec pos_map;
+	t_vec delta_map;
+
+	pos_map = (t_vec){.x = env->player.pos.x + vlook.x, .y = env->player.pos.y + vlook.y};
+	delta_map = (t_vec){.x = pos_map.x - (int)env->player.pos.x,
+		.y = pos_map.y - (int)env->player.pos.y};
+	if (env->player.pos.x + vlook.x < 0.0)
+		env->player.pos.x = 0.01;
+	else if (env->player.pos.x + vlook.x >= (double)env->map_file->width - 1)
+		env->player.pos.x = (double)env->map_file->width - 1.01;
+	else if (delta_map.x && env->map_file->map[pos_map.x + pos_map.y * env->map_file->width])
+		NULL;
+	else
+		env->player.pos.x += vlook.x;
+	if (env->player.pos.y + vlook.y < 0.0)
+		env->player.pos.y = 0.01;
+	else if (env->player.pos.y + vlook.y >= (double)env->map_file->height - 1)
+		env->player.pos.y = (double)env->map_file->height - 1.01;
+	else if (delta_map.y && env->map_file->map[pos_map.x + pos_map.y * env->map_file->width])
+		NULL;
+	else
+		env->player.pos.y += vlook.y;
+}
+
+void	move_player_callback(GLFWwindow *win, int key, int scan, int act, int mod)
 {
 	t_glfw_window	*glfw;
 	t_env			*env;
@@ -112,8 +140,7 @@ void	moove_player(GLFWwindow *win, int key, int scan, int act, int mod)
 		env->player.look += 4;
 	else if (key == env->config_file.turn_left)
 		env->player.look -= 4;
-	env->player.pos.x += vlook.x;
-	env->player.pos.y += vlook.y;
+	move_player(env, vlook);
 }
 
 t_collision	ray_cast(t_env *env, t_vector pos, t_vector ray)
@@ -218,8 +245,7 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	t_vector	ray;
 	size_t		i;
 	t_collision	df;
-	int			sizewall = 300;
-	double		distcam = 2.0;
+	int			sizewall = 650;
 	double		hauteur;
 	double		cheat;
 	double		real;
@@ -227,7 +253,7 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	double sx;
 	double sy;
 
-	t_bmp	*bmp = bmp_file_load("assets/images/sprites/guard/stand/D1.bmp");
+	t_bmp	*bmp = bmp_file_load("assets/images/sprites/ss/SPR_SS_PAIN_2");
 
 	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
 	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
@@ -245,8 +271,10 @@ void	ray_caster(t_player p, t_env *e, int mc)
 		ray = rotate_2d((t_vector){0, -1}, cheat + p.look);
 		df = ray_cast(e, p.pos, ray);
 		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
+		if (df.dist < 0.4)
+			df.dist = 0.4;
 		real = df.dist * cos(DEG_TO_RAD * cheat);
-		hauteur = (distcam * sizewall) / real;
+		hauteur = (sizewall) / real;
 		if (mc)
 		{
 			//if (df.face == 1)
@@ -254,13 +282,14 @@ void	ray_caster(t_player p, t_env *e, int mc)
 //				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
 //					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, 0x0000ff);
 //			}
-			printf("df.where: %f\n", df.where);
+//			printf("df.where: %f\n", df.where);
+
 			if (df.face == 0)
 			{
 				int tx;
 				int ty;
 				tx = (double)bmp->size.x * df.where;
-				printf("tx: %d\n", tx);
+//				printf("tx: %d\n", tx);
 				for (int blurp = 0; blurp < hauteur * 2; ++blurp)
 				{
 					ty = (double)bmp->size.y * (blurp / (hauteur * 2));
@@ -272,10 +301,8 @@ void	ray_caster(t_player p, t_env *e, int mc)
 			else
 				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
 					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (int[4]){0x0000ff, 0x00ff00, 0x00ffff, 0x777777}[df.face]);
-			/*
-				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
-		*/
+			//	draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+			//		(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
 					}
 	}
 	free(bmp);
@@ -465,8 +492,8 @@ int	main(void)
 	if (NULL == load_config("config.w3c", &env))
 		default_config(&env);
 	glfwSetKeyCallback(env.wolf3d->w, (GLFWkeyfun)print_key);
-	glfwSetKeyCallback(env.wolf3d->w, (GLFWkeyfun)moove_player);
-	env.wolf3d->key_cb = moove_player;
+	glfwSetKeyCallback(env.wolf3d->w, (GLFWkeyfun)move_player_callback);
+	env.wolf3d->key_cb = move_player_callback;
 	glfwSetMouseButtonCallback(env.wolf3d->w, (GLFWmousebuttonfun)print_mouse_button);
 	env.wolf3d->button_cb = print_mouse_button;
 	glfwSetCursorPosCallback(env.wolf3d->w, (GLFWcursorposfun)print_cursor_pos);
@@ -474,7 +501,7 @@ int	main(void)
 	env.wolf3d->scroll_cb = (GLFWscrollfun)noop;
 	glfwSetFramebufferSizeCallback(env.wolf3d->w, (GLFWframebuffersizefun)resize);
 	map_editor(&env);
-	glfwSetKeyCallback(env.minimap->w, (GLFWkeyfun)moove_player);
+	glfwSetKeyCallback(env.minimap->w, (GLFWkeyfun)move_player_callback);
 	t_vec pos;
 	glfwGetWindowPos(env.wolf3d->w, &pos.x, &pos.y);
 	glfwSetWindowPos(env.minimap->w, pos.x + env.wolf3d->w_width, pos.y);
@@ -491,7 +518,7 @@ int	main(void)
 	gui_attach_button(&test_gui, &test_button1);
 	gui_attach_button(&test_gui, &test_button2);
 	gui_attach_button(&test_gui, &test_button3);
-	gui_attach_to_window(env.wolf3d, &test_gui);
+//	gui_attach_to_window(env.wolf3d, &test_gui);
 	//
 
 	while (!glfwWindowShouldClose(env.wolf3d->w))
