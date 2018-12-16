@@ -64,7 +64,7 @@ t_map_file			*load_map(const char *path, t_env *env)
 		return (NULL);
 	}
 	*env->map_file = tmp;
-	env->player.pos = (t_vector){.x = env->map_file->startx + 0.5,
+	env->player.pos = (t_double2){.x = env->map_file->startx + 0.5,
 		.y = env->map_file->starty + 0.5};
 	env->player.look = (double)env->map_file->look / 100.0;
 	if (read(fd, env->map_file->map, size) != size)

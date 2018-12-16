@@ -13,8 +13,8 @@
 #include <glfw_wrapper.h>
 
 t_glfw_window		*draw_square(t_glfw_window *win,
-								t_vec pos,
-								t_vec size,
+								t_int2 pos,
+								t_int2 size,
 								uint32_t color)
 {
 	int x;

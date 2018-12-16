@@ -13,7 +13,7 @@
 #include <glfw_wrapper.h>
 
 static inline void	draw_line_0(t_glfw_window *win,
-								t_vec v[4],
+								t_int2 v[4],
 								int e,
 								uint32_t color)
 {
@@ -44,21 +44,21 @@ static inline void	draw_line_0(t_glfw_window *win,
 }
 
 t_glfw_window		*draw_line(t_glfw_window *win,
-								t_vec a,
-								t_vec b,
+								t_int2 a,
+								t_int2 b,
 								uint32_t color)
 {
-	t_vec	d;
-	t_vec	s;
+	t_int2	d;
+	t_int2	s;
 	int		e;
 
 	draw_pixel(win, (uint32_t)a.x, (uint32_t)a.y, color);
 	if (a.x == b.x && a.y == b.y)
 		return (win);
-	d = (t_vec){.x = (b.x - a.x) << 1, .y = (b.y - a.y) << 1};
-	s = (t_vec){.x = (d.x < 0) ? -1 : 1, .y = (d.y < 0) ? -1 : 1};
-	d = (t_vec){.x = (d.x < 0) ? -d.x : d.x, (d.y < 0) ? -d.y : d.y};
+	d = (t_int2){.x = (b.x - a.x) << 1, .y = (b.y - a.y) << 1};
+	s = (t_int2){.x = (d.x < 0) ? -1 : 1, .y = (d.y < 0) ? -1 : 1};
+	d = (t_int2){.x = (d.x < 0) ? -d.x : d.x, (d.y < 0) ? -d.y : d.y};
 	e = (d.x > d.y) ? d.y - (d.x >> 1) : d.x - (d.y >> 1);
-	draw_line_0(win, (t_vec[4]){a, b, d, s}, e, color);
+	draw_line_0(win, (t_int2[4]){a, b, d, s}, e, color);
 	return (win);
 }

@@ -32,7 +32,7 @@ t_map_file	*default_map(t_env *env)
 	while (++i < 121)
 		env->map_file->map[i] =
 			i % 11 == 0 || i % 11 == 10 || i < 11 || i > 109;
-	env->player.pos = (t_vector){.x = env->map_file->startx + 0.5,
+	env->player.pos = (t_double2){.x = env->map_file->startx + 0.5,
 								.y = env->map_file->starty + 0.5};
 	env->player.look = (double)env->map_file->look / 100.0;
 	return (env->map_file);

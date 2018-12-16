@@ -22,8 +22,8 @@
 */
 
 t_glfw_window		*draw_bmp(t_glfw_window *win,
-							t_vec pos,
-							t_vec size,
+							t_int2 pos,
+							t_int2 size,
 							t_bmp *bmp)
 {
 	int			x;

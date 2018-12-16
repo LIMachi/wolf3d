@@ -12,8 +12,8 @@
 
 #include <glfw_wrapper.h>
 
-t_button	gui_button_click(t_vec pos,
-							t_vec size,
+t_button	gui_button_click(t_int2 pos,
+							t_int2 size,
 							t_button_update_callback cb,
 							void *user_data)
 {
@@ -23,8 +23,8 @@ t_button	gui_button_click(t_vec pos,
 		.user_data = user_data});
 }
 
-t_button	gui_button_switch(t_vec pos,
-							t_vec size,
+t_button	gui_button_switch(t_int2 pos,
+							t_int2 size,
 							t_button_update_callback cb,
 							void *user_data)
 {
@@ -34,8 +34,8 @@ t_button	gui_button_switch(t_vec pos,
 		.user_data = user_data});
 }
 
-t_button	gui_button_slider_horizontal(t_vec pos,
-										t_vec size,
+t_button	gui_button_slider_horizontal(t_int2 pos,
+										t_int2 size,
 										t_button_update_callback cb,
 										void *user_data)
 {
@@ -45,8 +45,8 @@ t_button	gui_button_slider_horizontal(t_vec pos,
 		.user_data = user_data});
 }
 
-t_button	gui_button_slider_vertical(t_vec pos,
-										t_vec size,
+t_button	gui_button_slider_vertical(t_int2 pos,
+										t_int2 size,
 										t_button_update_callback cb,
 										void *user_data)
 {

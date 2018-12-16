@@ -13,7 +13,7 @@
 #include <glfw_wrapper.h>
 #include <ctype.h>
 
-static inline t_vec		special(t_glfw_window *win, char c)
+static inline t_int2		special(t_glfw_window *win, char c)
 {
 	if (c == ' ' || c == '\t')
 	{
@@ -43,8 +43,8 @@ static inline double	gray(FT_Bitmap bmp, int x, int y)
 		return (0.0);
 }
 
-static inline t_vec		draw_char_0(t_glfw_window *win,
-									t_vec pos,
+static inline t_int2		draw_char_0(t_glfw_window *win,
+									t_int2 pos,
 									FT_GlyphSlot glyph,
 									FT_Bitmap bmp)
 {
@@ -64,12 +64,12 @@ static inline t_vec		draw_char_0(t_glfw_window *win,
 				draw_pixel(win, tx, ty, color_blend(win->pen.color,
 					get_pixel(win, tx, ty), gray(bmp, x, y)));
 		}
-	return ((t_vec){.x = pos.x + ((x > (glyph->advance.x >> 6) || x == 0)
+	return ((t_int2){.x = pos.x + ((x > (glyph->advance.x >> 6) || x == 0)
 		? (glyph->advance.x >> 6) : x) + win->pen.spx.x, .y = pos.y});
 }
 
-t_vec					draw_char(t_glfw_window *win,
-								t_vec pos,
+t_int2					draw_char(t_glfw_window *win,
+								t_int2 pos,
 								const char c,
 								uint32_t color)
 {

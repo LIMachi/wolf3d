@@ -63,18 +63,18 @@ void			draw(t_glfw_window *win)
 		else
 			draw_square(win, button->pos, button->size, 0xFF);
 		if (win->gui->buttons[i]->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
-			draw_line(win, (t_vec){.x = button->pos.x + button->status, .y = button->pos.y},
-				(t_vec){.x = button->pos.x + button->status, .y = button->pos.y + button->size.y},
+			draw_line(win, (t_int2){.x = button->pos.x + button->status, .y = button->pos.y},
+				(t_int2){.x = button->pos.x + button->status, .y = button->pos.y + button->size.y},
 				0x7777);
 		if (win->gui->buttons[i]->type == BUTTON_TYPE_SLIDER_VERTICAL)
-			draw_line(win, (t_vec){.y = button->pos.y + button->status, .x = button->pos.x},
-				(t_vec){.y = button->pos.y + button->status, .x = button->pos.x + button->size.x},
+			draw_line(win, (t_int2){.y = button->pos.y + button->status, .x = button->pos.x},
+				(t_int2){.y = button->pos.y + button->status, .x = button->pos.x + button->size.x},
 				0x7777);
 	}
 	*/
 //	t_bmp	*bmp;
 //	bmp = bmp_file_load("assets/images/sprites/guard/die/1.bmp");
-//	draw_bmp(win, (t_vec){0, 0}, (t_vec){bmp->size.x * 2, bmp->size.y * 2}, bmp);
+//	draw_bmp(win, (t_int2){0, 0}, (t_int2){bmp->size.x * 2, bmp->size.y * 2}, bmp);
 //	free(bmp);
 }
 
@@ -89,13 +89,13 @@ void	resize(GLFWwindow *win, int x, int y)
 	draw(w);
 }
 
-void	move_player(t_env *env, t_vector vlook)
+void	move_player(t_env *env, t_double2 vlook)
 {
-	t_vec pos_map;
-	t_vec delta_map;
+	t_int2 pos_map;
+	t_int2 delta_map;
 
-	pos_map = (t_vec){.x = env->player.pos.x + vlook.x, .y = env->player.pos.y + vlook.y};
-	delta_map = (t_vec){.x = pos_map.x - (int)env->player.pos.x,
+	pos_map = (t_int2){.x = env->player.pos.x + vlook.x, .y = env->player.pos.y + vlook.y};
+	delta_map = (t_int2){.x = pos_map.x - (int)env->player.pos.x,
 		.y = pos_map.y - (int)env->player.pos.y};
 	if (env->player.pos.x + vlook.x < 0.0)
 		env->player.pos.x = 0.01;
@@ -119,7 +119,7 @@ void	move_player_callback(GLFWwindow *win, int key, int scan, int act, int mod)
 {
 	t_glfw_window	*glfw;
 	t_env			*env;
-	t_vector		vlook;
+	t_double2		vlook;
 
 	(void)scan;
 	(void)mod;
@@ -127,15 +127,15 @@ void	move_player_callback(GLFWwindow *win, int key, int scan, int act, int mod)
 		return ;
 	glfw = glfwGetWindowUserPointer(win);
 	env = glfw->user_ptr;
-	vlook = (t_vector){.x = 0.0, .y = 0.0};
+	vlook = (t_double2){.x = 0.0, .y = 0.0};
 	if (key == env->config_file.backward)
-		vlook = rotate_2d((t_vector){0, 0.1}, env->player.look);
+		vlook = rotate_2d((t_double2){0, 0.1}, env->player.look);
 	else if (key == env->config_file.strafe_left)
-		vlook = rotate_2d((t_vector){-0.1, 0}, env->player.look);
+		vlook = rotate_2d((t_double2){-0.1, 0}, env->player.look);
 	else if (key == env->config_file.strafe_right)
-		vlook = rotate_2d((t_vector){0.1, 0}, env->player.look);
+		vlook = rotate_2d((t_double2){0.1, 0}, env->player.look);
 	else if (key == env->config_file.forward)
-		vlook = rotate_2d((t_vector){0, -0.1}, env->player.look);
+		vlook = rotate_2d((t_double2){0, -0.1}, env->player.look);
 	else if (key == env->config_file.turn_right)
 		env->player.look += 4;
 	else if (key == env->config_file.turn_left)
@@ -143,13 +143,13 @@ void	move_player_callback(GLFWwindow *win, int key, int scan, int act, int mod)
 	move_player(env, vlook);
 }
 
-t_collision	ray_cast(t_env *env, t_vector pos, t_vector ray)
+t_collision	ray_cast(t_env *env, t_double2 pos, t_double2 ray)
 {
 	int stepx;
 	int stepy;
-	t_vector	inter;
+	t_double2	inter;
 
-//	t_vector ray = rotate_2d((t_vector){.x = 0, .y = -1}, dir);
+//	t_double2 ray = rotate_2d((t_double2){.x = 0, .y = -1}, dir);
 	int hit = 0;
 	double dx = fabs(1 / ray.x);
 	double dy = fabs(1 / ray.y);
@@ -207,7 +207,7 @@ t_collision	ray_cast(t_env *env, t_vector pos, t_vector ray)
 		col.face = 2;
 	if (stepy < 0 && col.face == 1)
 		col.face = 3;
-	//return ((t_vector){.x = pos.x + ray.x * dist, .y = pos.y + ray.y * dist});
+	//return ((t_double2){.x = pos.x + ray.x * dist, .y = pos.y + ray.y * dist});
 	if (col.face == 0)
 		col.where = pos.y + col.dist * ray.y;
 	if (col.face == 1)
@@ -224,25 +224,25 @@ t_collision	ray_cast(t_env *env, t_vector pos, t_vector ray)
 ** formule: look - fov / 2.0 + fov * (i / x)
 */
 
-t_vec	vecftoveci(t_vector v, double sx, double sy)
+t_int2	vecftoveci(t_double2 v, double sx, double sy)
 {
-	return ((t_vec){.x = (int)(v.x * sx), .y = (int)(v.y * sy)});
+	return ((t_int2){.x = (int)(v.x * sx), .y = (int)(v.y * sy)});
 }
 
-t_vector	vecfscale(t_vector v, double s)
+t_double2	vecfscale(t_double2 v, double s)
 {
-	return ((t_vector){.x = v.x * s, .y = v.y * s});
+	return ((t_double2){.x = v.x * s, .y = v.y * s});
 }
 
-t_vector	vecfadd(t_vector v1, t_vector v2)
+t_double2	vecfadd(t_double2 v1, t_double2 v2)
 {
-	return ((t_vector){.x = v1.x + v2.x, .y = v1.y + v2.y});
+	return ((t_double2){.x = v1.x + v2.x, .y = v1.y + v2.y});
 }
 
 void	ray_caster(t_player p, t_env *e, int mc)
 {
 	double		fov;
-	t_vector	ray;
+	t_double2	ray;
 	size_t		i;
 	t_collision	df;
 	int			sizewall = 650;
@@ -268,7 +268,7 @@ void	ray_caster(t_player p, t_env *e, int mc)
 		/*collision = ray_cast(e, p.pos,
 			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);*/
 		cheat = - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width;
-		ray = rotate_2d((t_vector){0, -1}, cheat + p.look);
+		ray = rotate_2d((t_double2){0, -1}, cheat + p.look);
 		df = ray_cast(e, p.pos, ray);
 		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
 		if (df.dist < 0.4)
@@ -279,8 +279,8 @@ void	ray_caster(t_player p, t_env *e, int mc)
 		{
 			//if (df.face == 1)
 //			{
-//				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-//					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, 0x0000ff);
+//				draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+//					(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, 0x0000ff);
 //			}
 //			printf("df.where: %f\n", df.where);
 
@@ -295,14 +295,14 @@ void	ray_caster(t_player p, t_env *e, int mc)
 					ty = (double)bmp->size.y * (blurp / (hauteur * 2));
 					draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - hauteur + blurp, bmp->data[tx + ty * bmp->size.x]);
 				}
-				//draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-				//	(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, text[tx + ty * 16]);
+				//draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+				//	(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, text[tx + ty * 16]);
 			}
 			else
-				draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-					(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (int[4]){0x0000ff, 0x00ff00, 0x00ffff, 0x777777}[df.face]);
-			//	draw_line(e->wolf3d, (t_vec){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-			//		(t_vec){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
+				draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+					(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (int[4]){0x0000ff, 0x00ff00, 0x00ffff, 0x777777}[df.face]);
+			//	draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+			//		(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
 					}
 	}
 	free(bmp);
@@ -467,7 +467,7 @@ int	main(void)
 	if (outputParameters.device == paNoDevice)
 		return (0 & printf("no valid sound device found\n"));
 	outputParameters.channelCount = 2;       /* stereo output */
-	outputParameters.sampleFormat = paFloat32; /* 32 bit floating point output */
+	outputParameters.sampleFormat = paFloat32; /* 32 bit floating int2 output */
 	outputParameters.suggestedLatency = Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
 	outputParameters.hostApiSpecificStreamInfo = NULL;
 //	sin_wave(2.0, &data);
@@ -502,15 +502,15 @@ int	main(void)
 	glfwSetFramebufferSizeCallback(env.wolf3d->w, (GLFWframebuffersizefun)resize);
 	map_editor(&env);
 	glfwSetKeyCallback(env.minimap->w, (GLFWkeyfun)move_player_callback);
-	t_vec pos;
+	t_int2 pos;
 	glfwGetWindowPos(env.wolf3d->w, &pos.x, &pos.y);
 	glfwSetWindowPos(env.minimap->w, pos.x + env.wolf3d->w_width, pos.y);
 	glfwFocusWindow(env.wolf3d->w);
 
 	//
-	t_button	test_button1 = gui_button_click((t_vec){0, 0}, (t_vec){100, 100}, clicked, NULL);
-	t_button	test_button2 = gui_button_switch((t_vec){100, 100}, (t_vec){100, 100}, clicked, NULL);
-	t_button	test_button3 = gui_button_slider_horizontal((t_vec){200, 0}, (t_vec){100, 20}, clicked, NULL);
+	t_button	test_button1 = gui_button_click((t_int2){0, 0}, (t_int2){100, 100}, clicked, NULL);
+	t_button	test_button2 = gui_button_switch((t_int2){100, 100}, (t_int2){100, 100}, clicked, NULL);
+	t_button	test_button3 = gui_button_slider_horizontal((t_int2){200, 0}, (t_int2){100, 20}, clicked, NULL);
 	test_button1.hover_cb = hover;
 	test_button2.hover_cb = hover;
 	test_button3.hover_cb = hover;

@@ -20,25 +20,25 @@ t_glfw_window		*draw_map(t_glfw_window *win,
 	uint32_t		y;
 	double			sx;
 	double			sy;
-	t_vector		look;
+	t_double2		look;
 
 	x = -1;
 	sx = (double)win->vb_width / (double)env->map_file->width;
 	sy = (double)win->vb_height / (double)env->map_file->height;
 	while (++x < env->map_file->width && (y = -1))
 		while (++y < env->map_file->height)
-			draw_square(win, (t_vec){(uint32_t)(x * sx), (uint32_t)(y * sy)},
-				(t_vec){(uint32_t)sx, (uint32_t)sy},
+			draw_square(win, (t_int2){(uint32_t)(x * sx), (uint32_t)(y * sy)},
+				(t_int2){(uint32_t)sx, (uint32_t)sy},
 				env->map_file->map[x + y * env->map_file->width] ? 0 : 0xFFFFFF);
-	look = rotate_2d((t_vector){.x = 0, .y = -10}, env->player.look);
+	look = rotate_2d((t_double2){.x = 0, .y = -10}, env->player.look);
 	draw_square(win,
-		(t_vec){.x = env->player.pos.x * sx - 2, .y = env->player.pos.y * sy - 2},
-		(t_vec){.x = 5, .y = 5}, 0xFF00);
+		(t_int2){.x = env->player.pos.x * sx - 2, .y = env->player.pos.y * sy - 2},
+		(t_int2){.x = 5, .y = 5}, 0xFF00);
 	draw_line(win,
-		(t_vec){.x = env->player.pos.x * sx, .y = env->player.pos.y * sy},
-		(t_vec){.x = look.x + env->player.pos.x * sx, .y = look.y + env->player.pos.y * sy},
+		(t_int2){.x = env->player.pos.x * sx, .y = env->player.pos.y * sy},
+		(t_int2){.x = look.x + env->player.pos.x * sx, .y = look.y + env->player.pos.y * sy},
 		0xFF0000);
-	draw_text(win, (t_vec){.x = 2, .y = 2}, "this is a complicated text\nthat\t"
+	draw_text(win, (t_int2){.x = 2, .y = 2}, "this is a complicated text\nthat\t"
 			"uses special\vcharacters to format\fitself", 0xFF0000);
 	return (win);
 }

@@ -12,9 +12,9 @@
 
 #include <wolf3d.h>
 
-t_vector	rotate_2d(t_vector vec, double deg)
+t_double2	rotate_2d(t_double2 vec, double deg)
 {
-	return ((t_vector){.x = vec.x * cos(deg * DEG_TO_RAD)
+	return ((t_double2){.x = vec.x * cos(deg * DEG_TO_RAD)
 						- vec.y * sin(deg * DEG_TO_RAD),
 						.y = vec.x * sin(deg * DEG_TO_RAD)
 						+ vec.y * cos(deg * DEG_TO_RAD)});

@@ -21,7 +21,7 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <math.h>
-# include "../libft/libft.h"
+# include "../libft/inc/libft.h"
 # include "glfw_wrapper.h"
 # include "portaudio.h"
 # include "../portaudio/dr_wav/dr_wav.h"
@@ -39,12 +39,6 @@
 # define W3DC_MAGIC 0x77336463
 
 # define MASK_FLAG_MOUSE_BUTTON (((uint32_t)1) << 31)
-
-typedef struct		s_vector
-{
-	double			x;
-	double			y;
-}					t_vector;
 
 typedef struct		s_collision
 {
@@ -68,7 +62,7 @@ typedef struct		s_map_file
 
 typedef struct		s_player
 {
-	t_vector		pos;
+	t_double2		pos;
 	double			look;
 }					t_player;
 
@@ -114,6 +108,6 @@ int					save_config(const char *path, t_config_file *config_file);
 
 t_env				*map_editor(t_env *env);
 t_glfw_window		*draw_map(t_glfw_window *win, t_env *env);
-t_vector			rotate_2d(t_vector vec, double deg);
+t_double2			rotate_2d(t_double2 vec, double deg);
 
 #endif

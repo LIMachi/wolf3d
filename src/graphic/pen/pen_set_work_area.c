@@ -12,7 +12,7 @@
 
 #include <glfw_wrapper.h>
 
-int	pen_set_work_area(t_glfw_window *win, t_vec top_left, t_vec bottom_right)
+int	pen_set_work_area(t_glfw_window *win, t_int2 top_left, t_int2 bottom_right)
 {
 	if (win == NULL)
 		return (-1);

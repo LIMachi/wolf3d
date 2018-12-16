@@ -42,8 +42,8 @@ static inline void		try_word(t_glfw_window *win,
 		draw_char(win, win->pen.pos, '\n', win->pen.color);
 }
 
-t_vec					draw_text(t_glfw_window *win,
-									t_vec pos,
+t_int2					draw_text(t_glfw_window *win,
+									t_int2 pos,
 									char *text,
 									uint32_t color)
 {

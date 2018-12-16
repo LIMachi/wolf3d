@@ -14,11 +14,11 @@
 
 int	pen_init(t_glfw_window *win)
 {
-	if (win == NULL || pen_set_work_area(win, (t_vec){.x = 0, .y = 0},
-			(t_vec){.x = win->vb_width, .y = win->vb_height})
+	if (win == NULL || pen_set_work_area(win, (t_int2){.x = 0, .y = 0},
+			(t_int2){.x = win->vb_width, .y = win->vb_height})
 			|| pen_set_font(win, PEN_DEFAULT_FONT,
-			(t_vec){PEN_DEFAULT_PX_X, PEN_DEFAULT_PX_Y},
-			(t_vec){PEN_DEFAULT_SPX_X, PEN_DEFAULT_SPX_Y}))
+			(t_int2){PEN_DEFAULT_PX_X, PEN_DEFAULT_PX_Y},
+			(t_int2){PEN_DEFAULT_SPX_X, PEN_DEFAULT_SPX_Y}))
 		return (-1);
 	win->pen.pos = win->pen.spx;
 	win->pen.color = PEN_DEFAULT_COLOR;

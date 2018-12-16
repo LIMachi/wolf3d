@@ -1,4 +1,9 @@
 *.o
+*.lo
+*.lai
+*.log
+*.status
+*.dylib
 *.a
 *.so
 wolf3d

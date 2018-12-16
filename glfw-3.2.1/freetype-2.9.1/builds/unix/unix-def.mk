@@ -28,11 +28,11 @@ OBJ_BUILD ?= $(BUILD_DIR)
 #
 FTSYS_SRC = $(BUILD_DIR)/ftsystem.c
 
-INSTALL         := /usr/bin/install -c
+INSTALL         := /Users/hmartzol/.brew/bin/ginstall -c
 INSTALL_DATA    := ${INSTALL} -m 644
 INSTALL_PROGRAM := ${INSTALL}
 INSTALL_SCRIPT  := ${INSTALL}
-MKINSTALLDIRS   := /Users/lmunoz-q/Projects/wolf3d/glfw-3.2.1/freetype-2.9.1/builds/unix/./install-sh -c -d
+MKINSTALLDIRS   := /Users/hmartzol/.brew/bin/gmkdir -p
 
 CLEAN += $(OBJ_BUILD)/freetype-config \
          $(OBJ_BUILD)/freetype2.pc
@@ -63,10 +63,10 @@ version_info := 22:1:16
 
 # Variables needed for `freetype-config' and `freetype.pc'.
 #
-PKG_CONFIG         := /Users/lmunoz-q/.brew/bin/pkg-config
-REQUIRES_PRIVATE   := zlib
+PKG_CONFIG         := /Users/hmartzol/.brew/bin/pkg-config
+REQUIRES_PRIVATE   := zlib, libpng
 LIBS_PRIVATE       := -lbz2
-LIBSSTATIC_CONFIG  := -lfreetype -lz -lbz2
+LIBSSTATIC_CONFIG  := -lfreetype -lz -lbz2 -L/Users/hmartzol/.brew/Cellar/libpng/1.6.35/lib -lpng16 -lz
 build_libtool_libs := 
 ft_version         := 22.1.16
 

@@ -14,8 +14,8 @@
 
 int	pen_set_font(t_glfw_window *win,
 				const char *font_path,
-				t_vec character_size,
-				t_vec spacing)
+				t_int2 character_size,
+				t_int2 spacing)
 {
 	if (win == NULL || font_path == NULL || character_size.x < 1
 			|| character_size.y < 1 || spacing.x < 0 || spacing.y < 0)

@@ -21,7 +21,7 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <time.h>
-# include "../libft/libft.h"
+# include "../libft/inc/libft.h"
 # include "../glfw-3.2.1/freetype-2.9.1/include/ft2build.h"
 //# include "../glfw-3.2.1/src/internal.h" //hack
 # include FT_FREETYPE_H
@@ -29,13 +29,6 @@
 /*
 ** https://www.freetype.org/freetype2/docs/tutorial/step1.html
 */
-
-# ifndef __WINDOWS__
-#  define WORD uint16_t
-#  define DWORD uint32_t
-#  define LONG uint32_t
-#  define O_BINARY 0
-# endif
 
 # define SX 1500
 # define SY 1500
@@ -49,113 +42,6 @@
 # define PEN_DEFAULT_SPX_X 2
 # define PEN_DEFAULT_SPX_Y 4
 # define PEN_DEFAULT_COLOR 0x0
-
-typedef struct							s_vec
-{
-	int									x;
-	int									y;
-}										t_vec;
-
-# pragma pack(push, 1)
-
-# define BITMAPSIGNATURE1 ((WORD)(('M' << 8) | 'B'))
-# define BITMAPSIGNATURE2 ((WORD)(('A' << 8) | 'B'))
-
-typedef struct							s_bitmap_file_header
-{
-	WORD								file_type;
-	DWORD								file_size;
-	DWORD								reserved;
-	DWORD								offset;
-}										t_bitmap_file_header;
-
-/*
-** unsuported format
-*/
-
-# define BITMAPCOREHEADER 12
-# define OS21XBITMAPHEADER 12
-
-/*
-** supported format
-*/
-
-# define OS22XBITMAPHEADER 64
-# define OS22XBITMAPHEADERV 16
-# define BITMAPINFOHEADER 40
-# define BITMAPV2INFOHEADER 52
-# define BITMAPV3INFOHEADER 56
-
-/*
-** partially supported format
-*/
-
-# define BITMAPV4HEADER 108
-# define BITMAPV5HEADER 124
-
-/*
-** supported compression
-*/
-
-# define BI_RGB 0
-# define BI_BITFIELDS 3
-# define BI_ALPHABITFIELDS 6
-
-/*
-** unsupported compression
-*/
-
-# define BI_RLE8 1
-# define BI_RLE4 2
-# define BI_JPEG 4
-# define BI_PNG 5
-# define BI_CMYK 11
-# define BI_CMYKRLE8 12
-# define BI_CMYKRLE4 13
-
-typedef struct							s_dib
-{
-	DWORD								dib_size;
-	LONG								width;
-	LONG								height;
-	WORD								planes;
-	WORD								bit_per_pixel;
-	DWORD								compression;
-	DWORD								size_image;
-	LONG								x_pixels_meter;
-	LONG								y_pixels_meter;
-	DWORD								palette;
-	DWORD								color_important;
-	DWORD								red_bmask;
-	DWORD								green_bmask;
-	DWORD								blue_bmask;
-	DWORD								alpha_bmask;
-	DWORD								color_space_type;
-	char								color_space_endpoint[36];
-	DWORD								gamma_red;
-	DWORD								gamma_green;
-	DWORD								gamma_blue;
-	DWORD								intent;
-	DWORD								icc_profile_data;
-	DWORD								icc_profile_size;
-	DWORD								reserved;
-}										t_dib;
-
-# pragma pack(pop)
-
-typedef struct							s_bmp_file
-{
-	t_bitmap_file_header				head;
-	t_dib								dib;
-	uint32_t							*color_palette;
-	uint8_t								*data;
-}										t_bmp_file;
-
-typedef	struct							s_bmp
-{
-	t_vec								size;
-	uint32_t							data[0];
-}										t_bmp;
 
 /*
 ** t_pen:
@@ -173,13 +59,13 @@ typedef	struct							s_bmp
 
 typedef struct							s_pen
 {
-	t_vec								pos;
-	t_vec								top_left;
-	t_vec								bottom_right;
+	t_int2								pos;
+	t_int2								top_left;
+	t_int2								bottom_right;
 	uint32_t							color;
 	FT_Face								font;
-	t_vec								px;
-	t_vec								spx;
+	t_int2								px;
+	t_int2								spx;
 }										t_pen;
 
 /*
@@ -204,7 +90,7 @@ typedef struct							s_pen
 ** 	BUTTON_TEXT_INPUT,
 ** 	BUTTON_COMPOSITE_INPUT
 ** }							t_button_type;
-** void						button_click_callback(int status, t_vec pos)
+** void						button_click_callback(int status, t_int2 pos)
 ** typedef struct				s_button_click
 ** {
 **
@@ -215,8 +101,8 @@ typedef struct							s_pen
 ** };
 ** typedef struct				s_button
 ** {
-** 	t_vec					pos;
-** 	t_vec					size;
+** 	t_int2					pos;
+** 	t_int2					size;
 ** 	t_button_type			type;
 ** 	union u_button			button;
 ** }							t_button;
@@ -282,8 +168,8 @@ struct									s_glfw_callback_holder
 	t_glfw_callback_holder				*next;
 	t_glfw_callback_flags_watch			watch;
 	t_glfw_callback_flags_data			data;
-	t_vec								position;
-	t_vec								size;
+	t_int2								position;
+	t_int2								size;
 	int									id;
 	void								*user_data;
 	t_glfw_callback						cb;
@@ -334,8 +220,8 @@ struct									s_button
 	t_button							*up; //initialized on attach
 	t_button							*down; //initialized on attach
 	t_button_type						type; //determined by function name
-	t_vec								pos;
-	t_vec								size;
+	t_int2								pos;
+	t_int2								size;
 	int									status; //initialized on attach
 	int									hover; //initialized on attach
 	t_button_update_callback			cb;
@@ -412,23 +298,23 @@ void									gui_attach_to_window(t_glfw_window *win,
 int										gui_attach_button(t_gui *gui,
 														t_button *button);
 
-t_button								gui_button_click(t_vec pos,
-													t_vec size,
+t_button								gui_button_click(t_int2 pos,
+													t_int2 size,
 													t_button_update_callback cb,
 													void *user_data);
 
-t_button								gui_button_switch(t_vec pos,
-													t_vec size,
+t_button								gui_button_switch(t_int2 pos,
+													t_int2 size,
 													t_button_update_callback cb,
 													void *user_data);
 
-t_button								gui_button_slider_horizontal(t_vec pos,
-													t_vec size,
+t_button								gui_button_slider_horizontal(t_int2 pos,
+													t_int2 size,
 													t_button_update_callback cb,
 													void *user_data);
 
-t_button								gui_button_slider_vertical(t_vec pos,
-													t_vec size,
+t_button								gui_button_slider_vertical(t_int2 pos,
+													t_int2 size,
 													t_button_update_callback cb,
 													void *user_data);
 
@@ -465,28 +351,28 @@ void									glfw_callbacks(t_glfw_window *win);
 t_bmp									*bmp_file_load(const char *path);
 
 t_glfw_window							*draw_bmp(t_glfw_window *win,
-													t_vec pos,
-													t_vec size,
+													t_int2 pos,
+													t_int2 size,
 													t_bmp *bmp);
 
 int										pen_init(t_glfw_window *win);
 
 int										pen_set_font(t_glfw_window *win,
 													const char *font_path,
-													t_vec character_size,
-													t_vec spacing);
+													t_int2 character_size,
+													t_int2 spacing);
 
 int										pen_set_work_area(t_glfw_window *win,
-														t_vec top_left,
-														t_vec bottom_right);
+														t_int2 top_left,
+														t_int2 bottom_right);
 
 void									glfw_refresh_window(t_glfw_window *win);
 
 void									glfw_remove_window(t_glfw_window *win);
 
 t_glfw_window							*draw_square(t_glfw_window *win,
-													t_vec pos,
-													t_vec size,
+													t_int2 pos,
+													t_int2 size,
 													uint32_t color);
 
 t_glfw_window							*draw_pixel(t_glfw_window *win,
@@ -495,8 +381,8 @@ t_glfw_window							*draw_pixel(t_glfw_window *win,
 													uint32_t color);
 
 t_glfw_window							*draw_line(t_glfw_window *win,
-													t_vec a,
-													t_vec b,
+													t_int2 a,
+													t_int2 b,
 													uint32_t color);
 
 uint32_t								color_blend(uint32_t c1,
@@ -507,13 +393,13 @@ uint32_t								get_pixel(t_glfw_window *win,
 													uint32_t x,
 													uint32_t y);
 
-t_vec									draw_char(t_glfw_window *win,
-													t_vec pos,
+t_int2									draw_char(t_glfw_window *win,
+													t_int2 pos,
 													const char c,
 													uint32_t color);
 
-t_vec									draw_text(t_glfw_window *win,
-													t_vec pos,
+t_int2									draw_text(t_glfw_window *win,
+													t_int2 pos,
 													char *text,
 													uint32_t color);
 
