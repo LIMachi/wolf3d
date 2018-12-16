@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/14 21:38:00 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/16 20:59:56 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,20 +246,23 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	size_t		i;
 	t_collision	df;
 	int			sizewall = 650;
+	int			floor;
+	int			sky;
 	double		hauteur;
-	double		cheat;
+	double		angle;
 	double		real;
 
 	double sx;
 	double sy;
 
-	t_bmp	*bmp = bmp_file_load("assets/images/sprites/ss/SPR_SS_PAIN_2");
+	t_bmp	*bmp = bmp_file_load("assets/cghanimeBMP.bmp");
 
 	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
 	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
 
 	if (mc)
-		fov = (double)e->config_file.fov / 100.0;
+		//fov = (double)e->config_file.fov / 100.0;
+		fov = 60.0;
 	else
 		fov = 60.0;
 	i = -1;
@@ -267,14 +270,16 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	{
 		/*collision = ray_cast(e, p.pos,
 			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);*/
-		cheat = - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width;
-		ray = rotate_2d((t_double2){0, -1}, cheat + p.look);
+		angle = -fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width;
+		ray = rotate_2d((t_double2){0, -1}, angle + p.look);
 		df = ray_cast(e, p.pos, ray);
 		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
 		if (df.dist < 0.4)
 			df.dist = 0.4;
-		real = df.dist * cos(DEG_TO_RAD * cheat);
+		real = df.dist * cos(DEG_TO_RAD * angle);
 		hauteur = (sizewall) / real;
+		floor = e->wolf3d->vb_height / 2 + hauteur;
+		sky = e->wolf3d->vb_height / 2 - hauteur;
 		if (mc)
 		{
 			//if (df.face == 1)
@@ -300,10 +305,16 @@ void	ray_caster(t_player p, t_env *e, int mc)
 			}
 			else
 				draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-					(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (int[4]){0x0000ff, 0x00ff00, 0x00ffff, 0x777777}[df.face]);
+					(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (int[4]){0x0000ff, 0x00ff00, 0x00ffff, 0xff0000}[df.face]);
 			//	draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
 			//		(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
 					}
+			draw_pixel(e->wolf3d, i, floor++, 0);
+			draw_pixel(e->wolf3d, i, sky--, 0);
+			while (floor <= (int)e->wolf3d->vb_height)
+				draw_pixel(e->wolf3d, i, floor++, 0xffffff);
+			while (sky >= 0)
+				draw_pixel(e->wolf3d, i, sky--, 0x505050);
 	}
 	free(bmp);
 }
