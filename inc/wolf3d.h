@@ -23,8 +23,7 @@
 # include <math.h>
 # include "../libft/inc/libft.h"
 # include "glfw_wrapper.h"
-# include "portaudio.h"
-# include "../portaudio/dr_wav/dr_wav.h"
+# include <sjson.h>
 
 /*
 ** <stdint.h>
@@ -89,6 +88,39 @@ typedef struct		s_save_file
 	t_map_file		map_file;
 }					t_save_file;
 
+typedef struct		s_animation_frame
+{
+	int				texture_index;
+	double			speed;
+	int				interuptible;
+}					t_animation_frame;
+
+typedef struct		s_animations
+{
+	t_bmp				**textures[8];
+	t_animation_frame	*die;
+	t_animation_frame	*hurt;
+	t_animation_frame	*shoot;
+	t_animation_frame	*stand;
+	t_animation_frame	*walk;
+}					t_animations;
+
+typedef struct		s_assets
+{
+	int				nb_animations;
+	t_animations	*animations;
+	char			**anmination_names;
+	int				nb_fonts;
+	char			**fonts;
+	char			**font_names;
+	int				nb_musics;
+	t_sound			*musics;
+	char			**music_names;
+	int				nb_textures;
+	t_bmp			**textures;
+	char			**texture_names;
+}					t_assets;
+
 typedef struct		s_env
 {
 	t_map_file		*map_file;
@@ -96,7 +128,10 @@ typedef struct		s_env
 	t_player		player;
 	t_glfw_window	*wolf3d;
 	t_glfw_window	*minimap;
+	t_assets		assets;
 }					t_env;
+
+t_assets			assets_load(const char *path);
 
 t_map_file			*default_map(t_env *env);
 t_map_file			*load_map(const char *path, t_env *env);

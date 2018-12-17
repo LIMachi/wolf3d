@@ -257,9 +257,6 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	double sx;
 	double sy;
 
-	t_bmp	*tiles = bmp_file_load("assets/walls/cghanimeBMP.bmp");
-	t_bmp	*bmp = bmp_file_load("assets/walls/Brick_Wall.bmp");
-
 	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
 	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
 
@@ -285,55 +282,24 @@ void	ray_caster(t_player p, t_env *e, int mc)
 		sky = e->wolf3d->vb_height / 2 - hauteur;
 		if (mc)
 		{
-			//if (df.face == 1)
-//			{
-//				draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-//					(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, 0x0000ff);
-//			}
-//			printf("df.where: %f\n", df.where);
-			if (df.face == 0)
-			{
-				int tx;
-				int ty;
-				tx = (double)bmp->size.x * df.where;
+			int tx;
+			int ty;
+			tx = (double)e->assets.textures[0]->size.x * df.where;
 //				printf("tx: %d\n", tx);
-				for (int blurp = 0; blurp < hauteur * 2; ++blurp)
-				{
-					ty = (double)bmp->size.y * (blurp / (hauteur * 2));
-					draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - hauteur + blurp, bmp->data[tx + ty * bmp->size.x]);
-				}
-				//draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-				//	(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, text[tx + ty * 16]);
-			}
-			else if (df.face == 2)
+			for (int blurp = 0; blurp < hauteur * 2; ++blurp)
 			{
-				int tx;
-				int ty;
-				tx = (double)tiles->size.x * df.where;
-//				printf("tx: %d\n", tx);
-				for (int blurp = 0; blurp < hauteur * 2; ++blurp)
-				{
-					ty = (double)tiles->size.y * (blurp / (hauteur * 2));
-					draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - hauteur + blurp, tiles->data[tx + ty * tiles->size.x]);
-				}
-				//draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-				//	(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, text[tx + ty * 16]);
+				ty = (double)e->assets.textures[0]->size.y * (blurp / (hauteur * 2));
+				draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - hauteur + blurp,
+					e->assets.textures[0]->data[tx + ty * e->assets.textures[0]->size.x]);
 			}
-
-			else
-				draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-					(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (int[4]){0x0000ff, 0x00ff00, 0x00ffff, 0xff0000}[df.face]);
-			//	draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-			//		(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
-					}
 			draw_pixel(e->wolf3d, i, floor++, 0);
 			draw_pixel(e->wolf3d, i, sky--, 0);
 			while (floor <= (int)e->wolf3d->vb_height)
 				draw_pixel(e->wolf3d, i, floor++, 0xffffff);
 			while (sky >= 0)
 				draw_pixel(e->wolf3d, i, sky--, 0x505050);
+		}
 	}
-	free(bmp);
 }
 
 #define TABLE_SIZE   (1000)
@@ -348,44 +314,6 @@ typedef struct
 	drwav_uint64 left_phase;
 	drwav_uint64 right_phase;
 } paTestData;
-
-/*
-** t_sound are treated as being const and should not be modified
-*/
-
-typedef struct		s_sound
-{
-	float			*data;
-	unsigned int	channels;
-	unsigned int	sampleRate;
-	drwav_uint64	totalSampleCount;
-}					t_sound;
-
-#define MAXIMUM_SOUND_SUPERPOSITION 10
-
-typedef enum		e_sound_flags
-{
-	SOUND_NONE,
-	SOUND_LOOP,
-	SOUND_PLAY_ONCE
-}					t_sound_flags;
-
-typedef struct		s_sound_playing
-{
-	t_sound_flags	flags;
-	float			left_gain;
-	float			right_gain;
-	drwav_uint64	left_phase;
-	drwav_uint64	right_phase;
-	unsigned int	currentSample;
-}					t_sound_playing;
-
-typedef struct		s_sound_player
-{
-	int				nb_sounds;
-	t_sound			*sound[MAXIMUM_SOUND_SUPERPOSITION];
-	t_sound_playing	playing[MAXIMUM_SOUND_SUPERPOSITION];
-}					t_sound_player;
 
 //gain equation -> g = 10 log10(out / int)
 //g / 10 = log10(out / in)
@@ -481,6 +409,9 @@ int	main(void)
 	t_env			env;
 	int tick = 0;
 	int second = (int)time(NULL);
+
+	env.assets = assets_load("assets/assets.json");
+//	printf("%s: %p\n", env.assets.texture_names[0], env.assets.textures[0]);
 
 	//
 	PaStream		*stream;

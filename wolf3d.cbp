@@ -3046,7 +3046,7 @@
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/libsjson/src/parser/new_value.c">
 			<Option target="wolf3d"/>
 		</Unit>
-		<Unit filename="/Users/hmartzol/Desktop/wolf3d/libsjson/src/parser/sjson_parse_src.c">
+		<Unit filename="/Users/hmartzol/Desktop/wolf3d/libsjson/src/parser/sjson_parse_str.c">
 			<Option target="wolf3d"/>
 		</Unit>
 		<Unit filename="/Users/hmartzol/Desktop/wolf3d/libsjson/src/parser/string_extractor.c">

@@ -60,22 +60,25 @@
       {"transparency": 9961608, "file": "assets/images/sprites/guard/walk/cycle_4/D8.bmp", "orientations": 128}
     ]
   ],
+  "sounds": [
+
+  ],
   "animations": {
     "die": [
-      {"frames": [1, 2, 3], "speed": 1, "interuptible": false},
-      {"frames": [0], "speed": 15, "interuptible": false}
+      {"textures": [1, 2, 3], "sounds": [],  "speed": 1, "interuptible": false},
+      {"textures": [0], "sounds": [], "speed": 15, "interuptible": false}
     ],
     "hurt": [
-      {"frames": [4, 5], "speed": 0.5, "interuptible": false}
+      {"textures": [4, 5], "sounds": [], "speed": 0.5, "interuptible": false}
     ],
     "shoot": [
-      {"frames": [6, 7, 8], "speed": 1, "interuptible": true}
+      {"textures": [6, 7, 8], "sounds": [], "speed": 1, "interuptible": true}
     ],
     "stand": [
-      {"frames": [9], "speed": 1, "interuptible": true}
+      {"textures": [9], "sounds": [], "speed": 1, "interuptible": true}
     ],
     "walk": [
-      {"frames": [10, 11, 12, 13], "speed": 2, "interuptible": true}
+      {"textures": [10, 11, 12, 13], "sounds": [], "speed": 2, "interuptible": true}
     ]
   }
 }

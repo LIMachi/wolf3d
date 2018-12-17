@@ -43,7 +43,8 @@ SRCFILES = main.c \
 		   noop.c \
 		   gui_key_catch.c \
 		   gui_cursor_pos_catch.c \
-		   gui_draw.c
+		   gui_draw.c \
+		   assets_load.c
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -52,7 +53,7 @@ INC = inc \
 	  glfw-3.2.1/freetype-2.9.1/include \
 	  portaudio/include \
 	  portaudio/dr_wav \
-	  libftjson/inc
+	  libsjson/inc
 
 DIRS =	parsing \
 		glfw_wrapper \
@@ -62,7 +63,8 @@ DIRS =	parsing \
 		graphic/draw \
 		graphic/pen \
 		graphic/bmp \
-		gui
+		gui \
+		assets
 
 INCDIRS = $(addprefix -I,$(INC))
 

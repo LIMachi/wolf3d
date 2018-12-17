@@ -1,0 +1,18 @@
+{
+  "animations": {
+    "Guard": "assets/animations/guard.json",
+    "Mutant": "assets/animations/mutant.json",
+    "SS": "assets/animations/ss.json"
+  },
+  "fonts": {
+    "Arial": "assets/fonts/Arial Unicode.ttf",
+    "Comic": "assets/fonts/Comic Sans MS.ttf",
+    "Papyrus": "assets/fonts/Papyrus.ttc"
+  },
+  "music": {
+    "Lava Reef": "assets/sounds/Hydra - Lava Reef Zone (Hydra Remix).wav"
+  },
+  "textures": {
+    "Wall": "assets/images/C_EASYPIC"
+  }
+}
