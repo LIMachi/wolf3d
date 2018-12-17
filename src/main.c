@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/14 21:38:00 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2018/12/16 23:26:13 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,9 +215,9 @@ t_collision	ray_cast(t_env *env, t_double2 pos, t_double2 ray)
 	if (col.face == 1)
 		col.where = pos.x + col.dist * ray.x;
 	if (col.face == 2)
-		col.where = pos.y - col.dist * ray.y;
+		col.where = pos.y + col.dist * ray.y;
 	if (col.face == 3)
-		col.where = pos.x - col.dist * ray.x;
+		col.where = pos.x + col.dist * ray.x;
 	col.where -= (int)col.where;
 	return (col);
 }
@@ -248,20 +248,24 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	size_t		i;
 	t_collision	df;
 	int			sizewall = 650;
+	int			floor;
+	int			sky;
 	double		hauteur;
-	double		cheat;
+	double		angle;
 	double		real;
 
 	double sx;
 	double sy;
 
-	t_bmp	*bmp = bmp_file_load("assets/images/sprites/ss/SPR_SS_PAIN_2");
+	t_bmp	*tiles = bmp_file_load("assets/walls/cghanimeBMP.bmp");
+	t_bmp	*bmp = bmp_file_load("assets/walls/Brick_Wall.bmp");
 
 	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
 	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
 
 	if (mc)
-		fov = (double)e->config_file.fov / 100.0;
+		//fov = (double)e->config_file.fov / 100.0;
+		fov = 60.0;
 	else
 		fov = 60.0;
 	i = -1;
@@ -269,14 +273,16 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	{
 		/*collision = ray_cast(e, p.pos,
 			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);*/
-		cheat = - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width;
-		ray = rotate_2d((t_double2){0, -1}, cheat + p.look);
+		angle = -fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width;
+		ray = rotate_2d((t_double2){0, -1}, angle + p.look);
 		df = ray_cast(e, p.pos, ray);
 		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
 		if (df.dist < 0.4)
 			df.dist = 0.4;
-		real = df.dist * cos(DEG_TO_RAD * cheat);
+		real = df.dist * cos(DEG_TO_RAD * angle);
 		hauteur = (sizewall) / real;
+		floor = e->wolf3d->vb_height / 2 + hauteur;
+		sky = e->wolf3d->vb_height / 2 - hauteur;
 		if (mc)
 		{
 			//if (df.face == 1)
@@ -285,7 +291,6 @@ void	ray_caster(t_player p, t_env *e, int mc)
 //					(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, 0x0000ff);
 //			}
 //			printf("df.where: %f\n", df.where);
-
 			if (df.face == 0)
 			{
 				int tx;
@@ -300,12 +305,33 @@ void	ray_caster(t_player p, t_env *e, int mc)
 				//draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
 				//	(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, text[tx + ty * 16]);
 			}
+			else if (df.face == 2)
+			{
+				int tx;
+				int ty;
+				tx = (double)tiles->size.x * df.where;
+//				printf("tx: %d\n", tx);
+				for (int blurp = 0; blurp < hauteur * 2; ++blurp)
+				{
+					ty = (double)tiles->size.y * (blurp / (hauteur * 2));
+					draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - hauteur + blurp, tiles->data[tx + ty * tiles->size.x]);
+				}
+				//draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
+				//	(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, text[tx + ty * 16]);
+			}
+
 			else
 				draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
-					(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (int[4]){0x0000ff, 0x00ff00, 0x00ffff, 0x777777}[df.face]);
+					(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (int[4]){0x0000ff, 0x00ff00, 0x00ffff, 0xff0000}[df.face]);
 			//	draw_line(e->wolf3d, (t_int2){.x = i, .y = e->wolf3d->vb_height / 2 + hauteur},
 			//		(t_int2){.x = i, .y = e->wolf3d->vb_height / 2 - hauteur}, (0x0000ff / 2));
 					}
+			draw_pixel(e->wolf3d, i, floor++, 0);
+			draw_pixel(e->wolf3d, i, sky--, 0);
+			while (floor <= (int)e->wolf3d->vb_height)
+				draw_pixel(e->wolf3d, i, floor++, 0xffffff);
+			while (sky >= 0)
+				draw_pixel(e->wolf3d, i, sky--, 0x505050);
 	}
 	free(bmp);
 }
