@@ -555,9 +555,10 @@ int	main(void)
 
 	while (!glfwWindowShouldClose(env.wolf3d->w))
 	{
-		draw(env.wolf3d);
 		draw_map(env.minimap, &env);
 		ray_caster(env.player, &env, 1);
+		if (env.wolf3d->gui != NULL)
+			gui_draw(env.wolf3d, env.wolf3d->gui);
 		glfw_refresh_window(env.minimap);
 		glfw_refresh_window(env.wolf3d);
 		glfwPollEvents();
