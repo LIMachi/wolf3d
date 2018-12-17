@@ -45,33 +45,6 @@ static void		gui_button_catch(GLFWwindow *w, int key, int act, int mod)
 		win->button_cb(w, key, act, mod);
 }
 
-static void		gui_cursor_pos_catch(GLFWwindow *w, double x, double y)
-{
-	t_glfw_window	*win;
-	t_button		*button;
-	int				i;
-
-	win = glfwGetWindowUserPointer(w);
-	if (win->gui->selected != -1)
-		win->gui->buttons[win->gui->selected]->hover = 0;
-	i = win->gui->nb_buttons;
-	while (i--)
-		if (x >= (button = win->gui->buttons[i])->pos.x
-				&& x < button->pos.x + button->size.x
-				&& y >= button->pos.y && y < button->size.y + button->size.y)
-			break ;
-	if (i != -1)
-	{
-		win->gui->selected = i;
-		win->gui->buttons[win->gui->selected]->hover = 1;
-		win->gui->buttons[win->gui->selected]->hover_cb(win, -1,
-			win->gui->buttons[win->gui->selected]->user_data,
-			win->gui->buttons[win->gui->selected]);
-	}
-	else
-		win->pos_cb(w, x, y);
-}
-
 static void		gui_scroll_catch(GLFWwindow *w, double x, double y)
 {
 	t_glfw_window	*win;

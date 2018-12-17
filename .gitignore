@@ -5,6 +5,10 @@
 *.status
 *.dylib
 *.a
+*.make
+*.bin
+*.out
+*.cmake
 *.so
 wolf3d
 .DS_Store

@@ -32,6 +32,8 @@ t_glfw_window		*draw_bmp(t_glfw_window *win,
 	double		ty;
 	uint32_t	color;
 
+	if (bmp == NULL || win == NULL)
+		return (win);
 	y = -1;
 	while (++y < size.y && (x = -1))
 		while (++x < size.x)

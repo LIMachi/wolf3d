@@ -14,15 +14,21 @@
 
 static inline void	i_up(t_glfw_window *win, t_button *button)
 {
-	if (button != NULL
-			&& button->type == BUTTON_TYPE_SLIDER_VERTICAL < button->size.y -1)
-		button->cb(win, ++button->status, button->user_data, button);
+	if (button != NULL && button->type == BUTTON_TYPE_SLIDER_VERTICAL)
+	{
+		if (button->status < button->size.y -1)
+			button->cb(win, ++button->status, button->user_data, button);
+	}
 	else
 	{
 		if (button != NULL)
+		{
+			button->hover = 0;
 			win->gui->selected = button->up->index;
+		}
 		else
 			win->gui->selected = win->gui->down->index;
+		win->gui->buttons[win->gui->selected]->hover = 1;
 		win->gui->buttons[win->gui->selected]->hover_cb(win, -1,
 			win->gui->buttons[win->gui->selected]->user_data,
 			win->gui->buttons[win->gui->selected]);
@@ -31,15 +37,21 @@ static inline void	i_up(t_glfw_window *win, t_button *button)
 
 static inline void	i_down(t_glfw_window *win, t_button *button)
 {
-	if (button != NULL
-		&& button->type == BUTTON_TYPE_SLIDER_VERTICAL > 0)
-		button->cb(win, --button->status, button->user_data, button);
+	if (button != NULL && button->type == BUTTON_TYPE_SLIDER_VERTICAL)
+	{
+		if (button->status > 0)
+			button->cb(win, --button->status, button->user_data, button);
+	}
 	else
 	{
 		if (button != NULL)
+		{
+			button->hover = 0;
 			win->gui->selected = button->down->index;
+		}
 		else
 			win->gui->selected = win->gui->up->index;
+		win->gui->buttons[win->gui->selected]->hover = 1;
 		win->gui->buttons[win->gui->selected]->hover_cb(win, -1,
 			win->gui->buttons[win->gui->selected]->user_data,
 			win->gui->buttons[win->gui->selected]);
@@ -48,15 +60,21 @@ static inline void	i_down(t_glfw_window *win, t_button *button)
 
 static inline void	i_left(t_glfw_window *win, t_button *button)
 {
-	if (button != NULL
-		&& button->type == BUTTON_TYPE_SLIDER_HORIZONTAL > 0)
-		button->cb(win, --button->status, button->user_data, button);
+	if (button != NULL && button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
+	{
+		if (button->status > 0)
+			button->cb(win, --button->status, button->user_data, button);
+	}
 	else
 	{
 		if (button != NULL)
+		{
+			button->hover = 0;
 			win->gui->selected = button->left->index;
+		}
 		else
 			win->gui->selected = win->gui->right->index;
+		win->gui->buttons[win->gui->selected]->hover = 1;
 		win->gui->buttons[win->gui->selected]->hover_cb(win, -1,
 			win->gui->buttons[win->gui->selected]->user_data,
 			win->gui->buttons[win->gui->selected]);
@@ -65,15 +83,21 @@ static inline void	i_left(t_glfw_window *win, t_button *button)
 
 static inline void	i_right(t_glfw_window *win, t_button *button)
 {
-	if (button != NULL
-		&& button->type == BUTTON_TYPE_SLIDER_HORIZONTAL < button->size.x -1)
-		button->cb(win, ++button->status, button->user_data, button);
+	if (button != NULL && button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
+	{
+		if (button->status < button->size.x - 1)
+			button->cb(win, ++button->status, button->user_data, button);
+	}
 	else
 	{
 		if (button != NULL)
+		{
+			button->hover = 0;
 			win->gui->selected = button->right->index;
+		}
 		else
 			win->gui->selected = win->gui->left->index;
+		win->gui->buttons[win->gui->selected]->hover = 1;
 		win->gui->buttons[win->gui->selected]->hover_cb(win, -1,
 			win->gui->buttons[win->gui->selected]->user_data,
 			win->gui->buttons[win->gui->selected]);
@@ -86,9 +110,11 @@ void				gui_key_catch(GLFWwindow *w,
 								int act,
 								int mod)
 {
-	t_glfw_window	*win;
-	t_button		*button;
-
+	t_glfw_window		*win;
+	t_button			*button;
+	/*static void	(*func[4])(t_glfw_window *, t_button *) =
+		{i_up, i_down, i_left, i_right};
+*/
 	win = glfwGetWindowUserPointer(w);
 	if ((act != GLFW_PRESS && act != GLFW_REPEAT))
 		win->key_cb(w, key, scan, act, mod);

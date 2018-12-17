@@ -54,6 +54,8 @@ void			draw(t_glfw_window *win)
 	for (int x = 0; x < win->w_width; ++x)
 		for (int y = 0; y < win->w_height; ++y)
 			*((uint32_t*)&win->vb[(y * win->w_width + x) * 4]) = 0xFF0000;
+	if (win->gui != NULL)
+		gui_draw(win, win->gui);
 	/*
 	for (int i = 0; i < win->gui->nb_buttons; ++i)
 	{
@@ -513,12 +515,16 @@ int	main(void)
 	t_button	test_button3 = gui_button_slider_horizontal((t_int2){200, 0}, (t_int2){100, 20}, clicked, NULL);
 	test_button1.hover_cb = hover;
 	test_button2.hover_cb = hover;
+	test_button2.active_bmp = bmp_file_load("assets/images/C_HARDPIC");
+	test_button3.active_bmp = test_button2.hover_bmp = bmp_file_load("assets/images/C_NORMALPIC");
+	test_button2.base_bmp = bmp_file_load("assets/images/C_EASYPIC");
 	test_button3.hover_cb = hover;
+	test_button3.base_bmp = test_button3.hover_bmp = bmp_file_load("assets/images/H_TOPWINDOWPIC");
 	t_gui		test_gui = gui_gui();
 	gui_attach_button(&test_gui, &test_button1);
 	gui_attach_button(&test_gui, &test_button2);
 	gui_attach_button(&test_gui, &test_button3);
-//	gui_attach_to_window(env.wolf3d, &test_gui);
+	gui_attach_to_window(env.wolf3d, &test_gui);
 	//
 
 	while (!glfwWindowShouldClose(env.wolf3d->w))

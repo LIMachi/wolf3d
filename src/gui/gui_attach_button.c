@@ -96,7 +96,7 @@ int					gui_attach_button(t_gui *gui, t_button *button)
 {
 	button->index = gui->nb_buttons;
 	button->gui = gui;
-	button->status = (button->type == BUTTON_TYPE_CLICK);
+	button->status = 0;
 	button->hover = 0;
 	if (gui->nb_buttons == 0)
 	{

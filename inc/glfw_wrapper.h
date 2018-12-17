@@ -23,7 +23,7 @@
 # include <time.h>
 # include "../libft/inc/libft.h"
 # include "../glfw-3.2.1/freetype-2.9.1/include/ft2build.h"
-//# include "../glfw-3.2.1/src/internal.h" //hack
+
 # include FT_FREETYPE_H
 
 /*
@@ -176,10 +176,10 @@ struct									s_glfw_callback_holder
 };
 
 /*
-button types:
-sinlge click
-toggle (vertical, horizontal)
-slider
+** button types:
+** sinlge click
+** toggle
+** slider (vertical, horizontal)
 */
 
 /*
@@ -213,21 +213,29 @@ typedef void							(*t_button_update_callback)(
 
 struct									s_button
 {
-	int									index; //initialized on attach
-	t_gui								*gui; //initialized on attach
-	t_button							*left; //initialized on attach
-	t_button							*right; //initialized on attach
-	t_button							*up; //initialized on attach
-	t_button							*down; //initialized on attach
-	t_button_type						type; //determined by function name
+	int									index;
+	t_gui								*gui;
+	t_button							*left;
+	t_button							*right;
+	t_button							*up;
+	t_button							*down;
+	t_button_type						type;
 	t_int2								pos;
 	t_int2								size;
-	int									status; //initialized on attach
-	int									hover; //initialized on attach
+	int									status;
+	int									hover;
 	t_button_update_callback			cb;
 	t_button_update_callback			hover_cb;
 	void								*user_data;
+	t_bmp								*base_bmp;
+	t_bmp								*hover_bmp;
+	t_bmp								*active_bmp;
 };
+
+/*
+** active_bmp is used in switch and click as a replacement for base_bmp
+** but will be used as a cursor for sliders
+*/
 
 /*
 ** gui:
@@ -241,7 +249,7 @@ struct									s_button
 
 struct									s_gui
 {
-	int									selected; //-1 reserved for not selected
+	int									selected;
 	int									nb_buttons;
 	t_button							**buttons;
 	t_button							*up;
@@ -290,7 +298,14 @@ void									gui_key_catch(GLFWwindow *w,
 													int act,
 													int mod);
 
+void									gui_cursor_pos_catch(GLFWwindow *w,
+															double x,
+															double y);
+
 t_gui									gui_gui(void);
+
+void									gui_draw(t_glfw_window *win,
+												t_gui *gui);
 
 void									gui_attach_to_window(t_glfw_window *win,
 															t_gui *gui);
