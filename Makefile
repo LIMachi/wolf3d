@@ -1,10 +1,10 @@
 NAME = wolf3d
 
-CC = gcc
+CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -fno-omit-frame-pointer
 
-CLIB = -L libft -lft -L libsjson -lsjson -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework Carbon -framework AudioUnit -framework AudioToolbox -framework CoreAudio -L glfw-3.2.1/freetype-2.9.1/objs/.libs -lfreetype glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib portaudio/lib/.libs/libportaudio.a portaudio/dr_wav/dr_wav.a
+CLIB = -L libft -lft -L libsjson -lsjson -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework Carbon -framework AudioUnit -framework AudioToolbox -framework CoreAudio -L glfw-3.2.1/freetype-2.9.1/objs/.libs -lfreetype glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib portaudio/lib/.libs/libportaudio.a portaudio/dr_wav/dr_wav.a -fsanitize=address
 
 SRCFILES = main.c \
 		   glfw_new_window.c \
@@ -44,7 +44,11 @@ SRCFILES = main.c \
 		   gui_key_catch.c \
 		   gui_cursor_pos_catch.c \
 		   gui_draw.c \
-		   assets_load.c
+		   assets_load.c \
+		   assets_load_animations.c \
+		   player_play_sound.c \
+		   sound_load.c \
+		   sound_player.c
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -64,7 +68,8 @@ DIRS =	parsing \
 		graphic/pen \
 		graphic/bmp \
 		gui \
-		assets
+		assets \
+		sound
 
 INCDIRS = $(addprefix -I,$(INC))
 
@@ -141,11 +146,9 @@ $(DR_WAVLIB):
 
 clean:
 	rm -rf $(OBJDIR)
-	$(MAKE) -w -C libft/ clean
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -w -C libft/ fclean
 
 re: fclean all
 

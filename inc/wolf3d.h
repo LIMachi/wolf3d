@@ -88,16 +88,30 @@ typedef struct		s_save_file
 	t_map_file		map_file;
 }					t_save_file;
 
+/*
+** sound == -1 do nothing
+** sound >= 0 start a sound
+** texture_index == -1 end of animation
+*/
+
 typedef struct		s_animation_frame
 {
 	int				texture_index;
 	double			speed;
 	int				interuptible;
+	int				sound;
 }					t_animation_frame;
+
+/*
+** layout: *textures[o + 8 * i] i == nb_frames, o == orientation
+*/
 
 typedef struct		s_animations
 {
-	t_bmp				**textures[8];
+	size_t				nb_textures;
+	t_bmp				**textures;
+	size_t				nb_sounds;
+	t_sound				*sounds;
 	t_animation_frame	*die;
 	t_animation_frame	*hurt;
 	t_animation_frame	*shoot;
@@ -132,6 +146,7 @@ typedef struct		s_env
 }					t_env;
 
 t_assets			assets_load(const char *path);
+t_sjson_error		assets_load_animation(const char *path, t_animations *anim);
 
 t_map_file			*default_map(t_env *env);
 t_map_file			*load_map(const char *path, t_env *env);

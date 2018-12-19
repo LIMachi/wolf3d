@@ -12,28 +12,54 @@
 
 #include <wolf3d.h>
 
-static void	i_load_animations(t_sjson_object *obj, t_assets *out)
+static t_sjson_error	i_load_animations(t_sjson_object *obj, t_assets *out)
 {
+	size_t			i;
+	t_sjson_string	*path;
+
 	printf("Loadding animations\n");
-	(void)obj;
-	(void)out;
+	out->nb_animations = obj->nb_pairs;
+	if (out->nb_animations == 0)
+		return (SJSON_ERROR_KO);
+	if (NULL == (out->anmination_names = malloc(sizeof(char*) * out->nb_animations)))
+	{
+		out->nb_animations = 0;
+		return (SJSON_ERROR_KO);
+	}
+	if (NULL == (out->animations = malloc(sizeof(t_animations) * out->nb_animations)))
+	{
+		free(out->anmination_names);
+		out->nb_animations = 0;
+		return (SJSON_ERROR_KO);
+	}
+	i = -1;
+	while (++i < obj->nb_pairs)
+	{
+		out->anmination_names[i] = ft_strdup(obj->pairs[i]->key->data);
+		if (sjson_explorer(obj->pairs[i]->value, "$s*", &path) != 1)
+			return (SJSON_ERROR_KO);
+		assets_load_animation(path->data, &out->animations[i]);
+	}
+	return (SJSON_ERROR_OK);
 }
 
-static void	i_load_fonts(t_sjson_object *obj, t_assets *out)
+static t_sjson_error	i_load_fonts(t_sjson_object *obj, t_assets *out)
 {
 	printf("Loadding fonts\n");
 	(void)obj;
 	(void)out;
+	return (SJSON_ERROR_OK);
 }
 
-static void	i_load_music(t_sjson_object *obj, t_assets *out)
+static t_sjson_error	i_load_music(t_sjson_object *obj, t_assets *out)
 {
 	printf("Loadding music\n");
 	(void)obj;
 	(void)out;
+	return (SJSON_ERROR_OK);
 }
 
-static void	i_load_textures(t_sjson_object *obj, t_assets *out)
+static t_sjson_error	i_load_textures(t_sjson_object *obj, t_assets *out)
 {
 	size_t			i;
 	t_sjson_string	*path;
@@ -41,30 +67,30 @@ static void	i_load_textures(t_sjson_object *obj, t_assets *out)
 	printf("Loadding textures\n");
 	out->nb_textures = obj->nb_pairs;
 	if (out->nb_textures == 0)
-		return ;
+		return (SJSON_ERROR_KO);
 	if (NULL == (out->texture_names = malloc(sizeof(char*) * out->nb_textures)))
 	{
 		out->nb_textures = 0;
-		return ;
+		return (SJSON_ERROR_KO);
 	}
 	if (NULL == (out->textures = malloc(sizeof(t_bmp*) * out->nb_textures)))
 	{
 		free(out->texture_names);
 		out->nb_textures = 0;
-		return ;
+		return (SJSON_ERROR_KO);
 	}
-	printf("Found %d textures\n", out->nb_textures);
 	i = -1;
 	while (++i < obj->nb_pairs)
 	{
 		out->texture_names[i] = ft_strdup(obj->pairs[i]->key->data);
-		sjson_explorer(obj->pairs[i]->value, "$s*", &path);
-		printf("got texture: %s\n", path->data);
+		if (sjson_explorer(obj->pairs[i]->value, "$s*", &path) != 1)
+			return (SJSON_ERROR_KO);
 		out->textures[i] = bmp_file_load(path->data);
 	}
+	return (SJSON_ERROR_OK);
 }
 
-t_assets	assets_load(const char *path)
+t_assets				assets_load(const char *path)
 {
 	t_assets		out;
 	t_sjson_value	*root;
@@ -74,9 +100,6 @@ t_assets	assets_load(const char *path)
 	if (sjson_parse_file(path, &root, SJSON_FLAG_PRINT_ERRORS, 2)
 			!= SJSON_ERROR_OK)
 		return (out);
-	//
-	sjson_print(1, root, 0);
-	//
 	sjson_explorer(root, "$o>#<>#<>#<>#", "animations", i_load_animations, &out,
 		"fonts", i_load_fonts, &out, "music", i_load_music, &out, "textures",
 		i_load_textures, &out);

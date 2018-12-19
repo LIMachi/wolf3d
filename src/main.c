@@ -302,26 +302,15 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	}
 }
 
-#define TABLE_SIZE   (1000)
-typedef struct
-{
-//	float sine[TABLE_SIZE];
-	float *data;
-	unsigned int channels;
-	unsigned int sampleRate;
-	unsigned int currentSample;
-	drwav_uint64 totalSampleCount;
-	drwav_uint64 left_phase;
-	drwav_uint64 right_phase;
-} paTestData;
-
-//gain equation -> g = 10 log10(out / int)
-//g / 10 = log10(out / in)
-//10 ^ (g / 10) = out / in
-//for log10:
-//out = in * pow(10, (g / 10))
-//for log2:
-//out = in * pow(2, (g / 10))
+/*
+** gain equation -> g = 10 log10(out / int)
+** g / 10 = log10(out / in)
+** 10 ^ (g / 10) = out / in
+** for log10:
+** out = in * pow(10, (g / 10))
+** for log2:
+** out = in * pow(2, (g / 10))
+*/
 
 int paudioCallback(const void *input,
 					void *output,
@@ -335,7 +324,7 @@ int paudioCallback(const void *input,
 	unsigned long	i;
 	unsigned long	j;
 
-	(void)ti; /* Prevent unused variable warnings. */
+	(void)ti;
 	(void)flags;
 	(void)input;
 	out = (float*)output;
@@ -368,12 +357,6 @@ int paudioCallback(const void *input,
 	return (paContinue);
 }
 
-void StreamFinished( void* userData )
-{
-	(void)userData;
-	printf( "Stream Completed\n");
-}
-
 /*
 void sin_wave(double factor, paTestData *data)
 {
@@ -396,6 +379,17 @@ void clicked(t_glfw_window *win, int status, void *data, t_button *button)
 	printf("button updated: index: %d, status: %d\n", button->index, status);
 }
 
+void slider(t_glfw_window *win, int status, void *data, t_button *button)
+{
+	double	power;
+
+	(void)win;
+	(void)data;
+	power = 12.0 * ((double)status / (double)button->size.x - 0.5);
+	sound_player()->playing[0].left_gain = power;
+	sound_player()->playing[0].right_gain = power;
+}
+
 void hover(t_glfw_window *win, int status, void *data, t_button *button)
 {
 	(void)win;
@@ -404,47 +398,24 @@ void hover(t_glfw_window *win, int status, void *data, t_button *button)
 	printf("hover updated: index: %d\n", button->index);
 }
 
+void joystick_callback(int joy, int event)
+{
+	if (event == GLFW_CONNECTED)
+		printf("connected controller %d: %s\n", joy, glfwGetJoystickName(joy));
+	else
+		printf("disconnected controller: %d\n", joy);
+}
+
 int	main(void)
 {
 	t_env			env;
 	int tick = 0;
 	int second = (int)time(NULL);
+	t_sound			sound;
 
+	sound = sound_load("assets/sounds/Hydra - Lava Reef Zone (Hydra Remix).wav");
+	player_play_sound(&sound, SOUND_LOOP);
 	env.assets = assets_load("assets/assets.json");
-//	printf("%s: %p\n", env.assets.texture_names[0], env.assets.textures[0]);
-
-	//
-	PaStream		*stream;
-	t_sound			sound1;
-	t_sound			sound2;
-	t_sound_player	player;
-
-	if (paNoError != Pa_Initialize())
-		return (0 & printf("can't load portaudio\n"));
-	PaStreamParameters outputParameters;
-	outputParameters.device = Pa_GetDefaultOutputDevice();
-	if (outputParameters.device == paNoDevice)
-		return (0 & printf("no valid sound device found\n"));
-	outputParameters.channelCount = 2;       /* stereo output */
-	outputParameters.sampleFormat = paFloat32; /* 32 bit floating int2 output */
-	outputParameters.suggestedLatency = Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
-	outputParameters.hostApiSpecificStreamInfo = NULL;
-//	sin_wave(2.0, &data);
-	sound1.data = drwav_open_and_read_file_f32("assets/sounds/Hydra - Lava Reef Zone (Hydra Remix).wav", &sound1.channels, &sound1.sampleRate, &sound1.totalSampleCount);
-	printf("loadded song, channels: %u, sr: %u, total: %llu\n", sound1.channels, sound1.sampleRate, sound1.totalSampleCount);
-	sound2.data = drwav_open_and_read_file_f32("assets/sounds/LRMonoPhase4test.wav", &sound2.channels, &sound2.sampleRate, &sound2.totalSampleCount);
-	printf("loadded song, channels: %u, sr: %u, total: %llu\n", sound2.channels, sound2.sampleRate, sound2.totalSampleCount);
-	player = (t_sound_player){.nb_sounds = 0, .playing = {
-		{.flags = SOUND_PLAY_ONCE, .currentSample = 0, .right_gain = 0, .left_gain = 0, .left_phase = 0, .right_phase = sound1.channels > 1},
-		{.flags = SOUND_LOOP, .currentSample = 0, .right_gain = 0, .left_gain = 0, .left_phase = 0, .right_phase = sound2.channels > 1}},
-		.sound = {&sound1, &sound2}};
-	if (sound1.data == NULL || sound2.data == NULL)
-		return (0 & printf("can't read audio file\n"));
-	Pa_OpenStream(&stream, NULL, &outputParameters, 44100, 0, paClipOff, paudioCallback, &player);
-	Pa_SetStreamFinishedCallback(stream, StreamFinished);
-	Pa_StartStream(stream);
-	//
-
 	if ((env.wolf3d = glfw_new_window(SX, SY, "Wolf3d", &env)) == NULL)
 		return (-42);
 	env.map_file = NULL;
@@ -469,7 +440,7 @@ int	main(void)
 	//
 	t_button	test_button1 = gui_button_click((t_int2){0, 0}, (t_int2){100, 100}, clicked, NULL);
 	t_button	test_button2 = gui_button_switch((t_int2){100, 100}, (t_int2){100, 100}, clicked, NULL);
-	t_button	test_button3 = gui_button_slider_horizontal((t_int2){200, 0}, (t_int2){100, 20}, clicked, NULL);
+	t_button	test_button3 = gui_button_slider_horizontal((t_int2){200, 0}, (t_int2){100, 20}, slider, NULL);
 	test_button1.hover_cb = hover;
 	test_button2.hover_cb = hover;
 	test_button2.active_bmp = bmp_file_load("assets/images/C_HARDPIC");
@@ -484,8 +455,13 @@ int	main(void)
 	gui_attach_to_window(env.wolf3d, &test_gui);
 	//
 
+	//
+	glfwSetJoystickCallback(joystick_callback);
+	//
+
 	while (!glfwWindowShouldClose(env.wolf3d->w))
 	{
+		printf("present: %d\n", glfwJoystickPresent(GLFW_JOYSTICK_1));
 		draw_map(env.minimap, &env);
 		ray_caster(env.player, &env, 1);
 		if (env.wolf3d->gui != NULL)
@@ -497,15 +473,15 @@ int	main(void)
 			glfwSetWindowShouldClose(env.wolf3d->w, 1);
 		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_KP_SUBTRACT))
 		{
-			player.playing[0].left_gain -= 0.1;
-			player.playing[0].right_gain -= 0.1;
-			printf("gain: %f\n", player.playing[0].left_gain);
+			sound_player()->playing[0].left_gain -= 0.1;
+			sound_player()->playing[0].right_gain -= 0.1;
+			printf("gain: %f\n", sound_player()->playing[0].left_gain);
 		}
 		if (glfwGetKey(env.wolf3d->w, GLFW_KEY_KP_ADD))
 		{
-			player.playing[0].left_gain += 0.1;
-			player.playing[0].right_gain += 0.1;
-			printf("gain: %f\n", player.playing[0].left_gain);
+			sound_player()->playing[0].left_gain += 0.1;
+			sound_player()->playing[0].right_gain += 0.1;
+			printf("gain: %f\n", sound_player()->playing[0].left_gain);
 		}
 		if (second != (int)time(NULL))
 		{
@@ -516,11 +492,8 @@ int	main(void)
 		++tick;
 	}
 	glfwTerminate();
-	Pa_StopStream(stream);
-	Pa_CloseStream(stream);
-	Pa_Terminate();
-	drwav_free(sound1.data);
-	drwav_free(sound2.data);
+	sound_player_finish();
+	sound_unload(&sound);
 	save_config("config.w3c", &env.config_file);
 	return (0);
 }

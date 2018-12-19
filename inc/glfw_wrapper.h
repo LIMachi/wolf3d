@@ -325,10 +325,19 @@ typedef struct		s_sound_playing
 
 typedef struct		s_sound_player
 {
-	int				nb_sounds;
-	t_sound			*sound[MAXIMUM_SOUND_SUPERPOSITION];
-	t_sound_playing	playing[MAXIMUM_SOUND_SUPERPOSITION];
+	PaStream			*stream;
+	PaStreamParameters	param;
+	int					nb_sounds;
+	t_sound				*sound[MAXIMUM_SOUND_SUPERPOSITION];
+	t_sound_playing		playing[MAXIMUM_SOUND_SUPERPOSITION];
 }					t_sound_player;
+
+t_sound_player							*sound_player(void);
+void									sound_player_finish(void);
+void									sound_unload(t_sound *sound);
+t_sound									sound_load(const char *path);
+void									player_play_sound(t_sound *sound,
+														t_sound_flags flags);
 
 void									noop(void);
 

@@ -61,18 +61,19 @@
     ]
   ],
   "sounds": [
-
+    "assets/sounds/Wolfenstein 3D/WSND0012",
+    "assets/sounds/Wolfenstein 3D/WSND0021"
   ],
   "animations": {
     "die": [
-      {"textures": [1, 2, 3], "sounds": [],  "speed": 1, "interuptible": false},
+      {"textures": [1, 2, 3], "sounds": [0],  "speed": 1, "interuptible": false},
       {"textures": [0], "sounds": [], "speed": 15, "interuptible": false}
     ],
     "hurt": [
       {"textures": [4, 5], "sounds": [], "speed": 0.5, "interuptible": false}
     ],
     "shoot": [
-      {"textures": [6, 7, 8], "sounds": [], "speed": 1, "interuptible": true}
+      {"textures": [6, 7, 8], "sounds": [1], "speed": 1, "interuptible": true}
     ],
     "stand": [
       {"textures": [9], "sounds": [], "speed": 1, "interuptible": true}

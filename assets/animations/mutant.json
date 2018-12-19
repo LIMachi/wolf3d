@@ -61,22 +61,26 @@
       {"transparency": 9961608, "file": "assets/images/sprites/mut/SPR_MUT_W4_8", "orientations": 128}
     ]
   ],
+  "sounds": [
+    "assets/sounds/Wolfenstein 3D/WSND0012",
+    "assets/sounds/Wolfenstein 3D/WSND0021"
+  ],
   "animations": {
     "die": [
-      {"frames": [1, 2, 3], "speed": 1, "interuptible": false},
-      {"frames": [0], "speed": 15, "interuptible": false}
+      {"textures": [1, 2, 3], "sounds": [0], "speed": 1, "interuptible": false},
+      {"textures": [0], "sounds": [], "speed": 15, "interuptible": false}
     ],
     "hurt": [
-      {"frames": [4, 5], "speed": 0.5, "interuptible": false}
+      {"textures": [4, 5], "sounds": [], "speed": 0.5, "interuptible": false}
     ],
     "shoot": [
-      {"frames": [6, 7, 8, 9], "speed": 1, "interuptible": true}
+      {"textures": [6, 7, 8, 9], "sounds": [1], "speed": 1, "interuptible": true}
     ],
     "stand": [
-      {"frames": [10], "speed": 1, "interuptible": true}
+      {"textures": [10], "sounds": [], "speed": 1, "interuptible": true}
     ],
     "walk": [
-      {"frames": [11, 12, 13, 14], "speed": 2, "interuptible": true}
+      {"textures": [11, 12, 13, 14], "sounds": [], "speed": 2, "interuptible": true}
     ]
   }
 }
