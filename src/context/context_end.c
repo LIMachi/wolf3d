@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   context_end.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,13 +13,11 @@
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
 
-int	main(void)
+int	context_end(t_env *env)
 {
-	t_env	env;
-
-	if (context_init_load(&env))
-		return (-1);
-	env.context = W3DC_MAIN_MENU;
-	context_swap(&env);
-	context_end(&env);
+	glfwTerminate();
+	sound_player_finish();
+	//assets_unload(env);
+	save_config(WOLF3D_CONFIG_W3C_PATH, &env->config_file);
+	return (0);
 }

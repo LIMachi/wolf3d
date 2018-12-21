@@ -48,7 +48,12 @@ SRCFILES = main.c \
 		   assets_load_animations.c \
 		   player_play_sound.c \
 		   sound_load.c \
-		   sound_player.c
+		   sound_player.c \
+		   context_init_load.c \
+		   context_main_menu_load.c \
+		   context_main_menu_loop.c \
+		   context_swap.c \
+		   context_end.c
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -69,7 +74,10 @@ DIRS =	parsing \
 		graphic/bmp \
 		gui \
 		assets \
-		sound
+		sound \
+		context \
+		context/init \
+		context/main_menu
 
 INCDIRS = $(addprefix -I,$(INC))
 

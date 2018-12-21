@@ -25,6 +25,11 @@
 # include "glfw_wrapper.h"
 # include <sjson.h>
 
+# define WOLF3D_ASSETS_JSON_PATH "assets/assets.json"
+# define WOLF3D_CONFIG_W3C_PATH "config.w3c"
+# define WOLF3D_DEFAULT_WINDOW_SIZE ((t_int2){.x = 1920, .y = 1080})
+# define WOLF3D_DEFAULT_WINDOW_NAME "Wolf3D"
+
 /*
 ** <stdint.h>
 ** typedef ... uint32_t
@@ -135,15 +140,39 @@ typedef struct		s_assets
 	char			**texture_names;
 }					t_assets;
 
+/*
+** contextes:
+*/
+
+# define W3DC_INIT				0
+# define W3DC_MAIN_MENU			1
+# define W3DC_NEW_GAME_MENU		2
+# define W3DC_PLAYING			3
+# define W3DC_PLAYING_MENU		4
+# define W3DC_LOAD_GAME_MENU	5
+# define W3DC_MAP_EDITOR		6
+# define W3DC_MAP_EDITOR_MENU	7
+# define W3DC_OPTIONS_MENU		8
+# define W3DC_CREDITS			9
+# define W3DC_EXIT				-1
+# define W3D_DEBUG				-2
+
 typedef struct		s_env
 {
 	t_map_file		*map_file;
 	t_config_file	config_file;
 	t_player		player;
+	int				context;
 	t_glfw_window	*wolf3d;
 	t_glfw_window	*minimap;
 	t_assets		assets;
 }					t_env;
+
+int					context_init_load(t_env *env);
+int					context_main_menu_load(t_env *env);
+int					context_main_menu_loop(t_env *env);
+int					context_end(t_env *env);
+int					context_swap(t_env *env);
 
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);

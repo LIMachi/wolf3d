@@ -13,6 +13,9 @@
     "Lava Reef": "assets/sounds/Hydra - Lava Reef Zone (Hydra Remix).wav"
   },
   "textures": {
-    "Wall": "assets/walls/Brick_Wall.bmp"
+    "Wall_1": "assets/walls/Brick_Wall.bmp",
+    "Button_Base": "assets/images/C_NOTSELECTEDPIC",
+    "Button_Hover": "assets/images/C_SELECTEDPIC",
+    "Menu": "assets/images/C_OPTIONSPIC"
   }
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   context_init_load.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,13 +13,17 @@
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
 
-int	main(void)
+int	context_init_load(t_env *env)
 {
-	t_env	env;
-
-	if (context_init_load(&env))
+	env->assets = assets_load(WOLF3D_ASSETS_JSON_PATH);
+	if ((env->wolf3d = glfw_new_window(WOLF3D_DEFAULT_WINDOW_SIZE.x,
+			WOLF3D_DEFAULT_WINDOW_SIZE.y, WOLF3D_DEFAULT_WINDOW_NAME,
+			env)) == NULL)
+	{
+		ft_printf("Could not create window: %s\n", WOLF3D_DEFAULT_WINDOW_NAME);
 		return (-1);
-	env.context = W3DC_MAIN_MENU;
-	context_swap(&env);
-	context_end(&env);
+	}
+	if (load_config(WOLF3D_CONFIG_W3C_PATH, env) == NULL)
+		default_config(env);
+	return (0);
 }

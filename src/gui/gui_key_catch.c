@@ -117,7 +117,7 @@ void				gui_key_catch(GLFWwindow *w,
 */
 	win = glfwGetWindowUserPointer(w);
 	if ((act != GLFW_PRESS && act != GLFW_REPEAT))
-		win->key_cb(w, key, scan, act, mod);
+		win->gui->key_cb(w, key, scan, act, mod);
 	else
 	{
 		if (win->gui->selected != -1)
@@ -139,8 +139,8 @@ void				gui_key_catch(GLFWwindow *w,
 				else
 					button->cb(win, button->status, button->user_data, button);
 			else
-				win->key_cb(w, key, scan, act, mod);
+				win->gui->key_cb(w, key, scan, act, mod);
 		else
-			win->key_cb(w, key, scan, act, mod);
+			win->gui->key_cb(w, key, scan, act, mod);
 	}
 }

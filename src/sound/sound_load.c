@@ -23,6 +23,24 @@ t_sound	sound_load(const char *path)
 
 void	sound_unload(t_sound *sound)
 {
+	t_sound_player	*player;
+	int				i;
+
+	player = sound_player();
+	i = -1;
+	while (++i < player->nb_sounds)
+		if (player->sound[i] == sound)
+		{
+			while (++i < player->nb_sounds - 1)
+			{
+				player->playing[i - 1] = player->playing[i];
+				player->sound[i - 1] = player->sound[i];
+			}
+			player->playing[i] = (t_sound_playing){.flags = SOUND_NONE,
+				.right_phase = 0, .left_phase = 0, .currentSample = 0,
+				.left_gain = 0.0, .right_gain = 0.0};
+			player->sound[i] = NULL;
+		}
 	sound->channels = 0;
 	drwav_free(sound->data);
 	sound->data = NULL;

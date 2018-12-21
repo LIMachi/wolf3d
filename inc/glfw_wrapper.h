@@ -258,6 +258,10 @@ struct									s_gui
 	t_button							*down;
 	t_button							*left;
 	t_button							*right;
+	GLFWmousebuttonfun					button_cb;
+	GLFWcursorposfun					pos_cb;
+	GLFWscrollfun						scroll_cb;
+	GLFWkeyfun							key_cb;
 };
 
 /*
@@ -286,10 +290,6 @@ struct									s_glfw_window
 	t_keyboard_status					keyboard;
 	void								*user_ptr;
 	t_gui								*gui;
-	GLFWmousebuttonfun					button_cb;
-	GLFWcursorposfun					pos_cb;
-	GLFWscrollfun						scroll_cb;
-	GLFWkeyfun							key_cb;
 };
 
 /*
@@ -353,11 +353,13 @@ void									gui_cursor_pos_catch(GLFWwindow *w,
 
 t_gui									gui_gui(void);
 
+void									gui_attach_to_window(t_glfw_window *win,
+												t_gui *gui,
+												int keep_original_callbacks);
+
 void									gui_draw(t_glfw_window *win,
 												t_gui *gui);
 
-void									gui_attach_to_window(t_glfw_window *win,
-															t_gui *gui);
 
 int										gui_attach_button(t_gui *gui,
 														t_button *button);

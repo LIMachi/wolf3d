@@ -53,5 +53,5 @@ void		gui_cursor_pos_catch(GLFWwindow *w, double x, double y)
 			i_update_slider(win, x, y, button);
 	}
 	else
-		win->pos_cb(w, x, y);
+		win->gui->pos_cb(w, x, y);
 }

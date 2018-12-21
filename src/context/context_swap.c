@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   context_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,13 +13,24 @@
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
 
-int	main(void)
+int	context_swap(t_env *env)
 {
-	t_env	env;
-
-	if (context_init_load(&env))
-		return (-1);
-	env.context = W3DC_MAIN_MENU;
-	context_swap(&env);
-	context_end(&env);
+	while (env->context != W3DC_EXIT && !glfwWindowShouldClose(env->wolf3d->w))
+		if (env->context == W3DC_MAIN_MENU)
+			context_main_menu_load(env);
+		else if (env->context == W3DC_NEW_GAME_MENU)
+			NULL;
+		else if (env->context == W3DC_PLAYING)
+			NULL;
+		else if (env->context == W3DC_PLAYING_MENU)
+			NULL;
+		else if (env->context == W3DC_LOAD_GAME_MENU)
+			NULL;
+		else if (env->context == W3DC_MAP_EDITOR)
+			NULL;
+		else if (env->context == W3DC_MAP_EDITOR_MENU)
+			NULL;
+		else if (env->context == W3DC_OPTIONS_MENU)
+			NULL;
+	return (0);
 }
