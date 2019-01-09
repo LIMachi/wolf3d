@@ -9,3 +9,6 @@
 	path = Makefiles
 	url = https://github.com/LIMachi/Makefiles.git
 	branch = mac
+[submodule "swiss-table"]
+	path = swiss-table
+	url = https://github.com/LIMachi/swiss-table.git
