@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/16 23:26:13 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/01/09 23:44:44 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	context_swap(t_env *env)
 		else if (env->context == W3DC_NEW_GAME_MENU)
 			NULL;
 		else if (env->context == W3DC_PLAYING)
-			NULL;
+			context_playing_load(env);
 		else if (env->context == W3DC_PLAYING_MENU)
 			NULL;
 		else if (env->context == W3DC_LOAD_GAME_MENU)

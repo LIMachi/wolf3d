@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 18:37:25 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/14 19:52:58 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/01/09 23:37:47 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,8 @@ int					context_main_menu_load(t_env *env);
 int					context_main_menu_loop(t_env *env);
 int					context_end(t_env *env);
 int					context_swap(t_env *env);
+int					context_playing_load(t_env *env);
+int					context_playing_loop(t_env *env);
 
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);

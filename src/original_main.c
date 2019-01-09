@@ -6,7 +6,7 @@
 /*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/16 23:26:13 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/01/09 23:47:05 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,9 +295,10 @@ void	ray_caster(t_player p, t_env *e, int mc)
 			draw_pixel(e->wolf3d, i, floor++, 0);
 			draw_pixel(e->wolf3d, i, sky--, 0);
 			while (floor <= (int)e->wolf3d->vb_height)
+			{
 				draw_pixel(e->wolf3d, i, floor++, 0xffffff);
-			while (sky >= 0)
 				draw_pixel(e->wolf3d, i, sky--, 0x505050);
+			}
 		}
 	}
 }

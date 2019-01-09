@@ -53,7 +53,9 @@ SRCFILES = main.c \
 		   context_main_menu_load.c \
 		   context_main_menu_loop.c \
 		   context_swap.c \
-		   context_end.c
+		   context_end.c \
+		   context_playing_load.c \
+		   context_playing_loop.c \
 
 INC = inc \
 	  glfw-3.2.1/include \
@@ -77,7 +79,8 @@ DIRS =	parsing \
 		sound \
 		context \
 		context/init \
-		context/main_menu
+		context/main_menu \
+		context/playing \
 
 INCDIRS = $(addprefix -I,$(INC))
 
