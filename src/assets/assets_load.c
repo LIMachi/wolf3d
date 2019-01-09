@@ -14,6 +14,10 @@
 
 static t_sjson_error	i_load_animations(t_sjson_object *obj, t_assets *out)
 {
+	(void)obj;
+	(void)out;
+	return (SJSON_ERROR_OK);
+	/*
 	size_t			i;
 	t_sjson_string	*path;
 
@@ -41,6 +45,7 @@ static t_sjson_error	i_load_animations(t_sjson_object *obj, t_assets *out)
 		assets_load_animation(path->data, &out->animations[i]);
 	}
 	return (SJSON_ERROR_OK);
+	*/
 }
 
 static t_sjson_error	i_load_fonts(t_sjson_object *obj, t_assets *out)
@@ -62,10 +67,13 @@ static t_sjson_error	i_load_music(t_sjson_object *obj, t_assets *out)
 static t_sjson_error	i_load_textures(t_sjson_object *obj, t_assets *out)
 {
 	size_t			i;
+	size_t			j;
+	char			*key;
+	t_sjson_value	*value;
 	t_sjson_string	*path;
 
 	printf("Loadding textures\n");
-	out->nb_textures = obj->nb_pairs;
+	out->nb_textures = obj->pair_count;
 	if (out->nb_textures == 0)
 		return (SJSON_ERROR_KO);
 	if (NULL == (out->texture_names = malloc(sizeof(char*) * out->nb_textures)))
@@ -79,13 +87,14 @@ static t_sjson_error	i_load_textures(t_sjson_object *obj, t_assets *out)
 		out->nb_textures = 0;
 		return (SJSON_ERROR_KO);
 	}
-	i = -1;
-	while (++i < obj->nb_pairs)
+	i = 0;
+	j = 0;
+	while (ft_swiss_table_iterate(obj, &i, (void**)&key, (void**)&value) == 1)
 	{
-		out->texture_names[i] = ft_strdup(obj->pairs[i]->key->data);
-		if (sjson_explorer(obj->pairs[i]->value, "$s*", &path) != 1)
+		out->texture_names[j] = ft_strdup(key);
+		if (sjson_explorer(value, "$s*", &path) != 1)
 			return (SJSON_ERROR_KO);
-		out->textures[i] = bmp_file_load(path->data);
+		out->textures[j++] = bmp_file_load(path->data);
 	}
 	return (SJSON_ERROR_OK);
 }

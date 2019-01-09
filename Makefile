@@ -4,7 +4,7 @@ CC = clang
 
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -fno-omit-frame-pointer
 
-CLIB = -L libft -lft -L libsjson -lsjson -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework Carbon -framework AudioUnit -framework AudioToolbox -framework CoreAudio -L glfw-3.2.1/freetype-2.9.1/objs/.libs -lfreetype glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib portaudio/lib/.libs/libportaudio.a portaudio/dr_wav/dr_wav.a -fsanitize=address
+CLIB = -L libft -lft swiss-table/swiss_table.a -L libsjson -lsjson -L glfw-3.2.1/src -lglfw3 -L glfw-3.2.1/glad -lglad -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework Carbon -framework AudioUnit -framework AudioToolbox -framework CoreAudio -L glfw-3.2.1/freetype-2.9.1/objs/.libs -lfreetype glfw-3.2.1/freetype-2.9.1/objs/.libs/libfreetype.6.dylib portaudio/lib/.libs/libportaudio.a portaudio/dr_wav/dr_wav.a -fsanitize=address
 
 SRCFILES = main.c \
 		   glfw_new_window.c \
