@@ -127,12 +127,15 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	double		hauteur;
 	double		angle;
 	double		real;
+	t_bmp		*texture;
 
 	double sx;
 	double sy;
 
 	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
 	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
+
+	texture = assets_get_texture(&e->assets, "Wall_1", NULL);
 
 	if (mc)
 		//fov = (double)e->config_file.fov / 100.0;
@@ -158,13 +161,13 @@ void	ray_caster(t_player p, t_env *e, int mc)
 		{
 			int tx;
 			int ty;
-			tx = (double)e->assets.textures[0]->size.x * df.where;
+			tx = (double)texture->size.x * df.where;
 //				printf("tx: %d\n", tx);
 			for (int blurp = 0; blurp < hauteur * 2; ++blurp)
 			{
-				ty = (double)e->assets.textures[0]->size.y * (blurp / (hauteur * 2));
+				ty = (double)texture->size.y * (blurp / (hauteur * 2));
 				draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - hauteur + blurp,
-					e->assets.textures[0]->data[tx + ty * e->assets.textures[0]->size.x]);
+					texture->data[tx + ty * texture->size.x]);
 			}
 			draw_pixel(e->wolf3d, i, floor++, 0);
 			draw_pixel(e->wolf3d, i, sky--, 0);

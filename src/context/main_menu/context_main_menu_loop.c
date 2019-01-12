@@ -13,21 +13,24 @@
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
 
-static void	i_draw(t_env *env, t_glfw_window *win)
+static void	i_draw(t_glfw_window *win, t_bmp *texture)
 {
 	draw_bmp(win,
 		(t_int2){WOLF3D_DEFAULT_WINDOW_SIZE.x / 2 -
-			env->assets.textures[3]->size.x, 10},
-		(t_int2){env->assets.textures[3]->size.x * 2,
-			env->assets.textures[3]->size.y * 2},
-		env->assets.textures[3]);
+			texture->size.x, 10},
+		(t_int2){texture->size.x * 2,
+			texture->size.y * 2},
+		texture);
 }
 
 int	context_main_menu_loop(t_env *env)
 {
+	t_bmp	*texture;
+
+	texture = assets_get_texture(&env->assets, "Menu", NULL);
 	while (env->context == W3DC_MAIN_MENU)
 	{
-		i_draw(env, env->wolf3d);
+		i_draw(env->wolf3d, texture);
 		gui_draw(env->wolf3d, env->wolf3d->gui);
 		glfw_refresh_window(env->wolf3d);
 		glfwPollEvents();

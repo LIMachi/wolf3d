@@ -64,6 +64,7 @@ static t_sjson_error	i_load_music(t_sjson_object *obj, t_assets *out)
 	return (SJSON_ERROR_OK);
 }
 
+/*
 static t_sjson_error	i_load_textures(t_sjson_object *obj, t_assets *out)
 {
 	size_t			i;
@@ -98,28 +99,69 @@ static t_sjson_error	i_load_textures(t_sjson_object *obj, t_assets *out)
 	}
 	return (SJSON_ERROR_OK);
 }
+*/
+
+static t_sjson_error	i_load_textures_names(t_sjson_object *obj, t_assets *out)
+{
+	char			resolved_path[PATH_MAX];
+	t_sjson_string	*path;
+	char			*name;
+	size_t			it;
+
+	it = 0;
+	while (ft_swiss_table_iterate(obj, &it, (void**)&name, (void**)&path) == 1)
+	{
+		if (sjson_explorer((t_sjson_value*)path, "$s*", &path) != 1)
+			return (SJSON_ERROR_KO);
+		realpath(path->data, resolved_path);
+		if (ft_swiss_table_find(&out->textures_names, name, NULL) == NULL)
+		{
+			if ((path = (t_sjson_string*)strdup(resolved_path)) == NULL)
+				return (SJSON_ERROR_KO);
+			if ((name = ft_strdup(name)) == NULL)
+				return (SJSON_ERROR_KO);
+			ft_swiss_table_insert(&out->textures_names, name, path);
+		}
+	}
+	return (SJSON_ERROR_OK);
+}
+
+static inline int		i_load_textures(t_assets *out)
+{
+	char	*path;
+	t_bmp	*bmp;
+	size_t	it;
+
+	it = 0;
+	while (ft_swiss_table_iterate(&out->textures_names, &it, NULL,
+			(void**)&path) == 1)
+		if (ft_swiss_table_find(&out->textures, path, NULL) == NULL)
+		{
+			if ((bmp = bmp_file_load(path)) == NULL)
+				return (-1);
+			ft_swiss_table_insert(&out->textures, path, bmp);
+		}
+	return (0);
+}
 
 t_assets				assets_load(const char *path)
 {
 	t_assets		out;
 	t_sjson_value	*root;
+	size_t			i;
 
-	out = (t_assets){.nb_animations = 0, .nb_fonts = 0, .nb_musics = 0,
-		.nb_textures = 0};
+	i = -1;
+	while (++i < 8)
+		if ((((t_swt_map*)&out)[i] = ft_swiss_table_create((t_swt_hashfun)
+				ft_basic_hash, (t_swt_cmpfun)ft_strcmp)).groups == NULL)
+			return (out);
 	if (sjson_parse_file(path, &root, SJSON_FLAG_PRINT_ERRORS, 2)
 			!= SJSON_ERROR_OK)
 		return (out);
 	sjson_explorer(root, "$o>#<>#<>#<>#", "animations", i_load_animations, &out,
 		"fonts", i_load_fonts, &out, "music", i_load_music, &out, "textures",
-		i_load_textures, &out);
-	if (out.nb_textures == 0)
-	{
-		out.nb_textures = 1;
-		out.textures = malloc(sizeof(t_bmp *));
-		out.textures[0] = ft_bmp_default();
-		out.texture_names = malloc(sizeof(char*));
-		out.texture_names[0] = ft_strdup("Wall");
-	}
+		i_load_textures_names, &out);
 	sjson_free(root);
+	i_load_textures(&out);
 	return (out);
 }

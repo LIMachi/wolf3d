@@ -29,10 +29,8 @@ static inline t_button	i_button(int x, int y, t_env *env, int context)
 
 	out = gui_button_click((t_int2){x, y}, (t_int2){200, 40}, i_callback,
 		(void*)(size_t)context);
-	if (env->assets.nb_textures > 1)
-		out.base_bmp = env->assets.textures[1];
-	if (env->assets.nb_textures > 2)
-		out.hover_bmp = env->assets.textures[2];
+	out.base_bmp = assets_get_texture(&env->assets, "Button_Base", NULL);
+	out.hover_bmp = assets_get_texture(&env->assets, "Button_Hover", NULL);
 	out.active_bmp = ft_bmp_default();
 	return (out);
 }
