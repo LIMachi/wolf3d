@@ -124,6 +124,7 @@ typedef struct		s_animations
 	t_animation_frame	*walk;
 }					t_animations;
 
+/*
 typedef struct		s_assets
 {
 	int				nb_animations;
@@ -138,6 +139,18 @@ typedef struct		s_assets
 	int				nb_textures;
 	t_bmp			**textures;
 	char			**texture_names;
+}					t_assets;
+*/
+
+typedef struct		s_assets
+{
+	t_swt_map		animations; //path -> file (cache)
+	t_swt_map		animations_names; //name -> path (id)
+	t_swt_map		fonts_names;
+	t_swt_map		sounds;
+	t_swt_map		sounds_names;
+	t_swt_map		textures;
+	t_swt_map		textures_names;
 }					t_assets;
 
 /*
@@ -169,15 +182,16 @@ typedef struct		s_env
 }					t_env;
 
 int					context_init_load(t_env *env);
-int					context_main_menu_load(t_env *env);
-int					context_main_menu_loop(t_env *env);
-int					context_end(t_env *env);
-int					context_swap(t_env *env);
-int					context_playing_load(t_env *env);
-int					context_playing_loop(t_env *env);
+void				context_main_menu_load(t_env *env);
+void				context_end(t_env *env);
+void				context_swap(t_env *env);
+void				context_playing_load(t_env *env);
+void				context_playing_loop(t_env *env);
 
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);
+t_bmp				*assets_get_texture(t_assets *assets, char *id, char *path);
+t_sound				*assets_get_sound(t_assets *assets, char *id, char *path);
 
 t_map_file			*default_map(t_env *env);
 t_map_file			*load_map(const char *path, t_env *env);

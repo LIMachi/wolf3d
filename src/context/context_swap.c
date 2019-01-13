@@ -13,9 +13,33 @@
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
 
-int	context_swap(t_env *env)
+static inline void	i_clear_callbacks(t_env *env)
+{
+	if (env->wolf3d != NULL)
+	{
+		glfwSetKeyCallback(env->wolf3d->w, NULL);
+		glfwSetScrollCallback(env->wolf3d->w, NULL);
+		glfwSetMouseButtonCallback(env->wolf3d->w, NULL);
+		glfwSetCursorPosCallback(env->wolf3d->w, NULL);
+		if (env->wolf3d->gui != NULL)
+			env->wolf3d->gui = NULL;
+	}
+	if (env->minimap != NULL)
+	{
+		glfwSetKeyCallback(env->minimap->w, NULL);
+		glfwSetScrollCallback(env->minimap->w, NULL);
+		glfwSetMouseButtonCallback(env->minimap->w, NULL);
+		glfwSetCursorPosCallback(env->minimap->w, NULL);
+		if (env->minimap->gui != NULL)
+			env->minimap->gui = NULL;
+	}
+}
+
+void				context_swap(t_env *env)
 {
 	while (env->context != W3DC_EXIT && !glfwWindowShouldClose(env->wolf3d->w))
+	{
+		i_clear_callbacks(env);
 		if (env->context == W3DC_MAIN_MENU)
 			context_main_menu_load(env);
 		else if (env->context == W3DC_NEW_GAME_MENU)
@@ -32,5 +56,5 @@ int	context_swap(t_env *env)
 			NULL;
 		else if (env->context == W3DC_OPTIONS_MENU)
 			NULL;
-	return (0);
+	}
 }

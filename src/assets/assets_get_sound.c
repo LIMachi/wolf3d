@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   context_end.c                                      :+:      :+:    :+:   */
+/*   assets_get_sound.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2018/12/16 23:26:13 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2018/12/21 00:00:00 by hmartzol          #+#    #+#             */
+/*   Updated: 2018/12/21 00:00:00 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
 
-void	context_end(t_env *env)
+t_sound	*assets_get_sound(t_assets *assets, char *id, char *path)
 {
-	glfwTerminate();
-	sound_player_finish();
-	//assets_unload(env);
-	save_config(WOLF3D_CONFIG_W3C_PATH, &env->config_file);
+	if (path == NULL)
+	{
+		if (id == NULL)
+			return (NULL);
+		if (!(path = ft_swiss_table_find(&assets->sounds_names, id, NULL)))
+			return (NULL);
+	}
+	return (ft_swiss_table_find(&assets->sounds, path, NULL));
 }
