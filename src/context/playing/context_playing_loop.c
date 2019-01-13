@@ -6,18 +6,12 @@
 /*   By: lmunoz-q <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 23:20:37 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/01/09 23:47:02 by lmunoz-q         ###   ########.fr       */
+/*   Updated: 2019/01/10 20:52:57 by lmunoz-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
-
-void	draw(t_env *env, t_glfw_window *win)
-{
-	(void)env;
-	(void)win;
-}
 
 t_collision	ray_cast(t_env *env, t_double2 pos, t_double2 ray)
 {
@@ -128,11 +122,11 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	double		angle;
 	double		real;
 
-	double sx;
-	double sy;
+//	double sx;
+//	double sy;
 
-	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
-	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
+//	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
+//	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
 
 	if (mc)
 		//fov = (double)e->config_file.fov / 100.0;
@@ -147,7 +141,7 @@ void	ray_caster(t_player p, t_env *e, int mc)
 		angle = -fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width;
 		ray = rotate_2d((t_double2){0, -1}, angle + p.look);
 		df = ray_cast(e, p.pos, ray);
-		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
+//		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
 		if (df.dist < 0.4)
 			df.dist = 0.4;
 		real = df.dist * cos(DEG_TO_RAD * angle);
@@ -177,6 +171,11 @@ void	ray_caster(t_player p, t_env *e, int mc)
 	}
 }
 
+void	draw(t_env *env, t_glfw_window *win)
+{
+	ray_caster(env->player, env, 1);
+	(void)win;
+}
 
 int		context_playing_loop(t_env *env)
 {
