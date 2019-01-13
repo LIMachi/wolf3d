@@ -146,10 +146,9 @@ typedef struct		s_assets
 {
 	t_swt_map		animations; //path -> file (cache)
 	t_swt_map		animations_names; //name -> path (id)
-	t_swt_map		fonts;
 	t_swt_map		fonts_names;
-	t_swt_map		music;
-	t_swt_map		music_names;
+	t_swt_map		sounds;
+	t_swt_map		sounds_names;
 	t_swt_map		textures;
 	t_swt_map		textures_names;
 }					t_assets;
@@ -192,6 +191,7 @@ void				context_playing_loop(t_env *env);
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);
 t_bmp				*assets_get_texture(t_assets *assets, char *id, char *path);
+t_sound				*assets_get_sound(t_assets *assets, char *id, char *path);
 
 t_map_file			*default_map(t_env *env);
 t_map_file			*load_map(const char *path, t_env *env);
