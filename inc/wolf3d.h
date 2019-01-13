@@ -38,6 +38,12 @@
 # define RAD_TO_DEG (180.0 / M_PI)
 # define DEG_TO_RAD (M_PI / 180.0)
 
+/*
+** map: w3dm
+** save: w3ds
+** config: w3dc
+*/
+
 # define W3DM_MAGIC	0x7733646D
 # define W3DS_MAGIC 0x77336473
 # define W3DC_MAGIC 0x77336463
@@ -197,6 +203,8 @@ void				assets_unload(t_assets *assets);
 t_map_file			*default_map(t_env *env);
 t_map_file			*load_map(const char *path, t_env *env);
 int					save_map(const char *path, t_map_file *header);
+int					get_maps_in_dir(const char *dirpath, char **buf,
+									size_t buf_size);
 
 t_config_file		*default_config(t_env *env);
 t_config_file		*load_config(const char *path, t_env *env);

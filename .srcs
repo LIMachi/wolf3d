@@ -2,6 +2,7 @@ SRCS = src/assets/assets_get_sound.c \
        src/assets/assets_get_texture.c \
        src/assets/assets_load.c \
        src/assets/assets_load_animations.c \
+       src/assets/assets_unload.c \
        src/context/context_end.c \
        src/context/context_swap.c \
        src/context/init/context_init_load.c \
@@ -16,7 +17,6 @@ SRCS = src/assets/assets_get_sound.c \
        src/glfw_wrapper/glfw_remove_window.c \
        src/glfw_wrapper/glfw_update_callbacks.c \
        src/glfw_wrapper/glfw_window_resize_video_buffer.c \
-       src/graphic/bmp/bmp_file_load.c \
        src/graphic/color_blend.c \
        src/graphic/draw/draw_bmp.c \
        src/graphic/draw/draw_char.c \
@@ -38,14 +38,15 @@ SRCS = src/assets/assets_get_sound.c \
        src/gui/gui_key_catch.c \
        src/main.c \
        src/map_editor.c \
+       src/maps/default_map.c \
+       src/maps/get_maps_in_dir.c \
+       src/maps/load_map.c \
+       src/maps/save_map.c \
        src/minimap/draw_map.c \
        src/noop.c \
        src/parsing/default_config.c \
-       src/parsing/default_map.c \
        src/parsing/load_config.c \
-       src/parsing/load_map.c \
        src/parsing/save_config.c \
-       src/parsing/save_map.c \
        src/sound/player_play_sound.c \
        src/sound/sound_load.c \
        src/sound/sound_player.c \
