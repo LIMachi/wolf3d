@@ -71,23 +71,13 @@ void		*click(GLFWwindow *win, int key, int act, int mod)
 	return (NULL);
 }
 
-t_env	*map_editor(t_env *env)
+t_env		*map_editor(t_env *env)
 {
-//	t_glfw_window	*win;
-
 	if (env->map_file == NULL && (default_map(env)) == NULL)
 		return (NULL);
-	if ((env->minimap = glfw_new_window(env->map_file->width * 25, env->map_file->height * 25,
-					"map editor", env)) == NULL)
+	if ((env->minimap = glfw_new_window(env->map_file->width * 25,
+			env->map_file->height * 25, "map editor", env)) == NULL)
 		return (NULL);
 	glfwSetMouseButtonCallback(env->minimap->w, (GLFWmousebuttonfun) & click);
-
-//	while (!glfwWindowShouldClose(win->w))
-//	{
-//		draw_map(win, env);
-//		glfw_refresh_window(win);
-//		glfwPollEvents();
-//	}
-//	glfw_remove_window(win);
 	return (env);
 }

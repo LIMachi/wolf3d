@@ -99,7 +99,8 @@ static t_sjson_error	i_load_musics_names(t_sjson_object *obj, t_assets *out)
 	return (SJSON_ERROR_OK);
 }
 
-static t_sjson_error	i_load_textures_names(t_sjson_object *obj, t_assets *out)
+static t_sjson_error	i_load_textures_names(t_sjson_object *obj,
+											t_assets *out)
 {
 	char			resolved_path[PATH_MAX];
 	t_sjson_string	*path;

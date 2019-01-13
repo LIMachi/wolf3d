@@ -27,7 +27,7 @@ static inline void	i_update_slider(t_glfw_window *win,
 			button->user_data, button);
 }
 
-void		gui_cursor_pos_catch(GLFWwindow *w, double x, double y)
+void				gui_cursor_pos_catch(GLFWwindow *w, double x, double y)
 {
 	t_glfw_window	*win;
 	t_button		*button;

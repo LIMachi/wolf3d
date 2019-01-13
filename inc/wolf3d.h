@@ -192,6 +192,7 @@ t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);
 t_bmp				*assets_get_texture(t_assets *assets, char *id, char *path);
 t_sound				*assets_get_sound(t_assets *assets, char *id, char *path);
+void				assets_unload(t_assets *assets);
 
 t_map_file			*default_map(t_env *env);
 t_map_file			*load_map(const char *path, t_env *env);

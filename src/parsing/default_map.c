@@ -21,8 +21,6 @@ t_map_file	*default_map(t_env *env)
 {
 	uint32_t				i;
 
-	if (env->map_file != NULL)
-		free(env->map_file);
 	if ((env->map_file = malloc(
 			sizeof(t_map_file) + 441 * sizeof(uint32_t))) == NULL)
 		return (NULL);

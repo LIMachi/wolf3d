@@ -13,7 +13,7 @@
 #include <glfw_wrapper.h>
 #include <math.h>
 
-static inline void	i_portaudio_callback(float *out,t_sound_player *player)
+static inline void	i_portaudio_callback(float *out, t_sound_player *player)
 {
 	long			i;
 	t_sound_playing	*play;

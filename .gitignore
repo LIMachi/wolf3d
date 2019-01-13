@@ -23,3 +23,4 @@ cmake-build-debug/
 42_coding_style.xml
 .dep
 .idea
+*.dSYM

@@ -16,7 +16,7 @@ static inline void	i_up(t_glfw_window *win, t_button *button)
 {
 	if (button != NULL && button->type == BUTTON_TYPE_SLIDER_VERTICAL)
 	{
-		if (button->status < button->size.y -1)
+		if (button->status < button->size.y - 1)
 			button->cb(win, ++button->status, button->user_data, button);
 	}
 	else
@@ -107,17 +107,14 @@ static inline void	i_right(t_glfw_window *win, t_button *button)
 void				gui_key_catch(GLFWwindow *w,
 								int key,
 								int scan,
-								int act,
-								int mod)
+								int act)
 {
 	t_glfw_window		*win;
 	t_button			*button;
-	/*static void	(*func[4])(t_glfw_window *, t_button *) =
-		{i_up, i_down, i_left, i_right};
-*/
+
 	win = glfwGetWindowUserPointer(w);
 	if ((act != GLFW_PRESS && act != GLFW_REPEAT))
-		win->gui->key_cb(w, key, scan, act, mod);
+		win->gui->key_cb(w, key, scan, act, 0);
 	else
 	{
 		if (win->gui->selected != -1)
@@ -135,12 +132,13 @@ void				gui_key_catch(GLFWwindow *w,
 		else if (key == GLFW_KEY_ENTER || key == GLFW_KEY_SPACE)
 			if (button != NULL)
 				if (button->type == BUTTON_TYPE_SWITCH)
-					button->cb(win, button->status ^= 1, button->user_data, button);
+					button->cb(win, button->status ^= 1,
+						button->user_data, button);
 				else
 					button->cb(win, button->status, button->user_data, button);
 			else
-				win->gui->key_cb(w, key, scan, act, mod);
+				win->gui->key_cb(w, key, scan, act, 0);
 		else
-			win->gui->key_cb(w, key, scan, act, mod);
+			win->gui->key_cb(w, key, scan, act, 0);
 	}
 }

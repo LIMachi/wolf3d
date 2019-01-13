@@ -68,7 +68,7 @@ static t_sjson_error	i_sounds(t_sjson_array *ar, t_animations *anim)
 	t_sjson_string	*s;
 	t_sound			*sound;
 
-	i= -1;
+	i = -1;
 	anim->nb_sounds = 0;
 	while (++i < ar->nb_values)
 		if (sjson_explorer(ar->values[i], "$s?") == 1)
@@ -94,14 +94,14 @@ static t_sjson_error	i_frames(t_sjson_array *ar, t_animations *anim)
 	return (SJSON_ERROR_OK);
 }
 
-t_sjson_error	assets_load_animation(const char *path, t_animations *anim)
+t_sjson_error			assets_load_animation(const char *path,
+											t_animations *anim)
 {
 	t_sjson_value	*root;
 
-	if (sjson_parse_file(path, &root, SJSON_FLAG_PRINT_ERRORS, 2) != SJSON_ERROR_OK)
+	if (sjson_parse_file(path, &root, SJSON_FLAG_PRINT_ERRORS, 2)
+			!= SJSON_ERROR_OK)
 		return (SJSON_ERROR_KO);
-//	sjson_print(2, root, 0);
-//	printf("\n");
 	sjson_explorer(root, "$o>a#$o>a#$o>>a#<o>a#<o>a#<o>a#<o>a#", "textures",
 		i_textures, anim, "sounds", i_sounds, anim, "animations", "die",
 		i_frames, anim->die, "hurt", i_frames, anim->hurt, "shoot", i_frames,
