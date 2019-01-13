@@ -181,7 +181,7 @@ void	ray_caster(t_player p, t_env *e, int mc)
 }
 
 
-int		context_playing_loop(t_env *env)
+void	context_playing_loop(t_env *env)
 {
 	while (env->context == W3DC_PLAYING)
 	{
@@ -191,6 +191,4 @@ int		context_playing_loop(t_env *env)
 		if (glfwGetKey(env->wolf3d->w, GLFW_KEY_ESCAPE))
 			env->context = W3DC_MAIN_MENU;
 	}
-
-	return (0);
 }

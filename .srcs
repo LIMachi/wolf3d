@@ -5,7 +5,6 @@ SRCS = src/assets/assets_get_texture.c \
        src/context/context_swap.c \
        src/context/init/context_init_load.c \
        src/context/main_menu/context_main_menu_load.c \
-       src/context/main_menu/context_main_menu_loop.c \
        src/context/playing/context_playing_load.c \
        src/context/playing/context_playing_loop.c \
        src/glfw_wrapper/glfw_attach_callback.c \

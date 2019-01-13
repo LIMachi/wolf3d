@@ -183,12 +183,11 @@ typedef struct		s_env
 }					t_env;
 
 int					context_init_load(t_env *env);
-int					context_main_menu_load(t_env *env);
-int					context_main_menu_loop(t_env *env);
-int					context_end(t_env *env);
-int					context_swap(t_env *env);
-int					context_playing_load(t_env *env);
-int					context_playing_loop(t_env *env);
+void				context_main_menu_load(t_env *env);
+void				context_end(t_env *env);
+void				context_swap(t_env *env);
+void				context_playing_load(t_env *env);
+void				context_playing_loop(t_env *env);
 
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);

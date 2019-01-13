@@ -72,14 +72,11 @@ void	move_player_callback(GLFWwindow *win, int key, int scan, int act, int mod)
 	move_player(env, vlook);
 }
 
-int		context_playing_load(t_env *env)
+void	context_playing_load(t_env *env)
 {
 	debug(env);
-
 	glfwSetKeyCallback(env->wolf3d->w, (GLFWkeyfun)move_player_callback);
-	glfwSetScrollCallback(env->wolf3d->w, NULL);
-	glfwSetMouseButtonCallback(env->wolf3d->w, NULL);
-	glfwSetCursorPosCallback(env->wolf3d->w, NULL);
 	env->context = W3DC_PLAYING;
-	return (context_playing_loop(env));
+	context_playing_loop(env);
+	free(env->map_file);
 }

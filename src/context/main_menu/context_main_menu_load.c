@@ -35,30 +35,38 @@ static inline t_button	i_button(int x, int y, t_env *env, int context)
 	return (out);
 }
 
-int	context_main_menu_load(t_env *env)
+static inline void		context_main_menu_loop(t_env *env)
+{
+	while (env->context == W3DC_MAIN_MENU)
+	{
+		gui_draw(env->wolf3d, env->wolf3d->gui);
+		glfw_refresh_window(env->wolf3d);
+		glfwPollEvents();
+	}
+}
+
+void					context_main_menu_load(t_env *env)
 {
 	t_gui		gui;
-	t_button	new_game;
-	t_button	load_game;
-	t_button	map_editor;
-	t_button	options;
-	t_button	credits;
-	t_button	exit_game;
+	t_button	buttons[6];
+	size_t		i;
+	t_bmp	*texture;
 
 	env->context = W3DC_MAIN_MENU;
 	gui = gui_gui();
-	new_game = i_button(560, 100, env, /*W3DC_NEW_GAME_MENU*/W3DC_PLAYING);
-	load_game = i_button(560, 250, env, W3DC_LOAD_GAME_MENU);
-	map_editor = i_button(560, 400, env, W3DC_MAP_EDITOR_MENU);
-	options = i_button(560, 550, env, W3DC_OPTIONS_MENU);
-	credits = i_button(560, 700, env, W3DC_CREDITS);
-	exit_game = i_button(560, 850, env, W3DC_EXIT);
-	gui_attach_button(&gui, &new_game);
-	gui_attach_button(&gui, &load_game);
-	gui_attach_button(&gui, &map_editor);
-	gui_attach_button(&gui, &options);
-	gui_attach_button(&gui, &credits);
-	gui_attach_button(&gui, &exit_game);
+	i = -1;
+	while (++i < 6)
+	{
+		buttons[i] = i_button(560, 100 + 150 * i, env, ((int[6]){
+			/*W3DC_NEW_GAME_MENU*/W3DC_PLAYING, W3DC_LOAD_GAME_MENU,
+			W3DC_MAP_EDITOR_MENU, W3DC_OPTIONS_MENU, W3DC_CREDITS,
+			W3DC_EXIT})[i]);
+		gui_attach_button(&gui, &buttons[i]);
+	}
 	gui_attach_to_window(env->wolf3d, &gui, 0);
-	return (context_main_menu_loop(env));
+	texture = assets_get_texture(&env->assets, "Menu", NULL);
+	draw_bmp(env->wolf3d, (t_int2){WOLF3D_DEFAULT_WINDOW_SIZE.x / 2 -
+			texture->size.x, 10}, (t_int2){texture->size.x * 2,
+			texture->size.y * 2}, texture);
+	context_main_menu_loop(env);
 }
