@@ -14,14 +14,8 @@
   },
   "textures": {
     "Wall_1": "assets/walls/Brick_Wall.bmp",
-<<<<<<< HEAD
-    "Wall_2": "assets/walls/cghanimeBMP.bmp",
-    "Button_Base": "assets/images/C_NOTSELECTEDPIC",
-    "Button_Hover": "assets/images/C_SELECTEDPIC",
-=======
     "Button_Base": "assets/images/C_NOTSELECTEDPIC.bmp",
     "Button_Hover": "assets/images/C_SELECTEDPIC.bmp",
->>>>>>> b17b055bf4395d82242012c9c1cc175086debb46
     "Menu": "assets/images/C_OPTIONSPIC"
   }
 }

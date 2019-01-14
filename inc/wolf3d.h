@@ -58,12 +58,21 @@ typedef struct		s_raycast
 	int				mapy;
 	int 			floor;
 	int 			sky;
+	int 			tx;
+	int 			ty;
+	int 			stepx;
+	int 			stepy;
+	int 			hit;
+	double 			dx;
+	double 			dy;
 	double			where;
 	double 			fov;
 	double			dist;
 	double			hauteur;
 	double			angle;
 	double			real;
+	t_bmp			*texture;
+	t_double2		firsthit;
 }					t_raycast;
 
 typedef struct		s_map_file
