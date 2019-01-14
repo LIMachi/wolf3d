@@ -344,8 +344,7 @@ void									noop(void);
 void									gui_key_catch(GLFWwindow *w,
 													int key,
 													int scan,
-													int act,
-													int mod);
+													int act);
 
 void									gui_cursor_pos_catch(GLFWwindow *w,
 															double x,
@@ -420,6 +419,9 @@ t_glfw_window							*draw_bmp(t_glfw_window *win,
 													t_int2 pos,
 													t_int2 size,
 													t_bmp *bmp);
+
+t_glfw_window							*draw_clear(t_glfw_window *win,
+													uint32_t color);
 
 int										pen_init(t_glfw_window *win);
 

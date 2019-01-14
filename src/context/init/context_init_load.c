@@ -15,6 +15,8 @@
 
 int	context_init_load(t_env *env)
 {
+	char *buf;
+
 	env->assets = assets_load(WOLF3D_ASSETS_JSON_PATH);
 	if ((env->wolf3d = glfw_new_window(WOLF3D_DEFAULT_WINDOW_SIZE.x,
 			WOLF3D_DEFAULT_WINDOW_SIZE.y, WOLF3D_DEFAULT_WINDOW_NAME,
@@ -25,5 +27,11 @@ int	context_init_load(t_env *env)
 	}
 	if (load_config(WOLF3D_CONFIG_W3C_PATH, env) == NULL)
 		default_config(env);
+	printf("test:\n");
+	if (get_maps_in_dir("maps", &buf, 1) == 1)
+	{
+		printf("map: %s\n", buf);
+		free(buf);
+	}
 	return (0);
 }

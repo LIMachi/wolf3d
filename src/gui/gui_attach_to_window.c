@@ -12,6 +12,17 @@
 
 #include <glfw_wrapper.h>
 
+static inline void	gui_button_slider(t_glfw_window *win, t_button *button,
+									double x, double y)
+{
+	if (button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
+		button->cb(win, button->status = x - button->pos.x,
+			button->user_data, button);
+	else if (button->type == BUTTON_TYPE_SLIDER_VERTICAL)
+		button->cb(win, button->status = y - button->pos.y,
+			button->user_data, button);
+}
+
 static void			gui_button_catch(GLFWwindow *w, int key, int act, int mod)
 {
 	t_glfw_window	*win;
@@ -32,14 +43,7 @@ static void			gui_button_catch(GLFWwindow *w, int key, int act, int mod)
 		else if (button->type == BUTTON_TYPE_SWITCH)
 			button->cb(win, (button->status ^= 1), button->user_data, button);
 		else
-		{
-			if (button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
-				button->cb(win, button->status = x - button->pos.x,
-					button->user_data, button);
-			else if (button->type == BUTTON_TYPE_SLIDER_VERTICAL)
-				button->cb(win, button->status = y - button->pos.y,
-					button->user_data, button);
-		}
+			gui_button_slider(win, button, x, y);
 	}
 	else
 		win->gui->button_cb(w, key, act, mod);
@@ -68,7 +72,7 @@ static inline void	clean_callbacks(t_glfw_window *win,
 {
 	gui->scroll_cb = glfwSetScrollCallback(win->w, gui_scroll_catch);
 	gui->button_cb = glfwSetMouseButtonCallback(win->w, gui_button_catch);
-	gui->key_cb = glfwSetKeyCallback(win->w, gui_key_catch);
+	gui->key_cb = glfwSetKeyCallback(win->w, (GLFWkeyfun)gui_key_catch);
 	gui->pos_cb = glfwSetCursorPosCallback(win->w, gui_cursor_pos_catch);
 	if (!keep_original_callbacks || gui->scroll_cb == NULL)
 		gui->scroll_cb = (GLFWscrollfun)noop;

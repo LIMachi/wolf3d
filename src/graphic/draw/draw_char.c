@@ -13,7 +13,7 @@
 #include <glfw_wrapper.h>
 #include <ctype.h>
 
-static inline t_int2		special(t_glfw_window *win, char c)
+static inline t_int2	special(t_glfw_window *win, char c)
 {
 	if (c == ' ' || c == '\t')
 	{
@@ -43,7 +43,7 @@ static inline double	gray(FT_Bitmap bmp, int x, int y)
 		return (0.0);
 }
 
-static inline t_int2		draw_char_0(t_glfw_window *win,
+static inline t_int2	draw_char_0(t_glfw_window *win,
 									t_int2 pos,
 									FT_GlyphSlot glyph,
 									FT_Bitmap bmp)
