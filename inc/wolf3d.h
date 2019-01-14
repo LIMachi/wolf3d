@@ -44,14 +44,21 @@
 
 # define MASK_FLAG_MOUSE_BUTTON (((uint32_t)1) << 31)
 
-typedef struct		s_collision
+typedef struct		s_raycast
 {
-	double			dist;
+	int 			sizewall;
 	int				face;
 	int				mapx;
 	int				mapy;
+	int 			floor;
+	int 			sky;
 	double			where;
-}					t_collision;
+	double 			fov;
+	double			dist;
+	double			hauteur;
+	double			angle;
+	double			real;
+}					t_raycast;
 
 typedef struct		s_map_file
 {

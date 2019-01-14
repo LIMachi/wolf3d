@@ -78,5 +78,4 @@ void	context_playing_load(t_env *env)
 	glfwSetKeyCallback(env->wolf3d->w, (GLFWkeyfun)move_player_callback);
 	env->context = W3DC_PLAYING;
 	context_playing_loop(env);
-	free(env->map_file);
 }

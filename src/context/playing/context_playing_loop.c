@@ -13,7 +13,7 @@
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
 
-t_collision	ray_cast(t_env *env, t_double2 pos, t_double2 ray)
+void	ray_cast(t_env *env, t_double2 pos, t_double2 ray, t_raycast *rc)
 {
 	int stepx;
 	int stepy;
@@ -23,71 +23,69 @@ t_collision	ray_cast(t_env *env, t_double2 pos, t_double2 ray)
 	int hit = 0;
 	double dx = fabs(1 / ray.x);
 	double dy = fabs(1 / ray.y);
-	t_collision		col;
 
-	col.mapx = (int)pos.x;
-	col.mapy = (int)pos.y;
+	rc->mapx = (int)pos.x;
+	rc->mapy = (int)pos.y;
 	if (ray.x < 0)
 	{
 		stepx = -1;
-		inter.x = (pos.x - col.mapx) * dx;
+		inter.x = (pos.x - rc->mapx) * dx;
 	}
 	else
 	{
 		stepx = 1;
-		inter.x = (col.mapx + 1.0 - pos.x) * dx;
+		inter.x = (rc->mapx + 1.0 - pos.x) * dx;
 	}
 	if (ray.y < 0)
 	{
 		stepy = -1;
-		inter.y = (pos.y - col.mapy) * dy;
+		inter.y = (pos.y - rc->mapy) * dy;
 	}
 	else
 	{
 		stepy = 1;
-		inter.y = (col.mapy + 1.0 - pos.y) * dy;
+		inter.y = (rc->mapy + 1.0 - pos.y) * dy;
 	}
 	while (hit == 0)
 	{
 		if (inter.x < inter.y)
 		{
 			inter.x += dx;
-			col.mapx += stepx;
-			col.face = 0;
+			rc->mapx += stepx;
+			rc->face = 0;
 		}
 		else
 		{
 			inter.y += dy;
-			col.mapy += stepy;
-			col.face = 1;
+			rc->mapy += stepy;
+			rc->face = 1;
 		}
 
-		if (col.mapx < 0 || col.mapx >= (int)env->map_file->width || col.mapy < 0 || col.mapy >= (int)env->map_file->height)
+		if (rc->mapx < 0 || rc->mapx >= (int)env->map_file->width || rc->mapy < 0 || rc->mapy >= (int)env->map_file->height)
 			hit = 1;
-		else if (env->map_file->map[col.mapx + col.mapy * env->map_file->width] > 0)
+		else if (env->map_file->map[rc->mapx + rc->mapy * env->map_file->width] > 0)
 			hit = 1;
 	}
 
-	if (col.face == 0)
-		col.dist = (col.mapx - pos.x + (1 - stepx) / 2) / ray.x;
+	if (rc->face == 0)
+		rc->dist = (rc->mapx - pos.x + (1 - stepx) / 2) / ray.x;
 	else
-		col.dist = (col.mapy - pos.y + (1 - stepy) / 2) / ray.y;
+		rc->dist = (rc->mapy - pos.y + (1 - stepy) / 2) / ray.y;
 
-	if (stepx < 0 && col.face == 0)
-		col.face = 2;
-	if (stepy < 0 && col.face == 1)
-		col.face = 3;
+	if (stepx < 0 && rc->face == 0)
+		rc->face = 2;
+	if (stepy < 0 && rc->face == 1)
+		rc->face = 3;
 	//return ((t_double2){.x = pos.x + ray.x * dist, .y = pos.y + ray.y * dist});
-	if (col.face == 0)
-		col.where = pos.y + col.dist * ray.y;
-	if (col.face == 1)
-		col.where = pos.x + col.dist * ray.x;
-	if (col.face == 2)
-		col.where = pos.y + col.dist * ray.y;
-	if (col.face == 3)
-		col.where = pos.x + col.dist * ray.x;
-	col.where -= (int)col.where;
-	return (col);
+	if (rc->face == 0)
+		rc->where = pos.y + rc->dist * ray.y;
+	if (rc->face == 1)
+		rc->where = pos.x + rc->dist * ray.x;
+	if (rc->face == 2)
+		rc->where = pos.y + rc->dist * ray.y;
+	if (rc->face == 3)
+		rc->where = pos.x + rc->dist * ray.x;
+	rc->where -= (int)rc->where;
 }
 
 /*
@@ -111,64 +109,49 @@ t_double2	vecfadd(t_double2 v1, t_double2 v2)
 
 void	ray_caster(t_player p, t_env *e, int mc)
 {
-	double		fov;
 	t_double2	ray;
 	size_t		i;
-	t_collision	df;
-	int			sizewall = 650;
-	int			floor;
-	int			sky;
-	double		hauteur;
-	double		angle;
-	double		real;
+	t_raycast	rc;
+
+	rc.sizewall = 650;
 	t_bmp		*texture;
-
-//	double sx;
-//	double sy;
-
-//	sx = (double)e->minimap->vb_width / (double)e->map_file->width;
-//	sy = (double)e->minimap->vb_height / (double)e->map_file->height;
 
 	texture = assets_get_texture(&e->assets, "Wall_1", NULL);
 
 	if (mc)
 		//fov = (double)e->config_file.fov / 100.0;
-		fov = 60.0;
+		rc.fov = 60.0;
 	else
-		fov = 60.0;
+		rc.fov = 60.0;
 	i = -1;
 	while (++i < e->wolf3d->vb_width)
 	{
-		/*collision = ray_cast(e, p.pos,
-			p.look - fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width);*/
-		angle = -fov / 2.0 + fov * (double)i / (double)e->wolf3d->vb_width;
-		ray = rotate_2d((t_double2){0, -1}, angle + p.look);
-		df = ray_cast(e, p.pos, ray);
-//		draw_line(e->minimap, vecftoveci(p.pos, sx, sy), vecftoveci(vecfadd(p.pos, vecfscale(ray, df.dist)), sx, sy), 0xFFFF00);
-		if (df.dist < 0.4)
-			df.dist = 0.4;
-		real = df.dist * cos(DEG_TO_RAD * angle);
-		hauteur = (sizewall) / real;
-		floor = e->wolf3d->vb_height / 2 + hauteur;
-		sky = e->wolf3d->vb_height / 2 - hauteur;
+		rc.angle = -rc.fov / 2.0 + rc.fov * (double)i / (double)e->wolf3d->vb_width;
+		ray = rotate_2d((t_double2){0, -1}, rc.angle + p.look);
+		ray_cast(e, p.pos, ray, &rc);
+		if (rc.dist < 0.4)
+			rc.dist = 0.4;
+		rc.real = rc.dist * cos(DEG_TO_RAD * rc.angle);
+		rc.hauteur = (rc.sizewall) / rc.real;
+		rc.floor = e->wolf3d->vb_height / 2 + rc.hauteur;
+		rc.sky = e->wolf3d->vb_height / 2 - rc.hauteur;
 		if (mc)
 		{
 			int tx;
 			int ty;
-			tx = (double)texture->size.x * df.where;
-//				printf("tx: %d\n", tx);
-			for (int blurp = 0; blurp < hauteur * 2; ++blurp)
+			tx = (double)texture->size.x * rc.where;
+			for (int blurp = 0; blurp < rc.hauteur * 2; ++blurp)
 			{
-				ty = (double)texture->size.y * (blurp / (hauteur * 2));
-				draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - hauteur + blurp,
+				ty = (double)texture->size.y * (blurp / (rc.hauteur * 2));
+				draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - rc.hauteur + blurp,
 					texture->data[tx + ty * texture->size.x]);
 			}
-			draw_pixel(e->wolf3d, i, floor++, 0);
-			draw_pixel(e->wolf3d, i, sky--, 0);
-			while (floor <= (int)e->wolf3d->vb_height)
+			draw_pixel(e->wolf3d, i, rc.floor++, 0);
+			draw_pixel(e->wolf3d, i, rc.sky--, 0);
+			while (rc.floor <= (int)e->wolf3d->vb_height)
 			{
-				draw_pixel(e->wolf3d, i, floor++, 0xffffff);
-				draw_pixel(e->wolf3d, i, sky--, 0x505050);
+				draw_pixel(e->wolf3d, i, rc.floor++, 0xffffff);
+				draw_pixel(e->wolf3d, i, rc.sky--, 0x505050);
 			}
 		}
 	}
