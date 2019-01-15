@@ -49,20 +49,18 @@ static inline void	i_dda(t_env *env, t_raycast *rc, t_double2 *pos, t_double2 *r
 	if (rc->stepy < 0 && rc->face == 1)
 		rc->face = 3;
 	//return ((t_double2){.x = pos.x + ray.x * dist, .y = pos.y + ray.y * dist});
-	if (rc->face == 0)
+	if (rc->face == 0 || rc->face == 2)
 		rc->where = pos->y + rc->dist * ray->y;
-	if (rc->face == 1)
+	else
 		rc->where = pos->x + rc->dist * ray->x;
-	if (rc->face == 2)
-		rc->where = pos->y + rc->dist * ray->y;
-	if (rc->face == 3)
-		rc->where = pos->x + rc->dist * ray->x;
+	rc->where -= (int)rc->where;
 	rc->real = rc->dist * cos(DEG_TO_RAD * rc->angle);
 	rc->hauteur = rc->sizewall / rc->real;
-	rc->where -= (int)rc->where;
 	rc->floor = env->wolf3d->vb_height / 2 + rc->hauteur;
 	rc->sky = env->wolf3d->vb_height / 2 - rc->hauteur;
 }
+
+
 
 void	dda(t_env *env, t_double2 pos, t_double2 ray, t_raycast *rc)
 {
@@ -112,10 +110,53 @@ t_double2	vecfadd(t_double2 v1, t_double2 v2)
 	return ((t_double2){.x = v1.x + v2.x, .y = v1.y + v2.y});
 }
 
+void 	i_floor_casting(t_env *e, t_raycast *rc, t_player *p, size_t i)
+{
+	while (rc->floor <= (int)e->wolf3d->vb_height)
+	{
+		rc->cdist = e->wolf3d->vb_height / (2.0 * rc->floor - e->wolf3d->vb_height);
+		rc->fact = rc->cdist / rc->real;
+		rc->cfx = rc->fact * rc->floorx + (1.0 - rc->fact) * p->pos.x;
+		rc->cfy = rc->fact * rc->floory + (1.0 - rc->fact) * p->pos.y;
+		rc->tx = (int)(rc->cfx * rc->texture->size.x) % rc->texture->size.x;
+		rc->ty = (int)(rc->cfy * rc->texture->size.y) % rc->texture->size.y;
+
+		draw_pixel(e->wolf3d, i, ++rc->floor, rc->texture->data[rc->tx + rc->ty * rc->texture->size.x]);
+		draw_pixel(e->wolf3d, i, --rc->sky, rc->texture->data[rc->tx + rc->ty * rc->texture->size.x]);
+	}
+}
+
+void 	floor_casting(t_env *e, t_raycast *rc, t_player *p, size_t i)
+{
+	if (rc->face == 0)
+	{
+		rc->floorx = rc->mapx;
+		rc->floory = rc->mapy + rc->where;
+	}
+	else if (rc->face == 2)
+	{
+		rc->floorx = rc->mapx + 1.0;
+		rc->floory = rc->mapy + rc->where;
+	}
+	else if (rc->face == 1)
+	{
+		rc->floorx = rc->mapx + rc->where;
+		rc->floory = rc->mapy;
+	}
+	else
+	{
+		rc->floorx = rc->mapx + rc->where;
+		rc->floory = rc->mapy + 1.0;
+	}
+	i_floor_casting(e, rc, p, i);
+}
+
 void	draw_wolf(t_env *e, t_player p, t_raycast *rc, size_t i)
 {
 	t_double2	ray;
+	size_t		j;
 
+	j = 0;
 	rc->angle = -rc->fov / 2.0 + rc->fov * (double)i / (double)e->wolf3d->vb_width;
 	ray = rotate_2d((t_double2){0, -1}, rc->angle + p.look);
 	dda(e, p.pos, ray, rc);
@@ -123,19 +164,20 @@ void	draw_wolf(t_env *e, t_player p, t_raycast *rc, size_t i)
 		rc->dist = 0.4;
 
 	rc->tx = (double)rc->texture->size.x * rc->where;
-	for (int blurp = 0; blurp < rc->hauteur * 2; ++blurp)
+	while (j++ < rc->hauteur * 2)
 	{
-		rc->ty = (double)rc->texture->size.y * (blurp / (rc->hauteur * 2));
-		draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - rc->hauteur + blurp,
+		rc->ty = (double)rc->texture->size.y * (j / (rc->hauteur * 2));
+		draw_pixel(e->wolf3d, i, e->wolf3d->vb_height / 2 - rc->hauteur + j,
 			rc->texture->data[rc->tx + rc->ty * rc->texture->size.x]);
 	}
 	draw_pixel(e->wolf3d, i, rc->floor++, 0);
 	draw_pixel(e->wolf3d, i, rc->sky--, 0);
-	while (rc->floor <= (int)e->wolf3d->vb_height)
+	floor_casting(e, rc, &p, i);
+/*	while (rc->floor <= (int)e->wolf3d->vb_height)
 	{
 		draw_pixel(e->wolf3d, i, rc->floor++, 0xffffff);
 		draw_pixel(e->wolf3d, i, rc->sky--, 0x505050);
-	}
+	}*/
 }
 
 void	ray_caster(t_player p, t_env *e, int mc)

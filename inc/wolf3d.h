@@ -68,9 +68,15 @@ typedef struct		s_raycast
 	double			where;
 	double 			fov;
 	double			dist;
+	double 			cdist;
 	double			hauteur;
 	double			angle;
 	double			real;
+	double 			floorx;
+	double 			floory;
+	double			cfx;
+	double 			cfy;
+	double 			fact;
 	t_bmp			*texture;
 	t_double2		firsthit;
 }					t_raycast;
