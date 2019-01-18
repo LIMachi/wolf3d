@@ -23,14 +23,16 @@ void	move_player(t_env *env, t_double2 vlook)
 	t_int2 pos_map;
 	t_int2 delta_map;
 
-	pos_map = (t_int2){.x = env->player.pos.x + vlook.x, .y = env->player.pos.y + vlook.y};
+	pos_map = (t_int2){.x = env->player.pos.x + vlook.x, .y = env->player.pos.y
+		+ vlook.y};
 	delta_map = (t_int2){.x = pos_map.x - (int)env->player.pos.x,
 		.y = pos_map.y - (int)env->player.pos.y};
 	if (env->player.pos.x + vlook.x < 0.0)
 		env->player.pos.x = 0.01;
 	else if (env->player.pos.x + vlook.x >= (double)env->map_file->width - 1)
 		env->player.pos.x = (double)env->map_file->width - 1.01;
-	else if (delta_map.x && env->map_file->map[pos_map.x + pos_map.y * env->map_file->width])
+	else if (delta_map.x && env->map_file->map[pos_map.x + pos_map.y
+		* env->map_file->width])
 		NULL;
 	else
 		env->player.pos.x += vlook.x;
@@ -38,7 +40,8 @@ void	move_player(t_env *env, t_double2 vlook)
 		env->player.pos.y = 0.01;
 	else if (env->player.pos.y + vlook.y >= (double)env->map_file->height - 1)
 		env->player.pos.y = (double)env->map_file->height - 1.01;
-	else if (delta_map.y && env->map_file->map[pos_map.x + pos_map.y * env->map_file->width])
+	else if (delta_map.y && env->map_file->map[pos_map.x + pos_map.y
+		* env->map_file->width])
 		NULL;
 	else
 		env->player.pos.y += vlook.y;

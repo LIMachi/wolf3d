@@ -52,7 +52,8 @@
 
 typedef struct		s_raycast
 {
-	int 			sizewall;
+	int 			drawstart;
+	int 			drawend;
 	int				face;
 	int				mapx;
 	int				mapy;
@@ -78,6 +79,8 @@ typedef struct		s_raycast
 	double 			cfy;
 	double 			fact;
 	t_bmp			*texture;
+	t_bmp			*texturen2;
+	t_bmp			*skybox;
 	t_double2		firsthit;
 }					t_raycast;
 

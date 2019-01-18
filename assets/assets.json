@@ -14,6 +14,8 @@
   },
   "textures": {
     "Wall_1": "assets/walls/Brick_Wall.bmp",
+    "dancefloor": "assets/walls/grass.bmp",
+    "skybox": "assets/walls/skybox.bmp",
     "Button_Base": "assets/images/C_NOTSELECTEDPIC.bmp",
     "Button_Hover": "assets/images/C_SELECTEDPIC.bmp",
     "Menu": "assets/images/C_OPTIONSPIC"
