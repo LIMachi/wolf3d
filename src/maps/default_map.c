@@ -30,6 +30,11 @@ t_map_file	*default_map(t_env *env)
 	while (++i < 441)
 		env->map_file->map[i] =
 			i % 21 == 0 || i % 21 == 20 || i < 21 || i > 419;
+	env->map_file->map[21 * 2 + 5] = 1;
+	env->map_file->map[21 * 3 + 15] = 1;
+	env->map_file->map[21 * 4 + 5] = 1;
+	env->map_file->map[21 * 9 + 5] = 1;
+	env->map_file->map[21 * 5 + 1] = 1;
 	env->player.pos = (t_double2){.x = env->map_file->startx + 0.5,
 								.y = env->map_file->starty + 0.5};
 	env->player.look = (double)env->map_file->look / 100.0;
