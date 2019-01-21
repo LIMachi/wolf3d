@@ -47,7 +47,7 @@ int	get_maps_in_dir(const char *dirpath, char **buf, size_t buf_size)
 		magic = 0;
 		read(fd, &magic, sizeof(uint32_t));
 		if (magic == W3DM_MAGIC && ++size < (int)buf_size && buf != NULL)
-			buf[size] = ft_strdup(dp->d_name);
+			buf[size] = ft_strdup(i_path(dirpath, dp->d_name));
 		close(fd);
 	}
 	closedir(dirp);

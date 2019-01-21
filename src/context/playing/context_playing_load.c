@@ -13,11 +13,6 @@
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
 
-void	debug(t_env *env)
-{
-	default_map(env);
-}
-
 void	move_player(t_env *env, t_double2 vlook)
 {
 	t_int2 pos_map;
@@ -74,9 +69,7 @@ void	move_player_callback(GLFWwindow *win, int key, int scan, int act, int mod)
 
 void	context_playing_load(t_env *env)
 {
-	debug(env);
 	glfwSetKeyCallback(env->wolf3d->w, (GLFWkeyfun)move_player_callback);
 	env->context = W3DC_PLAYING;
 	context_playing_loop(env);
-	free(env->map_file);
 }

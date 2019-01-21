@@ -1,0 +1,35 @@
+{
+  "title": "Main Menu",
+  "font": "assets/assets.json:fonts:Comic",
+  "clear_color": 8912896,
+  "elements": [
+    {"type": "image", "position": ["50%v", "10%v"], "size": ["20%v", "10%v"],
+      "bitmap": "assets/assets.json:textures:Menu"},
+    {"id": "new_game", "type": "composite", "elements":[
+      {"id": "button", "type": "button/click", "position": ["40%v", "20%v"],
+        "size": ["10%v", "5%v"], "button_base": "assets/assets.json:textures:Button_Base",
+        "button_hover": "assets/assets.json:textures:Button_Hover", "click": "context = 2;"},
+      {"id": "text", "type": "text", "position": ["150%r", "0%r"], "size": ["10%v", "5%v"], "text": "New Game"}
+    ]},
+    {"id": "load_game", "type": "copy", "copy": "new_game", "elements":[
+      {"id": "button", "position": ["40%v", "33%v"], "click": "context = 5;"},
+      {"id": "text", "text": "Load Game"}
+    ]},
+    {"id": "map_editor", "type": "copy", "copy": "new_game", "elements":[
+      {"id": "button", "position": ["40%v", "46%v"], "click": "context = 7;"},
+      {"id": "text", "text": "Map Editor"}
+    ]},
+    {"id": "options", "type": "copy", "copy": "new_game", "elements":[
+      {"id": "button", "position": ["40%v", "59%v"], "click": "context = 8;"},
+      {"id": "text", "text": "Optiond"}
+    ]},
+    {"id": "credits", "type": "copy", "copy": "new_game", "elements":[
+      {"id": "button", "position": ["40%v", "72%v"], "click": "context = 9;"},
+      {"id": "text", "text": "Credits"}
+    ]},
+    {"id": "exit", "type": "copy", "copy": "new_game", "elements":[
+      {"id": "button", "position": ["40%v", "85%v"], "click": "context = -1;"},
+      {"id": "text", "text": "Exit"}
+    ]}
+  ]
+}

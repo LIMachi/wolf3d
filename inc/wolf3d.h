@@ -193,6 +193,7 @@ void				context_end(t_env *env);
 void				context_swap(t_env *env);
 void				context_playing_load(t_env *env);
 void				context_playing_loop(t_env *env);
+void				context_new_game_menu_load(t_env *env);
 
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);

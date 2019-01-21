@@ -43,7 +43,7 @@ void				context_swap(t_env *env)
 		if (env->context == W3DC_MAIN_MENU)
 			context_main_menu_load(env);
 		else if (env->context == W3DC_NEW_GAME_MENU)
-			NULL;
+			context_new_game_menu_load(env);
 		else if (env->context == W3DC_PLAYING)
 			context_playing_load(env);
 		else if (env->context == W3DC_PLAYING_MENU)
