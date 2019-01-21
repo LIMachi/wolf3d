@@ -352,6 +352,8 @@ void									gui_cursor_pos_catch(GLFWwindow *w,
 
 t_gui									gui_gui(void);
 
+void									gui_destroy(t_gui *gui);
+
 void									gui_attach_to_window(t_glfw_window *win,
 												t_gui *gui,
 												int keep_original_callbacks);

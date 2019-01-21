@@ -74,6 +74,7 @@ void					context_new_game_menu_load(t_env *env)
 	t_gui		gui;
 	t_button	*buttons;
 	size_t		c;
+	size_t		i;
 	char		**files;
 
 	env->context = W3DC_NEW_GAME_MENU;
@@ -92,13 +93,17 @@ void					context_new_game_menu_load(t_env *env)
 	}
 	buttons[c] = i_button(100, env, NULL);
 	gui_attach_button(&gui, &buttons[c]);
-	while (c--)
+	i = c;
+	while (i--)
 	{
-		buttons[c] = i_button(200 + 150 * c, env, files[c]);
-		gui_attach_button(&gui, &buttons[c]);
+		buttons[i] = i_button(200 + 150 * i, env, files[i]);
+		gui_attach_button(&gui, &buttons[i]);
 	}
 	gui_attach_to_window(env->wolf3d, &gui, 0);
 	context_new_game_loop(env);
+	while (c--)
+		free(files[c]);
 	free(files);
 	free(buttons);
+	gui_destroy(&gui);
 }

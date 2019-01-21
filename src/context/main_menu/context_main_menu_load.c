@@ -77,4 +77,5 @@ void					context_main_menu_load(t_env *env)
 	gui_attach_to_window(env->wolf3d, &gui, 0);
 	texture = assets_get_texture(&env->assets, "Menu", NULL);
 	context_main_menu_loop(env, texture);
+	gui_destroy(&gui);
 }
