@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   context_new_game_menu_load.c                       :+:      :+:    :+:   */
+/*   context_load_game_menu_load.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -57,7 +57,7 @@ static inline t_button	i_button(int y, t_env *env, char *file)
 	return (out);
 }
 
-static inline void		context_new_game_loop(t_env *env)
+static inline void		context_load_game_menu_loop(t_env *env)
 {
 	int		i;
 	int		y;
@@ -83,7 +83,7 @@ static inline void		context_new_game_loop(t_env *env)
 	}
 }
 
-void					context_new_game_menu_load(t_env *env)
+void					context_load_game_menu_load(t_env *env)
 {
 	t_gui		gui;
 	t_button	*buttons;
@@ -113,7 +113,7 @@ void					context_new_game_menu_load(t_env *env)
 		gui_attach_button(&gui, &buttons[i]);
 	}
 	gui_attach_to_window(env->wolf3d, &gui, 0);
-	context_new_game_loop(env);
+	context_load_game_menu_loop(env);
 	while (c--)
 		free(files[c]);
 	free(files);
