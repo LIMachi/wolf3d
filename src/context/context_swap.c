@@ -56,7 +56,7 @@ void				context_swap(t_env *env)
 		else if (env->context == W3DC_PLAYING_MENU)
 			context_in_game_menu_load(env);
 		else if (env->context == W3DC_LOAD_GAME_MENU)
-			NULL;
+			context_load_game_menu_load(env);
 		else if (env->context == W3DC_MAP_EDITOR)
 			NULL;
 		else if (env->context == W3DC_MAP_EDITOR_MENU)

@@ -223,6 +223,7 @@ void				context_playing_load(t_env *env);
 void				context_playing_loop(t_env *env);
 void				context_new_game_menu_load(t_env *env);
 void				context_in_game_menu_load(t_env *env);
+void				context_load_game_menu_load(t_env *env);
 
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);
@@ -234,6 +235,11 @@ t_map_file			*default_map(t_env *env);
 t_map_file			*load_map(const char *path, t_env *env);
 int					save_map(const char *path, t_map_file *header);
 int					get_maps_in_dir(const char *dirpath, char **buf,
+									size_t buf_size);
+
+int					save(const char *path, t_env *env);
+int					load(const char *path, t_env *env);
+int					get_saves_in_dir(const char *dirpath, char **buf,
 									size_t buf_size);
 
 t_config_file		*default_config(t_env *env);

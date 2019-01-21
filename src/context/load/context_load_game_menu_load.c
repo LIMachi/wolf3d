@@ -22,7 +22,7 @@ static void				i_callback(t_glfw_window *win,
 	(void)button;
 	if ((size_t)data > 10)
 	{
-		load_map((char*)data, (t_env*)win->user_ptr);
+		load((char*)data, (t_env*)win->user_ptr);
 		set_context((t_env*)win->user_ptr, W3DC_PLAYING);
 	}
 	else if ((size_t)data == 0)
@@ -63,7 +63,7 @@ static inline void		context_load_game_menu_loop(t_env *env)
 	int		y;
 	char	*text;
 
-	while (env->context == W3DC_NEW_GAME_MENU)
+	while (env->context == W3DC_LOAD_GAME_MENU)
 	{
 		draw_clear(env->wolf3d, 0x880000);
 		i = -1;
@@ -71,7 +71,7 @@ static inline void		context_load_game_menu_loop(t_env *env)
 		{
 			y = env->wolf3d->gui->buttons[i]->pos.y;
 			pen_set_work_area(env->wolf3d, (t_int2){775, y},
-				(t_int2){1000, y + 60});
+				(t_int2){1500, y + 100});
 			if ((text = (char*)env->wolf3d->gui->buttons[i]->user_data) != NULL)
 				draw_text(env->wolf3d, (t_int2){775, y}, text, 0);
 			else
@@ -92,13 +92,13 @@ void					context_load_game_menu_load(t_env *env)
 	char		**files;
 
 	gui = gui_gui();
-	c = get_maps_in_dir("maps", NULL, -1);
+	c = get_saves_in_dir("saves", NULL, -1);
 	if ((files = malloc(sizeof(char *) * c)) == NULL)
 	{
 		env->context = W3DC_EXIT;
 		return ;
 	}
-	c = get_maps_in_dir("maps", files, c);
+	c = get_saves_in_dir("saves", files, c);
 	if ((buttons = malloc(sizeof(t_button) * (c + 1))) == NULL)
 	{
 		env->context = W3DC_EXIT;

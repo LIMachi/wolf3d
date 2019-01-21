@@ -26,15 +26,13 @@ static void				i_callback(t_glfw_window *win,
 	e = (t_env*)win->user_ptr;
 	c = (int)(size_t)data;
 	if (c == 0)
-	{
-		//save
-	}
+		save("saves/test.w3ds", e);
 	else if (c == 1)
 		set_context(e, W3DC_LOAD_GAME_MENU);
 	else if (c == 2)
 		set_context(e, W3DC_MAIN_MENU);
 	else
-		set_context(e, e->prev_context);
+		set_context(e, W3DC_PLAYING);
 }
 
 static inline t_button	i_button(int y, t_env *env, int context, char *text)

@@ -40,7 +40,7 @@ static inline t_button	i_button(int y, t_env *env, char *file)
 	out.base_bmp = assets_get_texture(&env->assets, "Button_Base", NULL);
 	out.hover_bmp = assets_get_texture(&env->assets, "Button_Hover", NULL);
 	out.active_bmp = ft_bmp_default();
-	pen_set_work_area(env->wolf3d, (t_int2){775, y}, (t_int2){1000, y + 60});
+	pen_set_work_area(env->wolf3d, (t_int2){775, y}, (t_int2){1500, y + 100});
 	if (file != NULL)
 	{
 		c = (size_t)(ft_strrchr(file, '.') - file);
