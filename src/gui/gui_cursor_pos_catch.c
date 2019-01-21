@@ -32,8 +32,12 @@ void				gui_cursor_pos_catch(GLFWwindow *w, double x, double y)
 	t_glfw_window	*win;
 	t_button		*button;
 	int				i;
+	int				t[2];
 
 	win = glfwGetWindowUserPointer(w);
+	glfwGetWindowSize(win->w, &t[0], &t[1]);
+	x *= (double)win->vb_width / (double)t[0];
+	y *= (double)win->vb_height / (double)t[1];
 	if (win->gui->selected != -1)
 		win->gui->buttons[win->gui->selected]->hover = 0;
 	i = win->gui->nb_buttons;
