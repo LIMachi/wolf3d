@@ -10,10 +10,11 @@ static void				i_callback(t_glfw_window *win,
 	if ((size_t)data > 10)
 	{
 		load_map((char*)data, (t_env*)win->user_ptr);
-		((t_env*)win->user_ptr)->context = W3DC_PLAYING;
+		set_context((t_env*)win->user_ptr, W3DC_PLAYING);
 	}
 	else if ((size_t)data == 0)
-		((t_env*)win->user_ptr)->context = W3DC_MAIN_MENU;
+		set_context((t_env*)win->user_ptr,
+			((t_env*)win->user_ptr)->prev_context);
 }
 
 static inline t_button	i_button(int y, t_env *env, char *file)
@@ -61,7 +62,7 @@ static inline void		context_new_game_loop(t_env *env)
 			if ((text = (char*)env->wolf3d->gui->buttons[i]->user_data) != NULL)
 				draw_text(env->wolf3d, (t_int2){775, y}, text, 0);
 			else
-				draw_text(env->wolf3d, (t_int2){775, y}, "Main Menu", 0);
+				draw_text(env->wolf3d, (t_int2){775, y}, "Back", 0);
 		}
 		gui_draw(env->wolf3d, env->wolf3d->gui);
 		glfw_refresh_window(env->wolf3d);
@@ -77,7 +78,6 @@ void					context_new_game_menu_load(t_env *env)
 	size_t		i;
 	char		**files;
 
-	env->context = W3DC_NEW_GAME_MENU;
 	gui = gui_gui();
 	c = get_maps_in_dir("maps", NULL, -1);
 	if ((files = malloc(sizeof(char *) * c)) == NULL)

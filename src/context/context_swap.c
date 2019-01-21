@@ -35,6 +35,13 @@ static inline void	i_clear_callbacks(t_env *env)
 	}
 }
 
+int					set_context(t_env *env, int context)
+{
+	env->prev_context = env->context;
+	env->context = context;
+	return (env->prev_context);
+}
+
 void				context_swap(t_env *env)
 {
 	while (env->context != W3DC_EXIT && !glfwWindowShouldClose(env->wolf3d->w))
@@ -47,7 +54,7 @@ void				context_swap(t_env *env)
 		else if (env->context == W3DC_PLAYING)
 			context_playing_load(env);
 		else if (env->context == W3DC_PLAYING_MENU)
-			NULL;
+			context_in_game_menu_load(env);
 		else if (env->context == W3DC_LOAD_GAME_MENU)
 			NULL;
 		else if (env->context == W3DC_MAP_EDITOR)

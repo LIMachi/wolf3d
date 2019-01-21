@@ -73,6 +73,5 @@ void	move_player_callback(GLFWwindow *win, int key, int scan, int act, int mod)
 void	context_playing_load(t_env *env)
 {
 	glfwSetKeyCallback(env->wolf3d->w, (GLFWkeyfun)move_player_callback);
-	env->context = W3DC_PLAYING;
 	context_playing_loop(env);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   context_main_menu_load.c                           :+:      :+:    :+:   */
+/*   context_in_game_menu_load.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmunoz-q <lmunoz-q@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmartzol <hmartzol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/06 11:52:12 by lmunoz-q          #+#    #+#             */
-/*   Updated: 2019/01/09 23:39:22 by lmunoz-q         ###   ########.fr       */
+/*   Created: 2019/01/01 00:00:00 by hmartzol          #+#    #+#             */
+/*   Updated: 2019/01/01 00:00:00 by hmartzol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,23 @@ static void				i_callback(t_glfw_window *win,
 									void *data,
 									t_button *button)
 {
+	t_env	*e;
+	int		c;
+
 	(void)status;
 	(void)button;
-	set_context((t_env*)win->user_ptr, (int)(size_t)data);
+	e = (t_env*)win->user_ptr;
+	c = (int)(size_t)data;
+	if (c == 0)
+	{
+		//save
+	}
+	else if (c == 1)
+		set_context(e, W3DC_LOAD_GAME_MENU);
+	else if (c == 2)
+		set_context(e, W3DC_MAIN_MENU);
+	else
+		set_context(e, e->prev_context);
 }
 
 static inline t_button	i_button(int y, t_env *env, int context, char *text)
@@ -37,12 +51,9 @@ static inline t_button	i_button(int y, t_env *env, int context, char *text)
 	return (out);
 }
 
-static inline void		context_main_menu_loop(t_env *env, t_bmp *texture)
+static inline void		context_in_game_menu_loop(t_env *env)
 {
-	draw_bmp(env->wolf3d, (t_int2){WOLF3D_DEFAULT_WINDOW_SIZE.x / 2 -
-		texture->size.x, 10}, (t_int2){texture->size.x * 2,
-		texture->size.y * 2}, texture);
-	while (env->context == W3DC_MAIN_MENU)
+	while (env->context == W3DC_PLAYING_MENU)
 	{
 		gui_draw(env->wolf3d, env->wolf3d->gui);
 		glfw_refresh_window(env->wolf3d);
@@ -50,31 +61,22 @@ static inline void		context_main_menu_loop(t_env *env, t_bmp *texture)
 	}
 }
 
-void					context_main_menu_load(t_env *env)
+void	context_in_game_menu_load(t_env *env)
 {
 	t_gui		gui;
-	t_button	buttons[6];
+	t_button	buttons[4];
 	size_t		i;
-	t_bmp		*texture;
-	char		*font_path;
 
-	font_path = ft_swiss_table_find(&env->assets.fonts_names, "Comic",
-		PEN_DEFAULT_FONT);
-	pen_set_font(env->wolf3d, font_path, (t_int2){32, 32}, (t_int2){2, 2});
 	draw_clear(env->wolf3d, 0x880000);
 	gui = gui_gui();
 	i = -1;
-	while (++i < 6)
+	while (++i < 4)
 	{
-		buttons[i] = i_button(200 + 150 * i, env, ((int[6]){
-			W3DC_NEW_GAME_MENU, W3DC_LOAD_GAME_MENU, W3DC_MAP_EDITOR_MENU,
-			W3DC_OPTIONS_MENU, W3DC_CREDITS, W3DC_EXIT})[i],
-			((char*[6]){"New Game", "Load Game", "Map Editor", "Options",
-			"Credits", "Exit"})[i]);
+		buttons[i] = i_button(200 + 150 * i, env, i, ((char*[4]){"Save",
+			"Load", "Main Menu", "Continue"})[i]);
 		gui_attach_button(&gui, &buttons[i]);
 	}
 	gui_attach_to_window(env->wolf3d, &gui, 0);
-	texture = assets_get_texture(&env->assets, "Menu", NULL);
-	context_main_menu_loop(env, texture);
+	context_in_game_menu_loop(env);
 	gui_destroy(&gui);
 }

@@ -220,6 +220,6 @@ void	context_playing_loop(t_env *env)
 		glfw_refresh_window(env->wolf3d);
 		glfwPollEvents();
 		if (glfwGetKey(env->wolf3d->w, GLFW_KEY_ESCAPE))
-			env->context = W3DC_MAIN_MENU;
+			set_context(env, W3DC_PLAYING_MENU);
 	}
 }

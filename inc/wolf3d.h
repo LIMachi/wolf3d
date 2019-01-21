@@ -207,18 +207,22 @@ typedef struct		s_env
 	t_config_file	config_file;
 	t_player		player;
 	int				context;
+	int				prev_context;
 	t_glfw_window	*wolf3d;
 	t_glfw_window	*minimap;
 	t_assets		assets;
 }					t_env;
 
+void				context_swap(t_env *env);
+int					set_context(t_env *env, int context);
+
 int					context_init_load(t_env *env);
 void				context_main_menu_load(t_env *env);
 void				context_end(t_env *env);
-void				context_swap(t_env *env);
 void				context_playing_load(t_env *env);
 void				context_playing_loop(t_env *env);
 void				context_new_game_menu_load(t_env *env);
+void				context_in_game_menu_load(t_env *env);
 
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);

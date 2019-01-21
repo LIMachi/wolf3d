@@ -17,6 +17,7 @@ int	context_init_load(t_env *env)
 {
 	char *buf;
 
+	set_context(env, W3DC_INIT);
 	env->assets = assets_load(WOLF3D_ASSETS_JSON_PATH);
 	if ((env->wolf3d = glfw_new_window(WOLF3D_DEFAULT_WINDOW_SIZE.x,
 			WOLF3D_DEFAULT_WINDOW_SIZE.y, WOLF3D_DEFAULT_WINDOW_NAME,
@@ -33,5 +34,6 @@ int	context_init_load(t_env *env)
 		printf("map: %s\n", buf);
 		free(buf);
 	}
+	set_context(env, W3DC_MAIN_MENU);
 	return (0);
 }
