@@ -47,6 +47,7 @@ t_int2					draw_text(t_glfw_window *win,
 									char *text,
 									uint32_t color)
 {
+	text == NULL ? text = "(null)" : NULL;
 	--text;
 	win->pen.pos = pos;
 	while (*++text != '\0')

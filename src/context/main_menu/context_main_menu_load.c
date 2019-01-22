@@ -53,7 +53,7 @@ static inline void		context_main_menu_loop(t_env *env, t_bmp *texture)
 void					context_main_menu_load(t_env *env)
 {
 	t_gui		gui;
-	t_button	buttons[6];
+	t_button	buttons[5];
 	size_t		i;
 	t_bmp		*texture;
 	char		*font_path;
@@ -64,13 +64,13 @@ void					context_main_menu_load(t_env *env)
 	draw_clear(env->wolf3d, 0x880000);
 	gui = gui_gui();
 	i = -1;
-	while (++i < 6)
+	while (++i < 5)
 	{
-		buttons[i] = i_button(200 + 150 * i, env, ((int[6]){
+		buttons[i] = i_button(200 + 150 * i, env, ((int[5]){
 			W3DC_NEW_GAME_MENU, W3DC_LOAD_GAME_MENU, W3DC_MAP_EDITOR_MENU,
-			W3DC_OPTIONS_MENU, W3DC_CREDITS, W3DC_EXIT})[i],
-			((char*[6]){"New Game", "Load Game", "Map Editor", "Options",
-			"Credits", "Exit"})[i]);
+			W3DC_OPTIONS_MENU, W3DC_EXIT})[i],
+			((char*[5]){"New Game", "Load Game", "Map Editor", "Options",
+			"Exit"})[i]);
 		gui_attach_button(&gui, &buttons[i]);
 	}
 	gui_attach_to_window(env->wolf3d, &gui, 0);

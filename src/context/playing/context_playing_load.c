@@ -79,6 +79,8 @@ void	context_playing_load(t_env *env)
 		sound = assets_get_sound(&env->assets, "Metal Gear Turret", NULL);
 		if (sound != NULL)
 			player_play_sound(sound, SOUND_LOOP);
+		sound_player()->playing[0].right_gain = env->music_volume;
+		sound_player()->playing[0].left_gain = env->music_volume;
 	}
 	glfwSetKeyCallback(env->wolf3d->w, (GLFWkeyfun)move_player_callback);
 	context_playing_loop(env);

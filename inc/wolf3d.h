@@ -211,6 +211,8 @@ typedef struct		s_env
 	t_glfw_window	*wolf3d;
 	t_glfw_window	*minimap;
 	t_assets		assets;
+	double			music_volume;
+	void			*user_ptr;
 }					t_env;
 
 void				context_swap(t_env *env);
@@ -224,6 +226,7 @@ void				context_playing_loop(t_env *env);
 void				context_new_game_menu_load(t_env *env);
 void				context_in_game_menu_load(t_env *env);
 void				context_load_game_menu_load(t_env *env);
+void				context_options_menu_load(t_env *env);
 
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);

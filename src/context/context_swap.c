@@ -62,6 +62,8 @@ void				context_swap(t_env *env)
 		else if (env->context == W3DC_MAP_EDITOR_MENU)
 			NULL;
 		else if (env->context == W3DC_OPTIONS_MENU)
+			context_options_menu_load(env);
+		else if (env->context == W3DC_CREDITS)
 			NULL;
 	}
 }
