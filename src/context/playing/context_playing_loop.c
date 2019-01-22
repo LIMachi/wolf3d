@@ -159,7 +159,6 @@ void	draw_walls(t_env *e, t_player p, t_raycast *rc, size_t i)
 		l = e->wolf3d->vb_height - d;
 	while (j++ < l)
 	{
-//		rc->ty = (j * .0 - e->wolf3d->vb_height + (rc->floor - rc->sky)) * rc->texture->size.y / (rc->floor - rc->sky);
 		rc->ty = (double)rc->texture->size.y * (j / rc->hauteur);
 		draw_pixel(e->wolf3d, i, d + j,
 			rc->texture->data[rc->tx + rc->ty * rc->texture->size.x]);
