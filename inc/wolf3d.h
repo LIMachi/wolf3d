@@ -117,9 +117,9 @@ typedef struct		s_config_file
 typedef struct		s_save_file
 {
 	uint32_t		magic;
-	uint32_t		posx;
-	uint32_t		posy;
-	uint32_t		look;
+	int32_t			posx;
+	int32_t			posy;
+	int32_t			look;
 	t_config_file	config_file;
 	t_map_file		map_file;
 }					t_save_file;

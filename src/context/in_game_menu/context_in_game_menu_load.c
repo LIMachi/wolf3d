@@ -12,6 +12,26 @@
 
 #include <glfw_wrapper.h>
 #include <wolf3d.h>
+#include <time.h>
+
+static char				*i_save_name(void)
+{
+	static char	name[PATH_MAX];
+	time_t		t;
+
+	ft_strcpy(name, "saves/Save_");
+	time(&t);
+	ft_strcpy(&name[11], ctime(&t));
+	name[14] = '_';
+	name[18] = '_';
+	name[21] = '_';
+	name[24] = '_';
+	name[27] = '_';
+	name[30] = '_';
+	ft_strcpy(&name[35], ".w3ds");
+	name[41] = '\0';
+	return (name);
+}
 
 static void				i_callback(t_glfw_window *win,
 									int status,
@@ -26,11 +46,14 @@ static void				i_callback(t_glfw_window *win,
 	e = (t_env*)win->user_ptr;
 	c = (int)(size_t)data;
 	if (c == 0)
-		save("saves/test.w3ds", e);
+		save(i_save_name(), e);
 	else if (c == 1)
 		set_context(e, W3DC_LOAD_GAME_MENU);
 	else if (c == 2)
+	{
 		set_context(e, W3DC_MAIN_MENU);
+		sound_player()->nb_sounds = 0;
+	}
 	else
 		set_context(e, W3DC_PLAYING);
 }

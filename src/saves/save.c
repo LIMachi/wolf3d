@@ -42,14 +42,14 @@ int	save(const char *path, t_env *env)
 			|| (fd = open(path, O_CREAT | O_TRUNC | O_WRONLY, 0644)) == -1)
 		return (-1);
 	save.magic = W3DS_MAGIC;
-	save.posx = (uint32_t)(env->player.pos.x * 100.0);
-	save.posy = (uint32_t)(env->player.pos.y * 100.0);
-	save.look = (uint32_t)(env->player.look * 100.0);
+	save.posx = (int32_t)(env->player.pos.x * 100.0);
+	save.posy = (int32_t)(env->player.pos.y * 100.0);
+	save.look = (int32_t)(env->player.look * 100.0);
 	save.config_file = env->config_file;
 	save.map_file = *env->map_file;
 	size = save.map_file.width * save.map_file.height * sizeof(uint8_t);
-	if (write(fd, &save, sizeof(save)) != sizeof(save)
-			|| write(fd, &save.map_file.map, size) != size)
+	if (write(fd, &save, sizeof(t_save_file)) != sizeof(t_save_file)
+			|| write(fd, env->map_file->map, size) != size)
 	{
 		close(fd);
 		return (-1);

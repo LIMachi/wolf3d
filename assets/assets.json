@@ -10,7 +10,8 @@
     "Papyrus": "assets/fonts/Papyrus.ttc"
   },
   "music": {
-    "Lava Reef": "assets/sounds/Hydra - Lava Reef Zone (Hydra Remix).wav"
+    "Lava Reef": "assets/sounds/Hydra - Lava Reef Zone (Hydra Remix).wav",
+    "Metal Gear Turret": "assets/sounds/Portal - Metal Gear Turret.wav"
   },
   "textures": {
     "Wall_1": "assets/walls/Brick_Wall.bmp",
