@@ -39,7 +39,7 @@ t_map_file	*map_scale(t_map_file *map, uint32_t width, uint32_t height)
 	return (out);
 }
 
-void		click_block(t_glfw_window *win, t_map_file *map, double x, double y)
+static void	click_block(t_glfw_window *win, t_map_file *map, double x, double y)
 {
 	double			sx;
 	double			sy;
@@ -51,7 +51,7 @@ void		click_block(t_glfw_window *win, t_map_file *map, double x, double y)
 	map->map[i] ^= 1;
 }
 
-void		*click(GLFWwindow *win, int key, int act, int mod)
+static void	*click(GLFWwindow *win, int key, int act, int mod)
 {
 	double			x;
 	double			y;

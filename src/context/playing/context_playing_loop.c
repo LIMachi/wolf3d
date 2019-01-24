@@ -28,7 +28,7 @@ void	context_playing_loop(t_env *env)
 		{
 			set_context(env, W3DC_PLAYING);
 			ray_caster(env->player, env, 1, rc);
-			minimap(env);
+			minimap(env, env->wolf3d, 1.0 / 6.0);
 		}
 		else
 			ray_caster(env->player, env, 1, rc);

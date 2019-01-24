@@ -227,8 +227,9 @@ void				context_new_game_menu_load(t_env *env);
 void				context_in_game_menu_load(t_env *env);
 void				context_load_game_menu_load(t_env *env);
 void				context_options_menu_load(t_env *env);
+void 				context_map_editor_load(t_env *env);
 
-void				minimap(t_env *env);
+void				minimap(t_env *env, t_glfw_window *win, double scale);
 void				skybox(t_env *e, t_player *p, t_raycast *rc, size_t i);
 void 				floor_casting(t_env *e, t_raycast *rc, t_player *p, size_t i);
 void				ray_caster(t_player p, t_env *e, int mc, t_raycast rc);

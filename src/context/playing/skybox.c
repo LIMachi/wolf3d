@@ -14,12 +14,18 @@
 
 void	skybox(t_env *e, t_player *p, t_raycast *rc, size_t i)
 {
-	int	tx;
-	int	ty;
-	int	y;
+	int		tx;
+	int		ty;
+	int		y;
+	double	t;
 
 	y = (e->wolf3d->vb_height / 2) + 1;
-	tx = ((rc->angle + p->look) / 90.0) * (double)rc->skybox->size.x;
+	t = rc->angle + p->look;
+	while (t < 0.0)
+		t += 360.0;
+	while (t >= 360.0)
+		t -= 360.0;
+	tx = (t / 90.0) * (double)rc->skybox->size.x;
 	while (y--)
 	{
 		ty = ((double)y / (double)(e->wolf3d->vb_height / 2))

@@ -42,14 +42,13 @@ void	move_player(t_env *env, t_double2 vlook)
 		env->player.pos.y += vlook.y;
 }
 
-void	move_player_callback(GLFWwindow *win, int key, int scan, int act, int mod)
+void	move_player_callback(GLFWwindow *win, int key, int scan, int act)
 {
 	t_glfw_window	*glfw;
 	t_env			*env;
 	t_double2		vlook;
 
 	(void)scan;
-	(void)mod;
 	if (act != GLFW_PRESS && act != GLFW_REPEAT)
 		return ;
 	glfw = glfwGetWindowUserPointer(win);

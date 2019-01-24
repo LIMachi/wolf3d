@@ -67,7 +67,7 @@ void					context_main_menu_load(t_env *env)
 	while (++i < 5)
 	{
 		buttons[i] = i_button(200 + 150 * i, env, ((int[5]){
-			W3DC_NEW_GAME_MENU, W3DC_LOAD_GAME_MENU, W3DC_MAP_EDITOR_MENU,
+			W3DC_NEW_GAME_MENU, W3DC_LOAD_GAME_MENU, W3DC_MAP_EDITOR/*_MENU*/,
 			W3DC_OPTIONS_MENU, W3DC_EXIT})[i],
 			((char*[5]){"New Game", "Load Game", "Map Editor", "Options",
 			"Exit"})[i]);
