@@ -28,7 +28,6 @@ int	context_init_load(t_env *env)
 	}
 	if (load_config(WOLF3D_CONFIG_W3C_PATH, env) == NULL)
 		default_config(env);
-	printf("test:\n");
 	if (get_maps_in_dir("maps", &buf, 1) == 1)
 	{
 		printf("map: %s\n", buf);

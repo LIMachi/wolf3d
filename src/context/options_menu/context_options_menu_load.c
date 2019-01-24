@@ -18,10 +18,17 @@ static void				i_key_callback(GLFWwindow *w,
 										int scan,
 										int act)
 {
-	(void)w;
+	t_env	*env;
+	size_t	i;
+
 	(void)scan;
 	if (act == GLFW_RELEASE || key == GLFW_KEY_ESCAPE)
 		return ;
+	env = (t_env*)((t_glfw_window*)glfwGetWindowUserPointer(w))->user_ptr;
+	i = -1;
+	while (++i < 6)
+		if (((t_button*)env->user_ptr)[i].status)
+			((int32_t*)&env->config_file)[i + 1] = key;
 }
 
 static void				i_callback(t_glfw_window *win,
