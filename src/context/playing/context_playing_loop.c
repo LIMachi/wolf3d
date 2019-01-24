@@ -17,8 +17,11 @@ void	context_playing_loop(t_env *env)
 {
 	t_raycast	rc;
 
-	rc.texture = assets_get_texture(&env->assets, "Wall_1", NULL);
-	rc.texturen2 = assets_get_texture(&env->assets, "dancefloor", NULL);
+	rc.text1 = assets_get_texture(&env->assets, "Wall_1", NULL);
+	rc.text2 = assets_get_texture(&env->assets, "Wall_2", NULL);
+	rc.text3 = assets_get_texture(&env->assets, "Wall_3", NULL);
+	rc.text4 = assets_get_texture(&env->assets, "Wall_4", NULL);
+	rc.dancefloor = assets_get_texture(&env->assets, "dancefloor", NULL);
 	rc.skybox = assets_get_texture(&env->assets, "skybox", NULL);
 	while (env->context == W3DC_PLAYING)
 	{

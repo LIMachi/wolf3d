@@ -11,24 +11,28 @@
 /* ************************************************************************** */
 
 #include <wolf3d.h>
+#include <stdio.h>
 
-static void	draw_floor(t_env *e, t_raycast *rc, t_player *p, size_t i)
+static void		draw_floor(t_env *e, t_raycast *rc, t_player *p, size_t i)
 {
+	(void)i;
 	while (rc->floor <= (int)e->wolf3d->vb_height)
 	{
-		rc->cdist = (e->wolf3d->vb_height / (2.0 * rc->floor -
-			e->wolf3d->vb_height));
+		rc->cdist = ((double)e->wolf3d->vb_height / (2.0 * (double)rc->floor -
+			(double)e->wolf3d->vb_height));
 		rc->fact = ((rc->cdist) / (rc->real));
-		rc->cfx = rc->fact * rc->floorx + (1.0 - rc->fact) * p->pos.x;
-		rc->cfy = rc->fact * rc->floory + (1.0 - rc->fact) * p->pos.y;
-		rc->tx = (int)(rc->cfx * rc->texturen2->size.x) % rc->texturen2->size.x;
-		rc->ty = (int)(rc->cfy * rc->texturen2->size.y) % rc->texturen2->size.y;
-		draw_pixel(e->wolf3d, i, rc->floor++, rc->texturen2->data[rc->tx
-			+ rc->ty * rc->texturen2->size.x]);
+		rc->cfx = fabs(rc->fact * rc->floorx + (1.0 - rc->fact) * p->pos.x);
+		rc->cfy = fabs(rc->fact * rc->floory + (1.0 - rc->fact) * p->pos.y);
+		rc->tx = (int)(rc->cfx * rc->dancefloor->size.x) %
+			rc->dancefloor->size.x;
+		rc->ty = (int)(rc->cfy * rc->dancefloor->size.y) %
+			rc->dancefloor->size.y;
+		draw_pixel(e->wolf3d, i, rc->floor++, rc->dancefloor->data[rc->tx
+			+ rc->ty * rc->dancefloor->size.x]);
 	}
 }
 
-void		floor_casting(t_env *e, t_raycast *rc, t_player *p, size_t i)
+void			floor_casting(t_env *e, t_raycast *rc, t_player *p, size_t i)
 {
 	if (rc->face == 0)
 	{

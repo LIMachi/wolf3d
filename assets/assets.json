@@ -14,7 +14,10 @@
     "Metal Gear Turret": "assets/sounds/Portal - Metal Gear Turret.wav"
   },
   "textures": {
-    "Wall_1": "assets/walls/Brick_Wall.bmp",
+    "Wall_1": "assets/walls/text1.bmp",
+    "Wall_2": "assets/walls/stone2.bmp",
+    "Wall_3": "assets/walls/Brick_Wall.bmp",
+    "Wall_4": "assets/walls/wall_mario.bmp",
     "dancefloor": "assets/walls/grass.bmp",
     "skybox": "assets/walls/skybox.bmp",
     "Button_Base": "assets/images/C_NOTSELECTEDPIC.bmp",
