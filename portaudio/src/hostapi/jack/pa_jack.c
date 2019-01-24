@@ -912,7 +912,7 @@ static PaError IsFormatSupported( struct PaUtilHostApiRepresentation *hostApi,
                 a native format
     */
 
-    /* check that the device supports sampleRate */
+    /* check that the device supports sample_rate */
 
 #define ABS(x) ( (x) > 0 ? (x) : -(x) )
     if( ABS(sampleRate - jack_get_sample_rate(((PaJackHostApiRepresentation *) hostApi)->jack_client )) > 1 )

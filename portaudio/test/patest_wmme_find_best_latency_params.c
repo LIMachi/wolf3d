@@ -367,7 +367,7 @@ static void usage( int wmmeHostApiIndex )
     int i;
 
     fprintf( stderr, "PortAudio WMME output latency user guided test\n" );
-    fprintf( stderr, "Usage: x.exe mme-device-index [sampleRate [min-buffer-count max-buffer-count]]\n" );
+    fprintf( stderr, "Usage: x.exe mme-device-index [sample_rate [min-buffer-count max-buffer-count]]\n" );
     fprintf( stderr, "Invalid device index. Use one of these:\n" );
     for( i=0; i < Pa_GetDeviceCount(); ++i ){
 

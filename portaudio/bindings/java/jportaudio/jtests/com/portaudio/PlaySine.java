@@ -15,14 +15,14 @@ public class PlaySine
 	 * @param stream
 	 * @param framesPerBuffer
 	 * @param numFrames
-	 * @param sampleRate
+	 * @param sample_rate
 	 */
 	private void writeSineData( BlockingStream stream, int framesPerBuffer,
-			int numFrames, int sampleRate )
+			int numFrames, int sample_rate )
 	{
 		float[] buffer = new float[framesPerBuffer * 2];
-		SineOscillator osc1 = new SineOscillator( 200.0, sampleRate );
-		SineOscillator osc2 = new SineOscillator( 300.0, sampleRate );
+		SineOscillator osc1 = new SineOscillator( 200.0, sample_rate );
+		SineOscillator osc2 = new SineOscillator( 300.0, sample_rate );
 		int framesLeft = numFrames;
 		while( framesLeft > 0 )
 		{
@@ -49,9 +49,9 @@ public class PlaySine
 		// Get the default device and setup the stream parameters.
 		int deviceId = PortAudio.getDefaultOutputDevice();
 		DeviceInfo deviceInfo = PortAudio.getDeviceInfo( deviceId );
-		double sampleRate = deviceInfo.defaultSampleRate;
+		double sample_rate = deviceInfo.defaultSampleRate;
 		System.out.println( "  deviceId    = " + deviceId );
-		System.out.println( "  sampleRate  = " + sampleRate );
+		System.out.println( "  sample_rate  = " + sample_rate );
 		System.out.println( "  device name = " + deviceInfo.name );
 
 		StreamParameters streamParameters = new StreamParameters();
@@ -66,13 +66,13 @@ public class PlaySine
 		
 		// Open a stream for output.
 		BlockingStream stream = PortAudio.openStream( null, streamParameters,
-				(int) sampleRate, framesPerBuffer, flags );
+				(int) sample_rate, framesPerBuffer, flags );
 
-		int numFrames = (int) (sampleRate * 4); // enough for 4 seconds
+		int numFrames = (int) (sample_rate * 4); // enough for 4 seconds
 
 		stream.start();
 
-		writeSineData( stream, framesPerBuffer, numFrames, (int) sampleRate );
+		writeSineData( stream, framesPerBuffer, numFrames, (int) sample_rate );
 
 		stream.stop();
 		stream.close();

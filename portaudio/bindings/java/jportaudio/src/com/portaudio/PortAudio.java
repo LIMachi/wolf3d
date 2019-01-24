@@ -222,17 +222,17 @@ public class PortAudio
 	 *            input description, may be null
 	 * @param outputStreamParameters
 	 *            output description, may be null
-	 * @param sampleRate
+	 * @param sample_rate
 	 *            typically 44100 or 48000, or maybe 22050, 16000, 8000, 96000
 	 * @return 0 if supported or a negative error
 	 */
 	public native static int isFormatSupported(
 			StreamParameters inputStreamParameters,
-			StreamParameters outputStreamParameters, int sampleRate );
+			StreamParameters outputStreamParameters, int sample_rate );
 
 	private native static void openStream( BlockingStream blockingStream,
 			StreamParameters inputStreamParameters,
-			StreamParameters outputStreamParameters, int sampleRate,
+			StreamParameters outputStreamParameters, int sample_rate,
 			int framesPerBuffer, int flags );
 
 	/**
@@ -241,7 +241,7 @@ public class PortAudio
 	 *            input description, may be null
 	 * @param outputStreamParameters
 	 *            output description, may be null
-	 * @param sampleRate
+	 * @param sample_rate
 	 *            typically 44100 or 48000, or maybe 22050, 16000, 8000, 96000
 	 * @param framesPerBuffer
 	 * @param flags
@@ -249,12 +249,12 @@ public class PortAudio
 	 */
 	public static BlockingStream openStream(
 			StreamParameters inputStreamParameters,
-			StreamParameters outputStreamParameters, int sampleRate,
+			StreamParameters outputStreamParameters, int sample_rate,
 			int framesPerBuffer, int flags )
 	{
 		BlockingStream blockingStream = new BlockingStream();
 		openStream( blockingStream, inputStreamParameters,
-				outputStreamParameters, sampleRate, framesPerBuffer, flags );
+				outputStreamParameters, sample_rate, framesPerBuffer, flags );
 		return blockingStream;
 	}
 

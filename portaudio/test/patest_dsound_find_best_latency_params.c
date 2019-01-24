@@ -361,7 +361,7 @@ static void usage( int dsoundHostApiIndex )
     int i;
 
     fprintf( stderr, "PortAudio DirectSound output latency user guided test\n" );
-    fprintf( stderr, "Usage: x.exe dsound-device-index [sampleRate]\n" );
+    fprintf( stderr, "Usage: x.exe dsound-device-index [sample_rate]\n" );
     fprintf( stderr, "Invalid device index. Use one of these:\n" );
     for( i=0; i < Pa_GetDeviceCount(); ++i ){
 

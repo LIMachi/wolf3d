@@ -3090,7 +3090,7 @@ if( previousTime > 0 ){
 
     double delta = paTimeInfo.currentTime - previousTime;
 
-    if( delta >= 2. * (theAsioStream->framesPerHostCallback / theAsioStream->streamRepresentation.streamInfo.sampleRate) ){
+    if( delta >= 2. * (theAsioStream->framesPerHostCallback / theAsioStream->streamRepresentation.streamInfo.sample_rate) ){
         if( theAsioStream->inputChannelCount > 0 )
             theAsioStream->callbackFlags |= paInputOverflow;
 

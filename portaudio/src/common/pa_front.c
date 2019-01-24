@@ -817,7 +817,7 @@ static int SampleFormatIsValid( PaSampleFormat format )
     validation. This function performs only generic conformance validation.
     Validation that would require knowledge of device capabilities is
     not performed because of potentially complex relationships between
-    combinations of parameters - for example, even if the sampleRate
+    combinations of parameters - for example, even if the sample_rate
     seems ok, it might not be for a duplex stream - we have no way of
     checking this in an API-neutral way, so we don't try.
 
@@ -864,9 +864,9 @@ static int SampleFormatIsValid( PaSampleFormat format )
     void *outputParmeters->hostApiSpecificStreamInfo
         - if supplied its hostApi field matches the output device's host Api
 
-    double sampleRate
+    double sample_rate
         - is not an 'absurd' rate (less than 1000. or greater than 384000.)
-        - sampleRate is NOT validated against device capabilities
+        - sample_rate is NOT validated against device capabilities
 
     PaStreamFlags streamFlags
         - unused platform neutral flags are zero
@@ -1067,7 +1067,7 @@ PaError Pa_IsFormatSupported( const PaStreamParameters *inputParameters,
         PA_LOGAPI(("\tvoid *outputParameters->hostApiSpecificStreamInfo: 0x%p\n", outputParameters->hostApiSpecificStreamInfo ));
     }
 
-    PA_LOGAPI(("\tdouble sampleRate: %g\n", sampleRate ));
+    PA_LOGAPI(("\tdouble sample_rate: %g\n", sample_rate ));
 #endif
 
     if( !PA_IS_INITIALISED_ )
@@ -1177,7 +1177,7 @@ PaError Pa_OpenStream( PaStream** stream,
         PA_LOGAPI(("\tvoid *outputParameters->hostApiSpecificStreamInfo: 0x%p\n", outputParameters->hostApiSpecificStreamInfo ));
     }
 
-    PA_LOGAPI(("\tdouble sampleRate: %g\n", sampleRate ));
+    PA_LOGAPI(("\tdouble sample_rate: %g\n", sample_rate ));
     PA_LOGAPI(("\tunsigned long framesPerBuffer: %d\n", framesPerBuffer ));
     PA_LOGAPI(("\tPaStreamFlags streamFlags: 0x%x\n", streamFlags ));
     PA_LOGAPI(("\tPaStreamCallback *streamCallback: 0x%p\n", streamCallback ));
@@ -1287,7 +1287,7 @@ PaError Pa_OpenDefaultStream( PaStream** stream,
     PA_LOGAPI(("\tint inputChannelCount: %d\n", inputChannelCount ));
     PA_LOGAPI(("\tint outputChannelCount: %d\n", outputChannelCount ));
     PA_LOGAPI(("\tPaSampleFormat sampleFormat: %d\n", sampleFormat ));
-    PA_LOGAPI(("\tdouble sampleRate: %g\n", sampleRate ));
+    PA_LOGAPI(("\tdouble sample_rate: %g\n", sampleRate ));
     PA_LOGAPI(("\tunsigned long framesPerBuffer: %d\n", framesPerBuffer ));
     PA_LOGAPI(("\tPaStreamCallback *streamCallback: 0x%p\n", streamCallback ));
     PA_LOGAPI(("\tvoid *userData: 0x%p\n", userData ));
@@ -1566,7 +1566,7 @@ const PaStreamInfo* Pa_GetStreamInfo( PaStream *stream )
         PA_LOGAPI(("\t\tint structVersion: %d\n", result->structVersion ));
         PA_LOGAPI(("\t\tPaTime inputLatency: %f\n", result->inputLatency ));
         PA_LOGAPI(("\t\tPaTime outputLatency: %f\n", result->outputLatency ));
-        PA_LOGAPI(("\t\tdouble sampleRate: %f\n", result->sampleRate ));
+        PA_LOGAPI(("\t\tdouble sample_rate: %f\n", result->sampleRate ));
         PA_LOGAPI(("\t}\n" ));
 
     }

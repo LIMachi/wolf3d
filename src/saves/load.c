@@ -47,7 +47,7 @@ static inline void	i_clear_map(t_env *env)
 	}
 }
 
-int		load(const char *path, t_env *env)
+int					load(const char *path, t_env *env)
 {
 	int			fd;
 	t_save_file	save;

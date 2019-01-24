@@ -23,10 +23,10 @@ static inline void	i_portaudio_callback(float *out, t_sound_player *player)
 	i = -1;
 	while (++i < player->nb_sounds && (play = &player->playing[i]) != NULL)
 	{
-		if (play->currentSample * player->sound[i]->channels
-				>= player->sound[i]->totalSampleCount)
+		if (play->current_sample * player->sound[i]->channels
+				>= player->sound[i]->total_sample_count)
 		{
-			play->currentSample = 0;
+			play->current_sample = 0;
 			if (play->flags == SOUND_PLAY_ONCE)
 				play->flags = SOUND_NONE;
 		}
@@ -34,11 +34,11 @@ static inline void	i_portaudio_callback(float *out, t_sound_player *player)
 			break ;
 		out[0] += pow(10.0, play->left_gain / 10.0) *
 			player->sound[i]->data[play->left_phase +
-			play->currentSample * player->sound[i]->channels];
+			play->current_sample * player->sound[i]->channels];
 		out[1] += pow(10.0, play->right_gain / 10.0) *
 			player->sound[i]->data[play->right_phase +
-			play->currentSample * player->sound[i]->channels];
-		++play->currentSample;
+			play->current_sample * player->sound[i]->channels];
+		++play->current_sample;
 	}
 }
 
@@ -59,13 +59,15 @@ static int			portaudio_callback(const void *input,
 	(void)input;
 	out = (float*)output;
 	player = (t_sound_player*)user_ptr;
-	for(i = 0; i < fpb; ++i)
+	i = -1;
+	while (++i < fpb)
 	{
 		i_portaudio_callback(out, player);
 		out += 2;
 	}
 	j = 0;
-	for(i = 0; (int)i < player->nb_sounds; ++i)
+	i = -1;
+	while ((int)++i < player->nb_sounds)
 		if (player->playing[i].flags != SOUND_NONE)
 			player->playing[j++] = player->playing[i];
 	player->nb_sounds = (int)j;

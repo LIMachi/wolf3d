@@ -82,7 +82,8 @@ static t_sjson_error	i_sounds(t_sjson_array *ar, t_animations *anim)
 		{
 			sound = &anim->sounds[anim->nb_sounds++];
 			sound->data = drwav_open_and_read_file_f32(s->data,
-				&sound->channels, &sound->sampleRate, &sound->totalSampleCount);
+				&sound->channels, &sound->sample_rate,
+				&sound->total_sample_count);
 		}
 	return (SJSON_ERROR_OK);
 }

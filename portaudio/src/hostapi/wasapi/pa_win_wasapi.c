@@ -2161,15 +2161,15 @@ static PaError MakeWaveFormatFromParams(WAVEFORMATEXTENSIBLE *wavex, const PaStr
 }
 
 // ------------------------------------------------------------------------------------------
-/*static void wasapiFillWFEXT( WAVEFORMATEXTENSIBLE* pwfext, PaSampleFormat sampleFormat, double sampleRate, int channelCount)
+/*static void wasapiFillWFEXT( WAVEFORMATEXTENSIBLE* pwfext, PaSampleFormat sampleFormat, double sample_rate, int channelCount)
 {
     PA_DEBUG(( "sampleFormat = %lx\n" , sampleFormat ));
-    PA_DEBUG(( "sampleRate = %f\n" , sampleRate ));
+    PA_DEBUG(( "sample_rate = %f\n" , sample_rate ));
     PA_DEBUG(( "chanelCount = %d\n", channelCount ));
 
     pwfext->Format.wFormatTag = WAVE_FORMAT_EXTENSIBLE;
     pwfext->Format.nChannels = (WORD)channelCount;
-    pwfext->Format.nSamplesPerSec = (DWORD)sampleRate;
+    pwfext->Format.nSamplesPerSec = (DWORD)sample_rate;
     if(channelCount == 1)
         pwfext->dwChannelMask = PAWIN_SPEAKER_DIRECTOUT;
     else

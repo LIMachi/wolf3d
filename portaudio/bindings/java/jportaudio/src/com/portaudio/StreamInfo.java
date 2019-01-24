@@ -56,5 +56,5 @@ public class StreamInfo
 	public int structVersion;
 	public double outputLatency;
 	public double inputLatency;
-	public double sampleRate;
+	public double sample_rate;
 }

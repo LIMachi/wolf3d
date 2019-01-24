@@ -168,10 +168,10 @@ static PaError conv_err(OSStatus error)
 }
 
 /* This function is unused
-static AudioStreamBasicDescription *InitializeStreamDescription(const PaStreamParameters *parameters, double sampleRate)
+static AudioStreamBasicDescription *InitializeStreamDescription(const PaStreamParameters *parameters, double sample_rate)
 {
     struct AudioStreamBasicDescription *streamDescription = PaUtil_AllocateMemory(sizeof(AudioStreamBasicDescription));
-    streamDescription->mSampleRate = sampleRate;
+    streamDescription->mSampleRate = sample_rate;
     streamDescription->mFormatID = kAudioFormatLinearPCM;
     streamDescription->mFormatFlags = 0;
     streamDescription->mFramesPerPacket = 1;

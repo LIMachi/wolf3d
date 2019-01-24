@@ -1381,7 +1381,7 @@ static PaError IsFormatSupported( struct PaUtilHostApiRepresentation *hostApi,
             - if a full duplex stream is requested, check that the combination
                 of input and output parameters is supported
 
-            - check that the device supports sampleRate
+            - check that the device supports sample_rate
 
             for mme all we can do is test that the input and output devices
             support the requested sample rate and number of channels. we
@@ -2464,7 +2464,7 @@ static PaError OpenStream( struct PaUtilHostApiRepresentation *hostApi,
 
     /*
         IMPLEMENT ME:
-            - alter sampleRate to a close allowable rate if possible / necessary
+            - alter sample_rate to a close allowable rate if possible / necessary
     */
 
 

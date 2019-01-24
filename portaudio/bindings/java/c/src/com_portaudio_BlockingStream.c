@@ -346,7 +346,7 @@ JNIEXPORT void JNICALL Java_com_portaudio_BlockingStream_getInfo
 		jpa_SetIntField( env, cls, streamInfo, "structVersion", info->structVersion );
 		jpa_SetDoubleField( env, cls, streamInfo, "inputLatency", info->inputLatency );
 		jpa_SetDoubleField( env, cls, streamInfo, "outputLatency", info->outputLatency );
-		jpa_SetDoubleField( env, cls, streamInfo, "sampleRate", info->sampleRate );
+		jpa_SetDoubleField( env, cls, streamInfo, "sample_rate", info->sampleRate );
 	}
 }
 

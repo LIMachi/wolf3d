@@ -66,8 +66,7 @@ static inline t_button	i_button(int y, t_env *env, size_t index)
 	return (out);
 }
 
-static inline void		context_options_menu_loop(t_env *env/*,
-												t_button buttons[8]*/)
+static inline void		context_options_menu_loop(t_env *env)
 {
 	size_t	i;
 	t_int2	c;
@@ -85,7 +84,9 @@ static inline void		context_options_menu_loop(t_env *env/*,
 					"Right Strafe: ", "Left Turn: ", "Right Turn: ",
 					"Back"})[i], 0);
 			if (i != 6)
-				draw_text(env->wolf3d, c, (char*)glfwGetKeyName(((int32_t*)&env->config_file)[i + 1], 0), 0);
+				draw_text(env->wolf3d, c,
+					(char*)glfwGetKeyName(((int32_t*)&env->config_file)[i + 1],
+						0), 0);
 		}
 		gui_draw(env->wolf3d, env->wolf3d->gui);
 		glfw_refresh_window(env->wolf3d);
@@ -93,7 +94,7 @@ static inline void		context_options_menu_loop(t_env *env/*,
 	}
 }
 
-void	context_options_menu_load(t_env *env)
+void					context_options_menu_load(t_env *env)
 {
 	t_gui		gui;
 	t_button	buttons[8];

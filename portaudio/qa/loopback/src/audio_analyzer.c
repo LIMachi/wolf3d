@@ -281,7 +281,7 @@ double PaQa_MeasureCrossingSlope( float *buffer, int numFrames )
  * But the zero crossing should be intact.
  * The measured slope of a sine wave at zero should be:
  *
- *   slope = sin( 2PI * frequency / sampleRate )
+ *   slope = sin( 2PI * frequency / sample_rate )
  *
  */
 double PaQa_MeasureSineAmplitudeBySlope( PaQaRecording *recording,
@@ -484,7 +484,7 @@ int PaQa_MeasureLatency( PaQaRecording *recording, PaQaTestTone *testTone, PaQaA
 	double period = testTone->sampleRate / testTone->frequency;
 	int cycleSize = (int) (period + 0.5);
 	//printf("PaQa_AnalyseRecording: frequency = %8f, frameRate = %8f, period = %8f, cycleSize = %8d\n", 
-	//	   testTone->frequency, testTone->sampleRate, period, cycleSize );
+	//	   testTone->frequency, testTone->sample_rate, period, cycleSize );
 	analysisResult->latency = -1;
 	analysisResult->valid = (0);
 	

@@ -177,9 +177,9 @@ public class TestBasic extends TestCase
 		double phase = 0.0;
 		double phaseIncrement = 0.01;
 
-		SineOscillator(double freq, int sampleRate)
+		SineOscillator(double freq, int sample_rate)
 		{
-			phaseIncrement = freq * Math.PI * 2.0 / sampleRate;
+			phaseIncrement = freq * Math.PI * 2.0 / sample_rate;
 		}
 
 		double next()
@@ -260,7 +260,7 @@ public class TestBasic extends TestCase
 		PortAudio.terminate();
 	}
 
-	public void checkBlockingWriteFloat( int deviceId, double sampleRate )
+	public void checkBlockingWriteFloat( int deviceId, double sample_rate )
 	{
 		StreamParameters streamParameters = new StreamParameters();
 		streamParameters.channelCount = 2;
@@ -273,30 +273,30 @@ public class TestBasic extends TestCase
 		int framesPerBuffer = 256;
 		int flags = 0;
 		BlockingStream stream = PortAudio.openStream( null, streamParameters,
-				(int) sampleRate, framesPerBuffer, flags );
+				(int) sample_rate, framesPerBuffer, flags );
 		assertTrue( "got default stream", stream != null );
 
 		assertEquals( "stream isStopped", true, stream.isStopped() );
 		assertEquals( "stream isActive", false, stream.isActive() );
 
 		int numFrames = 80000;
-		double expected = ((double)numFrames) / sampleRate;
+		double expected = ((double)numFrames) / sample_rate;
 		stream.start();
 		long startTime = System.currentTimeMillis();
 		double startStreamTime = stream.getTime();
 		assertEquals( "stream isStopped", false, stream.isStopped() );
 		assertEquals( "stream isActive", true, stream.isActive() );
 
-		writeSineData( stream, framesPerBuffer, numFrames, (int) sampleRate );
+		writeSineData( stream, framesPerBuffer, numFrames, (int) sample_rate );
 		
 		StreamInfo streamInfo = stream.getInfo();
 		System.out.println( "inputLatency of a stream = "+ streamInfo.inputLatency );
 		System.out.println( "outputLatency of a stream = "+streamInfo.outputLatency );
-		System.out.println( "sampleRate of a stream = "+ streamInfo.sampleRate );
+		System.out.println( "sample_rate of a stream = "+ streamInfo.sample_rate );
 		
 		assertEquals( "inputLatency of a stream ", 0.0, streamInfo.inputLatency, 0.000001 );
 		assertTrue( "outputLatency of a stream ",(streamInfo.outputLatency > 0) );
-		assertEquals( "sampleRate of a stream ", sampleRate, streamInfo.sampleRate, 3 );
+		assertEquals( "sample_rate of a stream ", sample_rate, streamInfo.sample_rate, 3 );
 
 		double endStreamTime = stream.getTime();
 		stream.stop();
@@ -335,7 +335,7 @@ public class TestBasic extends TestCase
 			int deviceId = hostInfo.defaultOutputDevice;
 			System.out.println( "   Device ID  =" + deviceId );
 			DeviceInfo deviceInfo = PortAudio.getDeviceInfo( deviceId );
-			System.out.println( "   sampleRate =" + deviceInfo.defaultSampleRate );
+			System.out.println( "   sample_rate =" + deviceInfo.defaultSampleRate );
 			checkBlockingWriteFloat( deviceId,
 					(int) deviceInfo.defaultSampleRate );
 			System.out.println( "Finished with " + hostInfo.name );
@@ -344,11 +344,11 @@ public class TestBasic extends TestCase
 	}
 
 	private void writeSineData( BlockingStream stream, int framesPerBuffer,
-			int numFrames, int sampleRate )
+			int numFrames, int sample_rate )
 	{
 		float[] buffer = new float[framesPerBuffer * 2];
-		SineOscillator osc1 = new SineOscillator( 200.0, sampleRate );
-		SineOscillator osc2 = new SineOscillator( 300.0, sampleRate );
+		SineOscillator osc1 = new SineOscillator( 200.0, sample_rate );
+		SineOscillator osc2 = new SineOscillator( 300.0, sample_rate );
 		int framesLeft = numFrames;
 		while( framesLeft > 0 )
 		{
@@ -434,8 +434,8 @@ public class TestBasic extends TestCase
 	{
 		int framesPerBuffer = 256;
 		int flags = 0;
-		int sampleRate = 44100;
-		int numFrames = sampleRate * 3;
+		int sample_rate = 44100;
+		int numFrames = sample_rate * 3;
 		float[] floatBuffer = null;
 		short[] shortBuffer = null;
 
@@ -461,7 +461,7 @@ public class TestBasic extends TestCase
 		}
 		// Record a few seconds of audio.
 		BlockingStream inStream = PortAudio.openStream( inParameters, null,
-				sampleRate, framesPerBuffer, flags );
+				sample_rate, framesPerBuffer, flags );
 
 		System.out.println( "RECORDING - say something like testing 1,2,3..." );
 		inStream.start();
@@ -492,7 +492,7 @@ public class TestBasic extends TestCase
 				.getDeviceInfo( outParameters.device ).defaultLowOutputLatency;
 
 		BlockingStream outStream = PortAudio.openStream( null, outParameters,
-				sampleRate, framesPerBuffer, flags );
+				sample_rate, framesPerBuffer, flags );
 		assertTrue( "got default stream", outStream != null );
 
 		assertEquals( "inStream isActive", false, inStream.isActive() );

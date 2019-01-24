@@ -71,6 +71,23 @@ static inline void		context_load_game_menu_loop(t_env *env)
 	}
 }
 
+static inline void		i_context_load_game_menu_load(t_env *env, size_t *c,
+											t_button **buttons, char ***files)
+{
+	*c = get_saves_in_dir("saves", NULL, -1);
+	if ((*files = malloc(sizeof(char *) * *c)) == NULL)
+	{
+		env->context = W3DC_EXIT;
+		return ;
+	}
+	*c = get_saves_in_dir("saves", *files, *c);
+	if ((*buttons = malloc(sizeof(t_button) * (*c + 1))) == NULL)
+	{
+		env->context = W3DC_EXIT;
+		return ;
+	}
+}
+
 void					context_load_game_menu_load(t_env *env)
 {
 	t_gui		gui;
@@ -80,18 +97,9 @@ void					context_load_game_menu_load(t_env *env)
 	char		**files;
 
 	gui = gui_gui();
-	c = get_saves_in_dir("saves", NULL, -1);
-	if ((files = malloc(sizeof(char *) * c)) == NULL)
-	{
-		env->context = W3DC_EXIT;
+	i_context_load_game_menu_load(env, &c, &buttons, &files);
+	if (env->context == W3DC_EXIT)
 		return ;
-	}
-	c = get_saves_in_dir("saves", files, c);
-	if ((buttons = malloc(sizeof(t_button) * (c + 1))) == NULL)
-	{
-		env->context = W3DC_EXIT;
-		return;
-	}
 	buttons[c] = i_button(100, env, NULL);
 	gui_attach_button(&gui, &buttons[c]);
 	i = c;

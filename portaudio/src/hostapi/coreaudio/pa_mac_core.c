@@ -897,7 +897,7 @@ static PaError IsFormatSupported( struct PaUtilHostApiRepresentation *hostApi,
     int inputChannelCount, outputChannelCount;
     PaSampleFormat inputSampleFormat, outputSampleFormat;
 
-    VVDBUG(("IsFormatSupported(): in chan=%d, in fmt=%ld, out chan=%d, out fmt=%ld sampleRate=%g\n",
+    VVDBUG(("IsFormatSupported(): in chan=%d, in fmt=%ld, out chan=%d, out fmt=%ld sample_rate=%g\n",
                 inputParameters  ? inputParameters->channelCount  : -1,
                 inputParameters  ? inputParameters->sampleFormat  : -1,
                 outputParameters ? outputParameters->channelCount : -1,
@@ -998,12 +998,12 @@ static void InitializeDeviceProperties( PaMacCoreDeviceProperties *devicePropert
 static Float64 CalculateSoftwareLatencyFromProperties( PaMacCoreStream *stream, PaMacCoreDeviceProperties *deviceProperties )
 {
     UInt32 latencyFrames = deviceProperties->bufferFrameSize + deviceProperties->deviceLatency + deviceProperties->safetyOffset;
-    return latencyFrames * deviceProperties->samplePeriod; // same as dividing by sampleRate but faster
+    return latencyFrames * deviceProperties->samplePeriod; // same as dividing by sample_rate but faster
 }
 
 static Float64 CalculateHardwareLatencyFromProperties( PaMacCoreStream *stream, PaMacCoreDeviceProperties *deviceProperties )
 {
-    return deviceProperties->deviceLatency * deviceProperties->samplePeriod; // same as dividing by sampleRate but faster
+    return deviceProperties->deviceLatency * deviceProperties->samplePeriod; // same as dividing by sample_rate but faster
 }
 
 /* Calculate values used to convert Apple timestamps into PA timestamps

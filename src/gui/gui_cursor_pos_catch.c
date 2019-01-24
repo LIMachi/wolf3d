@@ -27,6 +27,20 @@ static inline void	i_update_slider(t_glfw_window *win,
 			button->user_data, button);
 }
 
+static inline void	i_gui_cursor_pos_catch(t_glfw_window *win, int i,
+	double x, double y)
+{
+	t_button	*button;
+
+	win->gui->selected = i;
+	button = win->gui->buttons[win->gui->selected];
+	button->hover = 1;
+	button->hover_cb(win, -1, button->user_data, button);
+	if (button->type == BUTTON_TYPE_SLIDER_VERTICAL
+		|| button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
+		i_update_slider(win, x, y, button);
+}
+
 void				gui_cursor_pos_catch(GLFWwindow *w, double x, double y)
 {
 	t_glfw_window	*win;
@@ -47,15 +61,7 @@ void				gui_cursor_pos_catch(GLFWwindow *w, double x, double y)
 			&& y >= button->pos.y && y < button->pos.y + button->size.y)
 			break ;
 	if (i != -1)
-	{
-		win->gui->selected = i;
-		button = win->gui->buttons[win->gui->selected];
-		button->hover = 1;
-		button->hover_cb(win, -1, button->user_data, button);
-		if (button->type == BUTTON_TYPE_SLIDER_VERTICAL
-				|| button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
-			i_update_slider(win, x, y, button);
-	}
+		i_gui_cursor_pos_catch(win, i, x, y);
 	else
 		win->gui->pos_cb(w, x, y);
 }

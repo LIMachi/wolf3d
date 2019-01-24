@@ -2415,7 +2415,7 @@ static void PaAsiHpi_CalculateTimeInfo( PaAsiHpiStream *stream, PaStreamCallback
     /* The current time ("now") is at the forefront of both recording and playback */
     timeInfo->currentTime = GetStreamTime( (PaStream *)stream );
     /* The last sample in the input buffer was recorded just now, so the first sample
-     happened (number of recorded samples)/sampleRate ago */
+     happened (number of recorded samples)/sample_rate ago */
     timeInfo->inputBufferAdcTime = timeInfo->currentTime;
     if( stream->input )
     {

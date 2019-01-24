@@ -4162,7 +4162,7 @@ static PaError IsFormatSupported( struct PaUtilHostApiRepresentation *hostApi,
     - if a full duplex stream is requested, check that the combination
     of input and output parameters is supported if necessary
 
-    - check that the device supports sampleRate
+    - check that the device supports sample_rate
 
     Because the buffer adapter handles conversion between all standard
     sample formats, the following checks are only required if paCustomFormat
@@ -4334,7 +4334,7 @@ static PaError OpenStream( struct PaUtilHostApiRepresentation *hostApi,
     WAVEFORMATEXTENSIBLE wfx;
 
     PA_LOGE_;
-    PA_DEBUG(("OpenStream:sampleRate = %f\n",sampleRate));
+    PA_DEBUG(("OpenStream:sample_rate = %f\n",sampleRate));
     PA_DEBUG(("OpenStream:framesPerBuffer = %lu\n",framesPerUserBuffer));
 
     if( inputParameters )

@@ -249,7 +249,7 @@ static int paqaCheckMultipleSuggested( PaDeviceIndex deviceIndex, int isInput )
     printf(" lowLatency  = %g\n", lowLatency );
     printf(" highLatency = %g\n", highLatency );
     printf(" numChannels = %d\n", numChannels );
-    printf(" sampleRate  = %g\n", sampleRate );
+    printf(" sample_rate  = %g\n", sampleRate );
     
     if( (highLatency - lowLatency) < 0.001 )
     {

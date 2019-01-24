@@ -65,5 +65,7 @@ void				context_swap(t_env *env)
 			context_options_menu_load(env);
 		else if (env->context == W3DC_CREDITS)
 			NULL;
+		else if (env->context == W3DC_RELOAD)
+			set_context(env, env->prev_context);
 	}
 }

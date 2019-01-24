@@ -22,7 +22,7 @@ void	player_play_sound(t_sound *sound, t_sound_flags flags)
 		return ;
 	player->sound[player->nb_sounds] = sound;
 	player->playing[player->nb_sounds] = (t_sound_playing){.flags = flags,
-		.right_gain = 0.0, .left_gain = 0.0, .currentSample = 0,
+		.right_gain = 0.0, .left_gain = 0.0, .current_sample = 0,
 		.left_phase = 0, .right_phase = sound->channels > 1};
 	++player->nb_sounds;
 }

@@ -260,7 +260,7 @@ static void TestFormats( int mode, PaDeviceIndex deviceID, double sampleRate,
     TestAdvance( mode, deviceID, sampleRate, numChannels, paFloat32 );
     TestAdvance( mode, deviceID, sampleRate, numChannels, paInt16 );
     TestAdvance( mode, deviceID, sampleRate, numChannels, paInt32 );
-    /* TestAdvance( mode, deviceID, sampleRate, numChannels, paInt24 ); */
+    /* TestAdvance( mode, deviceID, sample_rate, numChannels, paInt24 ); */
 }
 
 /*******************************************************************/
@@ -341,8 +341,8 @@ static int TestAdvance( int mode, PaDeviceIndex deviceID, double sampleRate,
             unsigned long oldFrames;
             int minDelay = ( mode == MODE_INPUT ) ? 1000 : 400;
             /* Was:
-            int minNumBuffers = Pa_GetMinNumBuffers( FRAMES_PER_BUFFER, sampleRate );
-            int msec = (int) ((minNumBuffers * 3 * 1000.0 * FRAMES_PER_BUFFER) / sampleRate);
+            int minNumBuffers = Pa_GetMinNumBuffers( FRAMES_PER_BUFFER, sample_rate );
+            int msec = (int) ((minNumBuffers * 3 * 1000.0 * FRAMES_PER_BUFFER) / sample_rate);
             */
             int msec = (int)( 3.0 *
                        (( mode == MODE_INPUT ) ? inputParameters.suggestedLatency : outputParameters.suggestedLatency ));

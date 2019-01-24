@@ -2756,7 +2756,7 @@ static PaError PaAlsaStream_Configure( PaAlsaStream *self, const PaStreamParamet
         self->pollTimeout = CalculatePollTimeout( self, minFramesPerHostBuffer );    /* Period in msecs, rounded up */
 
         /* Time before watchdog unthrottles realtime thread == 1/4 of period time in msecs */
-        /* self->threading.throttledSleepTime = (unsigned long) (minFramesPerHostBuffer / sampleRate / 4 * 1000); */
+        /* self->threading.throttledSleepTime = (unsigned long) (minFramesPerHostBuffer / sample_rate / 4 * 1000); */
     }
 
     if( self->callbackMode )
@@ -3215,7 +3215,7 @@ error:
     goto end;
 }
 
-/* Return exact sample rate in param sampleRate */
+/* Return exact sample rate in param sample_rate */
 static int GetExactSampleRate( snd_pcm_hw_params_t *hwParams, double *sampleRate )
 {
     unsigned int num, den = 1;

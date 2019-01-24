@@ -296,41 +296,41 @@ struct									s_glfw_window
 ** t_sound are treated as being const and should not be modified
 */
 
-typedef struct		s_sound
+typedef struct							s_sound
 {
-	float			*data;
-	unsigned int	channels;
-	unsigned int	sampleRate;
-	drwav_uint64	totalSampleCount;
-}					t_sound;
+	float								*data;
+	unsigned int						channels;
+	unsigned int						sample_rate;
+	drwav_uint64						total_sample_count;
+}										t_sound;
 
-#define MAXIMUM_SOUND_SUPERPOSITION 10
+# define MAXIMUM_SOUND_SUPERPOSITION 10
 
-typedef enum		e_sound_flags
+typedef enum							e_sound_flags
 {
 	SOUND_NONE,
 	SOUND_LOOP,
 	SOUND_PLAY_ONCE
-}					t_sound_flags;
+}										t_sound_flags;
 
-typedef struct		s_sound_playing
+typedef struct							s_sound_playing
 {
-	t_sound_flags	flags;
-	float			left_gain;
-	float			right_gain;
-	drwav_uint64	left_phase;
-	drwav_uint64	right_phase;
-	unsigned int	currentSample;
-}					t_sound_playing;
+	t_sound_flags						flags;
+	float								left_gain;
+	float								right_gain;
+	drwav_uint64						left_phase;
+	drwav_uint64						right_phase;
+	unsigned int						current_sample;
+}										t_sound_playing;
 
-typedef struct		s_sound_player
+typedef struct							s_sound_player
 {
-	PaStream			*stream;
-	PaStreamParameters	param;
-	int					nb_sounds;
-	t_sound				*sound[MAXIMUM_SOUND_SUPERPOSITION];
-	t_sound_playing		playing[MAXIMUM_SOUND_SUPERPOSITION];
-}					t_sound_player;
+	PaStream							*stream;
+	PaStreamParameters					param;
+	int									nb_sounds;
+	t_sound								*sound[MAXIMUM_SOUND_SUPERPOSITION];
+	t_sound_playing						playing[MAXIMUM_SOUND_SUPERPOSITION];
+}										t_sound_player;
 
 t_sound_player							*sound_player(void);
 void									sound_player_finish(void);
@@ -360,7 +360,6 @@ void									gui_attach_to_window(t_glfw_window *win,
 
 void									gui_draw(t_glfw_window *win,
 												t_gui *gui);
-
 
 int										gui_attach_button(t_gui *gui,
 														t_button *button);

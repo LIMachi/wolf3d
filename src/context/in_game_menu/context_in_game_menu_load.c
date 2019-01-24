@@ -82,7 +82,7 @@ static inline void		context_in_game_menu_loop(t_env *env)
 	}
 }
 
-void	context_in_game_menu_load(t_env *env)
+void					context_in_game_menu_load(t_env *env)
 {
 	t_gui		gui;
 	t_button	buttons[4];

@@ -12,7 +12,7 @@
 
 #include <glfw_wrapper.h>
 
-static inline void	i_up(t_glfw_window *win, t_button *button)
+static inline int	i_up(t_glfw_window *win, t_button *button)
 {
 	if (button != NULL && button->type == BUTTON_TYPE_SLIDER_VERTICAL)
 	{
@@ -33,9 +33,10 @@ static inline void	i_up(t_glfw_window *win, t_button *button)
 			win->gui->buttons[win->gui->selected]->user_data,
 			win->gui->buttons[win->gui->selected]);
 	}
+	return (0);
 }
 
-static inline void	i_down(t_glfw_window *win, t_button *button)
+static inline int	i_down(t_glfw_window *win, t_button *button)
 {
 	if (button != NULL && button->type == BUTTON_TYPE_SLIDER_VERTICAL)
 	{
@@ -56,9 +57,10 @@ static inline void	i_down(t_glfw_window *win, t_button *button)
 			win->gui->buttons[win->gui->selected]->user_data,
 			win->gui->buttons[win->gui->selected]);
 	}
+	return (0);
 }
 
-static inline void	i_left(t_glfw_window *win, t_button *button)
+static inline int	i_left(t_glfw_window *win, t_button *button)
 {
 	if (button != NULL && button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
 	{
@@ -79,9 +81,10 @@ static inline void	i_left(t_glfw_window *win, t_button *button)
 			win->gui->buttons[win->gui->selected]->user_data,
 			win->gui->buttons[win->gui->selected]);
 	}
+	return (0);
 }
 
-static inline void	i_right(t_glfw_window *win, t_button *button)
+static inline int	i_right(t_glfw_window *win, t_button *button)
 {
 	if (button != NULL && button->type == BUTTON_TYPE_SLIDER_HORIZONTAL)
 	{
@@ -102,6 +105,7 @@ static inline void	i_right(t_glfw_window *win, t_button *button)
 			win->gui->buttons[win->gui->selected]->user_data,
 			win->gui->buttons[win->gui->selected]);
 	}
+	return (0);
 }
 
 void				gui_key_catch(GLFWwindow *w,
@@ -121,21 +125,14 @@ void				gui_key_catch(GLFWwindow *w,
 			button = win->gui->buttons[win->gui->selected];
 		else
 			button = NULL;
-		if (key == GLFW_KEY_UP)
-			i_up(win, button);
-		else if (key == GLFW_KEY_DOWN)
-			i_down(win, button);
-		else if (key == GLFW_KEY_LEFT)
-			i_left(win, button);
-		else if (key == GLFW_KEY_RIGHT)
-			i_right(win, button);
-		else if (key == GLFW_KEY_ENTER || key == GLFW_KEY_SPACE)
+		key == GLFW_KEY_UP && i_up(win, button);
+		key == GLFW_KEY_DOWN && i_down(win, button);
+		key == GLFW_KEY_LEFT && i_left(win, button);
+		key == GLFW_KEY_RIGHT && i_right(win, button);
+		if (key == GLFW_KEY_ENTER || key == GLFW_KEY_SPACE)
 			if (button != NULL)
-				if (button->type == BUTTON_TYPE_SWITCH)
-					button->cb(win, button->status ^= 1,
-						button->user_data, button);
-				else
-					button->cb(win, button->status, button->user_data, button);
+				button->cb(win, button->type == BUTTON_TYPE_SWITCH ?
+			button->status ^= 1 : button->status, button->user_data, button);
 			else
 				win->gui->key_cb(w, key, scan, act, 0);
 		else

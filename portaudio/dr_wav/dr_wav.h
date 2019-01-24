@@ -17,8 +17,8 @@
 //         // Error opening WAV file.
 //     }
 //
-//     drwav_int32* pDecodedInterleavedSamples = malloc(wav.totalSampleCount * sizeof(drwav_int32));
-//     size_t numberOfSamplesActuallyDecoded = drwav_read_s32(&wav, wav.totalSampleCount, pDecodedInterleavedSamples);
+//     drwav_int32* pDecodedInterleavedSamples = malloc(wav.total_sample_count * sizeof(drwav_int32));
+//     size_t numberOfSamplesActuallyDecoded = drwav_read_s32(&wav, wav.total_sample_count, pDecodedInterleavedSamples);
 //
 //     ...
 //
@@ -38,9 +38,9 @@
 // If you just want to quickly open and read the audio data in a single operation you can do something like this:
 //
 //     unsigned int channels;
-//     unsigned int sampleRate;
-//     drwav_uint64 totalSampleCount;
-//     float* pSampleData = drwav_open_and_read_file_s32("my_song.wav", &channels, &sampleRate, &totalSampleCount);
+//     unsigned int sample_rate;
+//     drwav_uint64 total_sample_count;
+//     float* pSampleData = drwav_open_and_read_file_s32("my_song.wav", &channels, &sample_rate, &total_sample_count);
 //     if (pSampleData == NULL) {
 //         // Error opening and reading WAV file.
 //     }
@@ -52,7 +52,7 @@
 // The examples above use versions of the API that convert the audio data to a consistent format (32-bit signed PCM, in
 // this case), but you can still output the audio data in its internal format (see notes below for supported formats):
 //
-//     size_t samplesRead = drwav_read(&wav, wav.totalSampleCount, pDecodedInterleavedSamples);
+//     size_t samplesRead = drwav_read(&wav, wav.total_sample_count, pDecodedInterleavedSamples);
 //
 // You can also read the raw bytes of audio data, which could be useful if dr_wav does not have native support for
 // a particular data format:
@@ -72,7 +72,7 @@
 //     format.container = drwav_container_riff;     // <-- drwav_container_riff = normal WAV files, drwav_container_w64 = Sony Wave64.
 //     format.format = DR_WAVE_FORMAT_PCM;          // <-- Any of the DR_WAVE_FORMAT_* codes.
 //     format.channels = 2;
-//     format.sampleRate = 44100;
+//     format.sample_rate = 44100;
 //     format.bitsPerSample = 16;
 //     drwav* pWav = drwav_open_file_write("data/recording.wav", &format);
 //
@@ -301,7 +301,7 @@ typedef struct
 	// Equal to fmt.formatTag, or the value specified by fmt.subFormat if fmt.formatTag is equal to 65534 (WAVE_FORMAT_EXTENSIBLE).
 	drwav_uint16 translatedFormatTag;
 
-	// The total number of samples making up the audio data. Use <totalSampleCount> * <bytesPerSample> to calculate
+	// The total number of samples making up the audio data. Use <total_sample_count> * <bytesPerSample> to calculate
 	// the required size of a buffer to hold the entire audio data.
 	drwav_uint64 totalSampleCount;
 
@@ -331,7 +331,7 @@ typedef struct
 	// Generic data for compressed formats. This data is shared across all block-compressed formats.
 	struct
 	{
-		drwav_uint64 iCurrentSample;    // The index of the next sample that will be read by drwav_read_*(). This is used with "totalSampleCount" to ensure we don't read excess samples at the end of the last block.
+		drwav_uint64 iCurrentSample;    // The index of the next sample that will be read by drwav_read_*(). This is used with "total_sample_count" to ensure we don't read excess samples at the end of the last block.
 	} compressed;
 
 	// Microsoft ADPCM specific data.
@@ -1567,11 +1567,11 @@ drwav_bool32 drwav_init(drwav* pWav, drwav_read_proc onRead, drwav_seek_proc onS
     // correctness tests against libsndfile, and is disabled by default.
     if (pWav->translatedFormatTag == DR_WAVE_FORMAT_ADPCM) {
         drwav_uint64 blockCount = dataSize / fmt.blockAlign;
-        pWav->totalSampleCount = (blockCount * (fmt.blockAlign - (6*pWav->channels))) * 2;  // x2 because two samples per byte.
+        pWav->total_sample_count = (blockCount * (fmt.blockAlign - (6*pWav->channels))) * 2;  // x2 because two samples per byte.
     }
     if (pWav->translatedFormatTag == DR_WAVE_FORMAT_DVI_ADPCM) {
         drwav_uint64 blockCount = dataSize / fmt.blockAlign;
-        pWav->totalSampleCount = ((blockCount * (fmt.blockAlign - (4*pWav->channels))) * 2) + (blockCount * pWav->channels);
+        pWav->total_sample_count = ((blockCount * (fmt.blockAlign - (4*pWav->channels))) * 2) + (blockCount * pWav->channels);
     }
 #endif
 
@@ -3664,7 +3664,7 @@ void drwav_free(void* pDataReturnedByOpenAndRead)
 //   - Improve A-law and mu-law efficiency.
 //
 // v0.5 - 2016-09-29
-//   - API CHANGE. Swap the order of "channels" and "sampleRate" parameters in drwav_open_and_read*(). Rationale for this is to
+//   - API CHANGE. Swap the order of "channels" and "sample_rate" parameters in drwav_open_and_read*(). Rationale for this is to
 //     keep it consistent with dr_audio and dr_flac.
 //
 // v0.4b - 2016-09-18

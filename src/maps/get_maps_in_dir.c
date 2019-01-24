@@ -27,7 +27,8 @@ static inline char	*i_path(const char *dirpath, char *name)
 	return (path);
 }
 
-int	get_maps_in_dir(const char *dirpath, char **buf, size_t buf_size)
+int					get_maps_in_dir(const char *dirpath, char **buf,
+	size_t buf_size)
 {
 	DIR				*dirp;
 	struct dirent	*dp;

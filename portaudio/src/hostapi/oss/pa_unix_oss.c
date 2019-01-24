@@ -708,7 +708,7 @@ static PaError IsFormatSupported( struct PaUtilHostApiRepresentation *hostApi,
     ENSURE_( tempDevHandle = open( deviceInfo->name, flags ), paDeviceUnavailable );
 
     /* PaOssStream_Configure will do the rest of the checking for us */
-    /* PA_ENSURE( PaOssStream_Configure( tempDevHandle, deviceName, outputChannelCount, &sampleRate ) ); */
+    /* PA_ENSURE( PaOssStream_Configure( tempDevHandle, deviceName, outputChannelCount, &sample_rate ) ); */
 
     /* everything succeeded! */
 

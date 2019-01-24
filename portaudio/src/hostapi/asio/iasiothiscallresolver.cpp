@@ -84,9 +84,9 @@
     40	virtual ASIOError (*getLatencies)(long *inputLatency, long *outputLatency) = 0;
     44	virtual ASIOError (*getBufferSize)(long *minSize, long *maxSize,
             long *preferredSize, long *granularity) = 0;
-    48	virtual ASIOError (*canSampleRate)(ASIOSampleRate sampleRate) = 0;
-    52	virtual ASIOError (*getSampleRate)(ASIOSampleRate *sampleRate) = 0;
-    56	virtual ASIOError (*setSampleRate)(ASIOSampleRate sampleRate) = 0;
+    48	virtual ASIOError (*canSampleRate)(ASIOSampleRate sample_rate) = 0;
+    52	virtual ASIOError (*getSampleRate)(ASIOSampleRate *sample_rate) = 0;
+    56	virtual ASIOError (*setSampleRate)(ASIOSampleRate sample_rate) = 0;
     60	virtual ASIOError (*getClockSources)(ASIOClockSource *clocks, long *numSources) = 0;
     64	virtual ASIOError (*setClockSource)(long reference) = 0;
     68	virtual ASIOError (*getSamplePosition)(ASIOSamples *sPos, ASIOTimeStamp *tStamp) = 0;
@@ -459,24 +459,24 @@ ASIOError IASIOThiscallResolver::getBufferSize(long *minSize, long *maxSize,
     return result;
 }
 
-ASIOError IASIOThiscallResolver::canSampleRate(ASIOSampleRate sampleRate)
+ASIOError IASIOThiscallResolver::canSampleRate(ASIOSampleRate sample_rate)
 {
     ASIOBool result;
-    CALL_THISCALL_1_DOUBLE( result, that_, 48, sampleRate );
+    CALL_THISCALL_1_DOUBLE( result, that_, 48, sample_rate );
     return result;
 }
 
-ASIOError IASIOThiscallResolver::getSampleRate(ASIOSampleRate *sampleRate)
+ASIOError IASIOThiscallResolver::getSampleRate(ASIOSampleRate *sample_rate)
 {
     ASIOBool result;
-    CALL_THISCALL_1( result, that_, 52, sampleRate );
+    CALL_THISCALL_1( result, that_, 52, sample_rate );
     return result;
 }
 
-ASIOError IASIOThiscallResolver::setSampleRate(ASIOSampleRate sampleRate)
+ASIOError IASIOThiscallResolver::setSampleRate(ASIOSampleRate sample_rate)
 {    
     ASIOBool result;
-    CALL_THISCALL_1_DOUBLE( result, that_, 56, sampleRate );
+    CALL_THISCALL_1_DOUBLE( result, that_, 56, sample_rate );
     return result;
 }
 

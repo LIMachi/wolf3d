@@ -52,32 +52,32 @@
 
 typedef struct		s_raycast
 {
-	int 			drawstart;
-	int 			drawend;
+	int				drawstart;
+	int				drawend;
 	int				face;
 	int				mapx;
 	int				mapy;
-	int 			floor;
-	int 			sky;
-	int 			tx;
-	int 			ty;
-	int 			stepx;
-	int 			stepy;
-	int 			hit;
-	double 			dx;
-	double 			dy;
+	int				floor;
+	int				sky;
+	int				tx;
+	int				ty;
+	int				stepx;
+	int				stepy;
+	int				hit;
+	double			dx;
+	double			dy;
 	double			where;
-	double 			fov;
+	double			fov;
 	double			dist;
-	double 			cdist;
+	double			cdist;
 	double			hauteur;
 	double			angle;
 	double			real;
-	double 			floorx;
-	double 			floory;
+	double			floorx;
+	double			floory;
 	double			cfx;
-	double 			cfy;
-	double 			fact;
+	double			cfy;
+	double			fact;
 	t_bmp			*texture;
 	t_bmp			*texturen2;
 	t_bmp			*skybox;
@@ -155,28 +155,10 @@ typedef struct		s_animations
 	t_animation_frame	*walk;
 }					t_animations;
 
-/*
 typedef struct		s_assets
 {
-	int				nb_animations;
-	t_animations	*animations;
-	char			**anmination_names;
-	int				nb_fonts;
-	char			**fonts;
-	char			**font_names;
-	int				nb_musics;
-	t_sound			*musics;
-	char			**music_names;
-	int				nb_textures;
-	t_bmp			**textures;
-	char			**texture_names;
-}					t_assets;
-*/
-
-typedef struct		s_assets
-{
-	t_swt_map		animations; //path -> file (cache)
-	t_swt_map		animations_names; //name -> path (id)
+	t_swt_map		animations;
+	t_swt_map		animations_names;
 	t_swt_map		fonts_names;
 	t_swt_map		sounds;
 	t_swt_map		sounds_names;
@@ -199,7 +181,7 @@ typedef struct		s_assets
 # define W3DC_OPTIONS_MENU		8
 # define W3DC_CREDITS			9
 # define W3DC_EXIT				-1
-# define W3D_DEBUG				-2
+# define W3DC_RELOAD			-2
 
 typedef struct		s_env
 {
@@ -227,20 +209,26 @@ void				context_new_game_menu_load(t_env *env);
 void				context_in_game_menu_load(t_env *env);
 void				context_load_game_menu_load(t_env *env);
 void				context_options_menu_load(t_env *env);
-void 				context_map_editor_load(t_env *env);
+void				context_map_editor_load(t_env *env);
+void				context_map_editor_loop(t_env *env);
 
 void				minimap(t_env *env, t_glfw_window *win, double scale);
 void				skybox(t_env *e, t_player *p, t_raycast *rc, size_t i);
-void 				floor_casting(t_env *e, t_raycast *rc, t_player *p, size_t i);
+void				floor_casting(t_env *e, t_raycast *rc, t_player *p,
+	size_t i);
 void				ray_caster(t_player p, t_env *e, int mc, t_raycast rc);
 void				draw_walls(t_env *e, t_player p, t_raycast *rc, size_t i);
-void				dda(t_env *env, t_double2 pos, t_double2 ray, t_raycast *rc);
+void				dda(t_env *env, t_double2 pos, t_double2 ray,
+	t_raycast *rc);
 
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);
 t_bmp				*assets_get_texture(t_assets *assets, char *id, char *path);
 t_sound				*assets_get_sound(t_assets *assets, char *id, char *path);
 void				assets_unload(t_assets *assets);
+
+t_sjson_error		load_textures_names(t_sjson_object *obj, t_assets *out);
+int					load_textures(t_assets *out);
 
 t_map_file			*default_map(t_env *env);
 t_map_file			*load_map(const char *path, t_env *env);

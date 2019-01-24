@@ -36,11 +36,10 @@ static void			gui_button_catch(GLFWwindow *w, int key, int act, int mod)
 	glfwGetWindowSize(win->w, &t[0], &t[1]);
 	x *= (double)win->vb_width / (double)t[0];
 	y *= (double)win->vb_height / (double)t[1];
-	if (key == GLFW_MOUSE_BUTTON_1 && act == GLFW_PRESS
-		&& win->gui->selected != -1
+	if (key == GLFW_MOUSE_BUTTON_1 && win->gui->selected != -1
 		&& x >= (button = win->gui->buttons[win->gui->selected])->pos.x
 		&& x < button->pos.x + button->size.x && y >= button->pos.y
-		&& y < button->pos.y + button->size.y)
+		&& y < button->pos.y + button->size.y && act == GLFW_PRESS)
 	{
 		if (button->type == BUTTON_TYPE_CLICK)
 			button->cb(win, 1, button->user_data, button);

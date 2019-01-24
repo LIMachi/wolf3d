@@ -17,7 +17,7 @@ t_sound	sound_load(const char *path)
 	t_sound	sound;
 
 	sound.data = drwav_open_and_read_file_f32(path, &sound.channels,
-		&sound.sampleRate, &sound.totalSampleCount);
+		&sound.sample_rate, &sound.total_sample_count);
 	return (sound);
 }
 
@@ -37,13 +37,13 @@ void	sound_unload(t_sound *sound)
 				player->sound[i - 1] = player->sound[i];
 			}
 			player->playing[i] = (t_sound_playing){.flags = SOUND_NONE,
-				.right_phase = 0, .left_phase = 0, .currentSample = 0,
+				.right_phase = 0, .left_phase = 0, .current_sample = 0,
 				.left_gain = 0.0, .right_gain = 0.0};
 			player->sound[i] = NULL;
 		}
 	sound->channels = 0;
 	drwav_free(sound->data);
 	sound->data = NULL;
-	sound->sampleRate = 0;
-	sound->totalSampleCount = 0;
+	sound->sample_rate = 0;
+	sound->total_sample_count = 0;
 }
