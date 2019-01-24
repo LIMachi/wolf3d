@@ -220,7 +220,7 @@ void	minimap(t_env *env)
 				(t_int2){(uint32_t)sx, (uint32_t)sy}, 0);
 	look = rotate_2d((t_double2){.x = 0, .y = -10}, env->player.look);
 	draw_square(env->wolf3d, (t_int2){.x = env->player.pos.x * sx - 2,
-		.y = env->player.pos.y * sy - 2}, (t_int2){.x = 5, .y = 5}, 0xFF00);
+		.y = env->player.pos.y * sy - 2}, (t_int2){.x = 5, .y = 5}, 0xFF0000);
 	draw_line(env->wolf3d, (t_int2){.x = env->player.pos.x * sx,
 		.y = env->player.pos.y * sy}, (t_int2){.x = look.x + env->player.pos.x *
 		sx, .y = look.y + env->player.pos.y * sy}, 0xFF0000);
@@ -236,10 +236,16 @@ void	context_playing_loop(t_env *env)
 
 	while (env->context == W3DC_PLAYING)
 	{
-		ray_caster(env->player, env, 1, rc);
-		minimap(env);
 		glfw_refresh_window(env->wolf3d);
 		glfwPollEvents();
+		if (glfwGetKey(env->wolf3d->w, GLFW_KEY_M))
+		{
+			set_context(env, W3DC_PLAYING);
+			ray_caster(env->player, env, 1, rc);
+			minimap(env);
+		}
+		else
+			ray_caster(env->player, env, 1, rc);
 		if (glfwGetKey(env->wolf3d->w, GLFW_KEY_ESCAPE))
 			set_context(env, W3DC_PLAYING_MENU);
 	}
