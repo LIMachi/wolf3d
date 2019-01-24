@@ -228,6 +228,13 @@ void				context_in_game_menu_load(t_env *env);
 void				context_load_game_menu_load(t_env *env);
 void				context_options_menu_load(t_env *env);
 
+void				minimap(t_env *env);
+void				skybox(t_env *e, t_player *p, t_raycast *rc, size_t i);
+void 				floor_casting(t_env *e, t_raycast *rc, t_player *p, size_t i);
+void				ray_caster(t_player p, t_env *e, int mc, t_raycast rc);
+void				draw_walls(t_env *e, t_player p, t_raycast *rc, size_t i);
+void				dda(t_env *env, t_double2 pos, t_double2 ray, t_raycast *rc);
+
 t_assets			assets_load(const char *path);
 t_sjson_error		assets_load_animation(const char *path, t_animations *anim);
 t_bmp				*assets_get_texture(t_assets *assets, char *id, char *path);
