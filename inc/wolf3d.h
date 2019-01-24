@@ -78,8 +78,11 @@ typedef struct		s_raycast
 	double			cfx;
 	double			cfy;
 	double			fact;
-	t_bmp			*texture;
-	t_bmp			*texturen2;
+	t_bmp			*text1;
+	t_bmp			*text2;
+	t_bmp			*text3;
+	t_bmp			*text4;
+	t_bmp			*dancefloor;
 	t_bmp			*skybox;
 	t_double2		firsthit;
 }					t_raycast;
